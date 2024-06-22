@@ -1,0 +1,71 @@
+﻿/* Responsive */
+
+@media (max-width:968px) {
+
+    /* Part Pengumuman */
+    .peng .peng-contents .peng-card {
+        flex-basis: calc(calc(100% / 2) - 1.2%);
+    }
+
+    .peng .section-header {
+        flex-direction: column;
+    }
+
+        .peng .section-header .peng-btn {
+            position: relative;
+            align-self: flex-start;
+            margin-top: 20px;
+        }
+
+    /* Akhir Part Pengumuman */
+}
+
+@media (max-width:768px) {
+}
+
+@media (max-width:668px) {
+
+    /* Part Pengumuman */
+    .peng .peng-contents .peng-card {
+        flex-basis: 100%;
+    }
+    /* Akhir Part Pengumuman */
+
+}
+
+@media (max-width:568px) {
+
+    /* Hero Section */
+    #hero {
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+        #hero h1 {
+            font-family: 'Alex brush';
+            color: #fff;
+            padding-top: 50px;
+            font-size: 50px;
+            letter-spacing: 1px;
+        }
+
+        #hero p {
+            color: #fff;
+            font-size: 14px;
+            letter-spacing: 1px;
+            width: 80%;
+        }
+    /* Akhir Hero Section */
+}
+
+@media (max-width:468px) {
+
+}
+
+/* Akhir Responsive */

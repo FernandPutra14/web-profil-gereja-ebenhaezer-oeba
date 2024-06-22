@@ -1,22 +1,107 @@
+/* Inisialisasi Google Font Tinos (Times New Roman) */
+@import url('https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
+/* akhir Inisialisasi Google Font Tinos (Times New Roman) */
+
+
+/* Style Global */
+* {
+    font-family: 'Tinos';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
-  font-size: 14px;
+    --primary-clr: #208245;
+    --primary-medium-clr: #d8e9df;
+    --primary-light-clr: #edfaf1;
+    --bg-clr-1: #ffffff;
+    --dark-heading-clr: #232d39;
+    --dark-text-clr: #6c757d;
+    --light-heading-clr: #efefef;
+    --light-text-clr: #cecece;
+    font-size: 10px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+button.btn {
+    padding: 10px 18px;
+    background-color: var(--primary-clr);
+    color: var(--light-heading-clr);
+    font-size: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+button.btn:hover {
+    background-color: var(--light-heading-clr);
+    color: var(--primary-clr);
+    border: 1px solid var(--primary-clr);
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.section-header h1{
+    position: relative;
+    font-size: 32px;
+    letter-spacing: 1px;
+    color: var(--dark-heading-clr);
+    margin-bottom: 20px;
+}
+
+.section-header h1::before {
+    position: absolute;
+    content: '';
+    width: 100px;
+    height: 1px;
+    left: 0;
+    top: calc(100% + 5px);
+    background-color: var(--dark-text-clr);
+}
+
+    .section-header h1::after {
+        position: absolute;
+        content: '';
+        width: 50px;
+        height: 3px;
+        left: 0;
+        top: calc(100% + 4px);
+        background-color: var(--primary-clr);
+    }
+
+.section-header p{
+    color: var(--dark-text-clr);
+    margin-bottom: 40px;
+    font-size: 15px;
+    max-width: 700px;
 }
 
 body {
-  margin-bottom: 60px;
+    width: 100%;
+    min-height: 100vh;
 }
+
+a.login-btn{
+    padding-top: 5px;
+    padding: 10px 18px;
+    background-color: var(--primary-clr);
+    color: var(--light-heading-clr);
+    font-size: 15px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    a.login-btn:hover {
+        background-color: var(--light-heading-clr);
+        color: var(--primary-clr);
+        border: 1px solid var(--primary-clr);
+    }
+/* Akhir Style Global */
+
+
+/* Style Global Responsive */
+
+/* Akhir Style Global Responsive */

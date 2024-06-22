@@ -1,48 +1,216 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿.website {
+    width: 100%;
+    max-width: auto;
+    min-height: 100vh;   
+    margin: 0px auto;
 }
 
-a {
-  color: #0077cc;
+/* Home */
+.home {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    /*background-color: var(--primary-light-clr);*/
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.badan-utama {
+    padding-left: 0;
+    padding-right: 0;
+}
+/* Akhir Home */
+
+
+/* Navbar */
+.home .main-navbar {
+    position: absolute;
+    width: 100%;
+    height: 12vh;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    max-height: 80px;
+    background-color: var(--primary-clr);
+    padding: 0px 8%;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.main-navbar .logo{
+    text-decoration: none;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.main-navbar .logo img{
+    width : 55px;
+    height: auto;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.main-navbar .nav-list {
+    list-style: none;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.main-navbar .nav-list li{
+    display: inline-block;
+    margin: 10px 20px;
+    padding-top: 15px;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    .main-navbar .nav-list li a {
+        position: relative;
+        color: var(--light-heading-clr);
+        font-weight: 500;
+        font-size: 14px;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 1px;
+    }
+
+        .main-navbar .nav-list li a::after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-heading-clr);
+            left: 0;
+            top: calc(100% + 2px);
+            transition: all 0.3s;
+            transform: scaleX(0);
+        }
+
+    .main-navbar .nav-list li a:hover::after {
+        transform: scaleX(1);
+    }
+
+.main-navbar .login-btn {
+    background-color: var(--light-heading-clr);
+    color: var(--primary-clr);
 }
+
+    .main-navbar .login-btn:hover {
+        background-color: var(--primary-clr);
+        color: var(--light-heading-clr);
+        border: 1px solid var(--light-heading-clr);
+    }
+
+.main-navbar .menu-btn {
+    min-width: 30px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    display: none;
+}
+
+.main-navbar .menu-btn span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--light-heading-clr);
+    border-radius: 5px;
+    transition: all 0.4s;
+}
+
+    .main-navbar .menu-btn span::before,
+    .main-navbar .menu-btn span::after {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 100%;
+        background-color: var(--light-heading-clr);
+        transition: all 0.4s;
+    }
+
+    .main-navbar .menu-btn span::before{
+        transform: translateY(-9px);
+    }
+
+    .main-navbar .menu-btn span::after {
+        transform: translateY(9px);
+    }
+/* Akhir Navbar */
+
+/* Responsive */
+@media (max-width:968px) {
+    .main-navbar .menu-btn {
+        display: flex;
+        margin-left: 40px;
+        z-index: 101;
+    }
+
+        .main-navbar .menu-btn.active span,
+        .main-navbar .menu-btn.active span::before,
+        .main-navbar .menu-btn.active span::after {
+            width: 100%;
+        }
+
+            .main-navbar .menu-btn.active span::before{
+                transform: rotate(45deg) translateY(0px);
+            }
+
+            .main-navbar .menu-btn.active span::after {
+                transform: rotate(-45deg) translateY(0px);
+            }
+
+            .main-navbar .menu-btn.active span {
+                background-color: transparent;
+            }
+
+            .main-navbar .nav-list {
+                position: fixed;
+                width: 100%;
+                height: 100vh;
+                top: 0;
+                right: -100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: var(--primary-clr);
+                transition: right 0.1s cubic-bezier(.1, .1, .1, .1);
+                z-index: 100;
+            }
+
+                .main-navbar .nav-list.active{
+                    right: 0;
+                    transition: all 0.1s;            
+                }
+
+                .main-navbar .nav-list li {
+                    margin: 25px 0px 0px;
+                }
+
+        .main-navbar .nav-list li:nth-child(1) {
+            margin-top: 180px;
+        }
+
+        .main-navbar .nav-list li a{
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+    .main-navbar .login-btn {
+        margin-left: auto;
+    }
+}
+
+@media (max-width:768px) {
+}
+
+@media (max-width:668px) {
+}
+
+@media (max-width:568px) {
+}
+
+@media (max-width:468px) {
+
+    .main-navbar .login-btn {
+        display: none;
+    }
+}
+
+/* Akhir Responsive */

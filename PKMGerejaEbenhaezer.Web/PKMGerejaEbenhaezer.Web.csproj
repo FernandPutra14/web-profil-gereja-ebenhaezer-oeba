@@ -6,4 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\js\carousel.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\carousel.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\carousel.js" />
+  </ItemGroup>
+
 </Project>
