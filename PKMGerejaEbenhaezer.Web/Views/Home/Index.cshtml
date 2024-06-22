@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IndexVM
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -29,130 +30,28 @@
     <!-- Content Pengumuman Section -->
     <div class="peng-contents">
         <div class="owl-carousel owl-theme fernand">
-
-            <!-- Ini Cardnya Bang -->
-            <div class="item peng-card">
-                <img src="~/img/gereja1.jpg" />
-                <div class="category">
-                    <div class="subject">
-                        <h3>Pengumuman</h3>
+            @if (Model.DaftarPengumuman != null || Model.DaftarPengumuman.Count > 0)
+            {
+                @foreach (var pengumuman in Model.DaftarPengumuman)
+                {
+                    var cultureInfo = new System.Globalization.CultureInfo("id-ID");
+                    <!-- Ini Cardnya Bang -->
+                    <div class="item peng-card">
+                        <img src="@pengumuman.PathFoto" />
+                        <div class="category">
+                            <div class="subject">
+                                <h3>Pengumuman</h3>
+                            </div>
+                        </div>
+                        <h2 class="peng-title">@pengumuman.Judul</h2>
+                        <p>@pengumuman.Keterangan</p>
+                        <div class="peng-tanggal">
+                            <span><i class="ri-calendar-fill"></i>@pengumuman.Tanggal.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
+                        </div>
                     </div>
-                </div>
-                <h2 class="peng-title">
-                    Lionel Messi lebih jago dari Cristiano Ronaldo karena kemampuan dribelnya
-                    yang luar biasa dan visi bermain yang sangat tajam.</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua. Varius quam quisque id diam vel quam elementum pulvinar. 
-                    Nisi scelerisque eu ultrices vitae. Risus commodo viverra maecenas accumsan lacus vel facilisis. 
-                    Pharetra diam sit amet nisl. Suscipit adipiscing bibendum est ultricies integer quis auctor elit. 
-                    Pharetra vel turpis nunc eget lorem dolor. Eros donec ac odio tempor orci. Diam sit amet nisl suscipit 
-                    adipiscing bibendum est ultricies Lorem ipsum dolor sit amet.
-                </p>
-                <div class="peng-tanggal">
-                    <span><i class="ri-calendar-fill"></i>Sabtu, 22 Juni 2024</span>
-                </div>        
-            </div>
-            <!-- Ini Akhir Cardnya Bang -->
-            <!-- Ini Cardnya Bang -->
-            <div class="item peng-card">
-                <img src="~/img/gereja1.jpg" />
-                <div class="category">
-                    <div class="subject">
-                        <h3>Pengumuman</h3>
-                    </div>
-                </div>
-                <h2 class="peng-title">
-                    Lionel Messi lebih jago dari Cristiano Ronaldo karena kemampuan dribelnya
-                    yang luar biasa dan visi bermain yang sangat tajam.
-                </h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Varius quam quisque id diam vel quam elementum pulvinar.
-                    Nisi scelerisque eu ultrices vitae. Risus commodo viverra maecenas accumsan lacus vel facilisis.
-                    Pharetra diam sit amet nisl. Suscipit adipiscing bibendum est ultricies integer quis auctor elit.
-                    Pharetra vel turpis nunc eget lorem dolor. Eros donec ac odio tempor orci. Diam sit amet nisl suscipit
-                    adipiscing bibendum est ultricies Lorem ipsum dolor sit amet.
-                </p>
-                <div class="peng-tanggal">
-                    <span><i class="ri-calendar-fill"></i>Sabtu, 22 Juni 2024</span>
-                </div>
-            </div>
-            <!-- Ini Akhir Cardnya Bang -->
-            <!-- Ini Cardnya Bang -->
-            <div class="item peng-card">
-                <img src="~/img/gereja1.jpg" />
-                <div class="category">
-                    <div class="subject">
-                        <h3>Pengumuman</h3>
-                    </div>
-                </div>
-                <h2 class="peng-title">
-                    Lionel Messi lebih jago dari Cristiano Ronaldo karena kemampuan dribelnya
-                    yang luar biasa dan visi bermain yang sangat tajam.
-                </h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Varius quam quisque id diam vel quam elementum pulvinar.
-                    Nisi scelerisque eu ultrices vitae. Risus commodo viverra maecenas accumsan lacus vel facilisis.
-                    Pharetra diam sit amet nisl. Suscipit adipiscing bibendum est ultricies integer quis auctor elit.
-                    Pharetra vel turpis nunc eget lorem dolor. Eros donec ac odio tempor orci. Diam sit amet nisl suscipit
-                    adipiscing bibendum est ultricies Lorem ipsum dolor sit amet.
-                </p>
-                <div class="peng-tanggal">
-                    <span><i class="ri-calendar-fill"></i>Sabtu, 22 Juni 2024</span>
-                </div>
-            </div>
-            <!-- Ini Akhir Cardnya Bang -->
-            <!-- Ini Cardnya Bang -->
-            <div class="item peng-card">
-                <img src="~/img/gereja1.jpg" />
-                <div class="category">
-                    <div class="subject">
-                        <h3>Pengumuman</h3>
-                    </div>
-                </div>
-                <h2 class="peng-title">
-                    Lionel Messi lebih jago dari Cristiano Ronaldo karena kemampuan dribelnya
-                    yang luar biasa dan visi bermain yang sangat tajam.
-                </h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Varius quam quisque id diam vel quam elementum pulvinar.
-                    Nisi scelerisque eu ultrices vitae. Risus commodo viverra maecenas accumsan lacus vel facilisis.
-                    Pharetra diam sit amet nisl. Suscipit adipiscing bibendum est ultricies integer quis auctor elit.
-                    Pharetra vel turpis nunc eget lorem dolor. Eros donec ac odio tempor orci. Diam sit amet nisl suscipit
-                    adipiscing bibendum est ultricies Lorem ipsum dolor sit amet.
-                </p>
-                <div class="peng-tanggal">
-                    <span><i class="ri-calendar-fill"></i>Sabtu, 22 Juni 2024</span>
-                </div>
-            </div>
-            <!-- Ini Akhir Cardnya Bang -->
-            <!-- Ini Cardnya Bang -->
-            <div class="item peng-card">
-                <img src="~/img/gereja1.jpg" />
-                <div class="category">
-                    <div class="subject">
-                        <h3>Pengumuman</h3>
-                    </div>
-                </div>
-                <h2 class="peng-title">
-                    Lionel Messi lebih jago dari Cristiano Ronaldo karena kemampuan dribelnya
-                    yang luar biasa dan visi bermain yang sangat tajam.
-                </h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Varius quam quisque id diam vel quam elementum pulvinar.
-                    Nisi scelerisque eu ultrices vitae. Risus commodo viverra maecenas accumsan lacus vel facilisis.
-                    Pharetra diam sit amet nisl. Suscipit adipiscing bibendum est ultricies integer quis auctor elit.
-                    Pharetra vel turpis nunc eget lorem dolor. Eros donec ac odio tempor orci. Diam sit amet nisl suscipit
-                    adipiscing bibendum est ultricies Lorem ipsum dolor sit amet.
-                </p>
-                <div class="peng-tanggal">
-                    <span><i class="ri-calendar-fill"></i>Sabtu, 22 Juni 2024</span>
-                </div>
-            </div>
-            <!-- Ini Akhir Cardnya Bang -->
+                    <!-- Ini Akhir Cardnya Bang -->
+                }
+            }
         </div>
     </div>
     <!-- Akhir Pengumuman Section -->
