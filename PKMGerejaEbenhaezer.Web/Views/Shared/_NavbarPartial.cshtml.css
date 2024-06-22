@@ -17,7 +17,7 @@
         text-decoration: none;
     }
 
-        ::deep .main-navbar .logo img {
+        .main-navbar .logo ::deep img {
             width: 55px;
             height: auto;
         }
