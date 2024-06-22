@@ -31,4 +31,8 @@
     <ProjectReference Include="..\PKMGerejaEbenhaezer.Domain\PKMGerejaEbenhaezer.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Dashboard\Models\" />
+  </ItemGroup>
+
 </Project>

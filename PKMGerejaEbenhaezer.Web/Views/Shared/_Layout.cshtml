@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PKMGerejaEbenhaezer.Web</title>   
+    <title>@ViewData["Title"] - Gereja Ebenhaezer Oeba</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <!-- Owl Carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
     <!-- Akhir Owl Carousel -->
-    <link rel="stylesheet" href="~/PKMGerejaEbenhaezer.Web.styles.css" asp-append-version="true" />    
+    <link rel="stylesheet" href="~/PKMGerejaEbenhaezer.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
     <div class="website">
@@ -20,7 +20,7 @@
             <!-- Navbar -->
             <nav class="main-navbar">
                 <a href="#" class="logo">
-                    <img src="img\logo_gereja.png"/>
+                    <img src="img/logo_gereja.png" />
                 </a>
                 <ul class="nav-list">
                     <li><a href="">Home</a></li>
@@ -29,9 +29,21 @@
                     <li><a href="">Tentang Kami</a></li>
                     <li><a href="">Kontak</a></li>
                 </ul>
-                <a href="" class="login-btn">
-                    Login Admin
-                </a>
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Index" asp-controller="Home" asp-area="Dashboard" class="login-btn mx-1">
+                        Dashboard
+                    </a>
+                    <form asp-action="Logout" asp-controller="Account">
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                }
+                else
+                {
+                    <a asp-action="Login" asp-controller="Account" asp-area="" class="login-btn">
+                        Login Admin
+                    </a>
+                }
                 <div class="menu-btn">
                     <span></span>
                 </div>
@@ -44,16 +56,16 @@
                 </main>
             </div>
             <!-- Akhir Body -->
-            <!-- Footer -->          
+            <!-- Footer -->
             <!-- Akhir Footer -->
         </div>
         <!-- Akhir HomePage Section -->
     </div>
     <!-- Script js -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>       
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>   
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/carousel.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
