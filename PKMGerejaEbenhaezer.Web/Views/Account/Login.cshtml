@@ -3,22 +3,48 @@
     ViewData["Title"] = "Login Admin";
 }
 
-<form asp-action="Login" class="container mx-3">
-    <div asp-validation-summary="ModelOnly"></div>
+<section id="login-form" class="">
+    <div class="container">
+        <h1>Masuk ke akun anda</h1>
+        <form id="account" method="post" asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div class="mb-3">
-        <label asp-for="@Model.UserName" class="form-label"></label>
-        <input type="text" asp-for="@Model.UserName" class="form-control"/>
-        <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+            <div class="divider">
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+
+            <label asp-for="@Model.UserName" class="form-label">Username:</label>
+            <div class="custome-input">
+                <input asp-for="@Model.UserName" type="text" placeholder="Your Username" autocomplete="off" />
+                <i class="ri-user-line"></i>
+                <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+            </div>
+
+            <label asp-for="@Model.Password">Password:</label>
+            <div class="custome-input">
+                <input asp-for="@Model.Password" type="password" placeholder="Your Password" id="id_password" />
+                <i class="ri-eye-line" id="togglePassword"></i>
+                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-check">
+                <input asp-for="@Model.RememberMe" type="checkbox" class="form-check-input" />
+                <label asp-for="@Model.RememberMe" class="form-check-label"></label>
+            </div>
+
+            <button class="login">Masuk</button>           
+        </form>
     </div>
-    <div class="mb-3">
-        <label asp-for="@Model.Password" class="form-label"></label>
-        <input type="password" asp-for="@Model.Password" class="form-control" />
-        <span asp-validation-for="@Model.Password" class="text-danger"></span>
-    </div>
-    <div class="mb-3 form-check">
-        <input asp-for="@Model.RememberMe" type="checkbox" class="form-check-input"/>
-        <label asp-for="@Model.RememberMe" class="form-check-label"></label>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+</section>
+
+<script type="text/javascript">
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#id_password');
+
+    togglePassword.addEventListener('click', function (e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.classList.toggle('ri-eye-off-line');
+    });
+</script>

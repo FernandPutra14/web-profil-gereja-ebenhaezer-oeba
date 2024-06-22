@@ -28,9 +28,37 @@
 
         .main-navbar .nav-list li {
             display: inline-block;
-            margin: 10px 20px;
+            margin: 10px 10px;
             padding-top: 15px;
         }
+
+            .main-navbar .nav-list li ::deep a.login-btn {
+                position: relative;
+               /* color: var(--light-heading-clr);*/
+                font-weight: 500;
+                font-size: 14px;
+                text-transform: uppercase;
+                text-decoration: none;
+                letter-spacing: 1px;
+            }
+
+                .main-navbar .nav-list li ::deep a.login-btn::after {
+                    position: absolute;
+                    content: '';
+                    width: 100%;
+                    height: 2px;
+                    color: black;
+                    /*background-color: var(--light-heading-clr);*/
+                    left: 0;
+                    top: calc(100% + 2px);
+                    transition: all 0.3s;
+                    transform: scaleX(0);
+                }
+
+                .main-navbar .nav-list li ::deep a.login-btn:hover::after {
+                    transform: scaleX(1);
+                    color: black;
+                }
 
             .main-navbar .nav-list li ::deep a {
                 position: relative;
@@ -41,7 +69,7 @@
                 text-decoration: none;
                 letter-spacing: 1px;
             }
-
+          
                 .main-navbar .nav-list li ::deep a::after {
                     position: absolute;
                     content: '';
@@ -58,12 +86,12 @@
                     transform: scaleX(1);
                 }
 
-    .main-navbar .login-btn {
+    .main-navbar .li .login-btn {
         background-color: var(--light-heading-clr);
         color: var(--primary-clr);
     }
 
-        .main-navbar .login-btn:hover {
+        .main-navbar .li .login-btn:hover {
             background-color: var(--primary-clr);
             color: var(--light-heading-clr);
             border: 1px solid var(--light-heading-clr);
@@ -163,13 +191,18 @@
                 margin-top: 180px;
             }
 
-            .main-navbar .nav-list li a {
+            .main-navbar .nav-list li ::deep a {
                 font-size: 20px;
                 letter-spacing: 1px;
             }
 
-    .main-navbar .login-btn {
+    .main-navbar ::deep .login-btn {
         margin-left: auto;
+        font-size: 20px;
+    }
+
+    .main-navbar .nav-list li ::deep a.login-btn { 
+        font-size: 20px;       
     }
 }
 

@@ -3,3 +3,180 @@
     padding-right: 0;
     padding-top: 8rem;
 }
+
+footer {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 40px 100px;
+    background: #369e5e;
+}
+
+    footer .container-fluid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 0.6fr 0.5fr 0.7fr 0.8fr;
+        grid-gap: 15px;
+    }
+
+        footer .container-fluid .sec h2 {
+            position: relative;
+            font-size: 25px;
+            color: #444;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        footer .container-fluid .sec p {
+            color: var(--light-heading-clr);
+            font-size: 16px;
+        }
+
+        footer .container-fluid .sci {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(4,50px);
+            padding: 0px 0px 0px 0px;
+        }
+
+            footer .container-fluid .sci li {
+                list-style: none;
+            }
+
+                footer .container-fluid .sci li a {
+                    display: inline-block;
+                    width: 36px;
+                    height: 36px;
+                    background: #333;
+                    display: grid;
+                    align-content: center;
+                    justify-content: center;
+                    text-decoration: none;
+                    transition: 0.3s ease;                  
+                }
+
+                    footer .container-fluid .sci li a i {
+                        color: #fff;
+                        font-size: 20px;
+                    }
+
+                    footer .container-fluid .sci li a:hover {
+                        background: rgb(21, 21, 100);
+                        color: yellow;
+                        cursor: pointer;
+                    }
+
+        footer .container-fluid .quicklinks {
+            position: relative;
+            font-size: 16px;
+        }
+
+            footer .container-fluid .quicklinks ul {
+                padding: 0px 0px 0px 0px;
+            }
+
+            footer .container-fluid .quicklinks ul li {
+                list-style: none;
+            }
+
+::deep footer .container-fluid .quicklinks ul li a {
+    color: var(--light-heading-clr);
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+    ::deep footer .container-fluid .quicklinks ul li a:hover {
+        color: orange;
+        font-weight: 700;
+        transition: 0.2s ease;
+    }
+
+::deep .bapakmu {
+    color: var(--light-heading-clr);
+    text-decoration: none;
+    font-size: 15px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+
+    ::deep .bapakmu:hover {
+        color: var(--light-heading-clr);
+        font-weight: 700;
+        transition: 0.2s ease;
+    }
+
+footer .container-fluid .contact .info {
+    position: relative;
+    padding: 0px 0px 0px 0px;
+}
+
+    footer .container-fluid .contact .info li {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        margin-bottom: 16px;
+    }
+
+        footer .container-fluid .contact .info li span {
+            color: var(--light-heading-clr);
+            font-size: 20px;
+        }
+
+        footer .container-fluid .contact .info li p {
+            display: flex;
+            align-items: center;
+        }
+
+        footer .container-fluid .contact .info li a {
+            color: var(--light-heading-clr);
+            font-size: 16px;
+            text-decoration: none;
+            cursor: default;
+        }
+
+.copyrightText {
+    width: 100%;
+    font-size: 16px;
+    background: var(--primary-clr);
+    padding: 10px 100px;
+    text-align: center;
+    color: var(--light-heading-clr);
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+    .copyrightText p{
+        padding-top: 15px;
+    }
+
+    @media (max-width: 991px) {
+        footer {
+        padding: 40px;
+    }
+
+        footer .container-fluid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            grid-gap: 20px;
+        }
+
+
+    .copyrightText {
+        padding: 20px 40px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    footer .container-fluid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        grid-gap: 20px;
+    }
+
+    footer {      
+        padding-top: 10px;
+        
+    }
+}
