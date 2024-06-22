@@ -32,7 +32,7 @@
             padding-top: 15px;
         }
 
-            .main-navbar .nav-list li a {
+            .main-navbar .nav-list li ::deep a {
                 position: relative;
                 color: var(--light-heading-clr);
                 font-weight: 500;
@@ -42,7 +42,7 @@
                 letter-spacing: 1px;
             }
 
-                .main-navbar .nav-list li a::after {
+                .main-navbar .nav-list li ::deep a::after {
                     position: absolute;
                     content: '';
                     width: 100%;
@@ -54,7 +54,7 @@
                     transform: scaleX(0);
                 }
 
-                .main-navbar .nav-list li a:hover::after {
+                .main-navbar .nav-list li ::deep a:hover::after {
                     transform: scaleX(1);
                 }
 
