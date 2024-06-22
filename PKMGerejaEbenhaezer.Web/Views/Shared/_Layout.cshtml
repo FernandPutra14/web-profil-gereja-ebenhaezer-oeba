@@ -14,53 +14,20 @@
     <link rel="stylesheet" href="~/PKMGerejaEbenhaezer.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="website">
-        <!-- HomePage Section -->
-        <div class="home" id="home">
-            <!-- Navbar -->
-            <nav class="main-navbar">
-                <a href="#" class="logo">
-                    <img src="img/logo_gereja.png" />
-                </a>
-                <ul class="nav-list">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Warta</a></li>
-                    <li><a href="">Pengunguman</a></li>
-                    <li><a href="">Tentang Kami</a></li>
-                    <li><a href="">Kontak</a></li>
-                </ul>
-                @if (User.Identity != null && User.Identity.IsAuthenticated)
-                {
-                    <a asp-action="Index" asp-controller="Home" asp-area="Dashboard" class="login-btn mx-1">
-                        Dashboard
-                    </a>
-                    <form asp-action="Logout" asp-controller="Account">
-                        <button type="submit" class="btn btn-danger">Logout</button>
-                    </form>
-                }
-                else
-                {
-                    <a asp-action="Login" asp-controller="Account" asp-area="" class="login-btn">
-                        Login Admin
-                    </a>
-                }
-                <div class="menu-btn">
-                    <span></span>
-                </div>
-            </nav>
-            <!-- Akhir Navbar -->
-            <!-- Body -->
-            <div class="container-fluid badan-utama">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-            <!-- Akhir Body -->
-            <!-- Footer -->
-            <!-- Akhir Footer -->
-        </div>
-        <!-- Akhir HomePage Section -->
+    <!-- Navbar -->
+    <partial name="_NavbarPartial"/>
+    <!-- Navbar -->
+
+    <!-- Body -->
+    <div class="container-fluid badan-utama">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
+    <!-- Akhir Body -->
+    <!-- Footer -->
+    <!-- Akhir Footer -->
+    <!-- Akhir HomePage Section -->
     <!-- Script js -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
