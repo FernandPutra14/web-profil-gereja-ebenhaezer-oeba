@@ -185,7 +185,11 @@
                 <img src="~/img/logo_gereja.png" alt="">
                 <ul class="profile-link">
                     <li><a href="#"><i class="ri-settings-3-line"></i> Pengaturan</a></li>
-                    <li><a href="#"><i class="ri-logout-box-fill"></i> Keluar</a></li>
+                    <li>
+						<form asp-action="Logout" asp-controller="Account" asp-area="" method="post">
+							<button type="submit"><i class="ri-logout-box-fill"></i> Keluar</button>
+						</form>
+					</li>
                 </ul>
             </div>
         </nav>
