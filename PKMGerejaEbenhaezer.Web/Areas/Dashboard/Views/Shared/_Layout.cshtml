@@ -165,6 +165,28 @@
 						nav .profile .profile-link a:hover {
 							background: #F1F0F6;
 						}
+
+		.tomboltoa {
+			padding: 10px 16px;
+			display: flex;
+			grid-gap: 10px;
+			font-size: 14px;
+			border: none;
+			background: transparent;
+			background-color: none;
+			color: #000;
+			align-items: center;
+			transition: all .3s ease;
+		}
+
+		.formuku {
+			
+		}
+
+		.formuku:hover {
+			cursor: pointer;
+			background: #F1F0F6;
+		}
 		/* NAVBAR */
     </style>
 
@@ -186,8 +208,8 @@
                 <ul class="profile-link">
                     <li><a href="#"><i class="ri-settings-3-line"></i> Pengaturan</a></li>
                     <li>
-						<form asp-action="Logout" asp-controller="Account" asp-area="" method="post">
-							<button type="submit"><i class="ri-logout-box-fill"></i> Keluar</button>
+						<form asp-action="Logout" asp-controller="Account" asp-area="" method="post" class="formuku">
+							<button class="tomboltoa" type="submit"><i class="ri-logout-box-fill"></i> Keluar</button>
 						</form>
 					</li>
                 </ul>

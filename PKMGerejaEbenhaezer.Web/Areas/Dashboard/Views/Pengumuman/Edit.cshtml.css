@@ -1,39 +1,39 @@
-﻿.cardplus {
+﻿.cardedit {
     padding: 20px;
     border-radius: 10px;
     background: var(--light);
     box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
 }
 
-.pluspeng {
+.editpeng {
     width: 100%;
     padding: 24px 20px 20px 20px;
 }
 
-    .pluspeng .title {
+    .editpeng .title {
         font-size: 28px;
         font-weight: 600;
         margin-bottom: 10px;
     }
 
-    .pluspeng .breadcrumbs {
+    .editpeng .breadcrumbs {
         display: flex;
         grid-gap: 6px;
         padding: 0;
         margin: 0;
     }
 
-        .pluspeng .breadcrumbs li,
-        .pluspeng .breadcrumbs li a {
+        .editpeng .breadcrumbs li,
+        .editpeng .breadcrumbs li a {
             font-size: 14px;
         }
 
-            .pluspeng .breadcrumbs li a {
+            .editpeng .breadcrumbs li a {
                 color: var(--blue);
             }
 
-                .pluspeng .breadcrumbs li a.active,
-                .pluspeng .breadcrumbs li.divider {
+                .editpeng .breadcrumbs li a.active,
+                .editpeng .breadcrumbs li.divider {
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
