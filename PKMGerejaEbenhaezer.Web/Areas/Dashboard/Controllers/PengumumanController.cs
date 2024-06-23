@@ -116,6 +116,93 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var pengumuman = await _appDbContext.PengumumanTable
+                .Where(p => p.Id == id)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
+            if (pengumuman == null)
+            {
+                _logger.LogError("Edit pengumuman gagal. Tidak ada pengumuman dengan id {0}", id);
+                return RedirectToAction("Index", "Pengumuman");
+            }
+
+            return View(new EditVM
+            {
+                Id = id,
+                Judul = pengumuman.Judul,
+                Keterangan = pengumuman.Keterangan,
+                Tanggal = pengumuman.Tanggal,
+                PathFoto = pengumuman.PathFoto
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditVM editVM)
+        {
+            //Validasi
+            if (!ModelState.IsValid) return View(editVM);
+            var pengumuman = _appDbContext.PengumumanTable.Where(p => p.Id == editVM.Id).FirstOrDefault();
+
+            if (pengumuman == null)
+            {
+                ModelState.AddModelError(string.Empty, $"Pengumuman dengan Id {editVM.Id} tidak ditemukan");
+                return View(editVM);
+            }
+
+            _appDbContext.PengumumanTable.Update(pengumuman);
+
+            //Simpan foto baru dan hapus foto lama
+            if (editVM.FotoBaru != null)
+            {
+                var fileFormContent = await FileHelpers.ProcessFormFile<EditVM>(
+                    editVM.FotoBaru,
+                    ModelState,
+                    _permittedFileExtension,
+                    _sizeLimit);
+
+                if (!ModelState.IsValid) return View(editVM);
+
+                var namaFile = $"Pengumuman-{Path.GetRandomFileName()}{Path.GetExtension(editVM.FotoBaru.FileName)}";
+                var pathFotoBaru = Path.Combine("/img/", namaFile);
+
+                try
+                {
+                    using (var fileStream = System.IO.File.Create(_webHostEnvironment.WebRootPath + pathFotoBaru)) 
+                    {
+                        await fileStream.WriteAsync(fileFormContent);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(editVM.FotoBaru.Name, "Foto baru gagal disimpan!");
+                    _logger.LogError("Simpan foto baru gagal! {0}", ex.Message);
+
+                    return View(editVM);
+                }
+
+                if(System.IO.File.Exists(_webHostEnvironment + pengumuman.PathFoto))
+                {
+                    System.IO.File.Delete(_webHostEnvironment + pengumuman.PathFoto);
+                }
+
+                pengumuman.PathFoto = pathFotoBaru;
+            }
+
+            //Update Pengumuman
+            pengumuman.Judul = editVM.Judul;
+            pengumuman.Keterangan = editVM.Keterangan;
+            pengumuman.Tanggal = editVM.Tanggal;
+
+            await _appDbContext.SaveChangesAsync();
+
+            _logger.LogInformation("Pengumuman dengan id {0} berhasil diupdate", editVM.Id);
+
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Hapus(int id, string? returnUrl)
         {
@@ -125,7 +212,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Validasi
             var pengumuman = await _appDbContext.PengumumanTable.Where(p => p.Id == id).FirstOrDefaultAsync();
             if (pengumuman == null) return Redirect(returnUrl!);
-            
+
 
             //Hapus pengumuman
             _appDbContext.PengumumanTable.Remove(pengumuman);
@@ -147,7 +234,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError("Hapus Pengumuman : {0}", ex.Message);
+                _logger.LogError("Hapus Pengumuman - Hapus Foto : {0}", ex.Message);
                 return Redirect(returnUrl!);
             }
 
