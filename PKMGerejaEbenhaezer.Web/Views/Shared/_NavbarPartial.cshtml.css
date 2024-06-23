@@ -188,7 +188,7 @@
         }
 
             .main-navbar .nav-list li:nth-child(1) {
-                margin-top: 180px;
+                margin-top: 150px;
             }
 
             .main-navbar .nav-list li ::deep a {

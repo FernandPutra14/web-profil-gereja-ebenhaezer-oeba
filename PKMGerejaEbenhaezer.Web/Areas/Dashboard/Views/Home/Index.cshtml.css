@@ -1,0 +1,97 @@
+﻿.pertama {
+    width: 100%;
+    padding: 24px 20px 20px 20px;
+}
+
+    .pertama .title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .pertama .breadcrumbs {
+        display: flex;
+        grid-gap: 6px;
+        padding: 0;
+        margin: 0;   
+    }
+
+        .pertama .breadcrumbs li,
+        .pertama .breadcrumbs li a {
+            font-size: 14px;
+        }
+
+            .pertama .breadcrumbs li a {
+                color: var(--blue);
+            }
+
+                .pertama .breadcrumbs li a.active,
+                .pertama .breadcrumbs li.divider {
+                    color: var(--dark-grey);
+                    pointer-events: none;
+                }
+
+    .pertama .info-data {
+        margin-top: 36px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-gap: 20px;
+    }
+
+        .pertama .info-data .card {
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--light);
+            box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+        }
+
+    .pertama .card .head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+        .pertama .card .head h2 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .pertama .card .head p {
+            font-size: 14px;
+        }
+
+        .pertama .card .head .icon {
+            font-size: 20px;
+            color: var(--green);
+        }
+
+            .pertama .card .head .icon.down {
+                color: var(--red);
+            }
+
+    .pertama .card .progress {
+        display: block;
+        margin-top: 24px;
+        height: 10px;
+        width: 100%;
+        border-radius: 10px;
+        background: var(--grey);
+        overflow-y: hidden;
+        position: relative;
+        margin-bottom: 4px;
+    }
+
+        .pertama .card .progress::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--blue);
+            width: var(--value);
+        }
+
+    .pertama .card .label {
+        font-size: 14px;
+        font-weight: 700;
+    }

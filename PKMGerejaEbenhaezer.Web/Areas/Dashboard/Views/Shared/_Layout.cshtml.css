@@ -1,0 +1,12 @@
+﻿@media screen (max-width: 768px) {
+    #content {
+        position: relative;
+        width: calc(100% - 60px);
+        transition: all .3s ease;
+    }
+
+    nav .nav-link,
+    nav .divider {
+        display: none;
+    }
+}
