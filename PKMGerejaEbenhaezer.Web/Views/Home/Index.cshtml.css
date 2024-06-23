@@ -1,5 +1,4 @@
 ﻿/* Responsive */
-
 @media (max-width:968px) {
 
     /* Part Pengumuman */
@@ -18,9 +17,25 @@
         }
 
     /* Akhir Part Pengumuman */
+
+
+    .counters > div {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .counter:nth-child(2)::before {
+        display: none;
+    }
 }
 
 @media (max-width:768px) {
+    #about-container {
+        padding: 2vw 4vw 2vw 4vw;
+    }
+
+        #about-container ::deep .about-img {
+            padding-right: 30px;
+        }
 }
 
 @media (max-width:668px) {
@@ -31,6 +46,20 @@
     }
     /* Akhir Part Pengumuman */
 
+
+    #about-container {
+        flex-direction: column-reverse;
+    }
+
+        #about-container ::deep .about-img {
+            width: 100%;
+            padding-right: 0px;
+        }
+
+        #about-container ::deep .about-text {
+            width: 100%;
+            padding-bottom: 20px;
+        }
 }
 
 @media (max-width:568px) {
@@ -62,6 +91,13 @@
             width: 80%;
         }
     /* Akhir Hero Section */
+
+
+    .counters > div {
+        grid-template-columns: 1fr;
+        row-gap: 5em;
+
+    }
 }
 
 @media (max-width:468px) {
