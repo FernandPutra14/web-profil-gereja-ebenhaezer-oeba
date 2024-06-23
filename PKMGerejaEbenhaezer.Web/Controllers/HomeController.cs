@@ -20,7 +20,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var daftarPengumuman = await _appDbContext.PengumumenTable.AsNoTracking().ToListAsync();
+            var daftarPengumuman = await _appDbContext.PengumumanTable.AsNoTracking().ToListAsync();
 
             return View(new IndexVM { DaftarPengumuman = daftarPengumuman });
         }

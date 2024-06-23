@@ -1,0 +1,76 @@
+﻿@model TambahVM
+@{
+    ViewData["Title"] = "Tambah Pengumuman";
+}
+
+<form asp-action="Tambah" method="post" class="container" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
+
+    <div class="row mb-3 justify-content-center">
+        <div class="col-6">
+            <label asp-for="@Model.Judul" class="form-label"></label>
+            <input type="text" asp-for="@Model.Judul" class="form-control"/>
+            <span class="form-text text-danger" asp-validation-for="@Model.Judul"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+        <div class="col-6">
+            <label asp-for="@Model.Keterangan" class="form-label"></label>
+            <input type="text" asp-for="@Model.Keterangan" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.Keterangan"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+        <div class="col-6">
+            <label asp-for="@Model.Tanggal" class="form-label"></label>
+            <input type="date" asp-for="@Model.Tanggal" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.Tanggal"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+        <div class="col-6">
+            <label asp-for="@Model.Foto" class="form-label"></label>
+            <input type="file" asp-for="@Model.Foto" class="form-control" id="fileupload" />
+            <span class="form-text text-danger" asp-validation-for="@Model.Foto"></span>
+        </div>
+    </div>
+    <div class="row mb-3 justify-content-center">
+        <div id="dvPreview" class="col-6"></div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#fileupload").change(function () {
+                $("#dvPreview").html("");
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                if (regex.test($(this).val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        $("#dvPreview").show();
+                        $("#dvPreview").append('<img class="img-fluid" />');
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $("#dvPreview img").attr("src", e.target.result);
+                        }
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    } else {
+                        alert("Browser tidak mendukung FileReader");
+                    }
+                } else {
+                    alert("Gambar file tidak valid");
+                }
+            });
+        });
+    </script>
+}

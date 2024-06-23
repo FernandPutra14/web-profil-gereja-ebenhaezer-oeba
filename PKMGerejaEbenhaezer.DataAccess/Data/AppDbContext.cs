@@ -17,7 +17,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         }
 
         public DbSet<AppUser> AppUserTable { get; set; }
-        public DbSet<Pengumuman> PengumumenTable {  get; set; }
+        public DbSet<Pengumuman> PengumumanTable {  get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

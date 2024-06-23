@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
     <!-- Akhir Owl Carousel -->
+
+    <!-- Font Awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Akhir Font Awesome-->
+
     <link rel="stylesheet" href="~/PKMGerejaEbenhaezer.Web.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -100,6 +105,28 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/carousel.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+        //Toggle Bang
+        var menuBtn = document.querySelector('.main-navbar .menu-btn');
+        var menuList = document.querySelector('.main-navbar .nav-list');
+        var menuListItems = document.querySelectorAll('.nav-list li a');
+
+        menuBtn.addEventListener('click', function () {
+            menuBtn.classList.toggle('active');
+            menuList.classList.toggle('active');
+        });
+
+        for (var i = 0; 1 < menuListItems.length; i++) {
+            menuListItems[i].addEventListener('click', menuItemClicked)
+        }
+
+        function menuItemClicked() {
+            menuBtn.classList.remove('active');
+            menuList.classList.remove('active');
+        }
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

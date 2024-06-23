@@ -23,16 +23,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.12" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.18" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PKMGerejaEbenhaezer.DataAccess\PKMGerejaEbenhaezer.DataAccess.csproj" />
     <ProjectReference Include="..\PKMGerejaEbenhaezer.Domain\PKMGerejaEbenhaezer.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Dashboard\Models\" />
   </ItemGroup>
 
 </Project>

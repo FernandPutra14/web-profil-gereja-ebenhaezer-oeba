@@ -48,7 +48,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "AQAAAAIAAYagAAAAEP9Jkku7w3fpizd144MLLx4AiLL8LVfW+OtDX2+7vn7sVjCRScHH1Prv0jH+i574Ww==",
+                            Password = "AQAAAAIAAYagAAAAEDyn0bTgcKRehvwG6uFe5ECh1caxJDVGpjGMwfv+mP5lPdVdD6Fezlr24BuyH5x4Lw==",
                             UserName = "admin"
                         });
                 });
@@ -78,7 +78,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PengumumenTable");
+                    b.ToTable("PengumumanTable");
 
                     b.HasData(
                         new
