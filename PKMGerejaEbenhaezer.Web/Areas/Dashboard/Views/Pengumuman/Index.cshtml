@@ -5,70 +5,82 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
-<div class="container">
-    <h1 class="text-center">Pengumuman</h1>
-    <a asp-action="Tambah" class="btn btn-primary">
-        Tambah
-    </a>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th width="10%">Foto</th>
-                <th>Judul</th>
-                <th>Keterangan</th>
-                <th>Tanggal</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var pengumuman in Model)
-            {
-                <tr>
-                    <td>@pengumuman.Id</td>
-                    <td>
-                        <img src="@pengumuman.PathFoto" alt="@pengumuman.Id" class="img-fluid"/>
-                    </td>
-                    <td>@pengumuman.Judul</td>
-                    <td>@pengumuman.Keterangan</td>
-                    <td>@pengumuman.Tanggal.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</td>
-                    <td>
-                        <div class="d-flex gap-1 justify-content-start align-items-center">
-                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@pengumuman.Id">
-                                <i class="fas fa-pen-square"></i>
-                            </a>
-                            <!-- Button trigger modal -->
-                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(pengumuman.Id)">
-                                <i class="fa fa-regular fa-trash"></i>
-                            </a>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal@(pengumuman.Id)" tabindex="-1" aria-labelledby="exampleModal@(pengumuman.Id)" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModal@(pengumuman.Id)">Hapus Pengumuman</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Apakah anda yakin ingin menghapus?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <form asp-action="Hapus" asp-route-id="@pengumuman.Id" method="post">
-                                                <button type="submit" class="btn btn-primary">Hapus</button>
-                                            </form>
+<div class="pengumuman">
+    <h1 class="title">Daftar Pengumuman</h1>
+    <ul class="breadcrumbs mb-4">
+        <li><a href="#">Information</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Daftar Pengumuman</a></li>
+    </ul>
+    <div class="container">
+        @* <a asp-action="Tambah" class="btn btn-primary mb-4">
+            Tambah
+        </a> *@
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th width="10%">Foto</th>
+                    <th>Judul</th>
+                    <th>Keterangan</th>
+                    <th>Tanggal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pengumuman in Model)
+                {
+                    <tr>
+                        <td>@pengumuman.Id</td>
+                        <td>
+                            <img src="@pengumuman.PathFoto" alt="@pengumuman.Id" class="img-fluid" />
+                        </td>
+                        <td>@pengumuman.Judul</td>
+                        <td>@pengumuman.Keterangan</td>
+                        <td>@pengumuman.Tanggal.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</td>
+                        <td>
+                            <div class="d-flex gap-1 justify-content-start align-items-center">
+                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@pengumuman.Id">
+                                    <i class="fas fa-pen-square"></i>
+                                </a>
+                                <!-- Button trigger modal -->
+                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(pengumuman.Id)">
+                                    <i class="fa fa-regular fa-trash"></i>
+                                </a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal@(pengumuman.Id)" tabindex="-1" aria-labelledby="exampleModal@(pengumuman.Id)" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModal@(pengumuman.Id)">Hapus Pengumuman</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Apakah anda yakin ingin menghapus?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <form asp-action="Hapus" asp-route-id="@pengumuman.Id" method="post">
+                                                    <button type="submit" class="btn btn-primary">Hapus</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+
+
+
+
 
 @section Scripts {
     <partial name="_DataTablePartial" />

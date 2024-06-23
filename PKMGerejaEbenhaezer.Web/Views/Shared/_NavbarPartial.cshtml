@@ -14,12 +14,12 @@
         <li>
             @if (User.Identity != null && User.Identity.IsAuthenticated)
             {
-                <a asp-action="Index" asp-controller="Home" asp-area="Dashboard" class="login-btn mx-1">
+                <a asp-action="Index" asp-controller="Home" asp-area="Dashboard" class="login-btn">
                     Dashboard
                 </a>
-                <form asp-action="Logout" asp-controller="Account">
-                    <button type="submit" class="btn btn-danger">Logout</button>
-                </form>
+                @* <form asp-action="Logout" asp-controller="Account">
+                    <button type="submit" class="login-btn">Logout</button>
+                </form> *@
             }
             else
             {
