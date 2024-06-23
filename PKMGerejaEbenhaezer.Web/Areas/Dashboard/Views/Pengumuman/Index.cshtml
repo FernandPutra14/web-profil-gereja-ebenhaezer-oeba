@@ -38,16 +38,16 @@
                                 <i class="fas fa-pen-square"></i>
                             </a>
                             <!-- Button trigger modal -->
-                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(pengumuman.Id)">
                                 <i class="fa fa-regular fa-trash"></i>
                             </a>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal@(pengumuman.Id)" tabindex="-1" aria-labelledby="exampleModal@(pengumuman.Id)" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Hapus Pengumuman</h5>
+                                            <h5 class="modal-title" id="exampleModal@(pengumuman.Id)">Hapus Pengumuman</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -56,7 +56,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                                             <form asp-action="Hapus" asp-route-id="@pengumuman.Id" method="post">
-                                                <button type="sumit" class="btn btn-primary">Hapus</button>
+                                                <button type="submit" class="btn btn-primary">Hapus</button>
                                             </form>
                                         </div>
                                     </div>

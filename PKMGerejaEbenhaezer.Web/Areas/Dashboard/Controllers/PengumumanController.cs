@@ -13,7 +13,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     public class PengumumanController : Controller
     {
         private readonly AppDbContext _appDbContext;
-        private readonly string[] _permittedFileExtension = new string[] {".jpg", ".jpeg"};
+        private readonly string[] _permittedFileExtension = new string[] { ".jpg", ".jpeg" };
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<PengumumanController> _logger;
         private readonly long _sizeLimit = 8000000L; //8 MB
@@ -49,7 +49,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         [HttpPost]
         public async Task<IActionResult> Tambah(TambahVM tambahVM)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(tambahVM);
             }
@@ -61,7 +61,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 _permittedFileExtension,
                 _sizeLimit);
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(tambahVM);
             }
@@ -76,10 +76,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                     await fileStream.WriteAsync(formFileContent);
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, $"Error menyimpan file foto!");
-                _logger.LogError(ex.Message);
+                _logger.LogError("Tambah Pengumuman : {0}", ex.Message);
                 return View(tambahVM);
             }
 
@@ -107,13 +107,52 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 System.IO.File.Delete(_webHostEnvironment.WebRootPath + pathFoto);
 
                 ModelState.AddModelError(string.Empty, $"Error menyimpan data ke database!");
-                _logger.LogError(ex.Message);
+                _logger.LogError("Tambah Pengumuman : {0}", ex.Message);
                 return View(tambahVM);
             }
 
             _logger.LogInformation("Pengumuman dengan Id {0} ditambahkan", changeTracker.Entity.Id);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Hapus(int id, string? returnUrl)
+        {
+            returnUrl ??= Url.Action("Index", "Pengumuman", new { Area = "Dashboard" });
+            ViewData["returnUrl"] = returnUrl;
+
+            //Validasi
+            var pengumuman = await _appDbContext.PengumumanTable.Where(p => p.Id == id).FirstOrDefaultAsync();
+            if (pengumuman == null) return Redirect(returnUrl!);
+            
+
+            //Hapus pengumuman
+            _appDbContext.PengumumanTable.Remove(pengumuman);
+
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Hapus Pengumuman : {0}", ex.Message);
+                return Redirect(returnUrl!);
+            }
+
+            //Hapus Foto
+            try
+            {
+                System.IO.File.Delete(_webHostEnvironment + pengumuman.PathFoto);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Hapus Pengumuman : {0}", ex.Message);
+                return Redirect(returnUrl!);
+            }
+
+            _logger.LogInformation("Pengumunan {0} berhasil dihapus", pengumuman.Id);
+            return Redirect(returnUrl!);
         }
     }
 }
