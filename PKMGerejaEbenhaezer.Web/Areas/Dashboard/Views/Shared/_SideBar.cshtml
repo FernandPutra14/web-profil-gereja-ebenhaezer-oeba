@@ -214,7 +214,13 @@
                 <li><a asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Tambah">Tambah</a></li>
             </ul>
         </li>
-        <li><a href=""><i class="ri-bar-chart-box-fill icon"></i>Penaldo</a></li>
+        <li>
+            <a asp-area="Dashboard" asp-controller="Rayon" asp-action="Index"><i class="ri-sticky-note-fill icon"></i>Rayon <i class="ri-arrow-right-s-line icon-right"></i></a>
+            <ul class="side-dropdown">
+                <li><a asp-area="Dashboard" asp-controller="Rayon" asp-action="Index">Daftar</a></li>
+                <li><a asp-area="Dashboard" asp-controller="Rayon" asp-action="Tambah">Tambah</a></li>
+            </ul>
+        </li>
         <!-- Akhir Sesi 2 -->
     </ul> 
 </section>

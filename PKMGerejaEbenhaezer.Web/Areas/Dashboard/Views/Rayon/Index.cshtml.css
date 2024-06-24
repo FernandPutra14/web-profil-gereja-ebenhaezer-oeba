@@ -1,0 +1,32 @@
+﻿.dafray {
+    width: 100%;
+    padding: 24px 20px 20px 20px;
+}
+
+    .dafray .title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .dafray .breadcrumbs {
+        display: flex;
+        grid-gap: 6px;
+        padding: 0;
+        margin: 0;
+    }
+
+        .dafray .breadcrumbs li,
+        .dafray .breadcrumbs li a {
+            font-size: 14px;
+        }
+
+            .dafray .breadcrumbs li a {
+                color: var(--blue);
+            }
+
+                .dafray .breadcrumbs li a.active,
+                .dafray .breadcrumbs li.divider {
+                    color: var(--dark-grey);
+                    pointer-events: none;
+                }
