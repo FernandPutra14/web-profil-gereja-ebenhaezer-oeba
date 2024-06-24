@@ -5,7 +5,7 @@
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedDataRayoPerbaiki : Migration
+    public partial class Perbaiki : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "Password",
-                value: "AQAAAAIAAYagAAAAEEbmtTQA3F+QSLVxUPgRYNWzrDXtiS5AwIp9Yz3uvfcYYZeGhwgeqzCWQcxQwFi8Cg==");
+                value: "AQAAAAIAAYagAAAAEIVVhrBNJgKaGkQtf4W3nFdDX74u/uTMOPxy4Ww8jagED6OIHk1VlxJHuMOIP0JoGQ==");
         }
 
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "Password",
-                value: "AQAAAAIAAYagAAAAEG6agSyM9+GBTflNDgC/zb5++gPleEsrQ0lk+b0Pzh+utVusXKFX7i1ImbmrBXejfg==");
+                value: "AQAAAAIAAYagAAAAEKGbZoxJLBq8BZETNk7MJNNy9jPbCakQLd+uYJQ3auqcbc4+NlRx2m4vZwcomH4OGA==");
         }
     }
 }
