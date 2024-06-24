@@ -5,6 +5,7 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pengumuman;
 using PKMGerejaEbenhaezer.Web.Utlities;
+using System.Drawing;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -17,6 +18,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<PengumumanController> _logger;
         private readonly long _sizeLimit = 8000000L; //8 MB
+        private readonly string _folderPath = "/img/";
 
         public PengumumanController(
             AppDbContext appDbContext,
@@ -67,7 +69,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             var namaFile = $"Pengumuman-{Path.GetRandomFileName()}{Path.GetExtension(tambahVM.Foto.FileName)}";
-            var pathFoto = Path.Combine("/img/", namaFile);
+            var pathFoto = Path.Combine(_folderPath, namaFile);
 
             try
             {
@@ -166,7 +168,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 if (!ModelState.IsValid) return View(editVM);
 
                 var namaFile = $"Pengumuman-{Path.GetRandomFileName()}{Path.GetExtension(editVM.FotoBaru.FileName)}";
-                var pathFotoBaru = Path.Combine("/img/", namaFile);
+                var pathFotoBaru = Path.Combine(_folderPath, namaFile);
 
                 try
                 {

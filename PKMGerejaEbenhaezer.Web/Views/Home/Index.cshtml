@@ -180,9 +180,6 @@
 
     /* Akhir Pengumuman Section */
 
-
-
-
     /* About Us */
     #about-container {
         display: flex;
@@ -321,7 +318,7 @@
                     var cultureInfo = new System.Globalization.CultureInfo("id-ID");
                     <!-- Ini Cardnya Bang -->
                     <div class="item peng-card">
-                        <img src="@pengumuman.PathFoto" />
+                        <img src="@pengumuman.PathFoto"/>
                         <div class="category">
                             <div class="subject">
                                 <h3>Pengumuman</h3>
@@ -345,7 +342,22 @@
 
 <section id="about-container" class="mb-5">
     <div class="about-img">
-        <canvas id="doughnut"></canvas>
+        @{
+            var chartModel = new ChartModel
+            {
+                Label = "Jemaat Gereja",
+                Data = new Dictionary<string, double>
+                {
+                  {"Lansia", Model.TotalLansia},  
+                  {"Dewasa", Model.TotalDewasa},  
+                  {"Pemuda", Model.TotalPemuda},  
+                  {"Remaja", Model.TotalRemaja},  
+                  {"Anak", Model.TotalAnak},  
+                },
+            };
+        }
+        
+        <vc:chart chart-model=chartModel></vc:chart>
     </div>
     <div class="about-text">
         <h2>Jumlah Jemaat Gereja GMIT Ebenhaezer Oeba</h2>
@@ -367,23 +379,23 @@
         <div class="counters">
             <div>
                 <div class="=counter">
-                    <h3><span data-count="90">0</span></h3>
+                    <h3><span data-count="@Model.TotalLansia">0</span></h3>
                     <h4>Lansia</h4>
                 </div>
                 <div class="=counter">
-                    <h3><span data-count="410">0</span></h3>
+                    <h3><span data-count="@Model.TotalDewasa">0</span></h3>
                     <h4>Dewasa</h4>
                 </div>
                 <div class="=counter">
-                    <h3><span data-count="240">0</span></h3>
+                    <h3><span data-count="@Model.TotalPemuda">0</span></h3>
                     <h4>Pemuda</h4>
                 </div>
                 <div class="=counter">
-                    <h3><span data-count="160">0</span></h3>
+                    <h3><span data-count="@Model.TotalRemaja">0</span></h3>
                     <h4>Remaja</h4>
                 </div>
                 <div class="=counter">
-                    <h3><span data-count="100">0</span></h3>
+                    <h3><span data-count="@Model.TotalAnak">0</span></h3>
                     <h4>Anak</h4>
                 </div>
             </div>
@@ -391,9 +403,8 @@
 
     </div>
 </section>
-
-
 <!-- Chart Section -->
+
 @section Scripts {
     <script type="text/javascript">
         $(function () {

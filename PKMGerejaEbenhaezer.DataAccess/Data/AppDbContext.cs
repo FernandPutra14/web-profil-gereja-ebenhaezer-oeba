@@ -18,6 +18,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
 
         public DbSet<AppUser> AppUserTable { get; set; }
         public DbSet<Pengumuman> PengumumanTable {  get; set; }
+        public DbSet<Rayon> RayonTable { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -81,6 +82,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     PathFoto = "\\img\\gereja1.jpg",
                 }
             );
+
+            modelBuilder.Entity<Rayon>().HasKey(r => r.Id);
         }
     }
 }

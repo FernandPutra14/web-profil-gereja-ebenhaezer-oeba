@@ -186,7 +186,7 @@ namespace PKMGerejaEbenhaezer.Web.Utlities
             return Array.Empty<byte>();
         }
 
-        private static bool IsValidFileExtensionAndSignature(string fileName, Stream data, string[] permittedExtensions)
+        public static bool IsValidFileExtensionAndSignature(string fileName, Stream data, string[] permittedExtensions)
         {
             if (string.IsNullOrEmpty(fileName) || data == null || data.Length == 0)
             {

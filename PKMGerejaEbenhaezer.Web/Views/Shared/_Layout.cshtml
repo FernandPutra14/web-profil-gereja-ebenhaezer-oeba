@@ -11,18 +11,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
     <!-- Akhir Owl Carousel -->
-
     <!-- Font Awesome -->
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- Akhir Font Awesome-->
 
     <link rel="stylesheet" href="~/PKMGerejaEbenhaezer.Web.styles.css" asp-append-version="true" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
     <!-- Navbar -->
-    <partial name="_NavbarPartial"/>
+    <partial name="_NavbarPartial" />
     <!-- Navbar -->
-
     <!-- Body -->
     <div class="container-fluid badan-utama">
         <main role="main" class="pb-3">
@@ -34,7 +34,7 @@
     <footer>
         <div class="container-fluid">
             <div class="sec gambar" style="text-align:center;">
-                <img src="~/img/logo_gereja.png" style="width:100px; padding-top: 50px;"/>
+                <img src="~/img/logo_gereja.png" style="width:100px; padding-top: 50px;" />
             </div>
             <div class="sec quicklinks">
                 <h2>Link Cepat</h2>
@@ -95,37 +95,35 @@
     <div class="copyrightText">
         <p>Copyright &copy;2024. All rights Reserved.</p>
     </div>
-    
+
 
     <!-- Akhir Footer -->
     <!-- Akhir HomePage Section -->
     <!-- Script js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/carousel.js" asp-append-version="true"></script>
-    <script src="~/js/chart.js" asp-append-version="true"></script>
 
     <script type="text/javascript">
         //Toggle Bang
-        var menuBtn = document.querySelector('.main-navbar .menu-btn');
-        var menuList = document.querySelector('.main-navbar .nav-list');
-        var menuListItems = document.querySelectorAll('.nav-list li a');
+        const menuBtn = $('.main-navbar .menu-btn');
+        const menuList = $('.main-navbar .nav-list');
+        const menuListItems = $('.nav-list li a');
 
-        menuBtn.addEventListener('click', function () {
-            menuBtn.classList.toggle('active');
-            menuList.classList.toggle('active');
+        $(menuBtn).on('click', function () {
+            $(menuBtn).toggleClass('active');
+            $(menuList).toggleClass('active');
         });
 
-        for (var i = 0; 1 < menuListItems.length; i++) {
-            menuListItems[i].addEventListener('click', menuItemClicked)
-        }
+        menuListItems.each(function (index, item) {
+            $(item).on('click', menuItemClicked);
+        });
 
         function menuItemClicked() {
-            menuBtn.classList.remove('active');
-            menuList.classList.remove('active');
+            $(menuBtn).removeClass('active');
+            $(menuList).removeClass('active');
         }
     </script>
 
