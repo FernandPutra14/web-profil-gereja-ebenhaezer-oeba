@@ -9,7 +9,8 @@ footer {
     width: 100%;
     height: auto;
     padding: 40px 100px 20px 100px;
-    background: #369e5e;
+    /*background: #369e5e;*/
+    background: #1b4182;
 }
 
     footer .container-fluid {
@@ -21,8 +22,8 @@ footer {
 
         footer .container-fluid .sec h2 {
             position: relative;
-            font-size: 25px;
-            color: #444;
+            font-size: 23px;
+            color: #28292b;
             font-weight: 600;
             margin-bottom: 15px;
         }
@@ -34,6 +35,7 @@ footer {
 
         footer .container-fluid .sci {
             margin-top: 20px;
+            margin-bottom: 20px;
             display: grid;
             grid-template-columns: repeat(4,50px);
             padding: 0px 0px 0px 0px;

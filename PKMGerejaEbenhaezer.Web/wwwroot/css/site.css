@@ -16,7 +16,8 @@
 }
 
 html {
-    --primary-clr: #208245;
+    /*--primary-clr: #208245;*/
+    --primary-clr: #10316B;
     --primary-medium-clr: #d8e9df;
     --primary-light-clr: #edfaf1;
     --bg-clr-1: #ffffff;
