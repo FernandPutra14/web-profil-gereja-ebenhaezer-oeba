@@ -144,31 +144,6 @@
 
 
 @section Scripts {
-    <script type="text/javascript">
-        $(function () {
-            $("#fileupload").change(function () {
-                $("#dvPreview").html("");
-                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
-                if (regex.test($(this).val().toLowerCase())) {
-                    if (typeof (FileReader) != "undefined") {
-                        $("#dvPreview").show();
-                        $("#dvPreview").append('<img class="img-fluid" />');
-                        var reader = new FileReader();
-                        reader.onload = function (e) {
-                            $("#dvPreview img").attr("src", e.target.result);
-                            $("#dvPreview img").css({
-                                "width": "185px",
-                                "height": "185px"
-                            });
-                        }
-                        reader.readAsDataURL($(this)[0].files[0]);
-                    } else {
-                        alert("Browser tidak mendukung FileReader");
-                    }
-                } else {
-                    alert("Gambar file tidak valid");
-                }
-            });
-        });
-    </script>
+    <partial name="_ImagePreviewPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }
