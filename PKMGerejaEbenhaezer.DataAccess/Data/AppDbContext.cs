@@ -64,7 +64,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Judul = "Ibadah Natal Bersama",
                     Keterangan = "Kami mengundang seluruh jemaat untuk hadir dalam Ibadah Natal yang akan diadakan pada hari Minggu, 25 Desember 2024, pukul 10.00 WIB di Gereja. Mari kita rayakan kelahiran Yesus Kristus dengan sukacita dan kebersamaan. Setelah ibadah, akan diadakan acara ramah tamah di aula gereja.",
                     Tanggal = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PathFoto = "\\img\\pengumuman\\natal.jpg",
+                    PathFoto = "\\img\\pengumuman\\natall.jpg",
                 },
                 new Pengumuman
                 {
@@ -72,7 +72,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Judul = "Rapat Anggota Jemaat Tahunan",
                     Keterangan = "Rapat Anggota Jemaat Tahunan akan dilaksanakan pada hari Sabtu, 27 Juni 2024, pukul 14.00 WIB di aula gereja. Kami mengajak seluruh jemaat untuk hadir dan berpartisipasi dalam membahas laporan tahunan dan rencana kegiatan gereja untuk tahun 2024.",
                     Tanggal = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PathFoto = "\\img\\pengumuman\\rapat.jpg",
+                    PathFoto = "\\img\\pengumuman\\rapatt.jpg",
                 },
                 new Pengumuman
                 {
@@ -80,7 +80,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Judul = "Retret Pemuda Gereja",
                     Keterangan = "Kami mengundang para pemuda gereja untuk mengikuti Retret Pemuda yang akan diadakan pada tanggal 15-17 Juli 2024 di Wisma Retreat Agape. Tema retret kali ini adalah \"Membangun Iman yang Kuat di Era Digital\". Pendaftaran dapat dilakukan melalui sekretariat gereja hingga 1 Juli 2024.",
                     Tanggal = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PathFoto = "\\img\\pengumuman\\trip.jpg",
+                    PathFoto = "\\img\\pengumuman\\tripp.jpg",
                 },
                 new Pengumuman
                 {
@@ -88,7 +88,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Judul = "Penggalangan Dana untuk Renovasi Gereja",
                     Keterangan = "Gereja kita akan mengadakan penggalangan dana untuk renovasi bangunan gereja yang direncanakan mulai bulan Juni 2024. Kami mengajak seluruh jemaat untuk berpartisipasi dalam acara ini pada hari Minggu, 5 Juli 2024, pukul 09.00 WIB setelah kebaktian. Donasi dapat diberikan langsung atau melalui rekening gereja.",
                     Tanggal = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PathFoto = "\\img\\pengumuman\\donasi.jpg",
+                    PathFoto = "\\img\\pengumuman\\donasii.jpg",
                 },
                 new Pengumuman
                 {
@@ -96,7 +96,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Judul = "Pelayanan Sosial Natal",
                     Keterangan = "Dalam rangka menyambut Natal, gereja akan mengadakan kegiatan pelayanan sosial ke Panti Asuhan Kasih Ibu pada hari Sabtu, 23 Desember 2024. Kami mengundang jemaat untuk ikut serta dalam kegiatan ini dengan menyumbangkan pakaian layak pakai, mainan, dan sembako. Barang-barang sumbangan dapat dikumpulkan di kantor gereja hingga 21 Desember 2024.",
                     Tanggal = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PathFoto = "\\img\\pengumuman\\pelayanan.jpg",
+                    PathFoto = "\\img\\pengumuman\\pelayanann.jpg",
                 }
             );
 
