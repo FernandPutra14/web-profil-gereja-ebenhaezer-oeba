@@ -1,0 +1,119 @@
+﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Rayon
+@model EditVM
+@{
+    ViewData["Title"] = "Tambah Rayon";
+}
+
+<form asp-action="Edit" method="post" class="container" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <label asp-for="@Model.Nama" class="form-label"></label>
+            <input type="text" asp-for="@Model.Nama" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.Nama"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+        <div id="dvPreview" class="col-6 justify-content-center">
+            <img class="img-fluid" width="185" height="185"
+                 src="@Url.ActionLink("FotoKetuaRayon", "File", new {Area="", id = Model.Id})" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <label asp-for="@Model.FotoKetua" class="form-label"></label>
+            <input type="file" asp-for="@Model.FotoKetua" class="form-control" id="fileupload" />
+            <span class="form-text text-danger" asp-validation-for="@Model.FotoKetua"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <label asp-for="@Model.KetuaRayon" class="form-label"></label>
+            <input type="text" asp-for="@Model.KetuaRayon" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.KetuaRayon"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="form-label">Jumlah Jemaat Berdasarkan Jenis Kelamin</label>
+        <div class="col-6">
+            <label asp-for="@Model.JumlahLakiLaki" class="form-label"></label>
+            <input type="text" asp-for="@Model.JumlahLakiLaki" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.JumlahLakiLaki"></span>
+        </div>
+        <div class="col-6">
+            <label asp-for="@Model.JumlahPerempuan" class="form-label"></label>
+            <input type="text" asp-for="@Model.JumlahPerempuan" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.JumlahPerempuan"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="form-label">Jumlah Jemaat Berdasarkan Usia</label>
+        <div class="col-2">
+            <label asp-for="@Model.JumlahAnak" class="form-label"></label>
+            <input type="text" asp-for="@Model.JumlahAnak" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.JumlahAnak"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="@Model.JumlahRemaja" class="form-label"></label>
+            <input type="text" asp-for="@Model.JumlahRemaja" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.JumlahRemaja"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="@Model.JumlahPemuda" class="form-label"></label>
+            <input type="text" asp-for="@Model.JumlahPemuda" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.JumlahPemuda"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="@Model.JumlahDewasa" class="form-label"></label>
+            <input type="text" asp-for="@Model.JumlahDewasa" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.JumlahDewasa"></span>
+        </div>
+        <div class="col-2">
+            <label asp-for="@Model.JumlahLansia" class="form-label"></label>
+            <input type="text" asp-for="@Model.JumlahLansia" class="form-control" />
+            <span class="form-text text-danger" asp-validation-for="@Model.JumlahLansia"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#fileupload").change(function () {
+                $("#dvPreview").html("");
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+                if (regex.test($(this).val().toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        $("#dvPreview").show();
+                        $("#dvPreview").append('<img class="img-fluid" />');
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $("#dvPreview img").attr("src", e.target.result);
+                            $("#dvPreview img").css({
+                                "width": "185px",
+                                "height": "185px"
+                            });
+                        }
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    } else {
+                        alert("Browser tidak mendukung FileReader");
+                    }
+                } else {
+                    alert("Gambar file tidak valid");
+                }
+            });
+        });
+    </script>
+}

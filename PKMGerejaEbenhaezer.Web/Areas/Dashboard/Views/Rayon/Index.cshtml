@@ -1,0 +1,90 @@
+﻿@using System.Globalization
+@model List<Rayon>
+@{
+    ViewData["Title"] = "Rayon";
+}
+
+<div class="container">
+    <a asp-action="Tambah" class="btn btn-primary mb-4">
+        Tambah
+    </a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th width="20%">Ketua</th>
+                <th>Jumlah Laki - Laki</th>
+                <th>Jumlah Perempuan</th>
+                <th>Jumlah Anak - Anak</th>
+                <th>Jumlah Remaja</th>
+                <th>Jumlah Pemuda</th>
+                <th>Jumlah Dewasa</th>
+                <th>Jumlah Lansia</th>
+                <th>Total Jemaat</th>
+                <th>Aksi</th>
+        </thead>
+        <tbody>
+            @foreach (var rayon in Model)
+            {
+                <tr>
+                    <td>@rayon.Id</td>
+                    <td>@rayon.Nama</td>
+                    <td>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-3 p-1">
+                                <img src="@Url.ActionLink("FotoKetuaRayon", "File", new {Area = "", id = rayon.Id})"
+                                     alt="Ketua @(rayon.KetuaRayon)" class="img-thumbnail"/>
+                            </div>
+                            <div class="col-9">@rayon.KetuaRayon</div>
+                        </div>
+                    </td>
+                    <td>@rayon.JumlahLakiLaki</td>
+                    <td>@rayon.JumlahPerempuan</td>
+                    <td>@rayon.JumlahAnak</td>
+                    <td>@rayon.JumlahRemaja</td>
+                    <td>@rayon.JumlahPemuda</td>
+                    <td>@rayon.JumlahDewasa</td>
+                    <td>@rayon.JumlahLansia</td>
+                    <td>@rayon.JumlahJemaat</td>
+                    <td>
+                        <div class="d-flex gap-1 justify-content-start align-items-center">
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@rayon.Id">
+                                <i class="fas fa-pen-square"></i>
+                            </a>
+                            <!-- Button trigger modal -->
+                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(rayon.Id)">
+                                <i class="fa fa-regular fa-trash"></i>
+                            </a>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal@(rayon.Id)" tabindex="-1" aria-labelledby="exampleModal@(rayon.Id)" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModal@(rayon.Id)">Hapus Pengumuman</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah anda yakin ingin menghapus?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <form asp-action="Hapus" asp-route-id="@rayon.Id" method="post">
+                                                <button type="submit" class="btn btn-primary">Hapus</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <partial name="_DataTablePartial" />
+}

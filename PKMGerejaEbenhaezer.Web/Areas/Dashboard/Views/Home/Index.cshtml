@@ -1,4 +1,7 @@
-﻿@{
+﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Home
+@model IndexVM
+
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -14,46 +17,57 @@
 		<div class="card">
 			<div class="head">
 				<div>
-					<h2>25</h2>
+					<h2>@Model.TotalLansia</h2>
 					<p>Lansia</p>
 				</div>
 				<img src="~/img/dashboard/tua.png" style="height: 50px;" />
 			</div>
 			<hr style="color: black; margin:0; margin-bottom:10px; opacity: 0.1" />
-			<span class="label">25%</span>
+			<span class="label">@(((double)Model.TotalLansia / Model.TotalJemaat * 100).ToString("F2"))%</span>
 		</div>
 		<div class="card">
 			<div class="head">
 				<div>
-					<h2>25</h2>
+					<h2>@Model.TotalDewasa</h2>
 					<p>Dewasa</p>
 				</div>
 				<img src="~/img/dashboard/dewasa.png" style="height: 50px;" />
 			</div>
 			<hr style="color: black; margin:0; margin-bottom:10px; opacity: 0.1" />
-			<span class="label">25%</span>
+			<span class="label">@(((double)Model.TotalDewasa / Model.TotalJemaat * 100).ToString("F2"))%</span>
 		</div>
 		<div class="card">
 			<div class="head">
 				<div>
-					<h2>25</h2>
+					<h2>@Model.TotalPemuda</h2>
+					<p>Pemuda</p>
+				</div>
+				<img src="~/img/dashboard/dewasa.png" style="height: 50px;" />
+			</div>
+			<hr style="color: black; margin:0; margin-bottom:10px; opacity: 0.1" />
+			<span class="label">@(((double)Model.TotalPemuda / Model.TotalJemaat * 100).ToString("F2"))%</span>
+		</div>
+		<div class="card">
+			<div class="head">
+				<div>
+					<h2>@Model.TotalRemaja</h2>
 					<p>Remaja</p>
 				</div>
 				<img src="~/img/dashboard/remaja.png" style="height: 50px;" />
 			</div>
 			<hr style="color: black; margin:0; margin-bottom:10px; opacity: 0.1" />
-			<span class="label">25%</span>
+			<span class="label">@(((double)Model.TotalRemaja / Model.TotalJemaat * 100).ToString("F2"))%</span>
 		</div>
 		<div class="card">
 			<div class="head">
 				<div>
-					<h2>25</h2>
+					<h2>@Model.TotalAnak</h2>
 					<p>Anak-Anak</p>
 				</div>
 				<img src="~/img/dashboard/bocah.png" style="height: 50px;" />
 			</div>
 			<hr style="color: black; margin:0; margin-bottom:10px; opacity: 0.1" />
-			<span class="label">25%</span>
+			<span class="label">@(((double)Model.TotalAnak / Model.TotalJemaat * 100).ToString("F2"))%</span>
 		</div>
 	</div>
 

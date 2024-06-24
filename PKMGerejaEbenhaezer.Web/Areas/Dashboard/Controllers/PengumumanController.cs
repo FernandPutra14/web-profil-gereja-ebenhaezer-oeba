@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pengumuman;
+using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Utlities;
 using System.Drawing;
 
@@ -14,20 +15,20 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     public class PengumumanController : Controller
     {
         private readonly AppDbContext _appDbContext;
-        private readonly string[] _permittedFileExtension = new string[] { ".jpg", ".jpeg" };
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<PengumumanController> _logger;
-        private readonly long _sizeLimit = 8000000L; //8 MB
-        private readonly string _folderPath = "/img/";
+        private readonly PhotoFileSettings _photoFileSettings;
 
         public PengumumanController(
             AppDbContext appDbContext,
             IWebHostEnvironment webHostEnvironment,
-            ILogger<PengumumanController> logger)
+            ILogger<PengumumanController> logger,
+            PhotoFileSettings photoFileSettings)
         {
             _appDbContext = appDbContext;
             _webHostEnvironment = webHostEnvironment;
             _logger = logger;
+            _photoFileSettings = photoFileSettings;
         }
 
         public async Task<IActionResult> Index()
@@ -60,8 +61,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             var formFileContent = await FileHelpers.ProcessFormFile<TambahVM>(
                 tambahVM.Foto,
                 ModelState,
-                _permittedFileExtension,
-                _sizeLimit);
+                _photoFileSettings.PermittedFileExtensions,
+                _photoFileSettings.SizeLimit);
 
             if (!ModelState.IsValid)
             {
@@ -69,7 +70,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             var namaFile = $"Pengumuman-{Path.GetRandomFileName()}{Path.GetExtension(tambahVM.Foto.FileName)}";
-            var pathFoto = Path.Combine(_folderPath, namaFile);
+            var pathFoto = Path.Combine(_photoFileSettings.FolderPath, namaFile);
 
             try
             {
@@ -125,11 +126,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 
-            if (pengumuman == null)
-            {
-                _logger.LogError("Edit pengumuman gagal. Tidak ada pengumuman dengan id {0}", id);
-                return RedirectToAction("Index", "Pengumuman");
-            }
+            if (pengumuman == null) return NotFound();
+            
 
             return View(new EditVM
             {
@@ -154,21 +152,19 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
-            _appDbContext.PengumumanTable.Update(pengumuman);
-
             //Simpan foto baru dan hapus foto lama
             if (editVM.FotoBaru != null)
             {
                 var fileFormContent = await FileHelpers.ProcessFormFile<EditVM>(
                     editVM.FotoBaru,
                     ModelState,
-                    _permittedFileExtension,
-                    _sizeLimit);
+                    _photoFileSettings.PermittedFileExtensions,
+                    _photoFileSettings.SizeLimit);
 
                 if (!ModelState.IsValid) return View(editVM);
 
                 var namaFile = $"Pengumuman-{Path.GetRandomFileName()}{Path.GetExtension(editVM.FotoBaru.FileName)}";
-                var pathFotoBaru = Path.Combine(_folderPath, namaFile);
+                var pathFotoBaru = Path.Combine(_photoFileSettings.FolderPath, namaFile);
 
                 try
                 {

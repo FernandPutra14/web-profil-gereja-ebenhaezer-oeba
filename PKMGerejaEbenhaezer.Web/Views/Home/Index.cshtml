@@ -311,7 +311,7 @@
     <!-- Content Pengumuman Section -->
     <div class="peng-contents">
         <div class="owl-carousel owl-theme fernand">
-            @if (Model.DaftarPengumuman != null || Model.DaftarPengumuman.Count > 0)
+            @if (Model.DaftarPengumuman != null || Model.DaftarPengumuman!.Count > 0)
             {
                 @foreach (var pengumuman in Model.DaftarPengumuman)
                 {

@@ -1,11 +1,21 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Web.Authentication;
+using PKMGerejaEbenhaezer.Web.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add configurations
+builder.Services.Configure<PhotoFileSettings>(builder.Configuration.GetSection("PhotoFileSettings"));
+builder.Services.AddSingleton<PhotoFileSettings>((sp) =>
+{
+    return sp.GetRequiredService<IOptions<PhotoFileSettings>>().Value;    
+});
+
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddLogging();

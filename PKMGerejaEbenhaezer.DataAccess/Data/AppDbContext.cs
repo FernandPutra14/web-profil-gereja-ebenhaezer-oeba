@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.Domain;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,22 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         public DbSet<AppUser> AppUserTable { get; set; }
         public DbSet<Pengumuman> PengumumanTable {  get; set; }
         public DbSet<Rayon> RayonTable { get; set; }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await base.SaveChangesAsync(cancellationToken);
+            }
+            catch (DbUpdateException ex)
+            {
+                foreach (var entry in ex.Entries)
+                {
+                    entry.State = EntityState.Detached;
+                }
+                throw;
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -84,6 +101,51 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
             );
 
             modelBuilder.Entity<Rayon>().HasKey(r => r.Id);
+
+            modelBuilder.Entity<Rayon>().HasData(
+                new Rayon
+                {
+                    Id = 1,
+                    Nama = "Rayon I",
+                    KetuaRayon = "Ketua Rayon I",
+                    FotoKetua = File.ReadAllBytes("D:\\Proyek\\Gereja Ebenhezer Oeba\\web-profil-gereja-ebenhaezer-oeba\\PKMGerejaEbenhaezer.Web\\wwwroot\\img\\generaluser.png"),
+                    JumlahLakiLaki = 25,
+                    JumlahPerempuan = 35,
+                    JumlahAnak = 10,
+                    JumlahRemaja = 10,
+                    JumlahPemuda = 10,
+                    JumlahDewasa = 15,
+                    JumlahLansia = 15,
+                },
+                new Rayon
+                {
+                    Id = 2,
+                    Nama = "Rayon II",
+                    KetuaRayon = "Ketua Rayon II",
+                    FotoKetua = File.ReadAllBytes("D:\\Proyek\\Gereja Ebenhezer Oeba\\web-profil-gereja-ebenhaezer-oeba\\PKMGerejaEbenhaezer.Web\\wwwroot\\img\\generaluser.png"),
+                    JumlahLakiLaki = 25,
+                    JumlahPerempuan = 35,
+                    JumlahAnak = 10,
+                    JumlahRemaja = 10,
+                    JumlahPemuda = 10,
+                    JumlahDewasa = 15,
+                    JumlahLansia = 15,
+                },
+                new Rayon
+                {
+                    Id = 3,
+                    Nama = "Rayon III",
+                    KetuaRayon = "Ketua Rayon III",
+                    FotoKetua = File.ReadAllBytes("D:\\Proyek\\Gereja Ebenhezer Oeba\\web-profil-gereja-ebenhaezer-oeba\\PKMGerejaEbenhaezer.Web\\wwwroot\\img\\generaluser.png"),
+                    JumlahLakiLaki = 25,
+                    JumlahPerempuan = 35,
+                    JumlahAnak = 10,
+                    JumlahRemaja = 10,
+                    JumlahPemuda = 10,
+                    JumlahDewasa = 15,
+                    JumlahLansia = 15,
+                }
+            );
         }
     }
 }
