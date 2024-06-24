@@ -8,7 +8,7 @@ footer {
     position: relative;
     width: 100%;
     height: auto;
-    padding: 40px 100px;
+    padding: 40px 100px 20px 100px;
     background: #369e5e;
 }
 
@@ -40,6 +40,18 @@ footer {
         }
 
             footer .container-fluid .sci li {
+                list-style: none;
+            }
+
+        footer .container-fluid .scj {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            display: grid;
+            grid-template-columns: repeat(2,60px);
+            padding: 0px 0px 0px 0px;
+        }
+
+            footer .container-fluid .scj li {
                 list-style: none;
             }
 
@@ -92,7 +104,7 @@ footer {
         transition: 0.2s ease;
     }
 
-::deep .bapakmu {
+::deep .foli {
     color: var(--light-heading-clr);
     text-decoration: none;
     font-size: 15px;
@@ -101,7 +113,7 @@ footer {
 }
 
 
-    ::deep .bapakmu:hover {
+    ::deep .foli:hover {
         color: var(--light-heading-clr);
         font-weight: 700;
         transition: 0.2s ease;

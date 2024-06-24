@@ -4,89 +4,144 @@
     ViewData["Title"] = "Tambah Rayon";
 }
 
-<form asp-action="Edit" method="post" class="container" enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
+<style>
+    .editray {
+        width: 100%;
+        padding: 24px 20px 20px 20px;
+    }
 
-    <div class="row mb-3">
-        <div class="col-12">
-            <label asp-for="@Model.Nama" class="form-label"></label>
-            <input type="text" asp-for="@Model.Nama" class="form-control" />
-            <span class="form-text text-danger" asp-validation-for="@Model.Nama"></span>
-        </div>
-    </div>
+        .editray .title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
 
-    <div class="row mb-3 justify-content-center">
-        <div id="dvPreview" class="col-6 justify-content-center">
-            <img class="img-fluid" width="185" height="185"
-                 src="@Url.ActionLink("FotoKetuaRayon", "File", new {Area="", id = Model.Id})" />
-        </div>
-    </div>
+        .editray .breadcrumbs {
+            display: flex;
+            grid-gap: 6px;
+            padding: 0;
+            margin: 0;
+        }
 
-    <div class="row mb-3">
-        <div class="col-12">
-            <label asp-for="@Model.FotoKetua" class="form-label"></label>
-            <input type="file" asp-for="@Model.FotoKetua" class="form-control" id="fileupload" />
-            <span class="form-text text-danger" asp-validation-for="@Model.FotoKetua"></span>
-        </div>
-    </div>
+            .editray .breadcrumbs li,
+            .editray .breadcrumbs li a {
+                font-size: 14px;
+            }
 
-    <div class="row mb-3">
-        <div class="col-12">
-            <label asp-for="@Model.KetuaRayon" class="form-label"></label>
-            <input type="text" asp-for="@Model.KetuaRayon" class="form-control" />
-            <span class="form-text text-danger" asp-validation-for="@Model.KetuaRayon"></span>
-        </div>
-    </div>
+                .editray .breadcrumbs li a {
+                    color: var(--blue);
+                }
 
-    <div class="row mb-3">
-        <label class="form-label">Jumlah Jemaat Berdasarkan Jenis Kelamin</label>
-        <div class="col-6">
-            <label asp-for="@Model.JumlahLakiLaki" class="form-label"></label>
-            <input type="text" asp-for="@Model.JumlahLakiLaki" class="form-control" />
-            <span class="form-text text-danger" asp-validation-for="@Model.JumlahLakiLaki"></span>
-        </div>
-        <div class="col-6">
-            <label asp-for="@Model.JumlahPerempuan" class="form-label"></label>
-            <input type="text" asp-for="@Model.JumlahPerempuan" class="form-control" />
-            <span class="form-text text-danger" asp-validation-for="@Model.JumlahPerempuan"></span>
-        </div>
-    </div>
+                    .editray .breadcrumbs li a.active,
+                    .editray .breadcrumbs li.divider {
+                        color: var(--dark-grey);
+                        pointer-events: none;
+                    }
 
-    <div class="row mb-3">
-        <label class="form-label">Jumlah Jemaat Berdasarkan Usia</label>
-        <div class="col-2">
-            <label asp-for="@Model.JumlahAnak" class="form-label"></label>
-            <input type="text" asp-for="@Model.JumlahAnak" class="form-control" />
-            <span class="form-text text-danger" asp-validation-for="@Model.JumlahAnak"></span>
-        </div>
-        <div class="col-2">
-            <label asp-for="@Model.JumlahRemaja" class="form-label"></label>
-            <input type="text" asp-for="@Model.JumlahRemaja" class="form-control" />
-            <span class="form-text text-danger" asp-validation-for="@Model.JumlahRemaja"></span>
-        </div>
-        <div class="col-2">
-            <label asp-for="@Model.JumlahPemuda" class="form-label"></label>
-            <input type="text" asp-for="@Model.JumlahPemuda" class="form-control" />
-            <span class="form-text text-danger" asp-validation-for="@Model.JumlahPemuda"></span>
-        </div>
-        <div class="col-2">
-            <label asp-for="@Model.JumlahDewasa" class="form-label"></label>
-            <input type="text" asp-for="@Model.JumlahDewasa" class="form-control" />
-            <span class="form-text text-danger" asp-validation-for="@Model.JumlahDewasa"></span>
-        </div>
-        <div class="col-2">
-            <label asp-for="@Model.JumlahLansia" class="form-label"></label>
-            <input type="text" asp-for="@Model.JumlahLansia" class="form-control" />
-            <span class="form-text text-danger" asp-validation-for="@Model.JumlahLansia"></span>
-        </div>
-    </div>
+    .cardedit {
+        padding: 20px;
+        border-radius: 10px;
+        background: var(--light);
+        box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+    }
+</style>
 
-    <div class="row mb-3">
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
+
+<div class="editray">
+    <h1 class="title">Edit Rayon</h1>
+    <ul class="breadcrumbs mb-4">
+        <li><a href="#">Daftar Rayon</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Edit Rayon</a></li>
+    </ul>
+
+    <div class="container-fluid cardedit">
+        <form asp-action="Edit" method="post" class="container" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label asp-for="@Model.Nama" class="form-label"></label>
+                    <input type="text" asp-for="@Model.Nama" class="form-control" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.Nama"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 justify-content-center">
+                <div id="dvPreview" class="col-6 justify-content-center">
+                    <img class="img-fluid" width="185" height="185"
+                         src="@Url.ActionLink("FotoKetuaRayon", "File", new {Area="", id = Model.Id})" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label asp-for="@Model.FotoKetua" class="form-label"></label>
+                    <input type="file" asp-for="@Model.FotoKetua" class="form-control" id="fileupload" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.FotoKetua"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label asp-for="@Model.KetuaRayon" class="form-label"></label>
+                    <input type="text" asp-for="@Model.KetuaRayon" class="form-control" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.KetuaRayon"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="form-label">Jumlah Jemaat Berdasarkan Jenis Kelamin</label>
+                <div class="col-6">
+                    <label asp-for="@Model.JumlahLakiLaki" class="form-label"></label>
+                    <input type="text" asp-for="@Model.JumlahLakiLaki" class="form-control" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.JumlahLakiLaki"></span>
+                </div>
+                <div class="col-6">
+                    <label asp-for="@Model.JumlahPerempuan" class="form-label"></label>
+                    <input type="text" asp-for="@Model.JumlahPerempuan" class="form-control" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.JumlahPerempuan"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="form-label">Jumlah Jemaat Berdasarkan Usia</label>
+                <div class="col-2">
+                    <label asp-for="@Model.JumlahAnak" class="form-label"></label>
+                    <input type="text" asp-for="@Model.JumlahAnak" class="form-control" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.JumlahAnak"></span>
+                </div>
+                <div class="col-2">
+                    <label asp-for="@Model.JumlahRemaja" class="form-label"></label>
+                    <input type="text" asp-for="@Model.JumlahRemaja" class="form-control" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.JumlahRemaja"></span>
+                </div>
+                <div class="col-2">
+                    <label asp-for="@Model.JumlahPemuda" class="form-label"></label>
+                    <input type="text" asp-for="@Model.JumlahPemuda" class="form-control" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.JumlahPemuda"></span>
+                </div>
+                <div class="col-2">
+                    <label asp-for="@Model.JumlahDewasa" class="form-label"></label>
+                    <input type="text" asp-for="@Model.JumlahDewasa" class="form-control" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.JumlahDewasa"></span>
+                </div>
+                <div class="col-2 mb-5">
+                    <label asp-for="@Model.JumlahLansia" class="form-label"></label>
+                    <input type="text" asp-for="@Model.JumlahLansia" class="form-control" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.JumlahLansia"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
+                    <button type="submit" class="btn" style="width:100%;">Simpan</button>
+                </div>
+            </div>
+        </form>
     </div>
-</form>
+</div>
+
 
 @section Scripts {
     <script type="text/javascript">
