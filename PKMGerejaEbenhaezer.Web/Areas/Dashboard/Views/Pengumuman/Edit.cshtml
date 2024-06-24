@@ -4,8 +4,6 @@
     ViewData["Title"] = "Edit Pengumuman";
 }
 
-
-
 <div class="editpeng">
     <h1 class="title">Edit Pengumuman</h1>
     <ul class="breadcrumbs mb-4">
@@ -20,6 +18,12 @@
 
             <input asp-for="@Model.Id" hidden />
             <input asp-for="@Model.PathFoto" hidden />
+
+            <div class="row mb-3 justify-content-center align-items-center">
+                <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
+                    <img src="@Model.PathFoto" class="img-fluid"/>
+                </div>
+            </div>
 
             <div class="row mb-3">
                 <div class="col-12">
@@ -50,11 +54,6 @@
                     <label asp-for="@Model.FotoBaru" class="form-label"></label>
                     <input type="file" asp-for="@Model.FotoBaru" class="form-control" id="fileupload" />
                     <span class="form-text text-danger" asp-validation-for="@Model.FotoBaru"></span>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div id="dvPreview" class="col-6">
-                    <img class="img-fluid" src="@Model.PathFoto" />
                 </div>
             </div>
 

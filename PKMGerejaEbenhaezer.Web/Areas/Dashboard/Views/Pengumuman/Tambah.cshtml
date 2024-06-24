@@ -4,7 +4,6 @@
     ViewData["Title"] = "Tambah Pengumuman";
 }
 
-
 <div class="pluspeng">
     <h1 class="title">Tambah Pengumuman</h1>
     <ul class="breadcrumbs mb-4">
@@ -17,6 +16,14 @@
 
         <form asp-action="Tambah" method="post" class="container" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
+
+            <div class="row mb-3 justify-content-center align-items-center">
+                <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
+                    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+                        <h2>Foto Pengumuman</h2>
+                    </div>
+                </div>
+            </div>
 
             <div class="row mb-3">
                 <div class="col-12">
@@ -48,9 +55,6 @@
                     <input type="file" asp-for="@Model.Foto" class="form-control" id="fileupload" />
                     <span class="form-text text-danger" asp-validation-for="@Model.Foto"></span>
                 </div>
-            </div>
-            <div class="row mb-3 justify-content-center">
-                <div id="dvPreview" class="col-6"></div>
             </div>
 
             <div class="row mb-3">

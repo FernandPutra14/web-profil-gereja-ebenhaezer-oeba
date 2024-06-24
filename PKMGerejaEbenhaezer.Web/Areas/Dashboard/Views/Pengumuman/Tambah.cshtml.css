@@ -37,3 +37,16 @@
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
+
+#dvPreview {
+    height: 350px;
+    width: 500px;
+    border-style: solid;
+    border-width: medium;
+    padding: 3px 3px 3px 3px;
+}
+
+    #dvPreview div {
+        border-style: dashed;
+        border-width: medium;
+    }
