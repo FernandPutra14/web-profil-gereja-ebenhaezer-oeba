@@ -3,15 +3,19 @@
 @{
     var labels = JsonConvert.SerializeObject(Model.Data.Keys);
     var data = JsonConvert.SerializeObject(Model.Data.Values.Select(v => (int)v));
+    var chartId = "chart";
+    var id = Guid.NewGuid();
+
+    chartId += id.ToString();
 }
 
-<canvas id="chart"></canvas>
+<canvas id="@chartId"></canvas>
 <input id="labels" hidden value="@labels"/>
 <input id="data" hidden value="@data"/>
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', () => {
-        const ctx = document.getElementById('chart');
+        const ctx = document.getElementById('@chartId');
         const labelsJson = $('#labels').val();
         const labels = JSON.parse(labelsJson);
         const dataJson = $('#data').val();
@@ -22,7 +26,7 @@
 
         function createChart() {
             chart = new Chart(ctx, {
-                type: 'doughnut',
+                type: '@(Model.Type.ToStringJS())',
                 data: {
                     labels: labels,
                     datasets: [{
@@ -68,6 +72,6 @@
             }
         }, { threshold: [0.1] });
 
-        observer.observe(document.querySelector("#chart"));
+        observer.observe(document.querySelector("#@(chartId)"));
     });
 </script>

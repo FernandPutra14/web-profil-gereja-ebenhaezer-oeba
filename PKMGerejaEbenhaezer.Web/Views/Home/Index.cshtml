@@ -65,6 +65,7 @@
         @{
             var chartModel = new ChartModel
             {
+                Type = ChartType.Doughnut,
                 Label = "Jemaat Gereja",
                 Data = new Dictionary<string, double>
                 {
@@ -75,6 +76,8 @@
                   {"Anak", Model.TotalAnak},  
                 },
             };
+
+            
         }
         
         <vc:chart chart-model=chartModel></vc:chart>
