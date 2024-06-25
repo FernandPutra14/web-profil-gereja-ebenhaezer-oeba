@@ -5,6 +5,7 @@
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
     max-height: 80px;
     background-color: var(--primary-clr);
+    opacity: 0.8;
     padding: 0px 8%;
     margin: 0px auto;
     display: flex;
