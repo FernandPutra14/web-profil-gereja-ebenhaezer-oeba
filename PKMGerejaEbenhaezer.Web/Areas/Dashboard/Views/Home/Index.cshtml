@@ -1,4 +1,5 @@
 ﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Home
+@using PKMGerejaEbenhaezer.Web.Models
 @model IndexVM
 
 @{
@@ -6,70 +7,87 @@
 }
 
 <div class="pertama">
-	<h1 class="title">Beranda</h1>
-	<ul class="breadcrumbs">
-		<li><a href="#">Main</a></li>
-		<li class="divider">/</li>
-		<li><a href="#" class="active">Beranda</a></li>
-	</ul>
+    <h1 class="title">Beranda</h1>
+    <ul class="breadcrumbs">
+        <li><a href="#">Main</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Beranda</a></li>
+    </ul>
 
-	<div class="info-data">
-		<div class="card">
-			<div class="head">
-				<div>
-					<h2>@Model.TotalLansia</h2>
-					<p>Lansia</p>
-				</div>
-				<img src="~/img/dashboard/tua.png" style="height: 50px;" />
-			</div>
-			<hr/>
-			<span class="label">@(((double)Model.TotalLansia / Model.TotalJemaat * 100).ToString("F2"))%</span>
-		</div>
-		<div class="card">
-			<div class="head">
-				<div>
-					<h2>@Model.TotalDewasa</h2>
-					<p>Dewasa</p>
-				</div>
-				<img src="~/img/dashboard/dewasa.png" style="height: 50px;" />
-			</div>
-			<hr/>
-			<span class="label">@(((double)Model.TotalDewasa / Model.TotalJemaat * 100).ToString("F2"))%</span>
-		</div>
-		<div class="card">
-			<div class="head">
-				<div>
-					<h2>@Model.TotalPemuda</h2>
-					<p>Pemuda</p>
-				</div>
-				<img src="~/img/dashboard/pemuda.png" style="height: 50px;" />
-			</div>
-			<hr/>
-			<span class="label">@(((double)Model.TotalPemuda / Model.TotalJemaat * 100).ToString("F2"))%</span>
-		</div>
-		<div class="card">
-			<div class="head">
-				<div>
-					<h2>@Model.TotalRemaja</h2>
-					<p>Remaja</p>
-				</div>
-				<img src="~/img/dashboard/remaja.png" style="height: 50px;" />
-			</div>
-			<hr/>
-			<span class="label">@(((double)Model.TotalRemaja / Model.TotalJemaat * 100).ToString("F2"))%</span>
-		</div>
-		<div class="card">
-			<div class="head">
-				<div>
-					<h2>@Model.TotalAnak</h2>
-					<p>Anak-Anak</p>
-				</div>
-				<img src="~/img/dashboard/bocah.png" style="height: 50px;" />
-			</div>
-			<hr/>
-			<span class="label">@(((double)Model.TotalAnak / Model.TotalJemaat * 100).ToString("F2"))%</span>
-		</div>
-	</div>
+    <div class="info-data">
+        <div class="card">
+            <div class="head">
+                <div>
+                    <h2>@Model.TotalLansia</h2>
+                    <p>Lansia</p>
+                </div>
+                <img src="~/img/dashboard/tua.png" style="height: 50px;" />
+            </div>
+            <hr />
+            <span class="label">@(((double)Model.TotalLansia / Model.TotalJemaat * 100).ToString("F2"))%</span>
+        </div>
+        <div class="card">
+            <div class="head">
+                <div>
+                    <h2>@Model.TotalDewasa</h2>
+                    <p>Dewasa</p>
+                </div>
+                <img src="~/img/dashboard/dewasa.png" style="height: 50px;" />
+            </div>
+            <hr />
+            <span class="label">@(((double)Model.TotalDewasa / Model.TotalJemaat * 100).ToString("F2"))%</span>
+        </div>
+        <div class="card">
+            <div class="head">
+                <div>
+                    <h2>@Model.TotalPemuda</h2>
+                    <p>Pemuda</p>
+                </div>
+                <img src="~/img/dashboard/pemuda.png" style="height: 50px;" />
+            </div>
+            <hr />
+            <span class="label">@(((double)Model.TotalPemuda / Model.TotalJemaat * 100).ToString("F2"))%</span>
+        </div>
+        <div class="card">
+            <div class="head">
+                <div>
+                    <h2>@Model.TotalRemaja</h2>
+                    <p>Remaja</p>
+                </div>
+                <img src="~/img/dashboard/remaja.png" style="height: 50px;" />
+            </div>
+            <hr />
+            <span class="label">@(((double)Model.TotalRemaja / Model.TotalJemaat * 100).ToString("F2"))%</span>
+        </div>
+        <div class="card">
+            <div class="head">
+                <div>
+                    <h2>@Model.TotalAnak</h2>
+                    <p>Anak-Anak</p>
+                </div>
+                <img src="~/img/dashboard/bocah.png" style="height: 50px;" />
+            </div>
+            <hr />
+            <span class="label">@(((double)Model.TotalAnak / Model.TotalJemaat * 100).ToString("F2"))%</span>
+        </div>
+    </div>
+
+    @{
+        var chartModel = new ChartModel
+        {
+            Label = "Jemaat Gereja",
+            Data = new Dictionary<string, double>
+            {
+                {"Lansia", Model.TotalLansia},
+                {"Dewasa", Model.TotalDewasa},
+                {"Pemuda", Model.TotalPemuda},
+                {"Remaja", Model.TotalRemaja},
+                {"Anak", Model.TotalAnak},
+            },
+        };
+    }
+
+    <vc:chart chart-model=chartModel></vc:chart>
 
 </div>
 
