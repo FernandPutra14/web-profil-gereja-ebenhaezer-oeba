@@ -72,22 +72,79 @@
         </div>
     </div>
 
-    @{
-        var chartModel = new ChartModel
-        {
-            Label = "Jemaat Gereja",
-            Data = new Dictionary<string, double>
+    <div class="data">
+        <div class="content-data">
+            <div class="head">
+                <h3>Pie Chart</h3>
+            </div>
+            <div class="chart">
+                @{
+                    var chartModel = new ChartModel
             {
+                Label = "Jemaat Gereja",
+                Data = new Dictionary<string, double>
+                {
+                    {"Lansia", Model.TotalLansia},
+                    {"Dewasa", Model.TotalDewasa},
+                    {"Pemuda", Model.TotalPemuda},
+                    {"Remaja", Model.TotalRemaja},
+                    {"Anak", Model.TotalAnak},
+                },
+            };
+                }
+
+                <vc:chart chart-model=chartModel></vc:chart>
+            </div>
+        </div>
+        <div class="content-data">
+            <div class="head">
+                <h3>Bar Chart</h3>
+            </div>
+            <div class="chart">
+                @{
+                    var chartModel1 = new ChartModel
+            {
+                Label = "Jemaat Gereja",
+                Data = new Dictionary<string, double>
+                {
                 {"Lansia", Model.TotalLansia},
                 {"Dewasa", Model.TotalDewasa},
                 {"Pemuda", Model.TotalPemuda},
                 {"Remaja", Model.TotalRemaja},
                 {"Anak", Model.TotalAnak},
-            },
-        };
-    }
+                },
+            };
+                }
 
-    <vc:chart chart-model=chartModel></vc:chart>
+                <vc:chart chart-model=chartModel></vc:chart>
+            </div>
+        </div>
+        <div class="content-data">
+            <div class="head">
+                <h3>Polar Area Chart</h3>
+            </div>
+            <div class="chart">
+                @{
+                    var chartModel2 = new ChartModel
+            {
+                Label = "Jemaat Gereja",
+                Data = new Dictionary<string, double>
+                {
+                    {"Lansia", Model.TotalLansia},
+                    {"Dewasa", Model.TotalDewasa},
+                    {"Pemuda", Model.TotalPemuda},
+                    {"Remaja", Model.TotalRemaja},
+                    {"Anak", Model.TotalAnak},
+                },
+            };
+                }
+
+                <vc:chart chart-model=chartModel></vc:chart>
+            </div>
+        </div>
+    </div>
+
+
 
 </div>
 

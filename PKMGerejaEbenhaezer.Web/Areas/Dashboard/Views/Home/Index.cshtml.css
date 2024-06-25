@@ -102,3 +102,46 @@
         margin-bottom: 10px;
         opacity: 0.1
     }
+
+
+main .data {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 20px;
+}
+
+    main .data .content-data {
+        flex-grow: 1;
+        align-items: center;
+        flex-basis: 500px;
+        padding: 20px;
+        background: var(--light);
+        border-radius: 10px;
+        box-shadow: 4px 4px 16px rgba(0, 0, 0, .1);
+    }
+
+main .content-data .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    main .content-data .head h3 {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+            
+main .content-data .chart {
+    width: 100%;
+    /*align-content: center;*/
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+    main .content-data .chart::-webkit-scrollbar {
+        display: none;
+    }
+
