@@ -1,0 +1,258 @@
+﻿#kontak-us {
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/gereja_ebenhaezer_oebaa.jpg");
+    margin: 0px auto;
+    width: 100%;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+    #kontak-us h2 {
+        /*font-family: 'Alex brush';*/
+        color: #fff;
+        padding-top: 50px;
+        font-size: 40px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+#contact {
+    padding: 4vw 8vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#contact .getin {
+    width: 350px;
+}
+
+    #contact .getin h2 {
+        color: #2c234d;
+        font-size: 30px;
+        font-weight: 800;
+        line-height: .8;
+        margin-bottom: 16px;
+    }
+
+    #contact .getin p {
+        color: #686875;
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 33px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid #e5e4ed;
+
+    }
+
+    #contact .getin h3 {
+        color: #2c234d;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 26px;
+        margin-bottom: 15px;
+    }
+
+    #contact .getin .getin-details div {
+        display: flex;
+    }
+
+        #contact .getin .getin-details div .dpt {
+            font-size: 16px;
+            line-height: 22px;
+            color: var(--primary-clr);
+            margin-right: 20px;
+        }
+
+    #contact .getin .getin-details div p {
+        font-size: 14px;
+        border-bottom: none;
+        line-height: 22px;
+        margin-bottom: 15px;
+    }
+
+    #contact .getin .getin-details .pro-links {
+        margin-top: 10px;
+    }
+
+        #contact .getin .getin-details .pro-links i {
+            padding: 10px 13px;
+            font-size: 15px;
+            border: 1px solid rgb(21, 21, 100);
+            cursor: pointer;
+            margin-right: 8px;
+            transition: 0.3s ease;
+        }
+
+        #contact .getin .getin-details .pro-links i:hover {
+            background: rgb(21, 21, 100);
+            color: #fff;
+            
+            border: 1px solid rgb(21, 21, 100);
+            cursor: pointer;
+            margin-right: 8px;
+        }
+
+#contact .formko {
+    width: 60%;
+    background: #f7f6fa;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+    #contact .formko h4 {
+        font-size: 24px;
+        color: #2c234d;
+        line-height: 30px;
+        margin-bottom: 8px;
+    }
+
+    #contact .formko p {
+        color: #686875;
+        font-size: 16px;
+        line-height: 24px;
+        padding-bottom: 25px;
+    }
+
+    #contact .formko .form-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    #contact .formko .form-row input {
+        font-size: 14px;
+        font-weight: 400;
+        width: 48%;
+        border-radius: 3px;
+        border: none;
+        background: #fff;
+        color: #7e7c87;
+        outline: none;
+        padding: 20px 30px;
+        margin-bottom: 20px;
+    }
+
+    #contact .formko .form-col input,
+    #contact .formko .form-col textarea {
+        font-size: 14px;
+        font-weight: 400;
+        width: 100%;
+        border-radius: 3px;
+        border: none;
+        background: #fff;
+        color: #7e7c87;
+        outline: none;
+        padding: 20px 30px;
+        margin-bottom: 20px;
+    }
+
+    #contact .formko button {
+        font-size: 12px;
+        padding: 13px 25px;
+        background: rgb(21, 21, 100);
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid rgb(21, 21, 100);
+        font-weight: 600;
+        cursor: pointer;
+        color: #fff;
+        transition: 0.3s ease;
+    }
+
+        #contact .formko button:hover {
+            background: #fff;
+            color: rgb(21, 21, 100);
+            border: 1px solid rgb(21, 21, 100);
+        }
+
+#peta {
+    width: 100%;
+    height: 70vh;
+}
+
+#peta iframe {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Responsive */
+@media (max-width:968px) {
+    #contact {
+        padding: 4vw 4vw;
+    }
+
+        #contact .getin {
+            width: 250px;
+        }
+    /* Part Pengumuman */
+    
+
+    /* Akhir Part Pengumuman */
+
+
+    
+}
+
+@media (max-width:768px) {
+    #contact {
+        padding: 4vw 4vw;       
+    }
+
+        #contact .getin {
+            width: 250px;
+        }
+}
+
+@media (max-width:668px) {
+
+    #contact {
+        padding: 9vw 4vw;
+        flex-direction: column;
+        align-content: flex-start;
+        justify-content: flex-start;
+    }
+
+        #contact .getin {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        #contact .formko {
+            width: 100%;
+            padding: 40px 30px;
+        }
+
+            #contact .formko .form-row {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                width: 100%;
+            }
+
+                #contact .formko .form-row input {
+                    width: 100%;
+                }
+
+}
+
+@media (max-width:568px) {
+
+
+    
+}
+
+@media (max-width:468px) {
+
+    
+}
+
+/* Akhir Responsive */
+
+
