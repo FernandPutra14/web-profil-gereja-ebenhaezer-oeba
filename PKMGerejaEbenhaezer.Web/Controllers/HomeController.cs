@@ -39,6 +39,11 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             });
         }
 
+        public IActionResult Kontak()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
