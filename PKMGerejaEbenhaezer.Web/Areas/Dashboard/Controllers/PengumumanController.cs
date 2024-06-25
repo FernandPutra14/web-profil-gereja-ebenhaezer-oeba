@@ -17,13 +17,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly AppDbContext _appDbContext;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<PengumumanController> _logger;
-        private readonly PhotoFileSettings _photoFileSettings;
+        private readonly PhotoFileSettingsOptions _photoFileSettings;
 
         public PengumumanController(
             AppDbContext appDbContext,
             IWebHostEnvironment webHostEnvironment,
             ILogger<PengumumanController> logger,
-            PhotoFileSettings photoFileSettings)
+            PhotoFileSettingsOptions photoFileSettings)
         {
             _appDbContext = appDbContext;
             _webHostEnvironment = webHostEnvironment;
