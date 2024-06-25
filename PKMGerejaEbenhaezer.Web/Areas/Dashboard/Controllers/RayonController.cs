@@ -15,13 +15,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly PhotoFileSettings _photoFileSettings;
+        private readonly PhotoFileSettingsOptions _photoFileSettings;
         private readonly ILogger<RayonController> _logger;
 
         public RayonController(
             IWebHostEnvironment webHostEnvironment,
             AppDbContext appDbContext,
-            PhotoFileSettings photoFileSettings,
+            PhotoFileSettingsOptions photoFileSettings,
             ILogger<RayonController> logger)
         {
             _webHostEnvironment = webHostEnvironment;

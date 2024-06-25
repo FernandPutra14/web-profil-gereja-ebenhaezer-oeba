@@ -8,10 +8,11 @@ using PKMGerejaEbenhaezer.Web.Configurations;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add configurations
-builder.Services.Configure<PhotoFileSettings>(builder.Configuration.GetSection("PhotoFileSettings"));
-builder.Services.AddSingleton<PhotoFileSettings>((sp) =>
+builder.Services.Configure<PhotoFileSettingsOptions>(builder.Configuration
+    .GetSection(PhotoFileSettingsOptions.PhotoFileSettings));
+builder.Services.AddSingleton((sp) =>
 {
-    return sp.GetRequiredService<IOptions<PhotoFileSettings>>().Value;    
+    return sp.GetRequiredService<IOptions<PhotoFileSettingsOptions>>().Value;
 });
 
 // Add services to the container.
