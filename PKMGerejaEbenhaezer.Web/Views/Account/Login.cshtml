@@ -39,12 +39,12 @@
 </section>
 
 <script type="text/javascript">
-    const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#id_password');
+    const togglePassword = $('#togglePassword');
+    const password = $('#id_password');
 
-    togglePassword.addEventListener('click', function (e) {
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        this.classList.toggle('ri-eye-off-line');
+    $(togglePassword).on('click', function (e) {
+        const type = $(password).attr('type') === 'password' ? 'text' : 'password';
+        $(password).attr('type', type);
+        $(this).toggleClass('ri-eye-off-line');
     });
 </script>

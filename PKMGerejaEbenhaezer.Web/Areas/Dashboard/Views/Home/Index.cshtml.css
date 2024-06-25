@@ -95,3 +95,10 @@
         font-size: 14px;
         font-weight: 700;
     }
+
+    .pertama .card hr {
+        color: black;
+        margin: 0;
+        margin-bottom: 10px;
+        opacity: 0.1
+    }

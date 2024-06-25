@@ -1,4 +1,44 @@
-﻿#dvPreview {
+﻿.cardplus {
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--light);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+}
+
+.tamrayon {
+    width: 100%;
+    padding: 24px 20px 20px 20px;
+}
+
+    .tamrayon .title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .tamrayon .breadcrumbs {
+        display: flex;
+        grid-gap: 6px;
+        padding: 0;
+        margin: 0;
+    }
+
+        .tamrayon .breadcrumbs li,
+        .tamrayon .breadcrumbs li a {
+            font-size: 14px;
+        }
+
+            .tamrayon .breadcrumbs li a {
+                color: var(--blue);
+            }
+
+                .tamrayon .breadcrumbs li a.active,
+                .tamrayon .breadcrumbs li.divider {
+                    color: var(--dark-grey);
+                    pointer-events: none;
+                }
+
+#dvPreview {
     height: 300px;
     width: 300px;
     border-style: solid;
