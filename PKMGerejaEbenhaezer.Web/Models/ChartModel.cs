@@ -9,7 +9,7 @@
 
     public enum ChartType
     {
-        Doughnut, Bar, PolarArea
+        Doughnut, Pie, PolarArea
     }
 
     public static class ChartTypeExtension
@@ -20,8 +20,8 @@
             {
                 case ChartType.Doughnut:
                     return "doughnut";
-                case ChartType.Bar:
-                    return "bar";
+                case ChartType.Pie:
+                    return "pie";
                 case ChartType.PolarArea:
                     return "polarArea";
             };

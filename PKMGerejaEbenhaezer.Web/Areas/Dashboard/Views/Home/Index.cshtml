@@ -75,7 +75,7 @@
     <div class="data">
         <div class="content-data">
             <div class="head">
-                <h3>Pie Chart</h3>
+                <h3>Doughnut Chart</h3>
             </div>
             <div class="chart">
                 @{
@@ -99,13 +99,13 @@
         </div>
         <div class="content-data">
             <div class="head">
-                <h3>Bar Chart</h3>
+                <h3>Pie Chart</h3>
             </div>
             <div class="chart">
                 @{
                     var chartModel1 = new ChartModel
                     {
-                        Type = ChartType.Bar,
+                        Type = ChartType.Pie,
                         Label = "Jemaat Gereja",
                         Data = new Dictionary<string, double>
                         {
