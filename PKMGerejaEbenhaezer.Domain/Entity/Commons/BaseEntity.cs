@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PKMGerejaEbenhaezer.Domain.Commons
+namespace PKMGerejaEbenhaezer.Domain.Entity.Commons
 {
     public abstract class BaseEntity
     {

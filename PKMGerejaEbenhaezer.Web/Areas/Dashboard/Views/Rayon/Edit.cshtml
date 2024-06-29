@@ -2,50 +2,7 @@
 @model EditVM
 @{
     ViewData["Title"] = "Tambah Rayon";
-}
-
-<style>
-    .editray {
-        width: 100%;
-        padding: 24px 20px 20px 20px;
-    }
-
-        .editray .title {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .editray .breadcrumbs {
-            display: flex;
-            grid-gap: 6px;
-            padding: 0;
-            margin: 0;
-        }
-
-            .editray .breadcrumbs li,
-            .editray .breadcrumbs li a {
-                font-size: 14px;
-            }
-
-                .editray .breadcrumbs li a {
-                    color: var(--blue);
-                }
-
-                    .editray .breadcrumbs li a.active,
-                    .editray .breadcrumbs li.divider {
-                        color: var(--dark-grey);
-                        pointer-events: none;
-                    }
-
-    .cardedit {
-        padding: 20px;
-        border-radius: 10px;
-        background: var(--light);
-        box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
-    }
-</style>
-
+}a
 
 <div class="editray">
     <h1 class="title">Edit Rayon</h1>
@@ -61,23 +18,17 @@
 
             <div class="row mb-3 justify-content-center align-items-center">
                 <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
-                    <img class="img-fluid" src="@Url.ActionLink("FotoKetuaRayon", "File", new {Area="", id = Model.Id})" />
+                    <img class="img-fluid" src="@Url.ActionLink("Index", "Foto", new {Area="", id = Model.IdFoto})" />
                 </div>
             </div>
+
+            <vc:upload-foto></vc:upload-foto>
 
             <div class="row mb-3">
                 <div class="col-12">
                     <label asp-for="@Model.Nama" class="form-label"></label>
                     <input type="text" asp-for="@Model.Nama" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.Nama"></span>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-12">
-                    <label asp-for="@Model.FotoKetua" class="form-label"></label>
-                    <input type="file" asp-for="@Model.FotoKetua" class="form-control" id="fileupload" />
-                    <span class="form-text text-danger" asp-validation-for="@Model.FotoKetua"></span>
                 </div>
             </div>
 
@@ -143,6 +94,5 @@
 
 
 @section Scripts {
-    <partial name="_ImagePreviewPartial" />
     <partial name="_ValidationScriptsPartial" />
 }

@@ -12,17 +12,12 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pengumuman
         [Required(ErrorMessage = "{0} belum diisi")]
         public string Judul { get; set; }
 
-        [Display(Name = "Keterangan Pengumuman")]
+        [Display(Name = "Isi Pengumuman")]
         [Required(ErrorMessage = "{0} belum diisi")]
-        public string Keterangan { get; set; }
+        public string Isi { get; set; }
 
-        [Display(Name = "Tanggal Pengumuman")]
-        [Required(ErrorMessage = "{0} belum diisi")]
-        public DateTime Tanggal { get; set; }
-
-        public string PathFoto { get; set; }
-
-        [Display(Name = "Foto")]
-        public IFormFile? FotoBaru { get; set; }
+        [Display(Name = "Foto Pengumuman")]
+        [Required(ErrorMessage = "{0} harus diisi")]
+        public int? IdFoto { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
-using PKMGerejaEbenhaezer.Domain;
+using PKMGerejaEbenhaezer.Domain.Entity;
 using System.Security.Claims;
 
 namespace PKMGerejaEbenhaezer.Web.Authentication

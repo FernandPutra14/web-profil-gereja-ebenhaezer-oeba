@@ -1,9 +1,9 @@
-﻿using PKMGerejaEbenhaezer.Domain.Commons;
+﻿using PKMGerejaEbenhaezer.Domain.Entity.Commons;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PKMGerejaEbenhaezer.Domain
+namespace PKMGerejaEbenhaezer.Domain.Entity
 {
     public class AppUser : BaseEntity
     {

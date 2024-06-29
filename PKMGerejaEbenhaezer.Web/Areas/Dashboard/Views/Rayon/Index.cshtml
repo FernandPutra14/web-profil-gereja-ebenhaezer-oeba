@@ -41,8 +41,16 @@
                         <td>
                             <div class="row justify-content-center align-items-center">
                                 <div class="col-3 p-1">
-                                    <img src="@Url.ActionLink("FotoKetuaRayon", "File", new {Area = "", id = rayon.Id})"
-                                         alt="Ketua @(rayon.KetuaRayon)" class="img-thumbnail" />
+                                    @if(rayon.FotoKetua is not null)
+                                    {
+                                        <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = rayon.FotoKetua.Id})"
+                                        alt="Ketua @(rayon.KetuaRayon)" class="img-thumbnail" />
+                                    } 
+                                    else
+                                    {
+                                        <img src="~/img/generaluser.png" alt="Ketua @(rayon.KetuaRayon)" 
+                                        class="img-thumbnail" />
+                                    }
                                 </div>
                                 <div class="col-9">@rayon.KetuaRayon</div>
                             </div>

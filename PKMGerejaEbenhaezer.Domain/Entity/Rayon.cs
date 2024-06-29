@@ -1,15 +1,16 @@
-﻿using PKMGerejaEbenhaezer.Domain.Commons;
+﻿using PKMGerejaEbenhaezer.Domain.Entity.Commons;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PKMGerejaEbenhaezer.Domain
+namespace PKMGerejaEbenhaezer.Domain.Entity
 {
     public class Rayon : BaseEntity
     {
         public string Nama { get; set; }
         public string KetuaRayon { get; set; }
-        public byte[] FotoKetua { get; set; }
+
+        public Foto? FotoKetua { get; set; }
 
         public int JumlahJemaat { get => JumlahLakiLaki + JumlahPerempuan; }
 

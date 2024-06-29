@@ -38,17 +38,31 @@
                     var cultureInfo = new System.Globalization.CultureInfo("id-ID");
                     <!-- Ini Cardnya Bang -->
                     <div class="item peng-card">
-                        <img src="@pengumuman.PathFoto"/>
+                        @if (pengumuman.Foto != null)
+                        {
+                            <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" />
+                        }
+                        else
+                        {
+                            <img src="~/img/gereja1.jpg"/>
+                        }
                         <div class="category">
                             <div class="subject">
                                 <h3>Pengumuman</h3>
                             </div>
                         </div>
                         <h2 class="peng-title">@pengumuman.Judul</h2>
-                        <p>@pengumuman.Keterangan</p>
+                        <p>@pengumuman.Isi</p>
                         <div class="peng-tanggal">
-                            <span><i class="ri-calendar-fill"></i>@pengumuman.Tanggal.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
+                            <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
                         </div>
+
+                        @if(pengumuman.Pembuat != null)
+                        {
+                            <div>
+                                Oleh : @pengumuman.Pembuat.UserName
+                            </div>    
+                        }
                     </div>
                     <!-- Ini Akhir Cardnya Bang -->
                 }
@@ -69,17 +83,15 @@
                 Label = "Jemaat Gereja",
                 Data = new Dictionary<string, double>
                 {
-                  {"Lansia", Model.TotalLansia},  
-                  {"Dewasa", Model.TotalDewasa},  
-                  {"Pemuda", Model.TotalPemuda},  
-                  {"Remaja", Model.TotalRemaja},  
-                  {"Anak", Model.TotalAnak},  
+                    {"Lansia", Model.TotalLansia},
+                    {"Dewasa", Model.TotalDewasa},
+                    {"Pemuda", Model.TotalPemuda},
+                    {"Remaja", Model.TotalRemaja},
+                    {"Anak", Model.TotalAnak},
                 },
             };
-
-            
         }
-        
+
         <vc:chart chart-model=chartModel></vc:chart>
     </div>
     <div class="about-text">
@@ -90,13 +102,13 @@
             quis nostrud exercitation ullamco laboris.
         </p>
         @* <div class="about-fe">
-            <div class="fe-text">
-                <h5 data-aos="fade-in">Jumlah Coders</h5>
-                <p data-aos="fade-in">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-            </div>
+        <div class="fe-text">
+        <h5 data-aos="fade-in">Jumlah Coders</h5>
+        <p data-aos="fade-in">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        </div>
         </div> *@
 
         <div class="counters">
@@ -127,7 +139,6 @@
     </div>
 </section>
 <!-- Chart Section -->
-
 @section Scripts {
     <script type="text/javascript" src="~/js/counter.js"></script>
 

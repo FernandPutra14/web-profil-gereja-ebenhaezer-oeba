@@ -1,4 +1,44 @@
-﻿#dvPreview {
+﻿.editray {
+    width: 100%;
+    padding: 24px 20px 20px 20px;
+}
+
+    .editray .title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .editray .breadcrumbs {
+        display: flex;
+        grid-gap: 6px;
+        padding: 0;
+        margin: 0;
+    }
+
+        .editray .breadcrumbs ::deep li,
+        .editray .breadcrumbs ::deep li ::deep a {
+            font-size: 14px;
+        }
+
+            .editray .breadcrumbs ::deep li ::deep a {
+                color: var(--blue);
+            }
+
+                .editray .breadcrumbs ::deep li ::deep a.active,
+                .editray .breadcrumbs ::deep li.divider {
+                    color: var(--dark-grey);
+                    pointer-events: none;
+                }
+
+.cardedit {
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--light);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+}
+
+#dvPreview {
     height: 300px;
     width: 300px;
     border-style: solid;

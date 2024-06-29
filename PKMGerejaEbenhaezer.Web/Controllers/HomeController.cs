@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
-using PKMGerejaEbenhaezer.Domain;
+using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Models;
 using PKMGerejaEbenhaezer.Web.Models.Home;
 using System.Diagnostics;
@@ -22,7 +22,10 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Index()
         {
-            var daftarPengumuman = await _appDbContext.PengumumanTable.AsNoTracking().ToListAsync();
+            var daftarPengumuman = await _appDbContext.PengumumanTable
+                .Include(p => p.Foto)
+                .Include(p => p.Pembuat)
+                .AsNoTracking().ToListAsync();
 
             var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
 

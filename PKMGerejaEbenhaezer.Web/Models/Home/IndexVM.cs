@@ -1,4 +1,4 @@
-﻿using PKMGerejaEbenhaezer.Domain;
+﻿using PKMGerejaEbenhaezer.Domain.Entity;
 
 namespace PKMGerejaEbenhaezer.Web.Models.Home
 {

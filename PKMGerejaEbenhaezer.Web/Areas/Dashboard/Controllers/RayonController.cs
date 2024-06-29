@@ -2,9 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
-using PKMGerejaEbenhaezer.Domain;
+using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Rayon;
-using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Utlities;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
@@ -14,25 +13,21 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     public class RayonController : Controller
     {
         private readonly AppDbContext _appDbContext;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly PhotoFileSettingsOptions _photoFileSettings;
         private readonly ILogger<RayonController> _logger;
 
         public RayonController(
-            IWebHostEnvironment webHostEnvironment,
             AppDbContext appDbContext,
-            PhotoFileSettingsOptions photoFileSettings,
             ILogger<RayonController> logger)
         {
-            _webHostEnvironment = webHostEnvironment;
             _appDbContext = appDbContext;
-            _photoFileSettings = photoFileSettings;
             _logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
-            var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
+            var daftarRayon = await _appDbContext.RayonTable
+                .Include(r => r.FotoKetua)
+                .AsNoTracking().ToListAsync();
 
             return View(daftarRayon);
         }
@@ -48,14 +43,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Validasi
             if (!ModelState.IsValid) return View(tambahVM);
 
-            //Simpan foto
-            var fileFormContent = await FileHelpers.ProcessFormFile<TambahVM>(
-                tambahVM.FotoKetua,
-                ModelState,
-                _photoFileSettings.PermittedFileExtensions,
-                _photoFileSettings.SizeLimit);
+            var foto = await _appDbContext.FotoTable.Where(f => f.Id == tambahVM.IdFoto)
+                .FirstOrDefaultAsync();
 
-            if (!ModelState.IsValid) return View(tambahVM);
+            if(foto == null)
+            {
+                ModelState.AddModelError(string.Empty, "Foto tidak ada");
+                return View(tambahVM);
+            }
 
             //Simpan data rayon
             var newRayon = new Rayon
@@ -63,7 +58,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Id = 0,
                 Nama = tambahVM.Nama,
                 KetuaRayon = tambahVM.KetuaRayon,
-                FotoKetua = fileFormContent,
+                FotoKetua = foto,
                 JumlahLakiLaki = tambahVM.JumlahLakiLaki,
                 JumlahPerempuan = tambahVM.JumlahPerempuan,
                 JumlahAnak = tambahVM.JumlahAnak,
@@ -79,23 +74,25 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 var result = await _appDbContext.SaveChangesAsync();
 
-                if (result <= 0) throw new Exception("Simpan pengumuman gagal! Jumlah entitas yang disimpan 0");
+                if (result <= 0) throw new Exception("Jumlah entitas yang disimpan 0");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Data gagal disimpan!");
-                _logger.LogError("Tambah Rayon Gagal : {0}", ex.Message);
+                _logger.LogError("Tambah Rayon Gagal! Error : {0}", ex.Message);
                 return View(tambahVM);
             }
 
-            _logger.LogInformation("Tambah Rayon Sukses : Id {0}", changeTracker.Entity.Id);
+            _logger.LogInformation("Tambah Rayon Sukses! Id : {0}", changeTracker.Entity.Id);
 
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var rayon = await _appDbContext.RayonTable.Where(r => r.Id == id).AsNoTracking().FirstOrDefaultAsync();
+            var rayon = await _appDbContext.RayonTable.Where(r => r.Id == id)
+                .Include(r => r.FotoKetua)
+                .AsNoTracking().FirstOrDefaultAsync();
 
             if (rayon == null) return NotFound();
 
@@ -103,6 +100,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = id,
                 Nama = rayon.Nama,
+                IdFoto = rayon.FotoKetua?.Id,
                 KetuaRayon = rayon.KetuaRayon,
                 JumlahLakiLaki = rayon.JumlahLakiLaki,
                 JumlahPerempuan = rayon.JumlahPerempuan,
@@ -128,18 +126,17 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
-            //Simpan foto baru kalau ada
-            if (editVM.FotoKetua != null)
+            if(editVM.IdFoto is not null)
             {
-                var fileFormContent = await FileHelpers.ProcessFormFile<EditVM>(
-                editVM.FotoKetua,
-                ModelState,
-                _photoFileSettings.PermittedFileExtensions,
-                _photoFileSettings.SizeLimit);
+                var foto = await _appDbContext.FotoTable.Where(f => f.Id == editVM.IdFoto)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
 
-                if (!ModelState.IsValid) return View(editVM);
-
-                rayon.FotoKetua = fileFormContent;
+                if(foto is null)
+                {
+                    ModelState.AddModelError(string.Empty, "Foto tidak ada");
+                    return View(editVM);
+                }
             }
 
             //Simpan perubahan
@@ -153,6 +150,12 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             rayon.JumlahDewasa = editVM.JumlahDewasa;
             rayon.JumlahLansia = editVM.JumlahLansia;
 
+            if (editVM.IdFoto is not null) 
+            {
+                rayon.FotoKetua = await _appDbContext.FotoTable.Where(f => f.Id == editVM.IdFoto)
+                    .FirstOrDefaultAsync();
+            }
+
             try
             {
                 var result = await _appDbContext.SaveChangesAsync();
@@ -162,7 +165,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Proses simpan gagal!");
-                _logger.LogError("Edit Rayon Gagal Id {0} : {1}", editVM.Id, ex.Message);
+                _logger.LogError("Edit Rayon Gagal! Error : {0}", ex.Message);
                 return View(editVM);
             }
 

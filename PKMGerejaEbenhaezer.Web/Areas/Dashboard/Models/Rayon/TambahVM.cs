@@ -13,9 +13,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Rayon
         [Required(ErrorMessage = "{0} belum diisi")]
         public string KetuaRayon { get; set; }
 
-        [Display(Name = "Foto Ketua Rayon")]
-        [Required(ErrorMessage = "{0} belum diisi")]
-        public IFormFile FotoKetua { get; set; }
+        [Display(Name = "Foto Ketua")]
+        [Required(ErrorMessage = "{0} harus diisi")]
+        public int IdFoto { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "{0} kurang dari {1} atau lebih dari {2}")]
         [Display(Name = "Jumlah Jemaat Laki - Laki")]

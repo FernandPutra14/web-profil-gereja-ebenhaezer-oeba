@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
-using PKMGerejaEbenhaezer.Domain;
+using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pengumuman;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Utlities;
@@ -15,25 +15,21 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     public class PengumumanController : Controller
     {
         private readonly AppDbContext _appDbContext;
-        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<PengumumanController> _logger;
-        private readonly PhotoFileSettingsOptions _photoFileSettings;
 
         public PengumumanController(
             AppDbContext appDbContext,
-            IWebHostEnvironment webHostEnvironment,
-            ILogger<PengumumanController> logger,
-            PhotoFileSettingsOptions photoFileSettings)
+            ILogger<PengumumanController> logger)
         {
             _appDbContext = appDbContext;
-            _webHostEnvironment = webHostEnvironment;
             _logger = logger;
-            _photoFileSettings = photoFileSettings;
         }
 
         public async Task<IActionResult> Index()
         {
             var daftarPengumuman = await _appDbContext.PengumumanTable
+                .Include(p => p.Foto)
+                .Include(p => p.Pembuat)
                 .AsNoTracking().ToListAsync();
 
             daftarPengumuman ??= new List<Pengumuman>();
@@ -43,10 +39,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
         public IActionResult Tambah()
         {
-            return View(new TambahVM
-            {
-                Tanggal = DateTime.Now,
-            });
+            return View(new TambahVM());
         }
 
         [HttpPost]
@@ -57,58 +50,32 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(tambahVM);
             }
 
-            //Simpan File Foto
-            var formFileContent = await FileHelpers.ProcessFormFile<TambahVM>(
-                tambahVM.Foto,
-                ModelState,
-                _photoFileSettings.PermittedFileExtensions,
-                _photoFileSettings.SizeLimit);
+            var foto = await _appDbContext.FotoTable.Where(f => f.Id == tambahVM.IdFoto)
+                .FirstOrDefaultAsync();
 
-            if (!ModelState.IsValid)
+            if(foto == null)
             {
+                ModelState.AddModelError(nameof(tambahVM.IdFoto), "Foto tidak ditemukan");
                 return View(tambahVM);
             }
-
-            var namaFile = $"Pengumuman-{Path.GetRandomFileName()}{Path.GetExtension(tambahVM.Foto.FileName)}";
-            var pathFoto = Path.Combine(_photoFileSettings.FolderPath, namaFile);
-
-            try
-            {
-                using (var fileStream = System.IO.File.Create(_webHostEnvironment.WebRootPath + pathFoto))
-                {
-                    await fileStream.WriteAsync(formFileContent);
-                }
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, $"Error menyimpan file foto!");
-                _logger.LogError("Tambah Pengumuman : {0}", ex.Message);
-                return View(tambahVM);
-            }
-
-            _logger.LogInformation("File {0} berhasil disimpan", pathFoto);
 
             //Simpan pwngumuman ke database
             var newPengumuman = new Pengumuman
             {
                 Id = 0,
                 Judul = tambahVM.Judul,
-                Keterangan = tambahVM.Keterangan,
-                Tanggal = tambahVM.Tanggal,
-                PathFoto = pathFoto,
+                Isi = tambahVM.Isi,
+                Foto = foto,
             };
 
             var changeTracker = _appDbContext.PengumumanTable.Add(newPengumuman);
-            var result = 0;
 
             try
             {
-                result = await _appDbContext.SaveChangesAsync();
+                await _appDbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                System.IO.File.Delete(_webHostEnvironment.WebRootPath + pathFoto);
-
                 ModelState.AddModelError(string.Empty, $"Error menyimpan data ke database!");
                 _logger.LogError("Tambah Pengumuman : {0}", ex.Message);
                 return View(tambahVM);
@@ -123,19 +90,18 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         {
             var pengumuman = await _appDbContext.PengumumanTable
                 .Where(p => p.Id == id)
+                .Include(p => p.Foto)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 
-            if (pengumuman == null) return NotFound();
-            
+            if (pengumuman == null) return NotFound();           
 
             return View(new EditVM
             {
                 Id = id,
                 Judul = pengumuman.Judul,
-                Keterangan = pengumuman.Keterangan,
-                Tanggal = pengumuman.Tanggal,
-                PathFoto = pengumuman.PathFoto
+                Isi = pengumuman.Isi,
+                IdFoto = pengumuman.Foto?.Id,
             });
         }
 
@@ -152,47 +118,27 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
-            //Simpan foto baru dan hapus foto lama
-            if (editVM.FotoBaru != null)
+            if (editVM.IdFoto != null)
             {
-                var fileFormContent = await FileHelpers.ProcessFormFile<EditVM>(
-                    editVM.FotoBaru,
-                    ModelState,
-                    _photoFileSettings.PermittedFileExtensions,
-                    _photoFileSettings.SizeLimit);
+                var foto = await _appDbContext.FotoTable.Where(f => f.Id == editVM.IdFoto)
+                    .AsNoTracking().FirstOrDefaultAsync();
 
-                if (!ModelState.IsValid) return View(editVM);
-
-                var namaFile = $"Pengumuman-{Path.GetRandomFileName()}{Path.GetExtension(editVM.FotoBaru.FileName)}";
-                var pathFotoBaru = Path.Combine(_photoFileSettings.FolderPath, namaFile);
-
-                try
+                if(foto == null)
                 {
-                    using (var fileStream = System.IO.File.Create(_webHostEnvironment.WebRootPath + pathFotoBaru)) 
-                    {
-                        await fileStream.WriteAsync(fileFormContent);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError(editVM.FotoBaru.Name, "Foto baru gagal disimpan!");
-                    _logger.LogError("Simpan foto baru gagal! {0}", ex.Message);
-
+                    ModelState.AddModelError(nameof(editVM.IdFoto), "Foto tidak ditemukan");
                     return View(editVM);
                 }
-
-                if(System.IO.File.Exists(_webHostEnvironment + pengumuman.PathFoto))
-                {
-                    System.IO.File.Delete(_webHostEnvironment + pengumuman.PathFoto);
-                }
-
-                pengumuman.PathFoto = pathFotoBaru;
             }
 
             //Update Pengumuman
             pengumuman.Judul = editVM.Judul;
-            pengumuman.Keterangan = editVM.Keterangan;
-            pengumuman.Tanggal = editVM.Tanggal;
+            pengumuman.Isi = editVM.Isi;
+
+            if(editVM.IdFoto != null)
+            {
+                pengumuman.Foto = await _appDbContext.FotoTable.Where(f => f.Id == editVM.IdFoto)
+                    .AsNoTracking().FirstOrDefaultAsync();
+            }
 
             await _appDbContext.SaveChangesAsync();
 
@@ -209,8 +155,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             //Validasi
             var pengumuman = await _appDbContext.PengumumanTable.Where(p => p.Id == id).FirstOrDefaultAsync();
-            if (pengumuman == null) return Redirect(returnUrl!);
-
+            if (pengumuman == null) return BadRequest(pengumuman);
 
             //Hapus pengumuman
             _appDbContext.PengumumanTable.Remove(pengumuman);
@@ -225,18 +170,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return Redirect(returnUrl!);
             }
 
-            //Hapus Foto
-            try
-            {
-                System.IO.File.Delete(_webHostEnvironment + pengumuman.PathFoto);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Hapus Pengumuman - Hapus Foto : {0}", ex.Message);
-                return Redirect(returnUrl!);
-            }
-
-            _logger.LogInformation("Pengumunan {0} berhasil dihapus", pengumuman.Id);
             return Redirect(returnUrl!);
         }
     }

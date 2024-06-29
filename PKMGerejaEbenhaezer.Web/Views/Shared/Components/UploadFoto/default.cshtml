@@ -1,0 +1,152 @@
+﻿@model List<Foto>
+@{
+    string idForm = (ViewData["idForm"] as string)!;
+}
+
+<input type="text" name="IdFoto" id="IdFoto" class="form-control" hidden value="0" />
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Pilih Gambar</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal">Pilih Gambar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-8">
+                            <input class="form-control" id="formFile" name="formFile" data-val="true" type="file" />
+                            <span class="text-danger" id="formFileVal"></span>
+                        </div>
+                        <div class="col-3">
+                            <button type="button" class="btn btn-primary" id="uploadFoto" onsubmit="uploadFoto">Upload</button>
+                        </div>
+                    </div>
+                    <div class="row" id="fotoGrid">
+                        @foreach (var foto in Model)
+                        {
+                            <div class="col-3 p-1 foto-container">
+                                <input type="type" id="fotoId" value="@foto.Id" hidden />
+                                <img class="img-thumbnail"
+                                     src="@Url.Action("Index", "Foto", new {Area = "", id = foto.Id})" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="buttonPilih" class="btn btn-primary" data-bs-dismiss="modal">Pilih</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    const selectedStyle = {
+        'background': 'blue'
+    };
+
+    const unselectedStyle = {
+        'background': 'white'
+    };
+
+    let idTerpilih = 0;
+
+    const makeGetUrl = (id) => '/Foto/Index/' + id;
+
+    const updateUI = () => {
+        $('.foto-container').each(function (index, item) {
+            const id = $(this).find('#fotoId').val();
+            if (id !== idTerpilih) {
+                $(item).css(unselectedStyle);
+            }
+
+            if (id === idTerpilih) {
+                $(item).css(selectedStyle);
+            }
+        });
+    }
+
+    const onFotoClick = function () {
+        const fotoId = $(this).find('#fotoId').val();
+
+        if (idTerpilih !== fotoId) {
+            idTerpilih = fotoId;
+        }
+
+        updateUI();
+    };
+
+    const init = () => {
+        const daftarFotoContainer = $('.foto-container');
+
+        daftarFotoContainer.each(function (index, item) {
+            $(item).on('click', onFotoClick);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#uploadFoto').on('click', async function () {
+            const formData = new FormData();
+            const inputFile = $('#formFile')[0].files[0];
+
+            formData.append('formFile', inputFile);
+
+            $('#formFileVal').html('');
+
+            $(this).html('');
+            $(this).append('Loading...');
+            $(this).prop('disabled', true);
+
+            const response = await fetch(
+                '/Dashboard/Foto/TambahJSON',
+                {
+                    credentials: 'same-origin',
+                    method: "POST",
+                    body: formData,
+                }
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+
+                $('.foto-container').first().before(`
+                    <div class="col-3 p-1 foto-container">
+                        <input type="type" id="fotoId" value="` + data['id'] + `" hidden />
+                        <img class="img-thumbnail" src="` + makeGetUrl(data['id']) + `" />
+                    </div>`);
+
+                $('.foto-container > input#fotoId[value="' + data['id'] + '"]')
+                    .parent('.foto-container')
+                    .on('click', onFotoClick);
+            } else {
+                const data = await response.json();
+
+                console.log(data);
+
+                $('#formFileVal').html('');
+                $('#formFileVal').append(data['formFile']);
+            }
+
+            $(this).html('');
+            $(this).append('Upload');
+            $(this).prop('disabled', false);
+        });
+
+        $('#buttonPilih').on('click', function () {
+            $('#IdFoto').val(idTerpilih);
+
+            if ($('#dvPreview') !== null && $('#dvPreview') !== undefined) {
+                $('#dvPreview').html('');
+                $('#dvPreview').append('<img class="img-fluid"/>');
+                $('#dvPreview img').attr('src', makeGetUrl(idTerpilih.toString()));
+            }
+        });
+
+        init();
+    })
+</script>

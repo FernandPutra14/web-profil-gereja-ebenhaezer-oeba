@@ -16,9 +16,11 @@
 
   <ItemGroup>
     <None Include="wwwroot\js\carousel.js" />
+    <None Include="wwwroot\lib\popper\popper.min.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Emgu.CV" Version="4.7.0.5276" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

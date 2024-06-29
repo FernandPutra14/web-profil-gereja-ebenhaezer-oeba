@@ -14,17 +14,16 @@
         <li><a href="#" class="active">Daftar Pengumuman</a></li>
     </ul>
     <div class="container">
-        @* <a asp-action="Tambah" class="btn btn-primary mb-4">
-            Tambah
-        </a> *@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th width="10%">Foto</th>
                     <th>Judul</th>
-                    <th>Keterangan</th>
-                    <th>Tanggal</th>
+                    <th>Isi</th>
+                    <th>Tanggal Dibuat</th>
+                    <th>Tanggal Diubah</th>
+                    <th>Pembuat</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -34,11 +33,30 @@
                     <tr>
                         <td>@pengumuman.Id</td>
                         <td>
-                            <img src="@pengumuman.PathFoto" alt="@pengumuman.Id" class="img-fluid" />
+                            @if (pengumuman.Foto is not null)
+                            {
+                                <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" 
+                                alt="@pengumuman.Id" class="img-fluid" />
+                            }
+                            else
+                            {
+                                <img src="~/img/gereja1.jpg" class="img-fluid"/>
+                            }
                         </td>
                         <td>@pengumuman.Judul</td>
-                        <td>@pengumuman.Keterangan</td>
-                        <td>@pengumuman.Tanggal.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</td>
+                        <td>@pengumuman.Isi</td>
+                        <td>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
+                        <td>@pengumuman.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @pengumuman.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
+                        <td>
+                            @if(pengumuman.Pembuat != null)
+                            {
+                                @pengumuman.Pembuat.UserName
+                            }
+                            else
+                            {
+                                "Tidak Ada".ToString();
+                            }
+                        </td>
                         <td>
                             <div class="d-flex gap-1 justify-content-start align-items-center">
                                 <a class="btn btn-primary" asp-action="Edit" asp-route-id="@pengumuman.Id">
