@@ -1,0 +1,126 @@
+﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.FotoModels
+@using PKMGerejaEbenhaezer.Web.Utlities
+@using System.Globalization
+@model IndexVM
+@{
+    ViewData["Title"] = "Daftar Foto";
+    var cultureInfo = new CultureInfo("id-ID");
+}
+
+<div class="container-fluid">
+    <h1 class="text-center">Daftar Foto</h1>
+
+    <div class="row">
+        <div class="col-8">
+            <form asp-action="IndexPOST" class="row" method="post" enctype="multipart/form-data"
+                  asp-route-pIndex="@Model.Items.PageIndex">
+                <div class="col-8">
+                    <input class="form-control" type="file" asp-for="@Model.FormFile" />
+                    <span asp-validation-for="@Model.FormFile" class="text-danger"></span>
+                </div>
+                <div class="col-4">
+                    <button class="btn btn-primary" type="submit">Upload</button>
+                </div>
+            </form>
+            <div class="row">
+                @foreach (var foto in Model.Items!)
+                {
+                    <div class="col-3 foto-container">
+                        <img class="img-fluid" src="@Url.Action("Index", "Foto", new {Area = "", id = foto.Id})" />
+                        <input hidden id="idFoto" value="@foto.Id" />
+                        <input hidden id="pathFoto" value="@foto.PathFoto" />
+                        <input hidden id="tanggalDibuat" value="@($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}")" />
+                        <input hidden id="namaPembuat" value="@foto.Pembuat?.UserName" />
+                    </div>
+                }
+            </div>
+            <div class="row">
+                @{
+                    var hasPrevious = Model.Items.HasPreviousPage;
+                    var hasNext = Model.Items.HasNextPage;
+                }
+
+                <a asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)" asp-area="Dashboard"
+                   class="btn btn-primary@(hasPrevious ? "" : " disabled")">
+                    Sebelumnya
+                </a>
+                <a asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)" asp-area="Dashboard"
+                   class="btn btn-primary@(hasNext ? "" : " disabled")">
+                    Selanjutnya
+                </a>
+            </div>
+        </div>
+        <div class="col-4 h-100" id="detailsPane">
+            <div class="row">
+                <img class="img-fluid" src="" />
+            </div>
+            <div class="row">
+                ID : <span id="idFoto"></span>
+            </div>
+            <div class="row">
+                Path Foto : <span id="pathFoto"></span>
+            </div>
+            <div class="row">
+                Tanggal Dibuat : <span id="tanggalDibuat"></span>
+            </div>
+            <div class="row">
+                Pembuat : <span id="namaPembuat"></span>
+            </div>
+            <div class="row">
+                <!-- Button trigger modal -->
+                <button class="btn btn-danger" id="buttonHapus" hidden data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa fa-regular fa-trash">Hapus</i>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModal">Hapus Pengumuman</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Apakah anda yakin ingin menghapus?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <form asp-action="Hapus" id="formHapus">
+                                    <button type="submit" class="btn btn-primary">Hapus</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+        const makeDeleteUrl = (id) => '/Dashboard/Foto/Hapus/' + id + '?returnUrl=%2FDashboard%2FFoto%2FIndex%3FpageIndex%3D@(Model.Items.PageIndex)';
+
+        $(function () {
+            $('.foto-container').each(function (index, item) {
+                $(item).on('click', function () {
+                    const src = $(item).find('img').attr('src');
+                    const idFoto = $(item).find('#idFoto').val();
+                    const pathFoto = $(item).find('#pathFoto').val();
+                    const tanggalDibuat = $(item).find('#tanggalDibuat').val();
+                    const namaPembuat = $(item).find('#namaPembuat').val();
+
+                    $('#detailsPane img').attr('src', src);
+                    $('#detailsPane #idFoto').html(idFoto);
+                    $('#detailsPane #pathFoto').html(pathFoto);
+                    $('#detailsPane #tanggalDibuat').html(tanggalDibuat);
+                    $('#detailsPane #namaPembuat').html(namaPembuat);
+                    $('#detailsPane #buttonHapus').prop('hidden', false);
+                    $('#detailsPane #formHapus').attr('action', makeDeleteUrl(idFoto));
+                });
+            });
+        });
+    </script>
+}
