@@ -43,7 +43,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 formFile,
                 ModelState,
                 _photoFileSettingsOptions.PermittedFileExtensions,
-                _photoFileSettingsOptions.SizeLimit);
+                _photoFileSettingsOptions.MinSizeLimit,
+                _photoFileSettingsOptions.MaxSizeLimit);
 
             if (!ModelState.IsValid)
             {

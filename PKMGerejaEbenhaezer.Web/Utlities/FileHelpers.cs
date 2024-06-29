@@ -53,7 +53,8 @@ namespace PKMGerejaEbenhaezer.Web.Utlities
 
         public static async Task<byte[]> ProcessFormFile<T>(IFormFile formFile,
             ModelStateDictionary modelState, string[] permittedExtensions,
-            long sizeLimit)
+            long minSizeLimit,
+            long maxSizeLimit)
         {
             var fieldDisplayName = string.Empty;
 
@@ -90,9 +91,19 @@ namespace PKMGerejaEbenhaezer.Web.Utlities
                 return Array.Empty<byte>();
             }
 
-            if (formFile.Length > sizeLimit)
+            if(formFile.Length < minSizeLimit)
             {
-                var megabyteSizeLimit = sizeLimit / 1048576;
+                var megabyteSizeLimit = minSizeLimit / (double)1048576;
+                modelState.AddModelError(formFile.Name,
+                    $"{fieldDisplayName}({trustedFileNameForDisplay}) kurang dari " +
+                    $"{megabyteSizeLimit:N3} MB.");
+
+                return Array.Empty<byte>();
+            }
+
+            if (formFile.Length > maxSizeLimit)
+            {
+                var megabyteSizeLimit = maxSizeLimit / (double)1048576;
                 modelState.AddModelError(formFile.Name,
                     $"{fieldDisplayName}({trustedFileNameForDisplay}) exceeds " +
                     $"{megabyteSizeLimit:N1} MB.");
