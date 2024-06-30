@@ -99,7 +99,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
             {
                 Id = 1,
                 UserName = "admin",
-                Password = new PasswordHasher<AppUser>().HashPassword(null, "admin"),
+                PasswordHash = new PasswordHasher<AppUser>().HashPassword(null, "admin"),
             };
 
             modelBuilder.Entity<AppUser>().HasData(user);

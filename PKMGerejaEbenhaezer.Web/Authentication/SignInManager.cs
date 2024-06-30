@@ -30,7 +30,7 @@ namespace PKMGerejaEbenhaezer.Web.Authentication
 
             //Bandingkan password dengan password di database
             var hasher = new PasswordHasher<AppUser>();
-            var result = hasher.VerifyHashedPassword(null, user.Password, password);
+            var result = hasher.VerifyHashedPassword(null, user.PasswordHash, password);
             if(result == PasswordVerificationResult.Failed) return false;
 
             //Buat claim
