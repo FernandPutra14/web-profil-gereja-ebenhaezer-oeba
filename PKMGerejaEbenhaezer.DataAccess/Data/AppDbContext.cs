@@ -82,6 +82,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                         .HasColumnType("timestamp without time zone");
                     modelBuilder.Entity(entityType.ClrType).Property(nameof(IAuditableEntity.TanggalDiUbah))
                         .HasColumnType("timestamp without time zone");
+                    modelBuilder.Entity(entityType.ClrType).HasOne(nameof(IAuditableEntity.Pembuat))
+                        .WithMany().OnDelete(DeleteBehavior.SetNull);
                 }
             }
 
@@ -91,8 +93,10 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
             modelBuilder.Entity<Foto>().HasKey(e => e.Id);
 
             modelBuilder.Entity<Pengumuman>().HasKey(e => e.Id);
+            modelBuilder.Entity<Pengumuman>().HasOne(e => e.Foto).WithMany().OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Rayon>().HasKey(r => r.Id);
+            modelBuilder.Entity<Rayon>().HasOne(e => e.FotoKetua).WithMany().OnDelete(DeleteBehavior.SetNull);
 
             ///Seeding Data
             var user = new AppUser
