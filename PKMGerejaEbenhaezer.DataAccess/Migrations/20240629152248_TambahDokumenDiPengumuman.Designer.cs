@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240629152248_TambahDokumenDiPengumuman")]
+    partial class TambahDokumenDiPengumuman
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +51,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Password = "AQAAAAIAAYagAAAAEEqLRg2tWB6vaE+Nst1tWs1YadhoQ7XBxeAIiy44NC69037XeqywQRmbuPbsUAVfKQ==",
+                            Password = "AQAAAAIAAYagAAAAEI70/mea6SClswMobVwq+eRcqm/ROalk1ahYTXQfb6gjPPmY0/gW40cuNabo7grFVQ==",
                             UserName = "admin"
                         });
                 });
@@ -146,7 +149,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                     b.Property<int?>("FotoId")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("HaveDocument")
+                    b.Property<bool>("HaveDocuments")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Isi")
@@ -182,7 +185,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 1,
                             FotoId = 1,
-                            HaveDocument = false,
+                            HaveDocuments = false,
                             Isi = "Kami mengundang seluruh jemaat untuk hadir dalam Ibadah Natal yang akan diadakan pada hari Minggu, 25 Desember 2024, pukul 10.00 WIB di Gereja. Mari kita rayakan kelahiran Yesus Kristus dengan sukacita dan kebersamaan. Setelah ibadah, akan diadakan acara ramah tamah di aula gereja.",
                             Judul = "Ibadah Natal Bersama",
                             PembuatId = 1,
@@ -192,7 +195,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 2,
                             FotoId = 2,
-                            HaveDocument = false,
+                            HaveDocuments = false,
                             Isi = "Rapat Anggota Jemaat Tahunan akan dilaksanakan pada hari Sabtu, 27 Juni 2024, pukul 14.00 WIB di aula gereja. Kami mengajak seluruh jemaat untuk hadir dan berpartisipasi dalam membahas laporan tahunan dan rencana kegiatan gereja untuk tahun 2024.",
                             Judul = "Rapat Anggota Jemaat Tahunan",
                             PembuatId = 1,
@@ -202,7 +205,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 3,
                             FotoId = 3,
-                            HaveDocument = false,
+                            HaveDocuments = false,
                             Isi = "Kami mengundang para pemuda gereja untuk mengikuti Retret Pemuda yang akan diadakan pada tanggal 15-17 Juli 2024 di Wisma Retreat Agape. Tema retret kali ini adalah \"Membangun Iman yang Kuat di Era Digital\". Pendaftaran dapat dilakukan melalui sekretariat gereja hingga 1 Juli 2024.",
                             Judul = "Retret Pemuda Gereja",
                             PembuatId = 1,
@@ -212,7 +215,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 4,
                             FotoId = 4,
-                            HaveDocument = false,
+                            HaveDocuments = false,
                             Isi = "Gereja kita akan mengadakan penggalangan dana untuk renovasi bangunan gereja yang direncanakan mulai bulan Juni 2024. Kami mengajak seluruh jemaat untuk berpartisipasi dalam acara ini pada hari Minggu, 5 Juli 2024, pukul 09.00 WIB setelah kebaktian. Donasi dapat diberikan langsung atau melalui rekening gereja.",
                             Judul = "Penggalangan Dana untuk Renovasi Gereja",
                             PembuatId = 1,
@@ -222,7 +225,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 5,
                             FotoId = 5,
-                            HaveDocument = false,
+                            HaveDocuments = false,
                             Isi = "Dalam rangka menyambut Natal, gereja akan mengadakan kegiatan pelayanan sosial ke Panti Asuhan Kasih Ibu pada hari Sabtu, 23 Desember 2024. Kami mengundang jemaat untuk ikut serta dalam kegiatan ini dengan menyumbangkan pakaian layak pakai, mainan, dan sembako. Barang-barang sumbangan dapat dikumpulkan di kantor gereja hingga 21 Desember 2024.",
                             Judul = "Pelayanan Sosial Natal",
                             PembuatId = 1,

@@ -164,6 +164,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Id = 1,
                     Judul = "Ibadah Natal Bersama",
                     Isi = "Kami mengundang seluruh jemaat untuk hadir dalam Ibadah Natal yang akan diadakan pada hari Minggu, 25 Desember 2024, pukul 10.00 WIB di Gereja. Mari kita rayakan kelahiran Yesus Kristus dengan sukacita dan kebersamaan. Setelah ibadah, akan diadakan acara ramah tamah di aula gereja.",
+                    HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[0].Id,
                     PembuatId = user.Id
@@ -173,6 +174,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Id = 2,
                     Judul = "Rapat Anggota Jemaat Tahunan",
                     Isi = "Rapat Anggota Jemaat Tahunan akan dilaksanakan pada hari Sabtu, 27 Juni 2024, pukul 14.00 WIB di aula gereja. Kami mengajak seluruh jemaat untuk hadir dan berpartisipasi dalam membahas laporan tahunan dan rencana kegiatan gereja untuk tahun 2024.",
+                    HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[1].Id,
                     PembuatId = user.Id
@@ -182,6 +184,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Id = 3,
                     Judul = "Retret Pemuda Gereja",
                     Isi = "Kami mengundang para pemuda gereja untuk mengikuti Retret Pemuda yang akan diadakan pada tanggal 15-17 Juli 2024 di Wisma Retreat Agape. Tema retret kali ini adalah \"Membangun Iman yang Kuat di Era Digital\". Pendaftaran dapat dilakukan melalui sekretariat gereja hingga 1 Juli 2024.",
+                    HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[2].Id,
                     PembuatId = user.Id
@@ -191,6 +194,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Id = 4,
                     Judul = "Penggalangan Dana untuk Renovasi Gereja",
                     Isi = "Gereja kita akan mengadakan penggalangan dana untuk renovasi bangunan gereja yang direncanakan mulai bulan Juni 2024. Kami mengajak seluruh jemaat untuk berpartisipasi dalam acara ini pada hari Minggu, 5 Juli 2024, pukul 09.00 WIB setelah kebaktian. Donasi dapat diberikan langsung atau melalui rekening gereja.",
+                    HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[3].Id,
                     PembuatId = user.Id
@@ -200,6 +204,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Id = 5,
                     Judul = "Pelayanan Sosial Natal",
                     Isi = "Dalam rangka menyambut Natal, gereja akan mengadakan kegiatan pelayanan sosial ke Panti Asuhan Kasih Ibu pada hari Sabtu, 23 Desember 2024. Kami mengundang jemaat untuk ikut serta dalam kegiatan ini dengan menyumbangkan pakaian layak pakai, mainan, dan sembako. Barang-barang sumbangan dapat dikumpulkan di kantor gereja hingga 21 Desember 2024.",
+                    HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[4].Id,
                     PembuatId = user.Id

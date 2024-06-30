@@ -13,10 +13,12 @@ namespace PKMGerejaEbenhaezer.Web.ViewComponents
             _appDbContext = appDbContext;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int? idFoto)
         {
             var daftarFoto = await _appDbContext.FotoTable.OrderByDescending(f => f.TanggalDiBuat)
                 .AsNoTracking().ToListAsync();
+
+            ViewData["idFoto"] = idFoto ?? 0;
 
             return View(daftarFoto);
         }

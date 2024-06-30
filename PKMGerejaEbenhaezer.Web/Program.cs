@@ -4,16 +4,25 @@ using Microsoft.Extensions.Options;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Web.Authentication;
 using PKMGerejaEbenhaezer.Web.Configurations;
+using PKMGerejaEbenhaezer.Web.Services.PDF;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add configurations
 builder.Services.Configure<PhotoFileSettingsOptions>(builder.Configuration
     .GetSection(PhotoFileSettingsOptions.PhotoFileSettings));
-builder.Services.AddSingleton((sp) =>
+builder.Services.AddScoped((sp) =>
 {
-    return sp.GetRequiredService<IOptions<PhotoFileSettingsOptions>>().Value;
+    return sp.GetRequiredService<IOptionsSnapshot<PhotoFileSettingsOptions>>().Value;
 });
+
+builder.Services.Configure<PDFFileSettingsOptions>(builder.Configuration
+    .GetSection(PDFFileSettingsOptions.PDFFileSettings));
+builder.Services.AddScoped((sp) =>
+{
+    return sp.GetRequiredService<IOptionsSnapshot<PDFFileSettingsOptions>>().Value;
+});
+
 
 // Add services to the container.
 
@@ -38,6 +47,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddScoped<ISignInManager, SignInManager>();
+
+builder.Services.AddScoped<IPDFUploadService, PDFUploadService>();
 
 var app = builder.Build();
 

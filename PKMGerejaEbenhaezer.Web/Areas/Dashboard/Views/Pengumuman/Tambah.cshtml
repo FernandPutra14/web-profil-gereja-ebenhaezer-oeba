@@ -15,7 +15,7 @@
     <div class="container-fluid cardplus">
 
         <form asp-action="Tambah" method="post" class="container" enctype="multipart/form-data">
-            <div asp-validation-summary="All" class="form-text text-danger"></div>
+            <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
             <div class="row mb-3 justify-content-center align-items-center">
                 <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
@@ -45,6 +45,22 @@
 
             <div class="row mb-3">
                 <div class="col-12">
+                    <input id="haveDocument" type="checkbox" asp-for="@Model.HaveDocument" class="form-check-input"></input>
+                    <label asp-for="@Model.HaveDocument" class="form-check-label"></label>
+                    <span class="form-text text-danger" asp-validation-for="@Model.HaveDocument"></span>
+                </div>
+            </div>
+
+            <div id="document" class="row mb-3" @(Model.HaveDocument ? "" : "hidden")>
+                <div class="col-12">
+                    <label asp-for="@Model.FormFile" class="form-label"></label>
+                    <input type="file" asp-for="@Model.FormFile" class="form-control"></input>
+                    <span class="form-text text-danger" asp-validation-for="@Model.FormFile"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12">
                     <button type="submit" class="btn" style="width:100%;">Simpan</button>
                 </div>
             </div>
@@ -54,4 +70,14 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+        $(function () {
+            $('#haveDocument').on('change', function () {
+                const value = $(this).prop('checked');
+
+                $('#document').prop('hidden', !value);
+            });
+        })
+    </script>
 }

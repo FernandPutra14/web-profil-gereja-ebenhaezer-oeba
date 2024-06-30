@@ -8,8 +8,10 @@ namespace PKMGerejaEbenhaezer.Domain.Entity
 {
     public class Pengumuman : BaseEntity, IAuditableEntity
     {
-        public string Judul { get; set; }
-        public string Isi { get; set; }
+        public string Judul { get; set; } = string.Empty;
+        public string Isi { get; set; } = string.Empty;
+        public bool HaveDocument { get; set; }
+        public string? PathPDF { get; set; } 
 
         public Foto? Foto { get; set; }
 

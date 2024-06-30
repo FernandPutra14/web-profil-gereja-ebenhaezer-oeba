@@ -21,6 +21,8 @@
                     <th width="10%">Foto</th>
                     <th>Judul</th>
                     <th>Isi</th>
+                    <th>Ada Dokumen</th>
+                    <th>Dokumen</th>
                     <th>Tanggal Dibuat</th>
                     <th>Tanggal Diubah</th>
                     <th>Pembuat</th>
@@ -45,6 +47,14 @@
                         </td>
                         <td>@pengumuman.Judul</td>
                         <td>@pengumuman.Isi</td>
+                        <td>@(pengumuman.HaveDocument ? "Ada" : "Tidak Ada")</td>
+                        <td>@if (pengumuman.HaveDocument)
+                            {
+                                <a href="@Url.ActionLink("Dokumen", "Pengumuman" , new {Area="" , id=pengumuman.Id})">
+                                    Dokumen
+                                </a>
+                            }
+                        </td>
                         <td>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
                         <td>@pengumuman.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @pengumuman.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
                         <td>

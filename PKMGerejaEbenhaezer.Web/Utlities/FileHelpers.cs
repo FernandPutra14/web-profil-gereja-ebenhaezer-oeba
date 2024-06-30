@@ -253,12 +253,12 @@ namespace PKMGerejaEbenhaezer.Web.Utlities
                 // for files (when possible) for all file types you intend
                 // to allow on the system and perform the file signature
                 // check.
-                /*
+
                 if (!_fileSignature.ContainsKey(ext))
                 {
                     return true;
                 }
-                */
+
 
                 // File signature check
                 // --------------------

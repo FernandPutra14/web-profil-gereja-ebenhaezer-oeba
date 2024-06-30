@@ -3,7 +3,7 @@
     string idForm = (ViewData["idForm"] as string)!;
 }
 
-<input type="text" name="IdFoto" id="IdFoto" class="form-control" hidden value="0" />
+<input type="text" name="IdFoto" id="IdFoto" class="form-control" hidden value="@ViewData["idFoto"]" />
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Pilih Gambar</button>
 
 <!-- Modal -->
