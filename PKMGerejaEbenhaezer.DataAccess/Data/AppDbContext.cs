@@ -26,37 +26,59 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         public DbSet<Rayon> RayonTable { get; set; }
         public DbSet<Foto> FotoTable { get; set; }
 
+        private void AuditAuditableEntity()
+        {
+            var addedEntries = ChangeTracker.Entries<IAuditableEntity>()
+                    .Where(e => e.State == EntityState.Added);
+
+            var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>()
+                .Where(e => e.State == EntityState.Modified);
+
+            var userName = _httpContext.User.Claims.Where(c => c.Type == ClaimTypes.Name)
+                .Select(c => c.Value)
+                .FirstOrDefault();
+            var user = AppUserTable.Where(u => u.UserName == userName).FirstOrDefault();
+
+            if (addedEntries != null && addedEntries.Count() > 0)
+            {
+                foreach (var entry in addedEntries)
+                {
+                    entry.Entity.TanggalDiBuat = DateTime.Now;
+                    entry.Entity.Pembuat = user;
+                }
+            }
+
+            if (modifiedEntries != null && modifiedEntries.Count() > 0)
+            {
+                foreach (var entry in modifiedEntries)
+                {
+                    entry.Entity.TanggalDiUbah = DateTime.Now;
+                }
+            }
+        }
+
+        public override int SaveChanges()
+        {
+            try
+            {
+                AuditAuditableEntity();
+                return base.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                foreach (var entry in ex.Entries)
+                {
+                    entry.State = EntityState.Detached;
+                }
+                throw;
+            }
+        }
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             try
             {
-                var addedEntries = ChangeTracker.Entries<IAuditableEntity>()
-                    .Where(e => e.State == EntityState.Added);
-
-                var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>()
-                    .Where(e => e.State == EntityState.Modified);
-
-                var userName = _httpContext.User.Claims.Where(c => c.Type == ClaimTypes.Name)
-                    .Select(c => c.Value)
-                    .FirstOrDefault();
-                var user = AppUserTable.Where(u => u.UserName == userName).FirstOrDefault();
-
-                if (addedEntries != null && addedEntries.Count() > 0) 
-                {
-                    foreach (var entry in addedEntries) 
-                    {
-                        entry.Entity.TanggalDiBuat = DateTime.Now;
-                        entry.Entity.Pembuat = user;
-                    }
-                }
-
-                if(modifiedEntries != null && modifiedEntries.Count() > 0)
-                {
-                    foreach (var entry in modifiedEntries)
-                    {
-                        entry.Entity.TanggalDiUbah = DateTime.Now;
-                    }
-                }
+                AuditAuditableEntity();
 
                 return await base.SaveChangesAsync(cancellationToken);
             }

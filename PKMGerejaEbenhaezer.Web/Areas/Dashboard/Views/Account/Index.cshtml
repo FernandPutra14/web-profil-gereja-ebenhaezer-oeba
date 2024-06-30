@@ -1,6 +1,32 @@
-﻿@model AppUser
-
+﻿@model List<AppUser>
 @{
     ViewData["Title"] = "Akun";
 }
 
+<div class="container-fluid">
+    <h1 class="text-center text-capitalize">
+        Daftar Akun
+    </h1>
+    
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var appUser in Model)
+            {
+                <tr>
+                    <td>@appUser.Id</td>
+                    <td>@appUser.UserName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <partial name="_DataTablePartial"/>
+}
