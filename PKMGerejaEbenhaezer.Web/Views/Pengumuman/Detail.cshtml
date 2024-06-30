@@ -1,0 +1,14 @@
+﻿@model Pengumuman
+@{
+    ViewData["Title"] = "Pengumuman";
+}
+
+@* Untuk Tampilkan foto pengumuman begini bng. Copy ini tinggal ganti variablenya *@
+@if (Model.Foto is not null)
+{
+    <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = Model.Foto.Id})" />
+}
+else
+{
+    <img src="~/img/gereja1.jpg" />
+}

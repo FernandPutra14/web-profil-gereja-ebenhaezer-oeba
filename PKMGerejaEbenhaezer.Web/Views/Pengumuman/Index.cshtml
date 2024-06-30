@@ -1,0 +1,16 @@
+﻿@using System.Globalization
+@model List<Pengumuman>
+@{
+    ViewData["Title"] = "Pengumuman";
+    var cultureInfo = new CultureInfo("id-ID");
+}
+
+@* Untuk Tampilkan foto pengumuman begini bng. Copy ini tinggal ganti variablenya *@
+@if(Model[0].Foto is not null)
+{
+    <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = Model[0].Foto!.Id})"/>
+}
+else
+{
+    <img src="~/img/gereja1.jpg"/>
+}
