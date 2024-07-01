@@ -12,3 +12,16 @@ else
 {
     <img src="~/img/gereja1.jpg" />
 }
+
+Judul : @Model.Judul
+Isi : @Model.Isi
+@if (Model.HaveDocument)
+{
+    <a asp-action="Dokumen" asp-route-id="@Model.Id">Dokumen</a>
+}
+@if (Model.Pembuat is not null)
+{
+    <div>
+        Oleh : @Model.Pembuat.UserName
+    </div>
+}
