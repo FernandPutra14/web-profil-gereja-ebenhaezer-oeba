@@ -1,0 +1,182 @@
+﻿#peng-us {
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/gereja_ebenhaezer_oebaa.jpg");
+    margin: 0px auto;
+    width: 100%;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+    #peng-us h2 {
+        /*font-family: 'Alex brush';*/
+        color: #fff;
+        padding-top: 50px;
+        font-size: 40px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+section.peng {
+    width: 100%;
+    padding-bottom: 30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 3%;
+}
+
+.peng .section-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .peng .section-header .peng-btn {
+        position: absolute;
+        right: 0;
+        bottom: 40px;
+    }
+
+.tombolseleng {
+    padding: 10px 18px;
+    color: #000;
+    font-size: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    .tombolseleng:hover {
+        background-color: var(--light-heading-clr);
+        color: var(--primary-clr);
+        border: 1px solid var(--primary-clr);
+    }
+
+.peng .peng-contents {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .peng .peng-contents .peng-card {
+        flex-basis: calc(calc(100% / 3) - 1.2%);
+        border: 1px solid #eee;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 5px 5px 5px 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+        .peng .peng-contents .peng-card:hover {
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        }
+
+.peng-contents .peng-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.peng-contents .peng-card p {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--dark-heading-clr);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+}
+
+.peng-contents .peng-card .category {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.peng-card .category img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    right: 15px;
+    top: -50px;
+    outline: 1px solid var(--primary-clr);
+    outline-offset: 3px;
+}
+
+.peng-card .category .subject {
+    padding: 8px 10px;
+    background-color: var(--primary-light-clr);
+    border-radius: 5px;
+}
+
+    .peng-card .category .subject h3 {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--primary-clr);
+    }
+
+.peng-card .peng-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--dark-heading-clr);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+}
+
+.peng-card .peng-tanggal {
+    padding: 15px 0px 0px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .peng-card .peng-tanggal span {
+        color: var(--primary-clr);
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+        .peng-card .peng-tanggal span:nth-child(1) i {
+            color: var(--primary-clr);
+            padding-right: 10px;
+            font-size: 14px;
+        }
+
+        .peng-card .peng-tanggal span b {
+            font-size: 24px;
+        }
+
+
+.filterbut {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+    .filterbut button {
+        padding: 10px 20px;
+        font-size: 18px;
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }

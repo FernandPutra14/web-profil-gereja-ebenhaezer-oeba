@@ -50,18 +50,33 @@ section.peng {
         bottom: 40px;
     }
 
-.peng .peng-contents {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.tombolseleng {
+    padding: 10px 18px;
+    color: #000;
+    font-size: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
+
+    .tombolseleng:hover {
+        background-color: var(--light-heading-clr);
+        color: var(--primary-clr);
+        border: 1px solid var(--primary-clr);
+    }
+
+    .peng .peng-contents {
+        display: flex;       
+        flex-wrap: wrap;
+    }
 
     .peng .peng-contents .peng-card {
         flex-basis: calc(calc(100% / 3) - 1.2%);
         border: 1px solid #eee;
         padding: 10px;
         border-radius: 5px;
-        margin-bottom: 20px;
+        margin : 5px 5px 5px 5px;
         cursor: pointer;
         transition: all 0.3s;
     }
@@ -84,7 +99,7 @@ section.peng {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    -webkit-line-clamp: 7;
+    -webkit-line-clamp: 3;
     text-overflow: ellipsis;
     line-height: 1.5em;
 }
@@ -135,6 +150,9 @@ section.peng {
 .peng-card .peng-tanggal {
     padding: 15px 0px 0px;
     border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
     .peng-card .peng-tanggal span {

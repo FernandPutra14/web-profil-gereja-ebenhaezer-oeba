@@ -30,10 +30,10 @@
     <!-- Akhir Header Pengumuman Section -->
     <!-- Content Pengumuman Section -->
     <div class="peng-contents">
-        <div class="owl-carousel owl-theme fernand">
+        @* <div class="owl-carousel owl-theme fernand"> *@
             @if (Model.DaftarPengumuman != null || Model.DaftarPengumuman!.Count > 0)
             {
-                @foreach (var pengumuman in Model.DaftarPengumuman)
+                @foreach (var pengumuman in Model.DaftarPengumuman.Take(3))
                 {
                     var cultureInfo = new System.Globalization.CultureInfo("id-ID");
                     <!-- Ini Cardnya Bang -->
@@ -55,19 +55,20 @@
                         <p>@pengumuman.Isi</p>
                         <div class="peng-tanggal">
                             <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
+                            <button class="tombolseleng">Baca Selengkapnya...</button>
                         </div>
 
-                        @if(pengumuman.Pembuat != null)
+                        @* @if(pengumuman.Pembuat != null)
                         {
                             <div>
                                 Oleh : @pengumuman.Pembuat.UserName
                             </div>    
-                        }
+                        } *@
                     </div>
                     <!-- Ini Akhir Cardnya Bang -->
                 }
             }
-        </div>
+        @* </div> *@
     </div>
     <!-- Akhir Pengumuman Section -->
 </section>

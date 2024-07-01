@@ -5,12 +5,82 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
-@* Untuk Tampilkan foto pengumuman begini bng. Copy ini tinggal ganti variablenya *@
-@if(Model[0].Foto is not null)
+<section id="peng-us" class="mb-lg-5">
+    <h2>
+        Pengumuman /
+    </h2>
+</section>
+
+<section class="peng">
+    
+
+    <div class="filterbut">
+        <button class="" data-name="semua">Semua</button>
+        <button class="" data-name="semua">Januari</button>
+        <button class="" data-name="semua">Februari</button>
+        <button class="" data-name="semua">Maret</button>
+        <button class="" data-name="semua">April</button>
+        <button class="" data-name="semua">Mei</button>
+        <button class="" data-name="semua">Juni</button>
+        <button class="" data-name="semua">Juli</button>
+        <button class="" data-name="semua">Agustus</button>
+        <button class="" data-name="semua">September</button>
+        <button class="" data-name="semua">Oktober</button>
+        <button class="" data-name="semua">November</button>
+        <button class="" data-name="semua">Desember</button>
+    </div>
+
+    
+
+
+<div class="peng-contents">
+        @foreach (var item in Model)
+        {           
+            <!-- Ini Cardnya Bang -->
+            <div class="item peng-card">
+            @if (item.Foto != null)
+            {
+            <img src="@Url.ActionLink("Index", "Foto", new { Area = "", id = item.Foto!.Id })" />
+            }
+            else
+            {
+            <img src="~/img/gereja1.jpg" />
+            }
+                <div class="category">
+                    <div class="subject">
+                        <h3>Pengumuman</h3>
+                    </div>
+                </div>
+                <h2 class="peng-title">@item.Judul</h2>
+                <p>@item.Isi</p>
+                <div class="peng-tanggal">
+                    <span><i class="ri-calendar-fill"></i>@item.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
+                    <button class="tombolseleng">Baca Selengkapnya...</button>
+                </div>               
+            </div>
+            <!-- Ini Akhir Cardnya Bang -->
+        }
+    
+</div>
+</section>
+
+
+@* @if(Model[0].Foto is not null)
 {
     <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = Model[0].Foto!.Id})"/>
 }
 else
 {
     <img src="~/img/gereja1.jpg"/>
-}
+} *@
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.badan-utama').css({
+            'padding-left': '0',
+            'padding-right': '0',
+            'padding-top': '0rem',
+        });
+    });
+</script>
