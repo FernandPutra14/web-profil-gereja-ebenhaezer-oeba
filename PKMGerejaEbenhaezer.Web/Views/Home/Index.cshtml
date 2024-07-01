@@ -1,6 +1,7 @@
 ﻿@model IndexVM
 @{
     ViewData["Title"] = "Home Page";
+    var cultureInfo = new System.Globalization.CultureInfo("id-ID");
 }
 
 <!-- Hero Section -->
@@ -25,49 +26,49 @@
                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
         </div>
-        <button class="peng-btn btn">Lihat Semua</button>
+        <a asp-action="Index" asp-controller="Pengumuman" class="peng-btn btn">Lihat Semua</a>
     </header>
     <!-- Akhir Header Pengumuman Section -->
     <!-- Content Pengumuman Section -->
     <div class="peng-contents">
         @* <div class="owl-carousel owl-theme fernand"> *@
-            @if (Model.DaftarPengumuman != null || Model.DaftarPengumuman!.Count > 0)
+        @if (Model.DaftarPengumuman != null || Model.DaftarPengumuman!.Count > 0)
+        {
+            @foreach (var pengumuman in Model.DaftarPengumuman)
             {
-                @foreach (var pengumuman in Model.DaftarPengumuman.Take(3))
-                {
-                    var cultureInfo = new System.Globalization.CultureInfo("id-ID");
-                    <!-- Ini Cardnya Bang -->
-                    <div class="item peng-card">
-                        @if (pengumuman.Foto != null)
-                        {
-                            <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" />
-                        }
-                        else
-                        {
-                            <img src="~/img/gereja1.jpg"/>
-                        }
-                        <div class="category">
-                            <div class="subject">
-                                <h3>Pengumuman</h3>
-                            </div>
+                <!-- Ini Cardnya Bang -->
+                <div class="item peng-card">
+                    @if (pengumuman.Foto != null)
+                    {
+                        <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" />
+                    }
+                    else
+                    {
+                        <img src="~/img/gereja1.jpg" />
+                    }
+                    <div class="category">
+                        <div class="subject">
+                            <h3>Pengumuman</h3>
                         </div>
-                        <h2 class="peng-title">@pengumuman.Judul</h2>
-                        <p>@pengumuman.Isi</p>
-                        <div class="peng-tanggal">
-                            <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
-                            <button class="tombolseleng">Baca Selengkapnya...</button>
-                        </div>
-
-                        @* @if(pengumuman.Pembuat != null)
-                        {
-                            <div>
-                                Oleh : @pengumuman.Pembuat.UserName
-                            </div>    
-                        } *@
                     </div>
-                    <!-- Ini Akhir Cardnya Bang -->
-                }
+                    <h2 class="peng-title">@pengumuman.Judul</h2>
+                    <p>@pengumuman.Isi</p>
+                    <div class="peng-tanggal">
+                        <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
+                        <a asp-action="Detail" asp-controller="Pengumuman" asp-route-id="@pengumuman.Id" asp-area=""
+                           class="tombolseleng">Baca Selengkapnya...</a>
+                    </div>
+
+                    @* @if(pengumuman.Pembuat != null)
+            {
+            <div>
+            Oleh : @pengumuman.Pembuat.UserName
+            </div>
+            } *@
+                </div>
+                <!-- Ini Akhir Cardnya Bang -->
             }
+        }
         @* </div> *@
     </div>
     <!-- Akhir Pengumuman Section -->
@@ -83,13 +84,13 @@
                 Type = ChartType.Doughnut,
                 Label = "Jemaat Gereja",
                 Data = new Dictionary<string, double>
-                {
-                    {"Lansia", Model.TotalLansia},
-                    {"Dewasa", Model.TotalDewasa},
-                    {"Pemuda", Model.TotalPemuda},
-                    {"Remaja", Model.TotalRemaja},
-                    {"Anak", Model.TotalAnak},
-                },
+        {
+        {"Lansia", Model.TotalLansia},
+        {"Dewasa", Model.TotalDewasa},
+        {"Pemuda", Model.TotalPemuda},
+        {"Remaja", Model.TotalRemaja},
+        {"Anak", Model.TotalAnak},
+        },
             };
         }
 

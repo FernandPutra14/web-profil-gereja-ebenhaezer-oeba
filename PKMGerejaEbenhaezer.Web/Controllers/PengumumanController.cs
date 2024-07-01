@@ -4,6 +4,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {
+    public enum Kategori
+    {
+        Semua, Bulan
+    }
+
     public class PengumumanController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -11,11 +16,6 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         public PengumumanController(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-        }
-
-        public enum Kategori
-        {
-            Semua, Bulan
         }
 
         public async Task<IActionResult> Index(Kategori kategori = Kategori.Semua, int bulan = 1)

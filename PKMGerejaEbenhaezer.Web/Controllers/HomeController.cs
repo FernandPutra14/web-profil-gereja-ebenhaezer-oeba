@@ -19,20 +19,26 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             _appDbContext = appDbContext;
         }
 
-        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
+        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Index()
         {
             var daftarPengumuman = await _appDbContext.PengumumanTable
+                .OrderByDescending(p => p.TanggalDiBuat)
                 .Include(p => p.Foto)
                 .Include(p => p.Pembuat)
                 .AsNoTracking().ToListAsync();
+
+            if (daftarPengumuman.Count > 3)
+            {
+                daftarPengumuman = daftarPengumuman.Take(3).ToList();
+            }
 
             var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
 
             daftarRayon ??= new List<Rayon>();
 
-            return View(new IndexVM 
-            { 
+            return View(new IndexVM
+            {
                 DaftarPengumuman = daftarPengumuman,
                 TotalAnak = daftarRayon.Sum(r => r.JumlahAnak),
                 TotalRemaja = daftarRayon.Sum(r => r.JumlahRemaja),

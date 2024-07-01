@@ -41,7 +41,8 @@ section.peng {
         bottom: 40px;
     }
 
-.tombolseleng {
+::deep .tombolseleng {
+    text-decoration: none;
     padding: 10px 18px;
     color: #000;
     font-size: 15px;
@@ -51,7 +52,7 @@ section.peng {
     transition: all 0.3s;
 }
 
-    .tombolseleng:hover {
+    ::deep .tombolseleng:hover {
         background-color: var(--light-heading-clr);
         color: var(--primary-clr);
         border: 1px solid var(--primary-clr);
@@ -172,11 +173,13 @@ section.peng {
     margin-bottom: 20px;
 }
 
-    .filterbut button {
+    .filterbut ::deep a {
         padding: 10px 20px;
         font-size: 18px;
         background: #fff;
         border: 1px solid rgba(0,0,0,0.1);
         border-radius: 15px;
+        text-decoration: none;
+        color: black;
         box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }

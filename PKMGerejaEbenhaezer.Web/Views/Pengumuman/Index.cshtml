@@ -1,8 +1,11 @@
 ﻿@using System.Globalization
+@using PKMGerejaEbenhaezer.Web.Controllers
 @model List<Pengumuman>
 @{
     ViewData["Title"] = "Pengumuman";
     var cultureInfo = new CultureInfo("id-ID");
+    var bulanToStringDict = new List<string> {"Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli",
+    "Agustus", "September", "Oktober", "November", "Desember"};
 }
 
 <section id="peng-us" class="mb-lg-5">
@@ -12,56 +15,52 @@
 </section>
 
 <section class="peng">
-    
 
     <div class="filterbut">
-        <button class="" data-name="semua">Semua</button>
-        <button class="" data-name="semua">Januari</button>
-        <button class="" data-name="semua">Februari</button>
-        <button class="" data-name="semua">Maret</button>
-        <button class="" data-name="semua">April</button>
-        <button class="" data-name="semua">Mei</button>
-        <button class="" data-name="semua">Juni</button>
-        <button class="" data-name="semua">Juli</button>
-        <button class="" data-name="semua">Agustus</button>
-        <button class="" data-name="semua">September</button>
-        <button class="" data-name="semua">Oktober</button>
-        <button class="" data-name="semua">November</button>
-        <button class="" data-name="semua">Desember</button>
+        <a asp-action="Index" asp-route-kategori="@Kategori.Semua" data-name="semua">Semua</a>
+        @for (int i = 1; i <= 12; i++)
+        {
+            <a asp-action="Index" asp-route-kategori="@Kategori.Bulan" asp-route-bulan="@i"
+               data-name="bulan">@bulanToStringDict[i - 1]</a>
+        }
     </div>
 
-    
-
-
-<div class="peng-contents">
-        @foreach (var item in Model)
-        {           
-            <!-- Ini Cardnya Bang -->
-            <div class="item peng-card">
-            @if (item.Foto != null)
+    <div class="peng-contents">
+        @if(Model.Count > 0)
+        {
+            @foreach (var item in Model)
             {
-            <img src="@Url.ActionLink("Index", "Foto", new { Area = "", id = item.Foto!.Id })" />
-            }
-            else
-            {
-            <img src="~/img/gereja1.jpg" />
-            }
-                <div class="category">
-                    <div class="subject">
-                        <h3>Pengumuman</h3>
+                <!-- Ini Cardnya Bang -->
+                <div class="item peng-card">
+                    @if (item.Foto != null)
+                    {
+                        <img src="@Url.ActionLink("Index", "Foto", new { Area = "", id = item.Foto!.Id })" />
+                    }
+                    else
+                    {
+                        <img src="~/img/gereja1.jpg" />
+                    }
+                    <div class="category">
+                        <div class="subject">
+                            <h3>Pengumuman</h3>
+                        </div>
+                    </div>
+                    <h2 class="peng-title">@item.Judul</h2>
+                    <p>@item.Isi</p>
+                    <div class="peng-tanggal">
+                        <span><i class="ri-calendar-fill"></i>@item.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
+                        <a asp-action="Detail" asp-controller="Pengumuman" asp-route-id="@item.Id"
+                           class="tombolseleng">Baca Selengkapnya...</a>
                     </div>
                 </div>
-                <h2 class="peng-title">@item.Judul</h2>
-                <p>@item.Isi</p>
-                <div class="peng-tanggal">
-                    <span><i class="ri-calendar-fill"></i>@item.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
-                    <button class="tombolseleng">Baca Selengkapnya...</button>
-                </div>               
-            </div>
-            <!-- Ini Akhir Cardnya Bang -->
+                <!-- Ini Akhir Cardnya Bang -->
+            }
         }
-    
-</div>
+        else
+        {
+            <h1 class="text-center">Tidak Ada Pengumuman</h1>
+        }
+    </div>
 </section>
 
 
