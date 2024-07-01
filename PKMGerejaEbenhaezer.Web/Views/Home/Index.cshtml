@@ -6,76 +6,117 @@
 
 <!-- Hero Section -->
 <section id="hero" class="container-fluid">
-    <h1>Gairah Untuk Mengenal Kristus</h1>
-    <p style="font-family:'Tinos';">
+    <h1>Welcome Home</h1>
+   @*  <p style="font-family:'Tinos';">
         "Inilah hidup yang kekal itu, yaitu bahwa mereka mengenal engkau, satu-satunya Allah
         yang benar, dan mengenal Yesus Kristus yang telah Engkau utus."
         <br />
         (Injil Yohanes 17:3)
-    </p>
+    </p> *@
 </section>
 <!-- Akhir Hero Section -->
-<!-- Pengumuman Section -->
-<section class="peng">
-    <!-- Header Pengumuman Section -->
-    <header class="section-header">
-        <div class="header-text">
-            <h1>Pengumuman Gereja</h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-        </div>
-        <a asp-action="Index" asp-controller="Pengumuman" class="peng-btn btn">Lihat Semua</a>
-    </header>
-    <!-- Akhir Header Pengumuman Section -->
-    <!-- Content Pengumuman Section -->
-    <div class="peng-contents">
-        @* <div class="owl-carousel owl-theme fernand"> *@
-        @if (Model.DaftarPengumuman != null || Model.DaftarPengumuman!.Count > 0)
-        {
-            @foreach (var pengumuman in Model.DaftarPengumuman)
-            {
-                <!-- Ini Cardnya Bang -->
-                <div class="item peng-card">
-                    @if (pengumuman.Foto != null)
-                    {
-                        <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" />
-                    }
-                    else
-                    {
-                        <img src="~/img/gereja1.jpg" />
-                    }
-                    <div class="category">
-                        <div class="subject">
-                            <h3>Pengumuman</h3>
-                        </div>
-                    </div>
-                    <h2 class="peng-title">@pengumuman.Judul</h2>
-                    <p>@pengumuman.Isi</p>
-                    <div class="peng-tanggal">
-                        <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
-                        <a asp-action="Detail" asp-controller="Pengumuman" asp-route-id="@pengumuman.Id" asp-area=""
-                           class="tombolseleng">Baca Selengkapnya...</a>
-                    </div>
 
-                    @* @if(pengumuman.Pembuat != null)
-            {
-            <div>
-            Oleh : @pengumuman.Pembuat.UserName
-            </div>
-            } *@
+
+<!-- Pendeta Section -->
+<section id="experts">
+    <h1>Pendeta GMIT Ebenhaezer Oeba</h1>
+    <p>Replenish man have thing gathering lights yielding shall you</p>
+    <div class="expert-box">
+        <div class="owl-carousel owl-theme fernand">
+
+            <!-- Pendeta 1 -->
+            <div class="profile">
+                <div class="gambar-pen">
+                    <img src="~/img/generaluser.png" alt="" />
                 </div>
-                <!-- Ini Akhir Cardnya Bang -->
-            }
-        }
-        @* </div> *@
-    </div>
-    <!-- Akhir Pengumuman Section -->
-</section>
-<!-- Akhir Pengumuman Section -->
-<!-- Chart Section -->
+                <h6>Pdt. Elen Th. Bailaen-Manafe, S.Si (Teol)</h6>
+                <p>Pendeta</p>
+                <div class="pen-link">
+                    <i class="ri-facebook-fill"></i>
+                    <i class="ri-instagram-fill"></i>
+                    <i class="ri-youtube-fill"></i>
+                </div>
+            </div>
 
+            <!-- Pendeta 2 -->
+            <div class="profile">
+                <div class="gambar-pen">
+                    <img src="~/img/generaluser.png" alt="" />
+                </div>
+                <h6>Pdt. Aleida Y. Salean Sola, S.Th, M.Hum</h6>
+                <p>Pendeta</p>
+                <div class="pen-link">
+                    <i class="ri-facebook-fill"></i>
+                    <i class="ri-instagram-fill"></i>
+                    <i class="ri-youtube-fill"></i>
+                </div>
+            </div>
+
+            <!-- Pendeta 3 -->
+            <div class="profile">
+                <div class="gambar-pen">
+                    <img src="~/img/generaluser.png" alt="" />
+                </div>
+                <h6>Pdt. Amelia Retha-Siokain, S.Th</h6>
+                <p>Pendeta</p>
+                <div class="pen-link">
+                    <i class="ri-facebook-fill"></i>
+                    <i class="ri-instagram-fill"></i>
+                    <i class="ri-youtube-fill"></i>
+                </div>
+            </div>
+
+            <!-- Pendeta 4 -->
+            <div class="profile">
+                <div class="gambar-pen">
+                    <img src="~/img/generaluser.png" alt="" />
+                </div>
+                <h6>Pdt. Tera D. Klaping, M.Th</h6>
+                <p>Pendeta</p>
+                <div class="pen-link">
+                    <i class="ri-facebook-fill"></i>
+                    <i class="ri-instagram-fill"></i>
+                    <i class="ri-youtube-fill"></i>
+                </div>
+            </div>
+
+            <!-- Pendeta 5 -->
+            <div class="profile">
+                <div class="gambar-pen">
+                    <img src="~/img/generaluser.png" alt="" />
+                </div>
+                <h6>Ita Tassi Adoe, S.Th.</h6>
+                <p>Pendeta</p>
+                <div class="pen-link">
+                    <i class="ri-facebook-fill"></i>
+                    <i class="ri-instagram-fill"></i>
+                    <i class="ri-youtube-fill"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Akhir Pendeta Section -->
+
+
+<!-- Injil Section -->
+
+<section id="injil">
+    <div class="injil-text">
+        <p class="mt-3">
+            "Karena itu, pergilah dan muridkanlah semua bangsa, baptiskanlah mereka dalam nama Bapa, dan Anak, 
+            dan Roh Kudus, ajarkanlah mereka untuk menaati semua yang Aku perintahkan kepadamu; dan lihat, 
+            Aku selalu bersamamu, bahkan sampai kepada akhir zaman."
+        </p>
+        <p class="mt-4">(Injil Yohanes 17:3)</p>
+    </div> 
+</section>
+
+<!-- Akhir Injil Section -->
+
+
+
+<!-- Char Jemaat Section -->
 <section id="about-container" class="mb-5">
     <div class="about-img">
         @{
@@ -103,16 +144,6 @@
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris.
         </p>
-        @* <div class="about-fe">
-        <div class="fe-text">
-        <h5 data-aos="fade-in">Jumlah Coders</h5>
-        <p data-aos="fade-in">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        </div>
-        </div> *@
-
         <div class="counters">
             <div>
                 <div class="=counter">
@@ -140,7 +171,126 @@
 
     </div>
 </section>
-<!-- Chart Section -->
+<!-- Akhir Chart Section -->
+<!-- Warta Section -->
+<section class="peng">
+    <!-- Header Pengumuman Section -->
+    <header class="section-header">
+        <div class="header-text">
+            <h1>Warta Jemaat</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+        </div>
+        <a asp-action="Index" asp-controller="Pengumuman" class="peng-btn btn">Lihat Semua</a>
+    </header>
+    <!-- Akhir Header Pengumuman Section -->
+    <!-- Content Pengumuman Section -->
+    <div class="peng-contents">
+        <div class="owl-carousel owl-theme fajar">
+            <!-- Ini Cardnya -->
+            <div class="item peng-card">            
+                <div class="image-wrapper">
+                    <img src="~/img/default4_warta_jemaat.png" />
+                    <div class="tanggal">
+                        <div class="tanggal-text mb-1">
+                            <h5></h5>
+                            <h3>07</h3>                                                 
+                        </div>                       
+                        <h4>Juli, 2024</h4>
+                    </div>
+                </div>
+                <button class="tombolbaca">Baca Warta Jemaat</button>
+            </div>
+            <!-- Ini Akhir Cardnya -->
+            <!-- Ini Cardnya -->
+            <div class="item peng-card">
+                <div class="image-wrapper">
+                    <img src="~/img/default4_warta_jemaat.png" />
+                    <div class="tanggal">
+                        <div class="tanggal-text mb-1">
+                            <h5></h5>
+                            <h3>14</h3>
+                        </div>
+                        <h4>Juli, 2024</h4>
+                    </div>
+                </div>
+                <button class="tombolbaca">Baca Warta Jemaat</button>
+            </div>
+            <!-- Ini Akhir Cardnya -->
+            <!-- Ini Cardnya -->
+            <div class="item peng-card">
+                <div class="image-wrapper">
+                    <img src="~/img/default4_warta_jemaat.png" />
+                    <div class="tanggal">
+                        <div class="tanggal-text mb-1">
+                            <h5></h5>
+                            <h3>21</h3>
+                        </div>
+                        <h4>Juli, 2024</h4>
+                    </div>
+                </div>
+                <button class="tombolbaca">Baca Warta Jemaat</button>
+            </div>
+            <!-- Ini Akhir Cardnya -->
+        </div>
+    </div>
+    <!-- Akhir Content Pengumuman Section -->
+</section>
+<!-- Akhir Warta Section -->
+<!-- Pengumuman Section -->
+<section class="peng">
+    <!-- Header Pengumuman Section -->
+    <header class="section-header">
+        <div class="header-text">
+            <h1>Pengumuman Gereja</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+        </div>
+        <a asp-action="Index" asp-controller="Pengumuman" class="peng-btn btn">Lihat Semua</a>
+    </header>
+    <!-- Akhir Header Pengumuman Section -->
+    <!-- Content Pengumuman Section -->
+    <div class="peng-contents">
+        <div class="owl-carousel owl-theme fajar">
+            @if (Model.DaftarPengumuman != null || Model.DaftarPengumuman!.Count > 0)
+            {
+                @foreach (var pengumuman in Model.DaftarPengumuman.Take(3))
+                {
+                    <!-- Ini Cardnya -->
+                    <div class="item peng-card">
+                        @if (pengumuman.Foto != null)
+                        {
+                            <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" />
+                        }
+                        else
+                        {
+                            <img src="~/img/gereja1.jpg" />
+                        }
+                        <div class="category">
+                            <div class="subject">
+                                <h3>Pengumuman</h3>
+                            </div>
+                        </div>
+                        <h2 class="peng-title">@pengumuman.Judul</h2>
+                        <p>@pengumuman.Isi</p>
+                        <div class="peng-tanggal">
+                            <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
+                            <a asp-action="Detail" asp-controller="Pengumuman" asp-route-id="@pengumuman.Id" asp-area=""
+                               class="tombolseleng">Baca Selengkapnya...</a>
+                        </div>
+                    </div>
+                    <!-- Ini Akhir Cardnya -->
+                }
+            }
+        </div>
+    </div>
+    <!-- Akhir Content Pengumuman Section -->
+</section>
+<!-- Akhir Pengumuman Section -->
 @section Scripts {
     <script type="text/javascript" src="~/js/counter.js"></script>
 

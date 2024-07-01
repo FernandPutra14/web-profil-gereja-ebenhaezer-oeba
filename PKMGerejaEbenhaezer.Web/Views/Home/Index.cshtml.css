@@ -1,23 +1,26 @@
-﻿/* Hero Section */
+﻿/* CSS Hero Section */
 #hero {
     background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background_gereja_testing.jpg");
+    background-attachment: fixed;
     margin: 0px auto;
     width: 100%;
     height: 100vh;
-    background-size: cover;
+    background-size: 100%;
     background-position: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative; 
+    overflow: hidden;
 }
 
     #hero h1 {
         font-family: 'Alex brush';
         color: #fff;
         padding-top: 50px;
-        font-size: 80px;
+        font-size: 170px;
         letter-spacing: 1px;
     }
 
@@ -27,15 +30,321 @@
         letter-spacing: 1px;
         width: 50%;
     }
-/* Akhir Hero Section */
+/* Akhir CSS Hero Section */
 
-/* Pengumuman Section */
+/* CSS Injil Section */
+#injil {
+    display: flex;
+    background-attachment: fixed;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 4vw;
+    color: #fff;
+    padding: 8vw 9vw 8vw 9vw;
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background_gereja_testing.jpg");
+}
+
+    #injil .injil-text p {
+        font-family: "Noto Serif Display", serif;
+        font-weight: 500;
+        font-size: 20px;
+    }
+/* Akhir CSS Injil Section */
+
+
+/* CSS Pendeta Section */
+#experts {
+    padding: 8vw 8vw 0 8vw;
+    text-align: center;
+}
+
+    #experts h1 {
+        font-size: 40px;
+    }
+
+    #experts p {
+        font-size: 16px;
+    }
+
+    #experts ::deep .expert-box {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 1rem;
+        margin-top: 50px;
+    }
+
+        #experts ::deep .expert-box .profile {
+            background: #fafaf1;
+            padding: 30px 10px;
+        }
+
+            #experts ::deep .expert-box .profile .gambar-pen {
+                display: flex;
+                justify-content: center;
+            }
+
+                #experts ::deep .expert-box .profile .gambar-pen img {
+                    width: 50%;
+                    object-fit: cover;
+                }
+
+            #experts ::deep .expert-box .profile h6 {
+                padding-top: 10px;
+                font-size: 17px;
+            }
+
+            #experts ::deep .expert-box .profile p {
+                font-size: 16px;
+            }
+
+.pen-link {
+    margin-top: 18px;
+}
+
+    .pen-link i {
+        font-size: 15px;
+        margin-right: 3px;
+        padding: 10px 13px;
+        border: 1px solid rgb(21, 21, 100);
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+        .pen-link i:hover {
+            background: rgb(21, 21, 100);
+            color: #fff;
+        }
+/* Akhir CSS Pendeta Section */
+
+/* CSS Chart jemaat Section */
+#about-container {
+    display: flex;
+    align-items: center;
+    padding: 0vw 8vw 0vw 8vw;
+}
+
+    #about-container .about-img {
+        height: 450px;
+        width: 50%;
+        padding-left: 50px;
+        align-items: center;
+    }
+
+        #about-container .about-img img {
+            width: 100%;
+        }
+
+    #about-container .about-text {
+        width: 50%;
+    }
+
+        #about-container .about-text h2 {
+            font-size: 40px;
+            color: #29303B;
+            padding-bottom: 15px;
+        }
+
+        #about-container .about-text p {
+            color: #686F7A;
+            font-size: 16px;
+            padding-bottom: 15px;
+            font-weight: 300;
+        }
+
+        #about-container .about-text .about-fe {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 30px;
+        }
+
+            #about-container .about-text .about-fe img {
+                width: 50px;
+                background-size: cover;
+                background-position: center;
+                margin-right: 20px;
+            }
+
+            #about-container .about-text .about-fe .fe-text {
+                width: 90%;
+            }
+
+                #about-container .about-text .about-fe .fe-text h5 {
+                    font-size: 16px;
+                    color: #29303B;
+                }
+
+    #about-container .counters {
+        padding: 3em 2em;
+        background: var(--primary-clr);
+        color: white;
+        text-align: center;
+    }
+
+.counters > div {
+    max-width: auto;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4em 2em;
+}
+
+#about-container .counters .counter {
+    position: relative;
+}
+
+    #about-container .counters .counter h4 {
+        font-size: 3em;
+        margin-bottom: 0.5em;
+    }
+
+        #about-container .counters .counter h4 span {
+            color: white;
+        }
+
+    #about-container .counters .counter:not(:last-child)::before {
+        content: '';
+        background: #fff;
+        position: absolute;
+        width: 2px;
+        height: 3em;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+/* Akhir CSS Chart jemaat Section */
+
+
+/* CSS Warta Section */
+section.warta {
+    width: 100%;
+    padding-bottom: 30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 2%;
+}
+
+.peng .section-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .peng .section-header ::deep .peng-btn {
+        position: absolute;
+        right: 0;
+        bottom: 40px;
+    }
+
+::deep .tombolbaca {
+    padding: 10px 18px;
+    text-decoration: none;
+    color: #fff;
+    background: var(--primary-clr);
+    width: 100%;
+    font-size: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    ::deep .tombolbaca:hover {
+        background-color: var(--light-heading-clr);
+        color: var(--primary-clr);
+        border: 1px solid var(--primary-clr);
+    }
+
+    .peng .peng-contents {
+        display: flex;       
+        flex-wrap: wrap;
+    }
+
+    .peng .peng-contents .peng-card {
+        flex-basis: calc(calc(100% / 3) - 1.2%);
+        position: relative;
+        border: 1px solid #eee;     
+        padding: 10px;
+        border-radius: 5px;
+        margin : 5px 5px 5px 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+        .peng .peng-contents .peng-card:hover {
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        }
+
+.peng-contents .peng-card ::deep img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.image-wrapper {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+    .image-wrapper img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 5px; /* Optional: to match your design */
+    }
+
+.peng .peng-contents .peng-card .tanggal {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(16, 49, 107, 0.9);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+    .peng .peng-contents .peng-card .tanggal h3 {
+        font-size: 43px;
+        color: #fafaf1;
+        font-family: "Noto Serif Display", serif;
+        margin: 0;
+    }
+
+.tanggal-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.peng .peng-contents .peng-card .tanggal h4 {
+    font-size: 11px;
+    color: #fff;
+    font-family: "Noto Serif Display", serif;
+    margin: 0;
+}
+
+.peng .peng-contents .peng-card .tanggal h5 {
+    font-size: 15px;
+    padding-top: 10px;
+    padding-right: 5px;
+    color: #fff;
+    font-family: "Noto Serif Display", serif;
+    margin: 0;
+}
+
+/* Akhir CSS Warta Section */
+
+/* CSS Pengumuman Section */
 section.peng {
     width: 100%;
     padding-bottom: 30px;
     padding-left: 100px;
     padding-right: 100px;
-    padding-top: 8%;
+    padding-top: 2%;
 }
 
 .peng .section-header {
@@ -67,17 +376,17 @@ section.peng {
         border: 1px solid var(--primary-clr);
     }
 
-    .peng .peng-contents {
-        display: flex;       
-        flex-wrap: wrap;
-    }
+.peng .peng-contents {
+    display: flex;
+    flex-wrap: wrap;
+}
 
     .peng .peng-contents .peng-card {
         flex-basis: calc(calc(100% / 3) - 1.2%);
         border: 1px solid #eee;
         padding: 10px;
         border-radius: 5px;
-        margin : 5px 5px 5px 5px;
+        margin: 5px 5px 5px 5px;
         cursor: pointer;
         transition: all 0.3s;
     }
@@ -172,13 +481,30 @@ section.peng {
         .peng-card .peng-tanggal span b {
             font-size: 24px;
         }
+/* Akhir CSS Pengumuman Section */
 
-.owl-carousel .owl-nav {
-    display: none;
+
+/* CSS Slider */
+.owl-carousel ::deep .owl-nav .owl-next {
+    position: absolute;
+    top: calc(50% - 50px);
+    right: 0;
+    opacity: 1;
+    font-size: 30px !important;
+    z-index: 1;
 }
 
-.owl-carousel .owl-dots {
-    margin-top: 5px;
+.owl-carousel ::deep .owl-nav .owl-prev {
+    position: absolute;
+    top: calc(50% - 50px);
+    left: 0;
+    opacity: 1;
+    font-size: 30px !important;
+    z-index: 1;
+}
+
+.owl-carousel ::deep .owl-dots {
+    margin-top: 20px;
 }
 
     .owl-carousel .owl-dots span {
@@ -189,131 +515,14 @@ section.peng {
         background-color: var(--primary-clr) !important;
     }
 
-/* Akhir Pengumuman Section */
-
-/* About Us */
-#about-container {
-    display: flex;
-    align-items: center;
-    padding: 0vw 8vw 2vw 8vw;
-}
-
-    #about-container .about-img {
-        height: 450px;
-        width: 50%;
-        padding-left: 50px;
-        align-items: center;
-    }
-
-        #about-container .about-img img {
-            width: 100%;
-        }
-
-    #about-container .about-text {
-        width: 50%;
-    }
-
-        #about-container .about-text h2 {
-            font-size: 40px;
-            color: #29303B;
-            padding-bottom: 15px;
-        }
-
-        #about-container .about-text p {
-            color: #686F7A;
-            font-size: 16px;
-            padding-bottom: 15px;
-            font-weight: 300;
-        }
-
-        #about-container .about-text .about-fe {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 30px;
-        }
-
-            #about-container .about-text .about-fe img {
-                width: 50px;
-                background-size: cover;
-                background-position: center;
-                margin-right: 20px;
-            }
-
-            #about-container .about-text .about-fe .fe-text {
-                width: 90%;
-            }
-
-                #about-container .about-text .about-fe .fe-text h5 {
-                    font-size: 16px;
-                    color: #29303B;
-                }
-
-#doughnut {
-    /* box-shadow: 0 7px 25px rgba(0,0,0,0.08); */
-}
-
-#about-container .counters {
-    padding: 3em 2em;
-    background: var(--primary-clr);
-    color: white;
-    text-align: center;
-}
-
-.counters > div {
-    max-width: auto;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 4em 2em;
-}
-
-#about-container .counters .counter {
-    position: relative;
-}
-
-    #about-container .counters .counter h4 {
-        font-size: 3em;
-        margin-bottom: 0.5em;
-    }
-
-        #about-container .counters .counter h4 span {
-            color: white;
-        }
-
-    #about-container .counters .counter:not(:last-child)::before {
-        content: '';
-        background: #fff;
-        position: absolute;
-        width: 2px;
-        height: 3em;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-/* Akhir About Us */
-
-/* Responsive */
-@media (max-width:968px) {
-
-    /* Part Pengumuman */
-    .peng .peng-contents .peng-card {
-        flex-basis: calc(calc(100% / 2) - 1.2%);
-    }
-
-    .peng .section-header {
-        flex-direction: column;
-    }
-
-        .peng .section-header .peng-btn {
-            position: relative;
-            align-self: flex-start;
-            margin-top: 20px;
-        }
-
-    /* Akhir Part Pengumuman */
+/* Akhir CSS Slider */
 
 
+
+/* Responsive 1200 */
+@media (max-width:1200px) {
+
+    /* CSS Chart jemaat Section */
     .counters > div {
         grid-template-columns: 1fr 1fr;
     }
@@ -321,9 +530,78 @@ section.peng {
     .counter:nth-child(2)::before {
         display: none;
     }
+    /* Akhir CSS Chart jemaat Section */
+
+
+    /* CSS Pengumuman Section */
+    section .peng {
+        padding-bottom: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8%;
+    }
+
+    .peng .peng-contents .peng-card {
+        flex-basis: calc(calc(100% / 2) - 1%);
+    }
+
+    .peng .section-header {
+        flex-direction: column;
+    }
+
+        .peng .section-header ::deep .peng-btn.btn {
+            position: relative;
+            align-self: flex-start;
+            margin-top: 20px;
+        }
+    /* Akhir CSS Pengumuman Section */  
 }
 
+
+/* Responsive 968 */
+@media (max-width:968px) {
+
+    /* CSS Chart jemaat Section */
+    .counters > div {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .counter:nth-child(2)::before {
+        display: none;
+    }
+    /* Akhir CSS Chart jemaat Section */
+
+
+    /* CSS Pengumuman Section */
+    section.peng {     
+        padding-bottom: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8%;
+    }
+
+    .peng .peng-contents .peng-card {
+        flex-basis: calc(calc(100% / 2) - 1.5%);
+    }
+
+    .peng .section-header {
+        flex-direction: column;
+    }
+
+        .peng .section-header ::deep .peng-btn.btn {
+            position: relative;
+            align-self: flex-start;
+            margin-top: 20px;
+        }
+
+    /* Akhir CSS Pengumuman Section */ 
+}
+
+
+/* Responsive 768 */
 @media (max-width:768px) {
+
+    /* CSS Chart Jemaat Section */
     #about-container {
         padding: 2vw 4vw 2vw 4vw;
     }
@@ -331,17 +609,25 @@ section.peng {
         #about-container ::deep .about-img {
             padding-right: 30px;
         }
+    /* Akhir CSS Chart Jemaat Section */
+
+
+    /* CSS Pengumuman Section */
+    section.peng {
+        width: 100%;
+        padding-bottom: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8%;
+    }
+    /* Akhir CSS Pengumuman Section */   
 }
 
-@media (max-width:668px) {
 
-    /* Part Pengumuman */
-    .peng .peng-contents .peng-card {
-        flex-basis: 100%;
-    }
-    /* Akhir Part Pengumuman */
+/* Responsive 690 */
+@media (max-width:690px) {
 
-
+    /* CSS Chart Jemaat Section */
     #about-container {
         flex-direction: column-reverse;
     }
@@ -355,21 +641,22 @@ section.peng {
             width: 100%;
             padding-bottom: 20px;
         }
+    /* Akhir CSS Chart Jemaat Section */
+
+
+    /* CSS Pengumuman Section */
+    .peng .peng-contents .peng-card {
+        flex-basis: 100%;
+    }
+    /* Akhir CSS Pengumuman Section */    
 }
 
+
+/* Responsive 568 */
 @media (max-width:568px) {
 
-
-    section.peng {
-        width: 100%;
-        padding-bottom: 30px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 8%;
-    }
-
-        /* Hero Section */
-        #hero {
+    /* CSS Hero Section */
+    #hero {
         height: 100vh;
         background-size: cover;
         background-position: center;
@@ -394,18 +681,31 @@ section.peng {
             letter-spacing: 1px;
             width: 80%;
         }
-    /* Akhir Hero Section */
+    /* Akhir CSS Hero Section */
 
 
+    /* CSS Chart Jemaat Section */
     .counters > div {
         grid-template-columns: 1fr;
         row-gap: 5em;
-
     }
+    /* Akhir CSS Chart Jemaat Section */
+
+
+    /* CSS Pengumuman Section */
+    section.peng {
+        width: 100%;
+        padding-bottom: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8%;
+    }
+    /* Akhir CSS Pengumuman Section */  
 }
 
+
+/* Responsive 468 */
 @media (max-width:468px) {
 
 }
 
-/* Akhir Responsive */

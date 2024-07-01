@@ -1,5 +1,6 @@
 ﻿#peng-us {
-    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/gereja_ebenhaezer_oebaa.jpg");
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background_gereja_testing.jpg");
+    background-attachment: fixed;
     margin: 0px auto;
     width: 100%;
     height: 60vh;
@@ -61,7 +62,17 @@ section.peng {
 .peng .peng-contents {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center; /* Tambahkan ini */
+    height: 100%; /* Tambahkan ini */
+    text-align: center; /* Tambahkan ini untuk memastikan teks rata tengah secara horizontal */
 }
+
+    .peng .peng-contents h1 {
+        padding-top: 70px;
+        width: 100%; /* Tambahkan ini untuk memastikan teks mengambil lebar penuh */
+        padding-bottom: 70px;
+    }
 
     .peng .peng-contents .peng-card {
         flex-basis: calc(calc(100% / 3) - 1.2%);
@@ -168,6 +179,7 @@ section.peng {
 .filterbut {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
@@ -178,8 +190,87 @@ section.peng {
         font-size: 18px;
         background: #fff;
         border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 15px;
+        border-radius: 10px;
         text-decoration: none;
         color: black;
         box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
+
+    .filterbut ::deep a.active {
+        background-color: blue;
+        color: white;
+    }
+
+/* Responsive 968 */
+@media (max-width:1160px) {
+
+    /* CSS Pengumuman Section */
+    section.peng {
+        padding-bottom: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8%;
+    }
+
+    .peng .peng-contents .peng-card {
+        flex-basis: calc(calc(100% / 2) - 1.5%);
+    }
+
+    .peng .section-header {
+        flex-direction: column;
+    }
+
+        .peng .section-header ::deep .peng-btn.btn {
+            position: relative;
+            align-self: flex-start;
+            margin-top: 20px;
+        }
+
+    /* Akhir CSS Pengumuman Section */
+}
+
+
+/* Responsive 768 */
+@media (max-width:768px) {
+
+    /* CSS Pengumuman Section */
+    section.peng {
+        width: 100%;
+        padding-bottom: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8%;
+    }
+    /* Akhir CSS Pengumuman Section */
+}
+
+
+/* Responsive 690 */
+@media (max-width:690px) {
+
+    /* CSS Pengumuman Section */
+    .peng .peng-contents .peng-card {
+        flex-basis: 100%;
+    }
+    /* Akhir CSS Pengumuman Section */
+}
+
+
+/* Responsive 568 */
+@media (max-width:568px) {
+
+    /* CSS Pengumuman Section */
+    section.peng {
+        width: 100%;
+        padding-bottom: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8%;
+    }
+    /* Akhir CSS Pengumuman Section */
+}
+
+
+/* Responsive 468 */
+@media (max-width:468px) {
+}

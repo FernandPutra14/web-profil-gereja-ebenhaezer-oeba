@@ -4,24 +4,38 @@
 }
 
 @* Untuk Tampilkan foto pengumuman begini bng. Copy ini tinggal ganti variablenya *@
-@if (Model.Foto is not null)
-{
-    <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = Model.Foto.Id})" />
-}
-else
-{
-    <img src="~/img/gereja1.jpg" />
-}
 
-Judul : @Model.Judul
-Isi : @Model.Isi
-@if (Model.HaveDocument)
-{
-    <a asp-action="Dokumen" asp-route-id="@Model.Id">Dokumen</a>
-}
-@if (Model.Pembuat is not null)
-{
-    <div>
-        Oleh : @Model.Pembuat.UserName
+<section id="blog-container">
+    <div class="blogs">
+        <div class="post">
+            @if (Model.Foto is not null)
+            {
+                <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = Model.Foto.Id})" />
+            }
+            else
+            {
+                <img src="~/img/gereja1.jpg" />
+            }
+            <h3>@Model.Judul</h3>
+            @if (Model.Pembuat is not null)
+            {
+                <h4>Oleh : @Model.Pembuat.UserName</h4>
+            }
+            <p>@Model.Isi</p>
+            <div class="dokumen">
+                @if (Model.HaveDocument)
+                {
+                    <a asp-action="Dokumen" asp-route-id="@Model.Id">Lihat Dokumen</a>
+                }
+            </div>         
+        </div>
     </div>
-}
+</section>
+
+
+
+
+
+
+
+
