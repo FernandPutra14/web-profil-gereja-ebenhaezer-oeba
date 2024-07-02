@@ -1,4 +1,5 @@
-﻿const counters = document.querySelectorAll(".counters span");
+﻿//Counter Chart Jemaat Section
+const counters = document.querySelectorAll(".counters span");
 const container = document.querySelector(".counters");
 
 let activated = false;
@@ -16,7 +17,7 @@ window.addEventListener("scroll", () => {
                 if (count < target) {
                     count++;
                     counter.innerText = count;
-                    setTimeout(updateCount, 20);
+                    setTimeout(updateCount, 10);
                 }
                 else {
                     counter.innerText = target;

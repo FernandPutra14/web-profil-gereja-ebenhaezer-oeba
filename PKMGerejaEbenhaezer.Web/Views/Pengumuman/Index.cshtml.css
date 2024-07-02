@@ -1,5 +1,5 @@
 ﻿#peng-us {
-    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background_gereja_testing.jpg");
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
     background-attachment: fixed;
     margin: 0px auto;
     width: 100%;
@@ -13,8 +13,7 @@
     text-align: center;
 }
 
-    #peng-us h2 {
-        /*font-family: 'Alex brush';*/
+    #peng-us h2 {       
         color: #fff;
         padding-top: 50px;
         font-size: 40px;
@@ -63,9 +62,7 @@ section.peng {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center; /* Tambahkan ini */
-    height: 100%; /* Tambahkan ini */
-    text-align: center; /* Tambahkan ini untuk memastikan teks rata tengah secara horizontal */
+    height: 100%;
 }
 
     .peng .peng-contents h1 {

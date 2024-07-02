@@ -1,27 +1,33 @@
-﻿//Slider (menggunakan template owl-carousel)
+﻿//Slider Pendeta Section
 $('.fernand').owlCarousel({
     loop: true,
     autoplay: true,
     autoplayTimeout: 8000,
-    margin: 10,
+    margin: 5,
     nav: true,
     navText: [
-        "<i class='ri-arrow-left-s-fill'></i>",
-        "<i class='ri-arrow-right-s-fill'></i>"
+        "<i class='ri-arrow-left-s-line'></i>",
+        "<i class='ri-arrow-right-s-line'></i>"
     ],
     responsive: {
         0: {
             items: 1
         },
-        600: {
+        690: {
             items: 2
         },
-        1000: {
+        1040: {
+            items: 3
+        },
+        1370: {
             items: 4
         }
     }
 });
+//Akhir Slider Pendeta Section
 
+
+//Slider Warta dan Pengumuman Section
 $(document).ready(function () {
     function setCarousel() {
         if ($(window).width() >= 1200) {
@@ -70,5 +76,4 @@ $(document).ready(function () {
         setCarousel();
     });
 });
-
-
+//Akhir Slider Warta dan Pengumuman Section
