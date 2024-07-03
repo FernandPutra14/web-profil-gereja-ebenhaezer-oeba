@@ -1,6 +1,6 @@
 ﻿function adjustBackgroundPosition() {
     var scrollPosition = window.pageYOffset;
-    var elements = ['hero'];
+    var elements = ['hero', 'kontak-us', 'peng-us'];
 
     elements.forEach(function (id) {
         var element = document.getElementById(id);
