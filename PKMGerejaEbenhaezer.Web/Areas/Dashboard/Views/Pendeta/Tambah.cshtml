@@ -4,55 +4,66 @@
     ViewData["Title"] = "Tambah Pendeta";
 }
 
-<div class="container-fluid">
-    <form asp-action="Tambah" method="post" class="container" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
+<div class="pluspend">
+    <h1 class="title">Tambah Pendeta</h1>
+    <ul class="breadcrumbs mb-4">
+        <li><a href="#">Information</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Tambah Pendeta</a></li>
+    </ul>
+    <div class="container-fluid cardplus">
+        <form asp-action="Tambah" method="post" class="container" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
-        <div class="row mb-3 justify-content-center align-items-center">
-            <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
-                <div class="d-flex justify-content-center align-items-center flex-grow-1">
-                    <h2>Foto Pendeta</h2>
+            <div class="row mb-3 justify-content-center align-items-center">
+                <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
+                    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+                        <h2>Foto Pendeta</h2>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <vc:upload-foto id-foto="0"></vc:upload-foto>
-        <span asp-validation-for="@Model.IdFoto"></span>
+            <div style="display:flex; justify-content: center; align-items: center;">
+                <vc:upload-foto id-foto="0"></vc:upload-foto>
+                <span asp-validation-for="@Model.IdFoto"></span>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-12 mt-4 mb-3 input-box">
+                    <label asp-for="@Model.Nama" class="form-label"></label>
+                    <input type="text" asp-for="@Model.Nama" class="form-control" placeholder="Isi Nama Pendeta" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.Nama"></span>
+                </div>
+            </div>
 
-        <div class="row mb-3">
-            <div class="col-12">
-                <label asp-for="@Model.Nama" class="form-label"></label>
-                <input type="text" asp-for="@Model.Nama" class="form-control" />
-                <span class="form-text text-danger" asp-validation-for="@Model.Nama"></span>
+            <div class="row mb-5">
+                <label class="form-label">Akun Media Sosial (Opsional)</label>
+                <div class="col-4 input-box">
+                    <label asp-for="@Model.FacebookProfileLink" class="form-label"></label>
+                    <input type="text" asp-for="@Model.FacebookProfileLink" class="form-control" placeholder="Link Facebook" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.FacebookProfileLink"></span>
+                </div>
+                <div class="col-4 input-box">
+                    <label asp-for="@Model.InstagramProfileLink" class="form-label"></label>
+                    <input type="text" asp-for="@Model.InstagramProfileLink" class="form-control" placeholder="Link Instagram" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.InstagramProfileLink"></span>
+                </div>
+                <div class="col-4 input-box">
+                    <label asp-for="@Model.YoutubeProfileLink" class="form-label"></label>
+                    <input type="text" asp-for="@Model.YoutubeProfileLink" class="form-control" placeholder="Link Youtube" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.YoutubeProfileLink"></span>
+                </div>
             </div>
-        </div>
 
-        <div class="row mb-3">
-            <label class="form-label">Akun Media Sosial (Opsional)</label>
-            <div class="col-4">
-                <label asp-for="@Model.FacebookProfileLink" class="form-label"></label>
-                <input type="text" asp-for="@Model.FacebookProfileLink" class="form-control" />
-                <span class="form-text text-danger" asp-validation-for="@Model.FacebookProfileLink"></span>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <button type="submit" class="btn" style="width:100%;">Simpan</button>
+                </div>
             </div>
-            <div class="col-4">
-                <label asp-for="@Model.InstagramProfileLink" class="form-label"></label>
-                <input type="text" asp-for="@Model.InstagramProfileLink" class="form-control" />
-                <span class="form-text text-danger" asp-validation-for="@Model.InstagramProfileLink"></span>
-            </div>
-            <div class="col-4">
-                <label asp-for="@Model.YoutubeProfileLink" class="form-label"></label>
-                <input type="text" asp-for="@Model.YoutubeProfileLink" class="form-control" />
-                <span class="form-text text-danger" asp-validation-for="@Model.YoutubeProfileLink"></span>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-12">
-                <button type="submit" class="btn" style="width:100%;">Simpan</button>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

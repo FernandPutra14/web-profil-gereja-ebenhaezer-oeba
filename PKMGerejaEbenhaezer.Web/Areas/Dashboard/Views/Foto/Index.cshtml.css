@@ -1,0 +1,75 @@
+﻿.fotoo {
+    width: 100%;
+    padding: 24px 20px 20px 20px;
+}
+
+    .fotoo .title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .fotoo .breadcrumbs {
+        display: flex;
+        grid-gap: 6px;
+        padding: 0;
+        margin: 0;
+    }
+
+        .fotoo .breadcrumbs li,
+        .fotoo .breadcrumbs li a {
+            font-size: 14px;
+        }
+
+            .fotoo .breadcrumbs li a {
+                color: var(--blue);
+            }
+
+                .fotoo .breadcrumbs li a.active,
+                .fotoo .breadcrumbs li.divider {
+                    color: var(--dark-grey);
+                    pointer-events: none;
+                }
+
+.foto-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+    ::deep .foto-container img {
+        width: 100%;
+        height: auto;
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+
+.btn-primary, .btn-danger {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#detailsPane .row {
+    margin-bottom: 10px;
+}
+
+#detailsPane img {
+    border-radius: 10px;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+/*#detailsPane {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+}*/
+
+    @media (max-width: 768px) {
+        #detailsPane {
+            margin-top: 20px;
+        }
+    }

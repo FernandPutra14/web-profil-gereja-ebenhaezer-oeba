@@ -3,92 +3,102 @@
     ViewData["Title"] = "Pendeta";
 }
 
-<h1 class="text-center">Daftar Pendeta</h1>
+<div class="pendetaa">
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th width="15%">Foto</th>
-            <th>Nama</th>
-            <th>Facebook</th>
-            <th>Instagram</th>
-            <th>Youtube</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>
-                    @if(item.Foto is not null)
-                    {
-                        <img class="img-thumbnail" src="@Url.ActionLink("Index", "Foto", new { Area = "", id = item.Foto.Id})"/>
-                    }
-                    else
-                    {
-                        <img class="img-thumbnail" src="~/img/generaluser.png"/>
-                    }
-                </td>
-                <td>@item.Nama</td>
-                <td>
-                    @if(item.FacebookProfileLink is not null)
-                    {
-                        <a href="@item.FacebookProfileLink.AbsoluteUri">Ada</a>
-                    }
-                    else
-                    {
-                        <span>Tidak Ada</span>
-                    }
-                </td>
-                <td>
-                    @if(item.InstagramProfileLink is not null)
-                    {
-                        <a href="@item.InstagramProfileLink.AbsoluteUri">Ada</a>
-                    }
-                    else
-                    {
-                        <span>Tidak Ada</span>
-                    }
-                </td>
-                <td>
-                    @if (item.YoutubeProfileLink is not null)
-                    {
-                        <a href="@item.YoutubeProfileLink.AbsoluteUri">Ada</a>
-                    }
-                    else
-                    {
-                        <span>Tidak Ada</span>
-                    }
-                </td>
-                <td>
-                    <div class="d-flex gap-1 justify-content-start align-items-center">
-                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">
-                            <i class="fas fa-pen-square"></i>
-                        </a>
-                        <!-- Button trigger modal -->
-                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)">
-                            <i class="fa fa-regular fa-trash"></i>
-                        </a>
-
-                        @{
-                            var modalVM = new DeleteConfirmationModalVM()
+    <h1 class="title">Daftar Pendeta</h1>
+    <ul class="breadcrumbs mb-4">
+        <li><a href="#">Information</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Daftar Pendeta</a></li>
+    </ul>
+    <div class="container">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th width="15%">Foto</th>
+                    <th>Nama</th>
+                    <th>Facebook</th>
+                    <th>Instagram</th>
+                    <th>Youtube</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>
+                            @if (item.Foto is not null)
                             {
-                                ModalId = $"exampleModal{item.Id}",
-                                ModalTitle = "Hapus Warta Jemaat",
-                                FormAction = Url.Action("Hapus", "Pendeta", new { Area = "Dashboard", id = item.Id })!,
-                            };
-                        }
+                                <img class="img-thumbnail" src="@Url.ActionLink("Index", "Foto", new { Area = "", id = item.Foto.Id})" />
+                            }
+                            else
+                            {
+                                <img class="img-thumbnail" src="~/img/generaluser.png" />
+                            }
+                        </td>
+                        <td>@item.Nama</td>
+                        <td>
+                            @if (item.FacebookProfileLink is not null)
+                            {
+                                <a href="@item.FacebookProfileLink.AbsoluteUri">Ada</a>
+                            }
+                            else
+                            {
+                                <span>Tidak Ada</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.InstagramProfileLink is not null)
+                            {
+                                <a href="@item.InstagramProfileLink.AbsoluteUri">Ada</a>
+                            }
+                            else
+                            {
+                                <span>Tidak Ada</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.YoutubeProfileLink is not null)
+                            {
+                                <a href="@item.YoutubeProfileLink.AbsoluteUri">Ada</a>
+                            }
+                            else
+                            {
+                                <span>Tidak Ada</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="d-flex gap-1 justify-content-start align-items-center">
+                                <a class="btn" asp-action="Edit" asp-route-id="@item.Id">
+                                    <i class="fas fa-pen-square"></i>
+                                </a>
+                                <!-- Button trigger modal -->
+                                <a class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)">
+                                    <i class="fa fa-regular fa-trash"></i>
+                                </a>
 
-                        <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                                @{
+                                    var modalVM = new DeleteConfirmationModalVM()
+                {
+                    ModalId = $"exampleModal{item.Id}",
+                    ModalTitle = "Hapus Warta Jemaat",
+                    FormAction = Url.Action("Hapus", "Pendeta", new { Area = "Dashboard", id = item.Id })!,
+                };
+                                }
+
+                                <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 @section Scripts {
     <partial name="_DataTablePartial" />

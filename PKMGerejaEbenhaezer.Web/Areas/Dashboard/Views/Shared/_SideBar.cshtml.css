@@ -34,7 +34,7 @@
         align-items: center;
         height: 64px;
         font-weight: 700;
-        color: #1775F1;
+        color: var(--primary-clr);
         transition: all .3s ease;
         padding: 0 6px;
     }
@@ -79,7 +79,7 @@
     }
 
     #sidebar .side-menu > ::deep li > ::deep a:hover {
-        background-color: #F1F0F6;
+        background-color: var(--primary-clr);
     }
 
     #sidebar .side-menu ::deep > li > ::deep a.active .icon-right {
@@ -90,7 +90,7 @@
     #sidebar .side-menu ::deep > li > a.active,
     #sidebar .side-menu ::deep > li > a.active:hover {
         color: white;
-        background-color: #1775F1;
+        background-color: var(--primary-clr);
     }
 
     #sidebar .divider {
@@ -98,7 +98,7 @@
         font-size: 12px;
         text-transform: uppercase;
         font-weight: 700;
-        color: #8D8D8D;
+        color: var(--primary-clr);
         transition: all .3s ease;
         white-space: nowrap;
     }
@@ -123,7 +123,7 @@
         }
 
         #sidebar .side-dropdown ::deep a:hover {
-            color: #1775F1;
+            color: var(--primary-clr);
         }
 
     #sidebar .logout {

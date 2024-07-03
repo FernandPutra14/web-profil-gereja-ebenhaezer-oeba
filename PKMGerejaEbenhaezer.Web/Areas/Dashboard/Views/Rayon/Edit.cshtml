@@ -2,7 +2,7 @@
 @model EditVM
 @{
     ViewData["Title"] = "Tambah Rayon";
-}a
+}
 
 <div class="editray">
     <h1 class="title">Edit Rayon</h1>
@@ -22,10 +22,12 @@
                 </div>
             </div>
 
-            <vc:upload-foto id-foto=Model.IdFoto></vc:upload-foto>
-
+            <div style="display:flex; justify-content: center; align-items: center;">
+                <vc:upload-foto id-foto=Model.IdFoto></vc:upload-foto>
+            </div>
+            
             <div class="row mb-3">
-                <div class="col-12">
+                <div class="col-12 mt-4 input-box">
                     <label asp-for="@Model.Nama" class="form-label"></label>
                     <input type="text" asp-for="@Model.Nama" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.Nama"></span>
@@ -33,7 +35,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-12">
+                <div class="col-12 mb-3 input-box">
                     <label asp-for="@Model.KetuaRayon" class="form-label"></label>
                     <input type="text" asp-for="@Model.KetuaRayon" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.KetuaRayon"></span>
@@ -42,12 +44,12 @@
 
             <div class="row mb-3">
                 <label class="form-label">Jumlah Jemaat Berdasarkan Jenis Kelamin</label>
-                <div class="col-6">
+                <div class="col-6 input-box">
                     <label asp-for="@Model.JumlahLakiLaki" class="form-label"></label>
                     <input type="text" asp-for="@Model.JumlahLakiLaki" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.JumlahLakiLaki"></span>
                 </div>
-                <div class="col-6">
+                <div class="col-6 input-box">
                     <label asp-for="@Model.JumlahPerempuan" class="form-label"></label>
                     <input type="text" asp-for="@Model.JumlahPerempuan" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.JumlahPerempuan"></span>
@@ -56,27 +58,27 @@
 
             <div class="row mb-3">
                 <label class="form-label">Jumlah Jemaat Berdasarkan Usia</label>
-                <div class="col-2">
+                <div class="col input-box">
                     <label asp-for="@Model.JumlahAnak" class="form-label"></label>
                     <input type="text" asp-for="@Model.JumlahAnak" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.JumlahAnak"></span>
                 </div>
-                <div class="col-2">
+                <div class="col input-box">
                     <label asp-for="@Model.JumlahRemaja" class="form-label"></label>
                     <input type="text" asp-for="@Model.JumlahRemaja" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.JumlahRemaja"></span>
                 </div>
-                <div class="col-2">
+                <div class="col input-box">
                     <label asp-for="@Model.JumlahPemuda" class="form-label"></label>
                     <input type="text" asp-for="@Model.JumlahPemuda" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.JumlahPemuda"></span>
                 </div>
-                <div class="col-2">
+                <div class="col input-box">
                     <label asp-for="@Model.JumlahDewasa" class="form-label"></label>
                     <input type="text" asp-for="@Model.JumlahDewasa" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.JumlahDewasa"></span>
                 </div>
-                <div class="col-2 mb-5">
+                <div class="col input-box mb-5">
                     <label asp-for="@Model.JumlahLansia" class="form-label"></label>
                     <input type="text" asp-for="@Model.JumlahLansia" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.JumlahLansia"></span>

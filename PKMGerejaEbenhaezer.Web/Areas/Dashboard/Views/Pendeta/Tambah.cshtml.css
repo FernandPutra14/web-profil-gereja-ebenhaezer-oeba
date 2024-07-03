@@ -5,35 +5,35 @@
     box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
 }
 
-.tamrayon {
+.pluspend {
     width: 100%;
     padding: 24px 20px 20px 20px;
 }
 
-    .tamrayon .title {
+    .pluspend .title {
         font-size: 28px;
         font-weight: 600;
         margin-bottom: 10px;
     }
 
-    .tamrayon .breadcrumbs {
+    .pluspend .breadcrumbs {
         display: flex;
         grid-gap: 6px;
         padding: 0;
         margin: 0;
     }
 
-        .tamrayon .breadcrumbs li,
-        .tamrayon .breadcrumbs li a {
+        .pluspend .breadcrumbs li,
+        .pluspend .breadcrumbs li a {
             font-size: 14px;
         }
 
-            .tamrayon .breadcrumbs li a {
+            .pluspend .breadcrumbs li a {
                 color: var(--blue);
             }
 
-                .tamrayon .breadcrumbs li a.active,
-                .tamrayon .breadcrumbs li.divider {
+                .pluspend .breadcrumbs li a.active,
+                .pluspend .breadcrumbs li.divider {
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
@@ -50,3 +50,41 @@
         border-style: dashed;
         border-width: medium;
     }
+
+
+.form-label {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+/* CSS type input Text dan Textarea */
+::deep .input-box label {
+    color: #333;
+    font-size: 14px;
+}
+
+::deep .input-box input {
+    position: relative;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+::deep .input-box textarea {
+    position: relative;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+/* Akhir CSS type input Text dan Textarea */

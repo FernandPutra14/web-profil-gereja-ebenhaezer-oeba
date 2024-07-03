@@ -1,42 +1,49 @@
-﻿.editray {
+﻿.cardplus {
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--light);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+}
+
+.edpend {
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--light);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+}
+
+.edpend {
     width: 100%;
     padding: 24px 20px 20px 20px;
 }
 
-    .editray .title {
+    .edpend .title {
         font-size: 28px;
         font-weight: 600;
         margin-bottom: 10px;
     }
 
-    .editray .breadcrumbs {
+    .edpend .breadcrumbs {
         display: flex;
         grid-gap: 6px;
         padding: 0;
         margin: 0;
     }
 
-        .editray .breadcrumbs ::deep li,
-        .editray .breadcrumbs ::deep li ::deep a {
+        .edpend .breadcrumbs li,
+        .edpend .breadcrumbs li a {
             font-size: 14px;
         }
 
-            .editray .breadcrumbs ::deep li ::deep a {
+            .edpend .breadcrumbs li a {
                 color: var(--blue);
             }
 
-                .editray .breadcrumbs ::deep li ::deep a.active,
-                .editray .breadcrumbs ::deep li.divider {
+                .edpend .breadcrumbs li a.active,
+                .edpend .breadcrumbs li.divider {
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
-
-.cardedit {
-    padding: 20px;
-    border-radius: 10px;
-    background: var(--light);
-    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
-}
 
 #dvPreview {
     height: 300px;
@@ -50,3 +57,41 @@
         border-style: dashed;
         border-width: medium;
     }
+
+
+.form-label {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+/* CSS type input Text dan Textarea */
+::deep .input-box label {
+    color: #333;
+    font-size: 14px;
+}
+
+::deep .input-box input {
+    position: relative;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+::deep .input-box textarea {
+    position: relative;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+/* Akhir CSS type input Text dan Textarea */

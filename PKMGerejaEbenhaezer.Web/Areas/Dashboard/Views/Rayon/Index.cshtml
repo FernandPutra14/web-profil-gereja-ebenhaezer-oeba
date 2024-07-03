@@ -65,11 +65,11 @@
                         <td>@rayon.JumlahJemaat</td>
                         <td>
                             <div class="d-flex gap-1 justify-content-start align-items-center">
-                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@rayon.Id">
+                                <a class="btn" asp-action="Edit" asp-route-id="@rayon.Id">
                                     <i class="fas fa-pen-square"></i>
                                 </a>
                                 <!-- Button trigger modal -->
-                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(rayon.Id)">
+                                <a class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal@(rayon.Id)">
                                     <i class="fa fa-regular fa-trash"></i>
                                 </a>
 
@@ -78,16 +78,15 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModal@(rayon.Id)">Hapus Pengumuman</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <h5 class="modal-title" id="exampleModal@(rayon.Id)">Hapus Pengumuman</h5>                                               
                                             </div>
                                             <div class="modal-body">
                                                 Apakah anda yakin ingin menghapus?
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="button" class="btn" data-bs-dismiss="modal">Batal</button>
                                                 <form asp-action="Hapus" asp-route-id="@rayon.Id" method="post">
-                                                    <button type="submit" class="btn btn-primary">Hapus</button>
+                                                    <button type="submit" class="btn">Hapus</button>
                                                 </form>
                                             </div>
                                         </div>

@@ -50,3 +50,40 @@
         border-style: dashed;
         border-width: medium;
     }
+
+.form-label {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+/* CSS type input Text dan Textarea */
+::deep .input-box label {
+    color: #333;
+    font-size: 14px;
+}
+
+::deep .input-box input {
+    position: relative;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+::deep .input-box textarea {
+    position: relative;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+/* Akhir CSS type input Text dan Textarea */
