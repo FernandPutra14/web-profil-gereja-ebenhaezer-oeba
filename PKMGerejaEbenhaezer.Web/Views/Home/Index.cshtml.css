@@ -88,6 +88,11 @@
 .pen-link {
     margin-top: 18px;
 }
+    
+    .pen-link a {
+        text-decoration : none;
+        color: #000;
+    }
 
     .pen-link i {
         font-size: 15px;

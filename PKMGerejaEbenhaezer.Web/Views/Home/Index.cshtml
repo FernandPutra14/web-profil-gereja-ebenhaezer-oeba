@@ -33,75 +33,45 @@
     <div class="pendeta-box">
         <div class="owl-carousel owl-theme fernand">
 
-            <!-- Pendeta 1 -->
-            <div class="profile">
-                <div class="gambar-pen">
-                    <img src="~/img/generaluser.png" alt="" />
-                </div>
-                <h6>Pdt. Elen Th. Bailaen-Manafe, S.Si (Teol)</h6>
-                <p>Pendeta</p>
-                <div class="pen-link">
-                    <i class="ri-facebook-fill"></i>
-                    <i class="ri-instagram-fill"></i>
-                    <i class="ri-youtube-fill"></i>
-                </div>
-            </div>
+            @foreach(var pendeta in Model.DaftarPendeta)
+            {
+                <div class="profile">
+                    <div class="gambar-pen">
+                        @if(pendeta.Foto is not null)
+                        {
+                            <img src="@Url.ActionLink("Index", "Foto", new { Area = "", id = pendeta.Foto.Id})"/>
+                        }
+                        else
+                        {
+                            <img src="~/img/generaluser.png" alt="" />
+                        }
+                    </div>
+                    <h6>@pendeta.Nama</h6>
+                    <p>Pendeta</p>
+                    <div class="pen-link">
+                        @if(pendeta.FacebookProfileLink is not null)
+                        {
+                            <a href="@pendeta.FacebookProfileLink.AbsoluteUri">
+                                <i class="ri-facebook-fill"></i>
+                            </a>
+                        }
 
-            <!-- Pendeta 2 -->
-            <div class="profile">
-                <div class="gambar-pen">
-                    <img src="~/img/generaluser.png" alt="" />
-                </div>
-                <h6>Pdt. Aleida Y. Salean Sola, S.Th, M.Hum</h6>
-                <p>Pendeta</p>
-                <div class="pen-link">
-                    <i class="ri-facebook-fill"></i>
-                    <i class="ri-instagram-fill"></i>
-                    <i class="ri-youtube-fill"></i>
-                </div>
-            </div>
+                        @if (pendeta.InstagramProfileLink is not null)
+                        {
+                            <a href="@pendeta.InstagramProfileLink.AbsoluteUri">
+                                <i class="ri-instagram-fill"></i>
+                            </a>
+                        }
 
-            <!-- Pendeta 3 -->
-            <div class="profile">
-                <div class="gambar-pen">
-                    <img src="~/img/generaluser.png" alt="" />
+                        @if (pendeta.YoutubeProfileLink is not null)
+                        {
+                            <a href="@pendeta.YoutubeProfileLink.AbsoluteUri">
+                                <i class="ri-youtube-fill"></i>
+                            </a>
+                        }
+                    </div>
                 </div>
-                <h6>Pdt. Amelia Retha-Siokain, S.Th</h6>
-                <p>Pendeta</p>
-                <div class="pen-link">
-                    <i class="ri-facebook-fill"></i>
-                    <i class="ri-instagram-fill"></i>
-                    <i class="ri-youtube-fill"></i>
-                </div>
-            </div>
-
-            <!-- Pendeta 4 -->
-            <div class="profile">
-                <div class="gambar-pen">
-                    <img src="~/img/generaluser.png" alt="" />
-                </div>
-                <h6>Pdt. Tera D. Klaping, M.Th</h6>
-                <p>Pendeta</p>
-                <div class="pen-link">
-                    <i class="ri-facebook-fill"></i>
-                    <i class="ri-instagram-fill"></i>
-                    <i class="ri-youtube-fill"></i>
-                </div>
-            </div>
-
-            <!-- Pendeta 5 -->
-            <div class="profile">
-                <div class="gambar-pen">
-                    <img src="~/img/generaluser.png" alt="" />
-                </div>
-                <h6>Ita Tassi Adoe, S.Th.</h6>
-                <p>Pendeta</p>
-                <div class="pen-link">
-                    <i class="ri-facebook-fill"></i>
-                    <i class="ri-instagram-fill"></i>
-                    <i class="ri-youtube-fill"></i>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </section>

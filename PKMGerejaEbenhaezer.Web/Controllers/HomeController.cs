@@ -35,6 +35,10 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 .Take(3)
                 .AsNoTracking().ToListAsync();
 
+            var daftarPendeta = await _appDbContext.PendetaTable
+                .Include(p => p.Foto)
+                .AsNoTracking().ToListAsync();
+
             var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
 
             daftarRayon ??= new List<Rayon>();
@@ -43,6 +47,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             {
                 DaftarPengumuman = daftarPengumuman,
                 DaftarWartaJemaat = daftarWarta,
+                DaftarPendeta = daftarPendeta,
                 TotalAnak = daftarRayon.Sum(r => r.JumlahAnak),
                 TotalRemaja = daftarRayon.Sum(r => r.JumlahRemaja),
                 TotalPemuda = daftarRayon.Sum(r => r.JumlahPemuda),
