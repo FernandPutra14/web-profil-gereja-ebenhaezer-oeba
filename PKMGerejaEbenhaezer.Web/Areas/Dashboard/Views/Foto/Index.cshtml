@@ -26,7 +26,7 @@
                 @foreach (var foto in Model.Items!)
                 {
                     <div class="col-3 foto-container">
-                        <img class="img-fluid" src="@Url.Action("Index", "Foto", new {Area = "", id = foto.Id})" />
+                        <img class="img-fluid" src="@Url.ActionLink("Index", "Foto", new {Area = "", id = foto.Id})" />
                         <input hidden id="idFoto" value="@foto.Id" />
                         <input hidden id="pathFoto" value="@foto.PathFoto" />
                         <input hidden id="tanggalDibuat" value="@($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}")" />
@@ -55,16 +55,44 @@
                 <img class="img-fluid" src="" />
             </div>
             <div class="row">
-                ID : <span id="idFoto"></span>
+                <div class="col-3">
+                    ID
+                </div>
+                <div class="col-9">
+                    : <span id="idFoto"></span>
+                </div>
             </div>
             <div class="row">
-                Path Foto : <span id="pathFoto"></span>
+                <div class="col-3">
+                    Path Foto
+                </div>
+                <div class="col-9">
+                    : <span id="pathFoto"></span>
+                </div>
             </div>
             <div class="row">
-                Tanggal Dibuat : <span id="tanggalDibuat"></span>
+                <div class="col-3">
+                    Tanggal Dibuat
+                </div>
+                <div class="col-9">
+                    : <span id="tanggalDibuat"></span>
+                </div>
             </div>
             <div class="row">
-                Pembuat : <span id="namaPembuat"></span>
+                <div class="col-3">
+                    Pembuat
+                </div>
+                <div class="col-9">
+                    : <span id="namaPembuat"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    Url
+                </div>
+                <div class="col-9">
+                    : <a href id="fileUrl"></a>
+                </div>
             </div>
             <div class="row">
                 <!-- Button trigger modal -->
@@ -117,6 +145,7 @@
                     $('#detailsPane #pathFoto').html(pathFoto);
                     $('#detailsPane #tanggalDibuat').html(tanggalDibuat);
                     $('#detailsPane #namaPembuat').html(namaPembuat);
+                    $('#detailsPane #fileUrl').html(src).attr('href', src);
                     $('#detailsPane #buttonHapus').prop('hidden', false);
                     $('#detailsPane #formHapus').attr('action', makeDeleteUrl(idFoto));
                 });

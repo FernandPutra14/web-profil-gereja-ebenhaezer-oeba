@@ -95,6 +95,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 .HasColumnType("timestamp without time zone");
             modelBuilder.Entity<WartaJemaat>().Property(w => w.DocumentLink)
                 .HasConversion(l => l.ToString(), l => new Uri(l));
+            modelBuilder.Entity<WartaJemaat>().HasIndex(w => w.TanggalWarta);
 
             ///Seeding Data
             var user = new AppUser
