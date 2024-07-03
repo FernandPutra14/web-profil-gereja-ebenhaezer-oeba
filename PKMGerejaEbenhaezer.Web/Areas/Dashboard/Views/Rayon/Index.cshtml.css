@@ -40,7 +40,6 @@
 }
 
     .table th, .table td {
-        padding: 12px 15px;
         text-align: left;
     }
 
@@ -66,7 +65,7 @@
         }
 
 .img-fluid {
-    max-width: 50px;
+    max-width: auto;
     height: auto;
     border-radius: 5px;
 }
