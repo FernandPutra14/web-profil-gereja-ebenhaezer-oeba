@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Pengumuman";
     var cultureInfo = new CultureInfo("id-ID");
-    var bulanToStringDict = new List<string> {"Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli",
+    var monthToStringDict = new List<string> {"Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli",
     "Agustus", "September", "Oktober", "November", "Desember"};
 }
 
@@ -19,11 +19,11 @@
 
     <div class="filterbut">
 
-        <a asp-action="Index" asp-route-kategori="@Kategori.Semua" data-name="semua">Semua</a>
+        <a asp-action="Index" data-name="semua">Semua</a>
         @for (int i = 1; i <= 12; i++)
         {
-            <a asp-action="Index" asp-route-kategori="@Kategori.Bulan" asp-route-bulan="@i"
-               data-name="bulan">@bulanToStringDict[i - 1]</a>
+            <a asp-action="Index" asp-route-bulan="@i"
+               data-name="bulan">@monthToStringDict[i - 1]</a>
         }
 
     </div>
