@@ -2,6 +2,21 @@
 @{
     ViewData["Title"] = "Home Page";
     var cultureInfo = new System.Globalization.CultureInfo("id-ID");
+    var monthNameDict = new Dictionary<int, string>()
+    {
+        {1, "Januari"},
+        {2, "Febuari"},
+        {3, "Maret"},
+        {4, "April"},
+        {5, "Mei"},
+        {6, "Juni"},
+        {7, "Juli"},
+        {8, "Agustus"},
+        {9, "September"},
+        {10, "Oktober"},
+        {11, "November"},
+        {12, "Desember"},
+    };
 }
 
 <!-- Hero Section -->
@@ -183,57 +198,29 @@
     <!-- Content Warta Section -->
     <div class="warta-contents">
         <div class="owl-carousel owl-theme fajar">
-            <!-- Ini Cardnya -->
-            <div class="item warta-card">
-                <div class="image-wrapper">
-                    <img src="~/img/default4_warta_jemaat.png" />
-                    <div class="tanggal">
-                        <div class="tanggal-text mb-1">
-                            <h5></h5>
-                            <h3>07</h3>                                                 
-                        </div>                       
-                        <h4>Juli, 2024</h4>
-                    </div>
-                </div>
-                <button class="tombolbaca">Baca Warta Jemaat</button>
-            </div>
-            <!-- Ini Akhir Cardnya -->
-            <!-- Ini Cardnya -->
-            <div class="item warta-card">
-                <div class="image-wrapper">
-                    <img src="~/img/default4_warta_jemaat.png" />
-                    <div class="tanggal">
-                        <div class="tanggal-text mb-1">
-                            <h5></h5>
-                            <h3>14</h3>
+            @foreach(var warta in Model.DaftarWartaJemaat)
+            {
+                <!-- Ini Cardnya -->
+                <div class="item warta-card">
+                    <div class="image-wrapper">
+                        <img src="~/img/default4_warta_jemaat.png" />
+                        <div class="tanggal">
+                            <div class="tanggal-text mb-1">
+                                <h5></h5>
+                                <h3>@warta.TanggalWarta.Day</h3>
+                            </div>
+                            <h4>@(monthNameDict[warta.TanggalWarta.Month]), @warta.TanggalWarta.Year</h4>
                         </div>
-                        <h4>Juli, 2024</h4>
                     </div>
+                    <a href="@warta.DocumentLink.AbsoluteUri" class="tombolbaca">Baca Warta Jemaat</a>
                 </div>
-                <button class="tombolbaca">Baca Warta Jemaat</button>
-            </div>
-            <!-- Ini Akhir Cardnya -->
-            <!-- Ini Cardnya -->
-            <div class="item warta-card">
-                <div class="image-wrapper">
-                    <img src="~/img/default4_warta_jemaat.png" />
-                    <div class="tanggal">
-                        <div class="tanggal-text mb-1">
-                            <h5></h5>
-                            <h3>21</h3>
-                        </div>
-                        <h4>Juli, 2024</h4>
-                    </div>
-                </div>
-                <button class="tombolbaca">Baca Warta Jemaat</button>
-            </div>
-            <!-- Ini Akhir Cardnya -->
+                <!-- Ini Akhir Cardnya -->
+            }           
         </div>
     </div>
     <!-- Akhir Content Warta Section -->
 </section>
 <!-- Akhir Warta Section -->
-
 
 <!-- Pengumuman Section -->
 <section class="peng">

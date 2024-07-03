@@ -25,37 +25,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         public DbSet<Pengumuman> PengumumanTable { get; set; }
         public DbSet<Rayon> RayonTable { get; set; }
         public DbSet<Foto> FotoTable { get; set; }
-
-        private void AuditAuditableEntity()
-        {
-            var addedEntries = ChangeTracker.Entries<IAuditableEntity>()
-                    .Where(e => e.State == EntityState.Added);
-
-            var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>()
-                .Where(e => e.State == EntityState.Modified);
-
-            var userName = _httpContext.User.Claims.Where(c => c.Type == ClaimTypes.Name)
-                .Select(c => c.Value)
-                .FirstOrDefault();
-            var user = AppUserTable.Where(u => u.UserName == userName).FirstOrDefault();
-
-            if (addedEntries != null && addedEntries.Count() > 0)
-            {
-                foreach (var entry in addedEntries)
-                {
-                    entry.Entity.TanggalDiBuat = DateTime.Now;
-                    entry.Entity.Pembuat = user;
-                }
-            }
-
-            if (modifiedEntries != null && modifiedEntries.Count() > 0)
-            {
-                foreach (var entry in modifiedEntries)
-                {
-                    entry.Entity.TanggalDiUbah = DateTime.Now;
-                }
-            }
-        }
+        public DbSet<WartaJemaat> WartaJemaatTable { get; set; }
 
         public override int SaveChanges()
         {
@@ -119,6 +89,12 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
 
             modelBuilder.Entity<Rayon>().HasKey(r => r.Id);
             modelBuilder.Entity<Rayon>().HasOne(e => e.FotoKetua).WithMany().OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<WartaJemaat>().HasKey(w => w.Id);
+            modelBuilder.Entity<WartaJemaat>().Property(w => w.TanggalWarta)
+                .HasColumnType("timestamp without time zone");
+            modelBuilder.Entity<WartaJemaat>().Property(w => w.DocumentLink)
+                .HasConversion(l => l.ToString(), l => new Uri(l));
 
             ///Seeding Data
             var user = new AppUser
@@ -281,6 +257,64 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     JumlahLansia = 15,
                 }
             );
+
+            modelBuilder.Entity<WartaJemaat>().HasData(
+                new
+                {
+                    Id = 1,
+                    TanggalWarta = new DateTime(2024, 7, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                    DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
+                    TanggalDiBuat = new DateTime(2024, 7, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                    PembuatId = user.Id,
+                },
+                new
+                {
+                    Id = 2,
+                    TanggalWarta = new DateTime(2024, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                    DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
+                    TanggalDiBuat = new DateTime(2024, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                    PembuatId = user.Id,
+                },
+                new
+                {
+                    Id = 3,
+                    TanggalWarta = new DateTime(2024, 7, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                    DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
+                    TanggalDiBuat = new DateTime(2024, 7, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                    PembuatId = user.Id,
+                }
+            );
+        }
+
+        private void AuditAuditableEntity()
+        {
+            var addedEntries = ChangeTracker.Entries<IAuditableEntity>()
+                    .Where(e => e.State == EntityState.Added);
+
+            var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>()
+                .Where(e => e.State == EntityState.Modified);
+
+            var userName = _httpContext.User.Claims.Where(c => c.Type == ClaimTypes.Name)
+                .Select(c => c.Value)
+                .FirstOrDefault();
+            var user = AppUserTable.Where(u => u.UserName == userName).FirstOrDefault();
+
+            if (addedEntries != null && addedEntries.Count() > 0)
+            {
+                foreach (var entry in addedEntries)
+                {
+                    entry.Entity.TanggalDiBuat = DateTime.Now;
+                    entry.Entity.Pembuat = user;
+                }
+            }
+
+            if (modifiedEntries != null && modifiedEntries.Count() > 0)
+            {
+                foreach (var entry in modifiedEntries)
+                {
+                    entry.Entity.TanggalDiUbah = DateTime.Now;
+                }
+            }
         }
     }
 }
