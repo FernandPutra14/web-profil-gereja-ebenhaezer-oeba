@@ -19,19 +19,21 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             _appDbContext = appDbContext;
         }
 
-        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any)]
+        [ResponseCache(Duration = 15, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Index()
         {
             var daftarPengumuman = await _appDbContext.PengumumanTable
                 .OrderByDescending(p => p.TanggalDiBuat)
                 .Include(p => p.Foto)
                 .Include(p => p.Pembuat)
+                .Take(3)
                 .AsNoTracking().ToListAsync();
 
-            if (daftarPengumuman.Count > 3)
-            {
-                daftarPengumuman = daftarPengumuman.Take(3).ToList();
-            }
+            var daftarWarta = await _appDbContext.WartaJemaatTable
+                .OrderByDescending(p => p.TanggalWarta)
+                .Include(w => w.Pembuat)
+                .Take(3)
+                .AsNoTracking().ToListAsync();
 
             var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
 
@@ -40,6 +42,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             return View(new IndexVM
             {
                 DaftarPengumuman = daftarPengumuman,
+                DaftarWartaJemaat = daftarWarta,
                 TotalAnak = daftarRayon.Sum(r => r.JumlahAnak),
                 TotalRemaja = daftarRayon.Sum(r => r.JumlahRemaja),
                 TotalPemuda = daftarRayon.Sum(r => r.JumlahPemuda),

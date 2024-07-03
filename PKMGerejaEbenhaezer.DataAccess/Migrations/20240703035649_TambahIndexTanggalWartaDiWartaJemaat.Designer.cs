@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240703035649_TambahIndexTanggalWartaDiWartaJemaat")]
+    partial class TambahIndexTanggalWartaDiWartaJemaat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,7 +51,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            PasswordHash = "AQAAAAIAAYagAAAAEIvohYWgv8an2nzRLK0mz1EPOP+0vBPreqC/EzIHYqPecPe2yTFeHz1JQXEFBaPLcw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOh6knBU+aLNNW7gTPmYQiLpojvr6Muexs2B1NuGpGA9a80oXvKeMplAvuKhksL0lw==",
                             UserName = "admin"
                         });
                 });
@@ -133,37 +136,6 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             PembuatId = 1,
                             TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
-                });
-
-            modelBuilder.Entity("PKMGerejaEbenhaezer.Domain.Entity.Pendeta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FacebookProfileLink")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("FotoId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("InstagramProfileLink")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Nama")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("YoutubeProfileLink")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FotoId");
-
-                    b.ToTable("Pendeta");
                 });
 
             modelBuilder.Entity("PKMGerejaEbenhaezer.Domain.Entity.Pengumuman", b =>
@@ -419,16 +391,6 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Pembuat");
-                });
-
-            modelBuilder.Entity("PKMGerejaEbenhaezer.Domain.Entity.Pendeta", b =>
-                {
-                    b.HasOne("PKMGerejaEbenhaezer.Domain.Entity.Foto", "Foto")
-                        .WithMany()
-                        .HasForeignKey("FotoId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Foto");
                 });
 
             modelBuilder.Entity("PKMGerejaEbenhaezer.Domain.Entity.Pengumuman", b =>

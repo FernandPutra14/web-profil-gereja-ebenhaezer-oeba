@@ -4,7 +4,8 @@ namespace PKMGerejaEbenhaezer.Web.Models.Home
 {
     public class IndexVM
     {
-        public List<Pengumuman>? DaftarPengumuman { get; set; }
+        public List<Pengumuman> DaftarPengumuman { get; set; } = new();
+        public List<WartaJemaat> DaftarWartaJemaat { get; set; } = new();
 
         public int TotalJemaat { get => TotalAnak + TotalRemaja + TotalPemuda + TotalDewasa + TotalLansia; }
 

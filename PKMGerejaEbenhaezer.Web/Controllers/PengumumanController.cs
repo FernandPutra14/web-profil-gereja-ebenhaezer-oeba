@@ -4,11 +4,6 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {
-    public enum Kategori
-    {
-        Semua, Bulan
-    }
-
     public class PengumumanController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -18,14 +13,14 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             _appDbContext = appDbContext;
         }
 
-        public async Task<IActionResult> Index(Kategori kategori = Kategori.Semua, int bulan = 1)
+        public async Task<IActionResult> Index(int? bulan)
         {
             var daftarPengumuman = _appDbContext.PengumumanTable
                 .Include(p => p.Foto)
                 .Include(p => p.Pembuat)
                 .AsNoTracking();
 
-            if(kategori == Kategori.Bulan)
+            if(bulan is not null)
             {
                 daftarPengumuman = daftarPengumuman.Where(p => p.TanggalDiBuat.Month == bulan)
                     .OrderByDescending(p => p.TanggalDiBuat);

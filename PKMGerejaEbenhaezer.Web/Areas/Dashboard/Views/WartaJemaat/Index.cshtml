@@ -1,0 +1,70 @@
+﻿@using System.Globalization
+@model List<WartaJemaat>
+@{
+    ViewData["Title"] = "Warta Jemaat";
+    var cultureInfo = new CultureInfo("id-ID");
+}
+
+<h1 class="text-center">Daftar Warta Jemaat</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Warta</th>
+            <th>Tanggal Warta</th>
+            <th>Tanggal Dibuat</th>
+            <th>Tanggal Diubah</th>
+            <th>Pembuat</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td><a href="@item.DocumentLink.AbsoluteUri">Warta</a></td>
+                <td>@item.TanggalWarta.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</td>
+                <td>@item.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @item.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
+                <td>@item.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @item.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
+                <td>
+                    @if (item.Pembuat != null)
+                    {
+                        @item.Pembuat.UserName
+                    }
+                    else
+                    {
+                        <span>Tidak Ada</span>
+                    }
+                </td>
+                <td>
+                    <div class="d-flex gap-1 justify-content-start align-items-center">
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="fas fa-pen-square"></i>
+                        </a>
+                        <!-- Button trigger modal -->
+                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)">
+                            <i class="fa fa-regular fa-trash"></i>
+                        </a>
+
+                        @{
+                            var modalVM = new DeleteConfirmationModalVM()
+                            {
+                                ModalId = $"exampleModal{item.Id}",
+                                ModalTitle = "Hapus Warta Jemaat",
+                                FormAction = Url.Action("Hapus", "WartaJemaat", new { Area = "Dashboard", id = item.Id })!,
+                            };
+                        }
+
+                        <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <partial name="_DataTablePartial" />
+}

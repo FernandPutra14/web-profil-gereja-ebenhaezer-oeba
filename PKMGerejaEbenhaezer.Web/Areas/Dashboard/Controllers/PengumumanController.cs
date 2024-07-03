@@ -55,7 +55,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             var foto = await _appDbContext.FotoTable.Where(f => f.Id == tambahVM.IdFoto)
                 .FirstOrDefaultAsync();
 
-            if (foto == null)
+            if (foto is null)
             {
                 ModelState.AddModelError(nameof(tambahVM.IdFoto), "Foto tidak ditemukan");
                 return View(tambahVM);
