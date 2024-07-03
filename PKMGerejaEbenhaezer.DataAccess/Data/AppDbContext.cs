@@ -97,6 +97,15 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 .HasConversion(l => l.ToString(), l => new Uri(l));
             modelBuilder.Entity<WartaJemaat>().HasIndex(w => w.TanggalWarta);
 
+            modelBuilder.Entity<Pendeta>().HasKey(p => p.Id);
+            modelBuilder.Entity<Pendeta>().HasOne(p => p.Foto).WithMany().OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Pendeta>().Property(p => p.FacebookProfileLink)
+                .HasConversion(l => l.ToString(), l => new Uri(l));
+            modelBuilder.Entity<Pendeta>().Property(p => p.InstagramProfileLink)
+                .HasConversion(l => l.ToString(), l => new Uri(l));
+            modelBuilder.Entity<Pendeta>().Property(p => p.YoutubeProfileLink)
+                .HasConversion(l => l.ToString(), l => new Uri(l));
+
             ///Seeding Data
             var user = new AppUser
             {
