@@ -31,6 +31,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
             var daftarWarta = await _appDbContext.WartaJemaatTable
                 .OrderByDescending(p => p.TanggalWarta)
+                .Include(w => w.Pembuat)
                 .Take(3)
                 .AsNoTracking().ToListAsync();
 
