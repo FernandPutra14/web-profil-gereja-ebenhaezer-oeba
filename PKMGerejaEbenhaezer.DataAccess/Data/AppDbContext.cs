@@ -26,6 +26,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         public DbSet<Rayon> RayonTable { get; set; }
         public DbSet<Foto> FotoTable { get; set; }
         public DbSet<WartaJemaat> WartaJemaatTable { get; set; }
+        public DbSet<Pendeta> PendetaTable { get; set; }
 
         public override int SaveChanges()
         {
@@ -292,6 +293,39 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                     TanggalDiBuat = new DateTime(2024, 7, 21, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id,
+                }
+            );
+
+            modelBuilder.Entity<Pendeta>().HasData(
+                new
+                {
+                    Id = 1,
+                    Nama = "Pdt. Elen Th. Bailaen-Manafe, S.Si (Teol)",
+                    FotoId = daftarFoto[daftarFoto.Length - 1].Id
+                },
+                new
+                {
+                    Id = 2,
+                    Nama = "Pdt. Aleida Y. Salean Sola, S.Th, M.Hum",
+                    FotoId = daftarFoto[daftarFoto.Length - 1].Id
+                },
+                new
+                {
+                    Id = 3,
+                    Nama = "Pdt. Amelia Retha-Siokain, S.Th",
+                    FotoId = daftarFoto[daftarFoto.Length - 1].Id
+                },
+                new
+                {
+                    Id = 4,
+                    Nama = "Pdt. Tera D. Klaping, M.Th",
+                    FotoId = daftarFoto[daftarFoto.Length - 1].Id
+                },
+                new
+                {
+                    Id = 5,
+                    Nama = "Ita Tassi Adoe, S.Th.",
+                    FotoId = daftarFoto[daftarFoto.Length - 1].Id
                 }
             );
         }
