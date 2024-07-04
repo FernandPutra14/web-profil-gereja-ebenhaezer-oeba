@@ -46,17 +46,25 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             return PhysicalFile(path, $"image/{ext}");
         }
 
-        public async Task<IActionResult> FotoKompresi(int index)
+        public async Task<IActionResult> FotoKompresi(int id)
         {
             var foto = await _appDbContext.FotoTable
-                .Where(f => f.Id == index).AsNoTracking()
+                .Where(f => f.Id == id).AsNoTracking()
                 .FirstOrDefaultAsync();
 
             if (foto == null)
+            {
+                _logger.LogError("Foto dengan Id {0} tidak ditemukan di database", id);
                 return NotFound();
+            }
+
+            _logger.LogInformation(foto.PathFotoKompresi);
 
             if (System.IO.File.Exists(foto.PathFotoKompresi) == false)
+            {
+                _logger.LogError("File dengan path {0} tidak ditemukan", foto.PathFotoKompresi);
                 return NotFound();
+            }
 
             var ext = Path.GetExtension(foto.PathFotoKompresi).ToLowerInvariant().Remove(0, 1);
             return PhysicalFile(foto.PathFotoKompresi, $"image/{ext}");

@@ -82,14 +82,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 fotoPath = await SaveFile(fileFormContent, Path.GetExtension(indexVM.FormFile.FileName));
-                fotoPathKompresi = fotoPath;
-                //fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
-                //    $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi{Path.GetExtension(fotoPath)}");
+                fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
+                    $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                //using (Mat original = CvInvoke.Imread(fotoPath))
-                //{
-                //    CvInvoke.Imwrite(fotoPathKompresi, original, KeyValuePair.Create(ImwriteFlags.JpegQuality, 75));
-                //}
+                using (Mat original = CvInvoke.Imread(fotoPath))
+                {
+                    CvInvoke.Imwrite(fotoPathKompresi, original, KeyValuePair.Create(ImwriteFlags.JpegQuality, 25));
+                }
             }
             catch (Exception ex)
             {
@@ -101,7 +100,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = 0,
                 PathFoto = fotoPath,
-                PathFotoKompresi = fotoPath,
+                PathFotoKompresi = fotoPathKompresi,
             };
 
             var changeTracker = _appDbContext.FotoTable.Add(foto);
@@ -147,14 +146,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 fotoPath = await SaveFile(fileFormContent, Path.GetExtension(formFile.FileName));
-                fotoPathKompresi = fotoPath;
-                //fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
-                //    $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi{Path.GetExtension(fotoPath)}");
+                fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
+                    $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                //using (Mat original = CvInvoke.Imread(fotoPath))
-                //{
-                //    CvInvoke.Imwrite(fotoPathKompresi, original, KeyValuePair.Create(ImwriteFlags.JpegQuality, 75));
-                //}
+                using (Mat original = CvInvoke.Imread(fotoPath))
+                {
+                    CvInvoke.Imwrite(fotoPathKompresi, original, KeyValuePair.Create(ImwriteFlags.JpegQuality, 25));
+                }
             }
             catch (Exception ex)
             {
@@ -166,7 +164,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = 0,
                 PathFoto = fotoPath,
-                PathFotoKompresi = fotoPath,
+                PathFotoKompresi = fotoPathKompresi,
             };
 
             var changeTracker = _appDbContext.FotoTable.Add(foto);
