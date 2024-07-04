@@ -16,6 +16,11 @@
         public bool HasPreviousPage => PageIndex > 1;
         public bool HasNextPage => PageIndex < TotalPages;
 
+        public static PaginatedList<T> Empty()
+        {
+            return new PaginatedList<T>(new List<T>(), 0, 0, 0);
+        }
+
         public static PaginatedList<T> Create(IEnumerable<T> source, int pageIndex, int pageSize)
         {
             var count = source.Count();

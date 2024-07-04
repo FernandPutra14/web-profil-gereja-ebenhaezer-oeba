@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
+using PKMGerejaEbenhaezer.Domain.Entity;
+using PKMGerejaEbenhaezer.Web.Models.PengumumanController;
+using PKMGerejaEbenhaezer.Web.Utlities;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {
@@ -13,30 +16,36 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             _appDbContext = appDbContext;
         }
 
-        public async Task<IActionResult> Index(int? bulan)
+        public async Task<IActionResult> Index(int? bulan, int? pageIndex, string? searchString)
         {
             if (bulan is not null && (bulan < 1 || bulan > 12)) 
             {
                 bulan = null;
             }
-            ViewData["bulan"] = bulan;
-            var daftarPengumuman = _appDbContext.PengumumanTable
+
+            var daftarPengumuman = await _appDbContext.PengumumanTable
                 .Include(p => p.Foto)
                 .Include(p => p.Pembuat)
-                .AsNoTracking();
+                .AsNoTracking().ToListAsync();
 
-            if(bulan is not null)
+            if (bulan is not null)
+                daftarPengumuman = daftarPengumuman.Where(p => p.TanggalDiBuat.Month == bulan).ToList();
+
+            if (searchString is not null)
+                daftarPengumuman = daftarPengumuman
+                    .Where(p => p.Judul.ToLower().Contains(searchString.ToLower()) || p.Isi.ToLower().Contains(searchString.ToLower()))
+                    .ToList();
+
+            daftarPengumuman = daftarPengumuman.OrderByDescending(p => p.TanggalDiBuat).ToList();
+
+            int pageSize = 6;
+
+            var model = new IndexVM
             {
-                daftarPengumuman = daftarPengumuman.Where(p => p.TanggalDiBuat.Month == bulan)
-                    .OrderByDescending(p => p.TanggalDiBuat);
-
-                var modelPerbulan = await daftarPengumuman.ToListAsync();
-
-                return View(modelPerbulan);
-            }
-
-            var model = await daftarPengumuman
-                .OrderByDescending(p => p.TanggalDiBuat).ToListAsync();
+                Items = PaginatedList<Pengumuman>.Create(daftarPengumuman, pageIndex ?? 1, pageSize),
+                Bulan = bulan,
+                SearchString = searchString,
+            };
 
             return View(model);
         }

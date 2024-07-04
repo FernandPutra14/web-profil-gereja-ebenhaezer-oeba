@@ -1,17 +1,14 @@
 ﻿@using System.Globalization
-@using PKMGerejaEbenhaezer.Web.Controllers
-@model List<Pengumuman>
+@using PKMGerejaEbenhaezer.Web.Models.PengumumanController
+@model IndexVM
 @{
     ViewData["Title"] = "Pengumuman";
-    var bulan = ViewData["bulan"] as int?;
     var cultureInfo = new CultureInfo("id-ID");
-    var monthToStringDict = new List<string> {"Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli",
-    "Agustus", "September", "Oktober", "November", "Desember"};
 }
 
 <section id="peng-us" class="mb-lg-5">
     <h2>
-        PENGUMUMAN@(bulan.HasValue ? $"/{monthToStringDict[bulan.Value - 1].ToUpper()}" : "")
+        PENGUMUMAN@(Model.Title())
     </h2>
 </section>
 
@@ -19,19 +16,31 @@
 
     <div class="filterbut">
 
-        <a asp-action="Index" data-name="semua" class="@(bulan is null ? "active" : "" )">Semua</a>
+        <a asp-action="Index" data-name="semua" class="@(Model.FilterCssClass())">Semua</a>
         @for (int i = 1; i <= 12; i++)
         {
-            <a asp-action="Index" asp-route-bulan="@i" class="@(bulan is not null && bulan == i ? "active" : "")"
-               data-name="bulan">@monthToStringDict[i - 1]</a>
+            <a asp-action="Index" asp-route-bulan="@i"
+               class="@(Model.FilterCssClass(i))"
+               data-name="bulan">@(Model.MonthName(i))</a>
         }
 
     </div>
 
+    <div class="row">
+        <form asp-action="Index" method="get">
+            <input hidden name="bulan" id="bulan" value="@Model.Bulan" />
+            <input id="searchString" name="searchString" value="@Model.SearchString"
+                   class="form-control" placeholder="Cari Pengumuman" required
+                   oninvalid="setCustomValidity('Masukan kata/kalimat yang ingin dicari')"
+                   oninput="setCustomValidity('')" />
+            <button class="btn btn-primary">Cari</button>
+        </form>
+    </div>
+
     <div class="peng-contents">
-        @if (Model.Count > 0)
+        @if (Model.Items.Count > 0)
         {
-            @foreach (var item in Model)
+            @foreach (var item in Model.Items)
             {
                 <!-- Ini Cardnya Bang -->
                 <div class="item peng-card">
@@ -63,21 +72,49 @@
         {
             <h1 class="text-center">Tidak Ada Pengumuman</h1>
         }
+
     </div>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)"
+                   asp-route-bulan="@Model.Bulan" asp-route-searchString="@Model.SearchString">
+                    Previous
+                </a>
+            </li>
+            @for (var i = 1; i <= Model.Items.TotalPages; i++)
+            {
+                <li class="page-item @(Model.Items.PageIndex == i ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-pageIndex="@i" asp-route-bulan="@Model.Bulan"
+                       asp-route-searchString="@Model.SearchString">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.Items.HasNextPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)"
+                   asp-route-bulan="@Model.Bulan" asp-route-searchString="@Model.SearchString">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
 </section>
 
+@section Scripts {
+    <script type="text/javascript">
 
-<script type="text/javascript">
-    $(function () {
-        $('.badan-utama').css({
-            'padding-left': '0',
-            'padding-right': '0',
-            'padding-top': '0rem',
+        $(function () {
+            $('.badan-utama').css({
+                'padding-left': '0',
+                'padding-right': '0',
+                'padding-top': '0rem',
+            });
+            $('.main-navbar').css({
+                'position': 'fixed',
+                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
+                'background-color': 'var(--primary-clr)',
+            });
         });
-        $('.main-navbar').css({
-            'position': 'fixed',
-            'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
-            'background-color': 'var(--primary-clr)',
-        });
-    });
-</script>
+    </script>
+}
+
