@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pendeta;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -74,6 +77,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if(tambahVM.YoutubeProfileLink is not null)
                 pendeta.YoutubeProfileLink = new Uri(tambahVM.YoutubeProfileLink);
+
+            if (!ValidasiAkunMediaSosial(pendeta.FacebookProfileLink, pendeta.InstagramProfileLink,
+                pendeta.YoutubeProfileLink))
+                return View(tambahVM);
             
             _appDbContext.PendetaTable.Add(pendeta);
 
@@ -161,6 +168,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             if (editVM.YoutubeProfileLink is not null)
                 pendeta.YoutubeProfileLink = new Uri(editVM.YoutubeProfileLink);
 
+            if (!ValidasiAkunMediaSosial(pendeta.FacebookProfileLink, pendeta.InstagramProfileLink,
+                pendeta.YoutubeProfileLink))
+                return View(editVM);
+
             try
             {
                 await _appDbContext.SaveChangesAsync();
@@ -197,6 +208,43 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private bool ValidasiAkunMediaSosial(
+            Uri? facebookProfileLink, 
+            Uri? instagramProfileLink, 
+            Uri? youtubeProfileLink)
+        {
+            bool isValid = true;
+
+            if(facebookProfileLink is not null)
+            {
+                if(facebookProfileLink.Host != "www.facebook.com")
+                {
+                    ModelState.AddModelError(nameof(facebookProfileLink), "Bukan URL Facebook valid");
+                    isValid = false;
+                }
+            }
+
+            if (instagramProfileLink is not null) 
+            {
+                if (instagramProfileLink.Host != "www.instagram.com")
+                {
+                    ModelState.AddModelError(nameof(instagramProfileLink), "Bukan URL Instagram Valid");
+                    isValid = false;
+                }
+            }
+
+            if (youtubeProfileLink is not null)
+            {
+                if (youtubeProfileLink.Host != "www.youtube.com")
+                {
+                    ModelState.AddModelError(nameof(youtubeProfileLink), "Bukan URL Facebook Valid");
+                    isValid = false;
+                }
+            }
+
+            return isValid;
         }
     }
 }
