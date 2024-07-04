@@ -33,9 +33,10 @@
                         <div class="col-6 col-md-3 foto-container">
                             <img class="img-fluid" src="@Url.ActionLink("Index", "Foto", new {Area = "", id = foto.Id})" />
                             <input type="hidden" id="idFoto" value="@foto.Id" />
-                            <input type="hidden" id="pathFoto" value="@foto.PathFoto" />
                             <input type="hidden" id="tanggalDibuat" value="@($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}")" />
                             <input type="hidden" id="namaPembuat" value="@foto.Pembuat?.UserName" />
+                            <input type="hidden" id="fileKompresiUrl"
+                                   value="@Url.ActionLink("FotoKompresi", "Foto", new {Area = "", id = foto.Id})" />
                         </div>
                     }
                 </div>
@@ -62,10 +63,6 @@
                     <div class="col-8">: <span id="idFoto"></span></div>
                 </div>
                 <div class="row">
-                    <div class="col-4">Path Foto</div>
-                    <div class="col-8">: <span id="pathFoto"></span></div>
-                </div>
-                <div class="row">
                     <div class="col-4">Tanggal Dibuat</div>
                     <div class="col-8">: <span id="tanggalDibuat"></span></div>
                 </div>
@@ -78,12 +75,16 @@
                     <div class="col-8">: <a href="" id="fileUrl"></a></div>
                 </div>
                 <div class="row">
+                    <div class="col-4">Url Kompresi</div>
+                    <div class="col-8">: <a href="" id="fileKompresiUrl"></a></div>
+                </div>
+                <div class="row">
                     <button class="btn" id="buttonHapus" hidden data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-regular fa-trash"></i> Hapus</button>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModal">Hapus Pengumuman</h5>                                   
+                                    <h5 class="modal-title" id="exampleModal">Hapus Pengumuman</h5>
                                 </div>
                                 <div class="modal-body">Apakah anda yakin ingin menghapus?</div>
                                 <div class="modal-footer">
@@ -120,16 +121,16 @@
                 $(item).on('click', function () {
                     const src = $(item).find('img').attr('src');
                     const idFoto = $(item).find('#idFoto').val();
-                    const pathFoto = $(item).find('#pathFoto').val();
                     const tanggalDibuat = $(item).find('#tanggalDibuat').val();
                     const namaPembuat = $(item).find('#namaPembuat').val();
+                    const fileKompresiUrl = $(item).find('#fileKompresiUrl').val();
 
                     $('#detailsPane img').attr('src', src);
                     $('#detailsPane #idFoto').html(idFoto);
-                    $('#detailsPane #pathFoto').html(pathFoto);
                     $('#detailsPane #tanggalDibuat').html(tanggalDibuat);
                     $('#detailsPane #namaPembuat').html(namaPembuat);
                     $('#detailsPane #fileUrl').html(src).attr('href', src);
+                    $('#detailsPane #fileKompresiUrl').html(fileKompresiUrl).attr('href', fileKompresiUrl);
                     $('#detailsPane #buttonHapus').prop('hidden', false);
                     $('#detailsPane #formHapus').attr('action', makeDeleteUrl(idFoto));
                 });
