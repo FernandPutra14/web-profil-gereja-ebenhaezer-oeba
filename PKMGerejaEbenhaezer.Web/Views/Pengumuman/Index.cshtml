@@ -3,6 +3,7 @@
 @model List<Pengumuman>
 @{
     ViewData["Title"] = "Pengumuman";
+    var bulan = ViewData["bulan"] as int?;
     var cultureInfo = new CultureInfo("id-ID");
     var monthToStringDict = new List<string> {"Januari", "Febuari", "Maret", "April", "Mei", "Juni", "Juli",
     "Agustus", "September", "Oktober", "November", "Desember"};
@@ -10,19 +11,18 @@
 
 <section id="peng-us" class="mb-lg-5">
     <h2>
-        PENGUMUMAN
+        PENGUMUMAN@(bulan.HasValue ? $"/{monthToStringDict[bulan.Value - 1].ToUpper()}" : "")
     </h2>
 </section>
 
 <section class="peng">
 
-
     <div class="filterbut">
 
-        <a asp-action="Index" data-name="semua">Semua</a>
+        <a asp-action="Index" data-name="semua" class="@(bulan is null ? "active" : "" )">Semua</a>
         @for (int i = 1; i <= 12; i++)
         {
-            <a asp-action="Index" asp-route-bulan="@i"
+            <a asp-action="Index" asp-route-bulan="@i" class="@(bulan is not null && bulan == i ? "active" : "")"
                data-name="bulan">@monthToStringDict[i - 1]</a>
         }
 

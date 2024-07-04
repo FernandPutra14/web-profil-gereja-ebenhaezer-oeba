@@ -15,6 +15,11 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
         public async Task<IActionResult> Index(int? bulan)
         {
+            if (bulan is not null && (bulan < 1 || bulan > 12)) 
+            {
+                bulan = null;
+            }
+            ViewData["bulan"] = bulan;
             var daftarPengumuman = _appDbContext.PengumumanTable
                 .Include(p => p.Foto)
                 .Include(p => p.Pembuat)
