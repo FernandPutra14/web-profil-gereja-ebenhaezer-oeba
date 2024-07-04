@@ -81,7 +81,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
             }
 
             modelBuilder.Entity<AppUser>().HasKey(e => e.Id);
-            modelBuilder.Entity<AppUser>().HasIndex(e => e.UserName);
+            modelBuilder.Entity<AppUser>().HasIndex(e => e.UserName).IsUnique();
 
             modelBuilder.Entity<Foto>().HasKey(e => e.Id);
 
@@ -92,15 +92,13 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
             modelBuilder.Entity<Rayon>().HasOne(e => e.FotoKetua).WithMany().OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<WartaJemaat>().HasKey(w => w.Id);
-            modelBuilder.Entity<WartaJemaat>().Property(w => w.TanggalWarta)
-                .HasColumnType("timestamp without time zone");
             modelBuilder.Entity<WartaJemaat>().Property(w => w.DocumentLink)
                 .HasConversion(l => l.ToString(), l => new Uri(l));
             modelBuilder.Entity<WartaJemaat>().HasIndex(w => w.TanggalWarta);
 
             modelBuilder.Entity<Pendeta>().HasKey(p => p.Id);
             modelBuilder.Entity<Pendeta>().HasOne(p => p.Foto).WithMany().OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Pendeta>().HasIndex(p => p.Nama);
+            modelBuilder.Entity<Pendeta>().HasIndex(p => p.Nama).IsUnique();
             modelBuilder.Entity<Pendeta>().Property(p => p.FacebookProfileLink)
                 .HasConversion(l => l.ToString(), l => new Uri(l));
             modelBuilder.Entity<Pendeta>().Property(p => p.InstagramProfileLink)
@@ -274,7 +272,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 new
                 {
                     Id = 1,
-                    TanggalWarta = new DateTime(2024, 7, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                    TanggalWarta = new DateOnly(2024, 7, 7),
                     DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                     TanggalDiBuat = new DateTime(2024, 7, 7, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id,
@@ -282,7 +280,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 new
                 {
                     Id = 2,
-                    TanggalWarta = new DateTime(2024, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                    TanggalWarta = new DateOnly(2024, 7, 7),
                     DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                     TanggalDiBuat = new DateTime(2024, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id,
@@ -290,7 +288,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 new
                 {
                     Id = 3,
-                    TanggalWarta = new DateTime(2024, 7, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                    TanggalWarta = new DateOnly(2024, 7, 7),
                     DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                     TanggalDiBuat = new DateTime(2024, 7, 21, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id,

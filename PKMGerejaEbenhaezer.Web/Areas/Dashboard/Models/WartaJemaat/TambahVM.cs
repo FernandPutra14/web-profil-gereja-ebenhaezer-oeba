@@ -6,7 +6,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.WartaJemaat
     {
         [Display(Name = "Tanggal Warta")]
         [Required(ErrorMessage = "{0} harus diisi")]
-        public DateTime TanggalWarta { get; set; } = DateTime.Now;
+        public DateOnly TanggalWarta { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
         [Display(Name = "Link Dokumen Warta")]
         [Required(ErrorMessage = "{0} harus diisi")]

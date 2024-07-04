@@ -9,7 +9,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.WartaJemaat
 
         [Display(Name = "Tanggal Warta")]
         [Required(ErrorMessage = "{0} harus diisi")]
-        public DateTime TanggalWarta { get; set; }
+        public DateOnly TanggalWarta { get; set; }
 
         [Display(Name = "Link Dokumen Warta")]
         [Required(ErrorMessage = "{0} harus diisi")]

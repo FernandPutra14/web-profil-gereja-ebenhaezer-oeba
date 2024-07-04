@@ -9,10 +9,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Account
         [Required(ErrorMessage = "{0} harus diisi")]
         public string UserName { get; set; } = string.Empty;
 
+        
         [Display(Name = "Password")]
+        [RegularExpression("/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/", 
+            ErrorMessage = "{0} harus minima 8 karakter dan harus memiliki angka(1 - 9), huruf kecil(a - z) dan huruf besar(A - Z)")]
         [Required]
         public string Password { get; set; } = string.Empty;
 
+        [DataType(DataType.Password)]
         [Display(Name = "Konfirmasi Password")]
         [Compare(nameof(Password), ErrorMessage = "{0} dan {1} harus sama"), ]
         public string PasswordConfirmation { get; set; } = string.Empty;

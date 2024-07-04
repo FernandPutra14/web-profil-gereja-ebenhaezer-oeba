@@ -44,7 +44,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             if (!ModelState.IsValid) return View(tambahVM);
 
             var warta = await _appDbContext.WartaJemaatTable
-                .Where(w => w.TanggalWarta.Date == tambahVM.TanggalWarta.Date)
+                .Where(w => w.TanggalWarta == tambahVM.TanggalWarta)
                 .FirstOrDefaultAsync();
 
             if (warta is not null)
@@ -108,7 +108,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             var duplikasiTanggal = await _appDbContext.WartaJemaatTable
-                .AnyAsync(w => w.Id != editVM.Id && w.TanggalWarta.Date == editVM.TanggalWarta.Date);
+                .AnyAsync(w => w.Id != editVM.Id && w.TanggalWarta == editVM.TanggalWarta);
 
             if (duplikasiTanggal)
             {
