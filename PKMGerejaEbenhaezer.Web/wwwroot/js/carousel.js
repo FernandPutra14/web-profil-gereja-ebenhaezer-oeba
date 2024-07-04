@@ -1,9 +1,9 @@
 ﻿//Slider Pendeta Section
 $('.fernand').owlCarousel({
     loop: true,
-    autoplay: true,
+    autoplay: false,
     autoplayTimeout: 8000,
-    margin: 5,
+    margin: 10,
     nav: true,
     navText: [
         "<i class='ri-arrow-left-s-line'></i>",
