@@ -41,7 +41,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         {
             //Validasi
             var duplikasiNama = await _appDbContext.PendetaTable
-                .AnyAsync(p => p.Nama.ToLower() == tambahVM.Nama.ToLower());
+                .AnyAsync(p => p.Nama.ToLower() == tambahVM.Nama.Trim().ToLower());
 
             if (duplikasiNama)
             {
@@ -62,7 +62,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             var pendeta = new Pendeta
             {
                 Id = 0,
-                Nama = tambahVM.Nama,
+                Nama = tambahVM.Nama.Trim(),
                 Foto = foto
             };
 
@@ -123,7 +123,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return RedirectToAction(nameof(Index));
 
             var duplikasiNama = await _appDbContext.PendetaTable
-                .AnyAsync(p => p.Id != editVM.Id && p.Nama.ToLower() == editVM.Nama.ToLower());
+                .AnyAsync(p => p.Id != editVM.Id && p.Nama.ToLower() == editVM.Nama.Trim().ToLower());
 
             if (duplikasiNama)
             {
@@ -145,7 +145,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             //Simpan ke database
-            pendeta.Nama = editVM.Nama;
+            pendeta.Nama = editVM.Nama.Trim();
 
             if(editVM.IdFoto is not null)
             {
