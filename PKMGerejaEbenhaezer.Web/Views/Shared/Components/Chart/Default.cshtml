@@ -23,6 +23,7 @@
 
         let chart;
         let isAnimating = false;
+        let hasAnimated = false;
 
         function createChart() {
             chart = new Chart(ctx, {
@@ -59,13 +60,14 @@
         }
 
         const observer = new IntersectionObserver(function (entries) {
-            if (entries[0].isIntersecting === true && !isAnimating) {
+            if (entries[0].isIntersecting === true && !isAnimating && !hasAnimated) {
                 isAnimating = true;
                 setTimeout(() => {
                     if (chart) {
                         chart.destroy();
                     }
                     createChart();
+                    hasAnimated = true;
                 }, 300);
             } else if (entries[0].isIntersecting === false) {
                 isAnimating = false;

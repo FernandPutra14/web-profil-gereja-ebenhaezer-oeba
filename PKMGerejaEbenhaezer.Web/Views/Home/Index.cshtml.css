@@ -38,11 +38,59 @@
 /* Akhir CSS Hero Section */
 
 
+/* CSS Sejarah Section */
+#sejarah {
+    margin: 6vw 8vw 0vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    #sejarah ::deep .row-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+        #sejarah ::deep .row-container .image-container {
+            width: 50%;
+            align-content: center;
+            padding: 3vw;
+        }
+
+            #sejarah ::deep .row-container .image-container img {
+                width: 100%;
+                height: auto;
+                border-radius: 10px;
+            }
+
+        #sejarah ::deep .row-container .content-sej {
+            width: 50%;
+            padding: 3vw;
+            vertical-align: middle;
+        }
+
+            #sejarah ::deep .row-container .content-sej h2 {
+                margin-bottom: 1vw;
+                font-size: 40px;
+            }
+
+            #sejarah .row-container .content-sej p {
+                margin-bottom: 1vw;
+                text-align: justify;
+                font-size: 16px;
+            }
+
+/* Akhir CSS Sejarah Section */
+
+
+
+
 /* CSS Pendeta Section */
 #pendeta {
-    padding: 8vw 8vw 0 8vw;
+    padding: 5vw 8vw 0 8vw;
     text-align: center;
-    z-index: 20;
+    z-index: 999;
 }
 
     #pendeta h1 {
@@ -71,7 +119,9 @@
             }
 
                 #pendeta ::deep .pendeta-box .profile .gambar-pen img {
-                    width: 50%;
+                    border-radius: 50%;
+                    height: 200px;
+                    width: 200px;
                     object-fit: cover;
                 }
 
@@ -124,7 +174,7 @@
     margin-top: 4vw;
     color: #fff;
     padding: 8vw 9vw 8vw 9vw;
-    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
+    background-image: linear-gradient(rgba(2, 5, 30, 0.3),rgba(5, 4, 25, 0.7)),url("img/background1_gereja_testing.jpg");
 }
 
     #injil .injil-text h6 {
@@ -227,16 +277,6 @@
         #about-container .counters .counter h4 span {
             color: white;
         }
-
-    #about-container .counters .counter:not(:last-child)::before {
-        content: '';
-        background: #fff;
-        position: absolute;
-        width: 2px;
-        height: 3em;
-        top: 50%;
-        transform: translateY(-50%);
-    }
 /* Akhir CSS Chart jemaat Section */
 
 
@@ -729,6 +769,19 @@ section.peng {
     /* Akhir CSS Hero Section */
 
 
+    /* CSS Sejarah Section */
+    #sejarah .row-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+        #sejarah .row-container .image-container,
+        #sejarah .row-container .content-sej {
+            width: 100%;
+        }
+    /* Akhir CSS Sejarah Section */
+
+
     /* CSS Chart Jemaat Section */
     #about-container {
         padding: 2vw 4vw 2vw 4vw;
@@ -792,9 +845,15 @@ section.peng {
     /* Akhir CSS Pendeta Section */
 
     /* CSS Chart Jemaat Section */
+    #about-container .about-char {
+        height: 300px;
+        width: 100%;
+        padding-left: 50px;
+        align-items: center;
+    }
+
     #about-container[b-t5jt8ugovc] .about-char {
         padding-left: 0px;
-        padding-top: 60px;
         padding-right: 0px;
     }
     /* Akhir CSS Chart Jemaat Section */
@@ -884,6 +943,22 @@ section.peng {
 
 /* Responsive 468 */
 @media (max-width:468px) {
+
+
+    /* CSS Sejarah Section */
+    #sejarah {
+        margin-top: 10vw;
+    }
+
+        #sejarah .row-container .content-sej h2 {
+            font-size: 32px;
+        }
+
+        #sejarah .row-container .content-sej p {
+            font-size: 14px;
+        }
+    /* Akhir CSS Sejarah Section */
+
 
     /* CSS Injil Section */
     #injil {
