@@ -124,7 +124,7 @@
     margin-top: 4vw;
     color: #fff;
     padding: 8vw 9vw 8vw 9vw;
-    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
+    background-image: linear-gradient(rgba(2, 5, 30, 0.3),rgba(5, 4, 25, 0.7)),url("img/background1_gereja_testing.jpg");
 }
 
     #injil .injil-text h6 {
@@ -792,9 +792,15 @@ section.peng {
     /* Akhir CSS Pendeta Section */
 
     /* CSS Chart Jemaat Section */
+    #about-container .about-char {
+        height: 300px;
+        width: 100%;
+        padding-left: 50px;
+        align-items: center;
+    }
+
     #about-container[b-t5jt8ugovc] .about-char {
         padding-left: 0px;
-        padding-top: 60px;
         padding-right: 0px;
     }
     /* Akhir CSS Chart Jemaat Section */
