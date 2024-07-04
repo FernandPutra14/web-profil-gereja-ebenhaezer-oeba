@@ -17,19 +17,21 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-12">
                             <input class="form-control" id="formFile" name="formFile" data-val="true" type="file" />
                             <span class="text-danger" id="formFileVal"></span>
-                        </div>
-                        <div class="col-3">
-                            <button type="button" class="btn btn-primary" id="uploadFoto" onsubmit="uploadFoto">Upload</button>
+                        </div>                       
+                    </div>
+                    <div class="row mt-4 mb-4">                    
+                        <div class="col-12">
+                            <button type="button" class="btn btn-primary w-100" id="uploadFoto" onsubmit="uploadFoto">Upload</button>
                         </div>
                     </div>
                     <div class="row" id="fotoGrid">
                         @foreach (var foto in Model)
                         {
                             <div class="col-3 p-1 foto-container">
-                                <input type="type" id="fotoId" value="@foto.Id" hidden />
+                                <input id="fotoId" value="@foto.Id" hidden />
                                 <img class="img-thumbnail"
                                      src="@Url.Action("Index", "Foto", new {Area = "", id = foto.Id})" />
                             </div>
@@ -47,7 +49,7 @@
 
 <script type="text/javascript">
     const selectedStyle = {
-        'background': 'blue'
+        'background': 'var(--primary-clr)'
     };
 
     const unselectedStyle = {

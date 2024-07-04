@@ -26,17 +26,20 @@
 
     </div>
 
-    <div class="row">
-        <form asp-action="Index" method="get">
-            <input hidden name="bulan" id="bulan" value="@Model.Bulan" />
-            <input id="searchString" name="searchString" value="@Model.SearchString"
-                   class="form-control" placeholder="Cari Pengumuman" required
-                   oninvalid="setCustomValidity('Masukan kata/kalimat yang ingin dicari')"
-                   oninput="setCustomValidity('')" />
-            <button class="btn btn-primary">Cari</button>
-        </form>
-    </div>
-
+    <div class="row penc">
+    <form asp-action="Index" method="get" class="form-inline w-100">
+        <div class="input-group">
+            <input type="hidden" name="bulan" id="bulan" value="@Model.Bulan" />
+            <input type="text" id="searchString" name="searchString" value="@Model.SearchString"
+                   class="form-control" placeholder="Cari Pengumuman..." required
+                   oninvalid="this.setCustomValidity('Masukkan kata/kalimat yang ingin dicari')"
+                   oninput="this.setCustomValidity('')" />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+        </div>
+    </form>
+</div>
     <div class="peng-contents">
         @if (Model.Items.Count > 0)
         {

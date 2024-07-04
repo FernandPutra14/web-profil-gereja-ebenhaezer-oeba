@@ -1,4 +1,65 @@
-﻿#peng-us {
+﻿/* CSS Search dan Pagination */
+
+::deep .penc .form-inline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+::deep .penc .input-group {
+    flex-wrap: nowrap;
+    width: 60%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+::deep .penc .form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 16px;
+}
+
+::deep .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left: -1px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+::deep .penc .input-group-append .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+::deep .penc {
+    padding: 30px 10px 30px;
+    margin: 0;
+}
+
+::deep .pagination {
+    padding: 30px 0px 10px;
+    margin: 0;
+    font-size: 16px;
+}
+
+::deep .page-item {
+    margin: 0 5px;
+}
+
+::deep .page-link {
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+::deep .page-item.active .page-link {
+    background-color: var(--primary-clr);
+    border-color: var(--primary-clr);
+    color: white;
+}
+
+/* Akhir CSS Search dan Pagination */
+
+
+#peng-us {
     background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
     background-attachment: fixed;
     margin: 0px auto;
@@ -67,7 +128,7 @@ section.peng {
 
     .peng .peng-contents h1 {
         padding-top: 70px;
-        width: 100%; /* Tambahkan ini untuk memastikan teks mengambil lebar penuh */
+        width: 100%;
         padding-bottom: 70px;
     }
 
@@ -194,7 +255,7 @@ section.peng {
     }
 
     .filterbut ::deep a.active {
-        background-color: blue;
+        background-color: var(--primary-clr);
         color: white;
     }
 
@@ -229,6 +290,10 @@ section.peng {
 
 /* Responsive 768 */
 @media (max-width:768px) {
+
+    ::deep .penc .input-group {
+        width: 100%;
+    }
 
     /* CSS Pengumuman Section */
     section.peng {
