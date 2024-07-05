@@ -64,7 +64,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 await _appDbContext.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState
                     .AddModelError(string.Empty, "Gagal menyimpan ke database. Silahkan hubungi administrator!");
@@ -79,7 +79,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
 
         //Ubah user name
-         
+
 
         //Hapus Akun
 
