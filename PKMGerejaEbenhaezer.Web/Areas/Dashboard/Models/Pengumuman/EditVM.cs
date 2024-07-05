@@ -23,7 +23,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pengumuman
         public bool OldDocumentExist { get; set; }
 
         [Display(Name = "File PDF Baru")]
-        public IFormFile? FormFile { get; set; }
+        public IFormFile? PDFFormFile { get; set; }
 
         [Display(Name = "Foto Pengumuman")]
         [Required(ErrorMessage = "{0} harus diisi")]

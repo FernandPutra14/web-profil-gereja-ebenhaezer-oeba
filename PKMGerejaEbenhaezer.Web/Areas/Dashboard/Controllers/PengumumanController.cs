@@ -61,9 +61,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(tambahVM);
             }
 
-            if (tambahVM.HaveDocument && tambahVM.FormFile is null)
+            if (tambahVM.HaveDocument && tambahVM.PDFFormFile is null)
             {
-                ModelState.AddModelError(nameof(tambahVM.FormFile), "Dokumen harus diisi jika Ada Dokumen di centang!");
+                ModelState.AddModelError(nameof(tambahVM.PDFFormFile), "Dokumen harus diisi jika Ada Dokumen di centang!");
                 return View(tambahVM);
             }
 
@@ -80,7 +80,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Simpan File PDF
             if (tambahVM.HaveDocument)
             {
-                var pdfPath = await _pDFUploadService.UploadAsync<TambahVM>(ModelState, tambahVM.FormFile!);
+                var pdfPath = await _pDFUploadService.UploadAsync<TambahVM>(ModelState, tambahVM.PDFFormFile!);
                 if (!ModelState.IsValid || pdfPath is null) return View(tambahVM);
                 newPengumuman.PathPDF = pdfPath;
             }
@@ -150,9 +150,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 }
             }
 
-            if (editVM.HaveDocument && pengumuman.PathPDF is null && editVM.FormFile is null)
+            if (editVM.HaveDocument && pengumuman.PathPDF is null && editVM.PDFFormFile is null)
             {
-                ModelState.AddModelError(nameof(editVM.FormFile), "Dokumen harus diisi jika Ada Dokumen di centang!");
+                ModelState.AddModelError(nameof(editVM.PDFFormFile), "Dokumen harus diisi jika Ada Dokumen di centang!");
                 return View(editVM);
             }
 
@@ -167,9 +167,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                     .AsNoTracking().FirstOrDefaultAsync();
             }
 
-            if (editVM.HaveDocument && editVM.FormFile is not null)
+            if (editVM.HaveDocument && editVM.PDFFormFile is not null)
             {
-                var pdfPath = await _pDFUploadService.UploadAsync<EditVM>(ModelState, editVM.FormFile);
+                var pdfPath = await _pDFUploadService.UploadAsync<EditVM>(ModelState, editVM.PDFFormFile);
                 if(!ModelState.IsValid || pdfPath is null)
                 {
                     return View(editVM);
