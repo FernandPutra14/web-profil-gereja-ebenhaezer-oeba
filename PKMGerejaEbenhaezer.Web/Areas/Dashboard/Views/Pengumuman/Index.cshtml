@@ -14,6 +14,9 @@
         <li class="divider">/</li>
         <li><a href="#" class="active">Daftar Pengumuman</a></li>
     </ul>
+    <div class="mb-4 mt-4">
+        <a style="" class="btn w-100" asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Tambah"> + Tambah Pengumuman</a>
+    </div>
     <div class="container">
         <table class="table table-bordered table-striped">
             <thead>
@@ -38,18 +41,19 @@
                         <td>
                             @if (pengumuman.Foto is not null)
                             {
-                                <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" 
-                                alt="@pengumuman.Id" class="img-fluid" />
+                                <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})"
+                                     alt="@pengumuman.Id" class="img-fluid" />
                             }
                             else
                             {
-                                <img src="~/img/gereja1.jpg" class="img-fluid"/>
+                                <img src="~/img/gereja1.jpg" class="img-fluid" />
                             }
                         </td>
                         <td>@pengumuman.Judul</td>
                         <td>@pengumuman.Isi</td>
                         <td>@(pengumuman.HaveDocument ? "Ada" : "Tidak Ada")</td>
-                        <td>@if (pengumuman.HaveDocument)
+                        <td>
+                            @if (pengumuman.HaveDocument)
                             {
                                 <a href="@Url.ActionLink("Dokumen", "Pengumuman" , new {Area="" , id=pengumuman.Id})">
                                     Dokumen
@@ -59,7 +63,7 @@
                         <td>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
                         <td>@pengumuman.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @pengumuman.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
                         <td>
-                            @if(pengumuman.Pembuat != null)
+                            @if (pengumuman.Pembuat != null)
                             {
                                 @pengumuman.Pembuat.UserName
                             }
@@ -80,14 +84,14 @@
 
                                 @{
                                     var modalVM = new DeleteConfirmationModalVM
-                                    {
-                                        ModalId = $"exampleModal{pengumuman.Id}",
-                                        ModalTitle = "Hapus Pengumuman",
-                                        FormAction = Url.Action("Hapus", "Pengumuman", new { Area = "Dashboard", id = pengumuman.Id})!,
-                                    };
+                {
+                    ModalId = $"exampleModal{pengumuman.Id}",
+                    ModalTitle = "Hapus Pengumuman",
+                    FormAction = Url.Action("Hapus", "Pengumuman", new { Area = "Dashboard", id = pengumuman.Id })!,
+                };
                                 }
 
-                                <partial name="_DeleteConfirmationModalPartial" model="modalVM"/>
+                                <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
                             </div>
                         </td>
                     </tr>
