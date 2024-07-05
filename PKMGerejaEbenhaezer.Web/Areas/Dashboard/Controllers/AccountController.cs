@@ -75,13 +75,42 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //Hapus Akun
+        [HttpPost]
+        public async Task<IActionResult> Hapus(int id)
+        {
+            var loggedUser = await _appDbContext.AppUserTable
+                .Where(a => a.UserName == User.Identity!.Name).FirstOrDefaultAsync();
+
+            if (loggedUser?.Id == id) 
+            {
+                _logger.LogError("Mencoba menghapus akun yang sendiri");
+                return BadRequest();
+            }
+
+            var user = await _appDbContext.AppUserTable
+                .Where(a => a.Id == id).FirstOrDefaultAsync();
+
+            if (user is null) return NotFound();
+
+            _appDbContext.AppUserTable.Remove(user);
+
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("Hapus. Error saat menyimpan. Exception : {0}", ex.ToString());
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
         //Ubah password
 
 
         //Ubah user name
-
-
-        //Hapus Akun
 
 
     }

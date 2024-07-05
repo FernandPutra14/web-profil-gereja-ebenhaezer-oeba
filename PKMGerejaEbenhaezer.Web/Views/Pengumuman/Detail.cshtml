@@ -1,6 +1,8 @@
-﻿@model Pengumuman
+﻿@using System.Globalization
+@model Pengumuman
 @{
     ViewData["Title"] = "Pengumuman";
+    var cultureInfo = new CultureInfo("id-ID");
 }
 
 <section id="blog-container">
@@ -19,7 +21,8 @@
                 @if (Model.Pembuat is not null)
                 {
                     <h4>Oleh : @Model.Pembuat.UserName</h4>
-                    <h4>@Model.TanggalDiBuat</h4>
+                    <h4>@Model.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
+                        @Model.TanggalDiBuat.ToString("h:mm tt" , cultureInfo)</h4>
                 }
             </div>
             <p>@Model.Isi</p>
