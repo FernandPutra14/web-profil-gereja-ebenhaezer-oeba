@@ -57,11 +57,11 @@
 
                                 @{
                                     var modalVM = new DeleteConfirmationModalVM()
-                {
-                    ModalId = $"exampleModal{item.Id}",
-                    ModalTitle = "Hapus Warta Jemaat",
-                    FormAction = Url.Action("Hapus", "WartaJemaat", new { Area = "Dashboard", id = item.Id })!,
-                };
+                                    {
+                                        ModalId = $"exampleModal{item.Id}",
+                                        ModalTitle = "Hapus Warta Jemaat",
+                                        FormAction = Url.Action("Hapus", "WartaJemaat", new { Area = "Dashboard", id = item.Id })!,
+                                    };
                                 }
 
                                 <partial name="_DeleteConfirmationModalPartial" model="modalVM" />

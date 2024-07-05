@@ -31,12 +31,12 @@
                     @foreach (var foto in Model.Items!)
                     {
                         <div class="col-6 col-md-3 foto-container">
-                            <img class="img-fluid" src="@Url.ActionLink("Index", "Foto", new {Area = "", id = foto.Id})" />
+                            <img class="img-fluid" src="@Url.Action("Index", "Foto", new {Area = "", id = foto.Id})" />
                             <input type="hidden" id="idFoto" value="@foto.Id" />
                             <input type="hidden" id="tanggalDibuat" value="@($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}")" />
                             <input type="hidden" id="namaPembuat" value="@foto.Pembuat?.UserName" />
                             <input type="hidden" id="fileKompresiUrl"
-                                   value="@Url.ActionLink("FotoKompresi", "Foto", new {Area = "", id = foto.Id})" />
+                                   value="@Url.Action("FotoKompresi", "Foto", new {Area = "", id = foto.Id})" />
                         </div>
                     }
                 </div>

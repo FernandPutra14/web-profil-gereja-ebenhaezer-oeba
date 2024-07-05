@@ -40,7 +40,7 @@
                                 <div class="col-3 p-1">
                                     @if(rayon.FotoKetua is not null)
                                     {
-                                        <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = rayon.FotoKetua.Id})"
+                                        <img src="@Url.Action("Index", "Foto", new {Area = "", id = rayon.FotoKetua.Id})"
                                         alt="Ketua @(rayon.KetuaRayon)" class="img-thumbnail" />
                                     } 
                                     else

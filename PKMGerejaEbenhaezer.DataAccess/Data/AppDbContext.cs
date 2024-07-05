@@ -121,48 +121,48 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 new
                 {
                     Id = 1,
-                    PathFoto = "/wwwroot/img/pengumuman/natall.jpg",
-                    PathFotoKompresi = "/wwwroot/img/pengumuman/natall.jpg",
+                    PathFoto = "wwwroot/img/pengumuman/natall.jpg",
+                    PathFotoKompresi = "wwwroot/img/pengumuman/natall.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id
                 },
                 new
                 {
                     Id = 2,
-                    PathFoto = "/wwwroot/img/pengumuman/rapatt.jpg",
-                    PathFotoKompresi = "/wwwroot/img/pengumuman/rapatt.jpg",
+                    PathFoto = "wwwroot/img/pengumuman/rapatt.jpg",
+                    PathFotoKompresi = "wwwroot/img/pengumuman/rapatt.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id
                 },
                 new
                 {
                     Id = 3,
-                    PathFoto = "/wwwroot/img/pengumuman/tripp.jpg",
-                    PathFotoKompresi = "/wwwroot/img/pengumuman/tripp.jpg",
+                    PathFoto = "wwwroot/img/pengumuman/tripp.jpg",
+                    PathFotoKompresi = "wwwroot/img/pengumuman/tripp.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id
                 },
                 new
                 {
                     Id = 4,
-                    PathFoto = "/wwwroot/img/pengumuman/donasii.jpg",
-                    PathFotoKompresi = "/wwwroot/img/pengumuman/donasii.jpg",
+                    PathFoto = "wwwroot/img/pengumuman/donasii.jpg",
+                    PathFotoKompresi = "wwwroot/img/pengumuman/donasii.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id
                 },
                 new
                 {
                     Id = 5,
-                    PathFoto = "/wwwroot/img/pengumuman/pelayanann.jpg",
-                    PathFotoKompresi = "/wwwroot/img/pengumuman/pelayanann.jpg",
+                    PathFoto = "wwwroot/img/pengumuman/pelayanann.jpg",
+                    PathFotoKompresi = "wwwroot/img/pengumuman/pelayanann.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id
                 },
                 new
                 {
                     Id = 6,
-                    PathFoto = @"/wwwroot/img/generaluser.png",
-                    PathFotoKompresi = @"/wwwroot/img/generaluser.png",
+                    PathFoto = @"wwwroot/img/generaluser.png",
+                    PathFotoKompresi = @"wwwroot/img/generaluser.png",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = user.Id
                 },

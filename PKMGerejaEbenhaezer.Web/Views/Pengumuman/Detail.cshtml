@@ -10,7 +10,7 @@
         <div class="post">
             @if (Model.Foto is not null)
             {
-                <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = Model.Foto.Id})" />
+                <img src="@Url.Action("Index", "Foto", new {Area = "", id = Model.Foto.Id})" />
             }
             else
             {

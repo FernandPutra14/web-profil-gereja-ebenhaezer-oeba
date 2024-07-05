@@ -38,7 +38,7 @@
                         <td>
                             @if (pengumuman.Foto is not null)
                             {
-                                <img src="@Url.ActionLink("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" 
+                                <img src="@Url.Action("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" 
                                 alt="@pengumuman.Id" class="img-fluid" />
                             }
                             else
@@ -51,7 +51,7 @@
                         <td>@(pengumuman.HaveDocument ? "Ada" : "Tidak Ada")</td>
                         <td>@if (pengumuman.HaveDocument)
                             {
-                                <a href="@Url.ActionLink("Dokumen", "Pengumuman" , new {Area="" , id=pengumuman.Id})">
+                                <a href="@Url.Action("Dokumen", "Pengumuman" , new {Area="" , id=pengumuman.Id})">
                                     Dokumen
                                 </a>
                             }

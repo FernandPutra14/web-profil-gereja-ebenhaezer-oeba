@@ -66,7 +66,7 @@
                     <div class="gambar-pen">
                         @if(pendeta.Foto is not null)
                         {
-                            <img src="@Url.ActionLink("Index", "Foto", new { Area = "", id = pendeta.Foto.Id})"/>
+                            <img src="@Url.Action("Index", "Foto", new { Area = "", id = pendeta.Foto.Id})"/>
                         }
                         else
                         {

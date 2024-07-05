@@ -32,7 +32,7 @@
                         <td>
                             @if (item.Foto is not null)
                             {
-                                <img class="img-thumbnail" src="@Url.ActionLink("Index", "Foto", new { Area = "", id = item.Foto.Id})" />
+                                <img class="img-thumbnail" src="@Url.Action("Index", "Foto", new { Area = "", id = item.Foto.Id})" />
                             }
                             else
                             {

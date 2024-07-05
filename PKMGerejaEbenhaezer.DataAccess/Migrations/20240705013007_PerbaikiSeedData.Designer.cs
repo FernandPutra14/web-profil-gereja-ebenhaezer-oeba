@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240705013007_PerbaikiSeedData")]
+    partial class PerbaikiSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            PasswordHash = "AQAAAAIAAYagAAAAEAhPXpdwb31iCHWi50OGMQkK1HQ7Z/7Qe+KTOGyGr6p7FG0u1ghY9j+zZs93jTtOkQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPvZgNsZQnLlVMrAUvKEeG6K7iSSfGuDlDy76jLHdkPGq6najWTarp8AWQDby86QMw==",
                             UserName = "admin"
                         });
                 });
@@ -90,7 +93,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 1,
                             PathFoto = "wwwroot/img/pengumuman/natall.jpg",
-                            PathFotoKompresi = "wwwroot/img/pengumuman/natall.jpg",
+                            PathFotoKompresi = "/wwwroot/img/pengumuman/natall.jpg",
                             PembuatId = 1,
                             TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },

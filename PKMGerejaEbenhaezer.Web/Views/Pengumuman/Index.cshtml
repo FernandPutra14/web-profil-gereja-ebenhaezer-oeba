@@ -49,7 +49,7 @@
                 <div class="item peng-card">
                     @if (item.Foto != null)
                     {
-                        <img src="@Url.ActionLink("Index", "Foto", new { Area = "", id = item.Foto!.Id })" />
+                        <img src="@Url.Action("Index", "Foto", new { Area = "", id = item.Foto!.Id })" />
                     }
                     else
                     {

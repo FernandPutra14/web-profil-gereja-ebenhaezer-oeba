@@ -33,14 +33,24 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 .Where(f => f.Id == id).AsNoTracking()
                 .FirstOrDefaultAsync();
 
-            if(foto == null)
+            if (foto == null)
+            {
+                _logger.LogError("Foto dengan Id {0} tidak ditemukan di database", id);
                 return NotFound();
+            }
+
+            _logger.LogInformation(_webHostEnvironment.ContentRootPath);
 
             var path = Path.IsPathFullyQualified(foto.PathFoto) ? foto.PathFoto
-                : _webHostEnvironment.ContentRootPath + foto.PathFoto;
+                : _webHostEnvironment.ContentRootPath + "/" + foto.PathFoto;
+
+            _logger.LogInformation(path);
 
             if (System.IO.File.Exists(path) == false)
+            {
+                _logger.LogError("File dengan path {0} tidak ditemukan", path);
                 return NotFound();
+            }
 
             var ext = Path.GetExtension(foto.PathFoto).ToLowerInvariant().Remove(0, 1);
             return PhysicalFile(path, $"image/{ext}");
@@ -58,16 +68,21 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 return NotFound();
             }
 
-            _logger.LogInformation(foto.PathFotoKompresi);
+            _logger.LogInformation(_webHostEnvironment.ContentRootPath);
 
-            if (System.IO.File.Exists(foto.PathFotoKompresi) == false)
+            var path = Path.IsPathFullyQualified(foto.PathFotoKompresi) ? foto.PathFotoKompresi
+                : _webHostEnvironment.ContentRootPath + "/" + foto.PathFotoKompresi;
+
+            _logger.LogInformation(path);
+
+            if (System.IO.File.Exists(path) == false)
             {
-                _logger.LogError("File dengan path {0} tidak ditemukan", foto.PathFotoKompresi);
+                _logger.LogError("File dengan path {0} tidak ditemukan", path);
                 return NotFound();
             }
 
-            var ext = Path.GetExtension(foto.PathFotoKompresi).ToLowerInvariant().Remove(0, 1);
-            return PhysicalFile(foto.PathFotoKompresi, $"image/{ext}");
+            var ext = Path.GetExtension(path).ToLowerInvariant().Remove(0, 1);
+            return PhysicalFile(path, $"image/{ext}");
         }
     }
 }
