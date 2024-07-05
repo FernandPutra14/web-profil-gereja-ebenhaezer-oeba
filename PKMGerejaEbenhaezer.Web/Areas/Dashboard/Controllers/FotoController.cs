@@ -1,6 +1,4 @@
-﻿using Emgu.CV;
-using Emgu.CV.CvEnum;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -8,6 +6,8 @@ using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.FotoModels;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Utlities;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -85,9 +85,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
                     $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                using (Mat original = CvInvoke.Imread(fotoPath))
+                using (var fotoKompresi = Image.Load(fileFormContent))
                 {
-                    CvInvoke.Imwrite(fotoPathKompresi, original, KeyValuePair.Create(ImwriteFlags.JpegQuality, 25));
+                    var encoder = new JpegEncoder
+                    {
+                        Quality = _photoFileSettingsOptions.CompressionQuality
+                    };
+                    fotoKompresi.Save(fotoPathKompresi, encoder);
                 }
             }
             catch (Exception ex)
@@ -149,9 +153,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
                     $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                using (Mat original = CvInvoke.Imread(fotoPath))
+                using (var fotoKompresi = Image.Load(fileFormContent))
                 {
-                    CvInvoke.Imwrite(fotoPathKompresi, original, KeyValuePair.Create(ImwriteFlags.JpegQuality, 25));
+                    var encoder = new JpegEncoder 
+                    { 
+                        Quality = _photoFileSettingsOptions.CompressionQuality 
+                    };
+                    fotoKompresi.Save(fotoPathKompresi, encoder);
                 }
             }
             catch (Exception ex)

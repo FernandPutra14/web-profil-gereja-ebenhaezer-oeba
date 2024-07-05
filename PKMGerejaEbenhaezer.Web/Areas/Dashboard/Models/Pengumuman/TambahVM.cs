@@ -17,7 +17,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pengumuman
         public bool HaveDocument { get; set; }
 
         [Display(Name = "File PDF")]
-        public IFormFile? FormFile { get; set; }
+        public IFormFile? PDFFormFile { get; set; }
 
         [Display(Name = "Foto Pengumuman")]
         [Required(ErrorMessage = "{0} harus diisi")]
