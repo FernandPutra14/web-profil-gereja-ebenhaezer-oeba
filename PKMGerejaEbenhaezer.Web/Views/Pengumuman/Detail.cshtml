@@ -3,8 +3,6 @@
     ViewData["Title"] = "Pengumuman";
 }
 
-@* Untuk Tampilkan foto pengumuman begini bng. Copy ini tinggal ganti variablenya *@
-
 <section id="blog-container">
     <div class="blogs">
         <div class="post">
@@ -17,22 +15,23 @@
                 <img src="~/img/gereja1.jpg" />
             }
             <h3>@Model.Judul</h3>
-            @if (Model.Pembuat is not null)
-            {
-                <h4>Oleh : @Model.Pembuat.UserName</h4>
-            }
+            <div class="info-blog">
+                @if (Model.Pembuat is not null)
+                {
+                    <h4>Oleh : @Model.Pembuat.UserName</h4>
+                    <h4>@Model.TanggalDiBuat</h4>
+                }
+            </div>
             <p>@Model.Isi</p>
             <div class="dokumen">
                 @if (Model.HaveDocument)
                 {
-                    <a asp-action="Dokumen" asp-route-id="@Model.Id">Lihat Dokumen</a>
+                    <a class="btn" asp-action="Dokumen" asp-route-id="@Model.Id">Lihat Dokumen</a>
                 }
             </div>         
         </div>
     </div>
 </section>
-
-
 
 <script type="text/javascript">
     $(function () {

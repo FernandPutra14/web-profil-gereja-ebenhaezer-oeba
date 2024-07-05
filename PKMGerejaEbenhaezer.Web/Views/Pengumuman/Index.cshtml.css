@@ -1,5 +1,190 @@
-﻿/* CSS Search dan Pagination */
+﻿/* CSS Bagian Top dan Judul */
+#peng-us {
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0px auto;
+    width: 100%;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 101;
+}
 
+    #peng-us h2 {
+        color: #fff;
+        padding-top: 60px;
+        font-size: 40px;
+        font-weight: bold;
+    }
+/* Akhir CSS Bagian Top dan Judul */
+
+section.peng {
+    width: 100%;
+    padding: 3% 100px 30px;
+}
+
+/* Tombol Filter */
+.filterbut {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+    .filterbut ::deep a {
+        text-decoration: none;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 10px;
+        color: black;
+        font-size: 18px;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+    }
+
+        .filterbut ::deep a:hover {
+            color: #fff;
+            background-color: var(--primary-clr);
+        }
+
+        .filterbut ::deep a.active {
+            background-color: var(--primary-clr);
+            color: white;
+        }
+/* Akhir Tombol Filter */
+
+
+/* Content Pengumuman */
+.peng .peng-contents {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 100%;
+}
+
+    .peng .peng-contents h1 {
+        width: 100%;
+        padding: 70px 0 70px;
+    }
+
+    .peng .peng-contents .peng-card {
+        flex-basis: calc(calc(100% / 3) - 1.2%);
+        border: 1px solid #eee;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 5px 5px 5px 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+        .peng .peng-contents .peng-card:hover {
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        }
+
+.peng-contents .peng-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.peng-contents .peng-card .category {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.peng-card .category .subject {
+    background-color: var(--primary-light-clr);
+    border-radius: 5px;
+    padding: 8px 10px;
+}
+
+    .peng-card .category .subject h3 {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--primary-clr);
+    }
+
+.peng-card .peng-title {
+    color: var(--dark-heading-clr);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.peng-contents .peng-card p {
+    color: var(--dark-heading-clr);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.peng-card .peng-tanggal {
+    display: flex;
+    padding: 15px 0px 0px;
+    border-top: 1px solid #ccc;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .peng-card .peng-tanggal span {
+        color: var(--primary-clr);
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+        .peng-card .peng-tanggal span:nth-child(1) i {
+            color: var(--primary-clr);
+            padding-right: 10px;
+            font-size: 14px;
+        }
+
+        .peng-card .peng-tanggal span b {
+            font-size: 24px;
+        }
+
+/* Tombol Baca Selengkapnya */
+::deep .tombolseleng {
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #000;
+    padding: 10px 18px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    ::deep .tombolseleng:hover {
+        background-color: var(--light-heading-clr);
+        color: var(--primary-clr);
+        border: 1px solid var(--primary-clr);
+    }
+/* Akhir Tombol Baca Selengkapnya */
+
+
+/* CSS Search dan Pagination */
 ::deep .penc .form-inline {
     display: flex;
     justify-content: center;
@@ -55,219 +240,14 @@
     border-color: var(--primary-clr);
     color: white;
 }
-
 /* Akhir CSS Search dan Pagination */
 
-
-#peng-us {
-    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
-    background-attachment: fixed;
-    margin: 0px auto;
-    width: 100%;
-    height: 60vh;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-    #peng-us h2 {       
-        color: #fff;
-        padding-top: 50px;
-        font-size: 40px;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
-
-section.peng {
-    width: 100%;
-    padding-bottom: 30px;
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-top: 3%;
-}
-
-.peng .section-header {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-}
-
-    .peng .section-header .peng-btn {
-        position: absolute;
-        right: 0;
-        bottom: 40px;
-    }
-
-::deep .tombolseleng {
-    text-decoration: none;
-    padding: 10px 18px;
-    color: #000;
-    font-size: 15px;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-    ::deep .tombolseleng:hover {
-        background-color: var(--light-heading-clr);
-        color: var(--primary-clr);
-        border: 1px solid var(--primary-clr);
-    }
-
-.peng .peng-contents {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    height: 100%;
-}
-
-    .peng .peng-contents h1 {
-        padding-top: 70px;
-        width: 100%;
-        padding-bottom: 70px;
-    }
-
-    .peng .peng-contents .peng-card {
-        flex-basis: calc(calc(100% / 3) - 1.2%);
-        border: 1px solid #eee;
-        padding: 10px;
-        border-radius: 5px;
-        margin: 5px 5px 5px 5px;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
-
-        .peng .peng-contents .peng-card:hover {
-            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
-        }
-
-.peng-contents .peng-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.peng-contents .peng-card p {
-    margin-top: 10px;
-    font-size: 13px;
-    color: var(--dark-heading-clr);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 3;
-    text-overflow: ellipsis;
-    line-height: 1.5em;
-}
-
-.peng-contents .peng-card .category {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0px;
-}
-
-.peng-card .category img {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    right: 15px;
-    top: -50px;
-    outline: 1px solid var(--primary-clr);
-    outline-offset: 3px;
-}
-
-.peng-card .category .subject {
-    padding: 8px 10px;
-    background-color: var(--primary-light-clr);
-    border-radius: 5px;
-}
-
-    .peng-card .category .subject h3 {
-        font-size: 18px;
-        font-weight: 500;
-        color: var(--primary-clr);
-    }
-
-.peng-card .peng-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--dark-heading-clr);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
-    line-height: 1.3;
-}
-
-.peng-card .peng-tanggal {
-    padding: 15px 0px 0px;
-    border-top: 1px solid #ccc;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-    .peng-card .peng-tanggal span {
-        color: var(--primary-clr);
-        text-align: center;
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-        .peng-card .peng-tanggal span:nth-child(1) i {
-            color: var(--primary-clr);
-            padding-right: 10px;
-            font-size: 14px;
-        }
-
-        .peng-card .peng-tanggal span b {
-            font-size: 24px;
-        }
-
-
-.filterbut {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-    .filterbut ::deep a {
-        padding: 10px 20px;
-        font-size: 18px;
-        background: #fff;
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 10px;
-        text-decoration: none;
-        color: black;
-        box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-
-    .filterbut ::deep a.active {
-        background-color: var(--primary-clr);
-        color: white;
-    }
-
-/* Responsive 968 */
+/* --------------------------------- Responsive  ----------------------------------------- */
+/*  Responsive 968  */
 @media (max-width:1160px) {
 
-    /* CSS Pengumuman Section */
     section.peng {
-        padding-bottom: 30px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 8%;
+        padding: 8% 10px 30px;
     }
 
     .peng .peng-contents .peng-card {
@@ -283,8 +263,6 @@ section.peng {
             align-self: flex-start;
             margin-top: 20px;
         }
-
-    /* Akhir CSS Pengumuman Section */
 }
 
 
@@ -294,45 +272,37 @@ section.peng {
     ::deep .penc .input-group {
         width: 100%;
     }
-
-    /* CSS Pengumuman Section */
+  
     section.peng {
         width: 100%;
-        padding-bottom: 30px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 8%;
     }
-    /* Akhir CSS Pengumuman Section */
 }
 
 
 /* Responsive 690 */
 @media (max-width:690px) {
-
-    /* CSS Pengumuman Section */
+ 
     .peng .peng-contents .peng-card {
         flex-basis: 100%;
-    }
-    /* Akhir CSS Pengumuman Section */
+    } 
 }
 
 
 /* Responsive 568 */
 @media (max-width:568px) {
-
-    /* CSS Pengumuman Section */
-    section.peng {
-        width: 100%;
-        padding-bottom: 30px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 8%;
+   
+    #peng-us h2 {
+        font-size: 30px;
+        padding-top: 70px;
     }
-    /* Akhir CSS Pengumuman Section */
 }
 
 
 /* Responsive 468 */
 @media (max-width:468px) {
+
+    #peng-us h2 {
+        font-size: 25px;
+        padding-top: 70px;
+    }
 }

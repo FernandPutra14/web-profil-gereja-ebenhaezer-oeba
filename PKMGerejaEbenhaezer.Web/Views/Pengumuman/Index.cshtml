@@ -6,16 +6,18 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
-<section id="peng-us" class="mb-lg-5">
+@* Bagian Top dan Judul *@
+<section id="peng-us">
     <h2>
         PENGUMUMAN@(Model.Title())
     </h2>
 </section>
+@* Akhir Bagian Top dan Judul *@
 
 <section class="peng">
 
+    @* Tombol Filter *@
     <div class="filterbut">
-
         <a asp-action="Index" data-name="semua" class="@(Model.FilterCssClass())">Semua</a>
         @for (int i = 1; i <= 12; i++)
         {
@@ -23,23 +25,27 @@
                class="@(Model.FilterCssClass(i))"
                data-name="bulan">@(Model.MonthName(i))</a>
         }
-
     </div>
+    @* AKhir Tombol Filter *@
 
+    @* Search *@
     <div class="row penc">
-    <form asp-action="Index" method="get" class="form-inline w-100">
-        <div class="input-group">
-            <input type="hidden" name="bulan" id="bulan" value="@Model.Bulan" />
-            <input type="text" id="searchString" name="searchString" value="@Model.SearchString"
-                   class="form-control" placeholder="Cari Pengumuman..." required
-                   oninvalid="this.setCustomValidity('Masukkan kata/kalimat yang ingin dicari')"
-                   oninput="this.setCustomValidity('')" />
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-primary">Cari</button>
+        <form asp-action="Index" method="get" class="form-inline w-100">
+            <div class="input-group">
+                <input type="hidden" name="bulan" id="bulan" value="@Model.Bulan" />
+                <input type="text" id="searchString" name="searchString" value="@Model.SearchString"
+                       class="form-control" placeholder="Cari Pengumuman..." required
+                       oninvalid="this.setCustomValidity('Masukkan kata/kalimat yang ingin dicari')"
+                       oninput="this.setCustomValidity('')" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+    @* Akhir Search *@
+
+    @* Content Pengumuman *@
     <div class="peng-contents">
         @if (Model.Items.Count > 0)
         {
@@ -77,13 +83,15 @@
         }
 
     </div>
+    @* Akhir Content Pengumuman *@
 
+    @* Pagination *@
     <nav>
         <ul class="pagination justify-content-center">
             <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
                 <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)"
                    asp-route-bulan="@Model.Bulan" asp-route-searchString="@Model.SearchString">
-                    Previous
+                    Sebelumnya
                 </a>
             </li>
             @for (var i = 1; i <= Model.Items.TotalPages; i++)
@@ -96,11 +104,12 @@
             <li class="page-item @(Model.Items.HasNextPage ? "" : "disabled")">
                 <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)"
                    asp-route-bulan="@Model.Bulan" asp-route-searchString="@Model.SearchString">
-                    Next
+                    Selanjutnya
                 </a>
             </li>
         </ul>
     </nav>
+    @* Akhir Pagination *@
 </section>
 
 @section Scripts {
