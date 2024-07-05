@@ -2,7 +2,7 @@
 @using System.Globalization
 @model EditVM
 @{
-    ViewData["Title"] = "Tambah Warta Jemaat";
+    ViewData["Title"] = "Edit Warta Jemaat";
     var cultureInfo = new CultureInfo("id-ID");
 }
 
@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-12 mb-3 input-box">
                     <label asp-for="@Model.TanggalWarta" class="form-label"></label>
-                    <input asp-for="@Model.TanggalWarta" type="date" class="form-control" />
+                    <input asp-for="@Model.TanggalWarta" type="date" value="@Model.TanggalWarta.ToString("yyyy-MM-dd")" class="form-control" />
                     <span asp-validation-for="@Model.TanggalWarta" class="text-danger"></span>
                 </div>
             </div>
