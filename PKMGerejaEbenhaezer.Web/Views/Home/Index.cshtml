@@ -3,21 +3,6 @@
 @{
     ViewData["Title"] = "Home Page";
     var cultureInfo = new System.Globalization.CultureInfo("id-ID");
-    var monthNameDict = new Dictionary<int, string>()
-    {
-        {1, "Januari"},
-        {2, "Febuari"},
-        {3, "Maret"},
-        {4, "April"},
-        {5, "Mei"},
-        {6, "Juni"},
-        {7, "Juli"},
-        {8, "Agustus"},
-        {9, "September"},
-        {10, "Oktober"},
-        {11, "November"},
-        {12, "Desember"},
-    };
 }
 
 <!-- Hero Section -->
@@ -191,7 +176,7 @@
                                 <h5></h5>
                                 <h3>@warta.TanggalWarta.Day</h3>
                             </div>
-                            <h4>@(monthNameDict[warta.TanggalWarta.Month]), @warta.TanggalWarta.Year</h4>
+                            <h4>@warta.TanggalWarta.ToString("MMMM, yyyy", cultureInfo)</h4>
                         </div>
                     </div>
                     <a href="@warta.DocumentLink.AbsoluteUri" class="tombolbaca">Baca Warta Jemaat</a>
