@@ -83,46 +83,9 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 }
             }
 
-            modelBuilder.Entity<AppUser>().HasKey(e => e.Id);
-            modelBuilder.Entity<AppUser>().HasIndex(e => e.UserName).IsUnique();
-            modelBuilder.Entity<AppUser>().Property(e => e.LastChanged)
-                .HasColumnType("timestamp without time zone");
+            modelBuilder.ApplyConfigurationsFromAssembly(AssemblyReference.Assembly);
 
-            modelBuilder.Entity<Foto>().HasKey(e => e.Id);
-
-            modelBuilder.Entity<Pengumuman>().HasKey(e => e.Id);
-            modelBuilder.Entity<Pengumuman>().HasOne(e => e.Foto).WithMany().OnDelete(DeleteBehavior.SetNull);
-
-            modelBuilder.Entity<Rayon>().HasKey(r => r.Id);
-            modelBuilder.Entity<Rayon>().HasOne(e => e.FotoKetua).WithMany().OnDelete(DeleteBehavior.SetNull);
-
-            modelBuilder.Entity<WartaJemaat>().HasKey(w => w.Id);
-            modelBuilder.Entity<WartaJemaat>().Property(w => w.DocumentLink)
-                .HasConversion(l => l.ToString(), l => new Uri(l));
-            modelBuilder.Entity<WartaJemaat>().HasIndex(w => w.TanggalWarta);
-
-            modelBuilder.Entity<Pendeta>().HasKey(p => p.Id);
-            modelBuilder.Entity<Pendeta>().HasOne(p => p.Foto).WithMany()
-                .OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Pendeta>().HasIndex(p => p.Nama).IsUnique();
-            modelBuilder.Entity<Pendeta>().Property(p => p.FacebookProfileLink)
-                .HasConversion(l => l.ToString(), l => new Uri(l));
-            modelBuilder.Entity<Pendeta>().Property(p => p.InstagramProfileLink)
-                .HasConversion(l => l.ToString(), l => new Uri(l));
-            modelBuilder.Entity<Pendeta>().Property(p => p.YoutubeProfileLink)
-                .HasConversion(l => l.ToString(), l => new Uri(l));
-
-            modelBuilder.Entity<KategoriIbadah>().HasKey(k => k.Id);
-
-            modelBuilder.Entity<Ibadah>().HasKey(i => i.Id);
-            modelBuilder.Entity<Ibadah>().HasOne(i => i.KategoriIbadah)
-                .WithMany(k => k.DaftarIbadah).OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Ibadah>().HasOne(i => i.Pendeta)
-                .WithMany(p => p.DaftarIbadah).OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Ibadah>().Property(i => i.TanggalIbadah)
-                .HasColumnType("timestamp without time zone");
-
-            ///Seeding Data
+            //Seeding Data
             var daftarUser = new AppUser[]
             {
                 new AppUser

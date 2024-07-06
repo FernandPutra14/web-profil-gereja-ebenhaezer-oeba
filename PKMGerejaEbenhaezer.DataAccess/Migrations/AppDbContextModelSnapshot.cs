@@ -50,7 +50,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("AppUserTable");
+                    b.ToTable("AppUserTable", (string)null);
 
                     b.HasData(
                         new
@@ -100,7 +100,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("PembuatId");
 
-                    b.ToTable("FotoTable");
+                    b.ToTable("FotoTable", (string)null);
 
                     b.HasData(
                         new
@@ -192,7 +192,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("PendetaId");
 
-                    b.ToTable("Ibadah");
+                    b.ToTable("Ibadah", (string)null);
 
                     b.HasData(
                         new
@@ -247,7 +247,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("KategoriIbadahTable");
+                    b.ToTable("KategoriIbadahTable", (string)null);
 
                     b.HasData(
                         new
@@ -301,7 +301,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                     b.HasIndex("Nama")
                         .IsUnique();
 
-                    b.ToTable("PendetaTable");
+                    b.ToTable("PendetaTable", (string)null);
 
                     b.HasData(
                         new
@@ -376,7 +376,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("PembuatId");
 
-                    b.ToTable("PengumumanTable");
+                    b.ToTable("PengumumanTable", (string)null);
 
                     b.HasData(
                         new
@@ -475,7 +475,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("FotoKetuaId");
 
-                    b.ToTable("RayonTable");
+                    b.ToTable("RayonTable", (string)null);
 
                     b.HasData(
                         new
@@ -552,7 +552,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("TanggalWarta");
 
-                    b.ToTable("WartaJemaatTable");
+                    b.ToTable("WartaJemaatTable", (string)null);
 
                     b.HasData(
                         new
