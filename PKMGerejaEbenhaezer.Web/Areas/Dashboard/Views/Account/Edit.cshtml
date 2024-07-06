@@ -1,0 +1,60 @@
+﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Account
+@model EditVM
+@{
+    ViewData["Title"] = "Edit Akun";
+}
+
+<div class="plusakn">
+    <h1 class="title">Edit Akun</h1>
+    <ul class="breadcrumbs mb-4">
+        <li><a href="#">Akun</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Edit Akun</a></li>
+    </ul>
+    <div class="container-fluid cardplus">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <input hidden asp-for="@Model.Id"/>
+
+            <div class="row">
+                <div class="col-12 input-box">
+                    <label asp-for="@Model.UserName" class="form-label"></label>
+                    <input asp-for="@Model.UserName" class="form-control" type="text" autocomplete="new-username" />
+                    <span asp-validation-for="@Model.UserName" class="text-danger form-text"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 input-box">
+                    <label asp-for="@Model.Password" class="form-label"></label>
+                    <input asp-for="@Model.Password" class="form-control" type="password" autocomplete="new-password" />
+                    <span asp-validation-for="@Model.Password" class=" text-danger form-text"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 input-box">
+                    <label asp-for="@Model.PasswordConfirmation" class="form-label"></label>
+                    <input asp-for="@Model.PasswordConfirmation" class="form-control" type="password" />
+                    <span asp-validation-for="@Model.PasswordConfirmation" class=" text-danger form-text"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 mt-4">
+                <div class="col-12">
+                    <button type="submit" class="btn" style="width:100%;">Simpan</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

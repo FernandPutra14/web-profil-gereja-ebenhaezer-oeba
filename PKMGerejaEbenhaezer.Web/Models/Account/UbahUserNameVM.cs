@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Account
+namespace PKMGerejaEbenhaezer.Web.Models.Account
 {
     public class UbahUserNameVM
     {

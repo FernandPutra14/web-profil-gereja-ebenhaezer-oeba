@@ -7,7 +7,7 @@
 <section id="login-form" class="">
     <div class="container">
         <h1>Masuk ke akun anda</h1>
-        <form id="account" method="post" asp-action="Login">
+        <form id="account" method="post" asp-action="Login" asp-route-returnUrl="@ViewData["returnUrl"]">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="divider">

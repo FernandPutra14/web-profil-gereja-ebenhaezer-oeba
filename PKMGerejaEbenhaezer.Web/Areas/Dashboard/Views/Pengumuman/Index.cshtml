@@ -77,6 +77,7 @@
                                 <a class="btn" asp-action="Edit" asp-route-id="@pengumuman.Id">
                                     <i class="fas fa-pen-square"></i>
                                 </a>
+
                                 <!-- Button trigger modal -->
                                 <a class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal@(pengumuman.Id)">
                                     <i class="fa fa-regular fa-trash"></i>
@@ -84,11 +85,11 @@
 
                                 @{
                                     var modalVM = new DeleteConfirmationModalVM
-                {
-                    ModalId = $"exampleModal{pengumuman.Id}",
-                    ModalTitle = "Hapus Pengumuman",
-                    FormAction = Url.Action("Hapus", "Pengumuman", new { Area = "Dashboard", id = pengumuman.Id })!,
-                };
+                                    {
+                                        ModalId = $"exampleModal{pengumuman.Id}",
+                                        ModalTitle = "Hapus Pengumuman",
+                                        FormAction = Url.Action("Hapus", "Pengumuman", new { Area = "Dashboard", id = pengumuman.Id })!,
+                                    };
                                 }
 
                                 <partial name="_DeleteConfirmationModalPartial" model="modalVM" />

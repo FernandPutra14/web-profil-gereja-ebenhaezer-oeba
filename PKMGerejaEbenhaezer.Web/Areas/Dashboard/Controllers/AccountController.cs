@@ -9,7 +9,7 @@ using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Account;
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
-    [Authorize]
+    [Authorize(Roles = AppUserRoles.SuperAdmin)]
     public class AccountController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -21,7 +21,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             _logger = logger;
         }
 
-        [Authorize(Roles = AppUserRoles.SuperAdmin)]
         public async Task<IActionResult> Index()
         {
             var daftarUser = await _appDbContext.AppUserTable
@@ -31,14 +30,12 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         }
 
         //Tambah Akun
-        [Authorize(Roles = AppUserRoles.SuperAdmin)]
         public IActionResult Tambah()
         {
             return View(new TambahVM());
         }
 
         [HttpPost]
-        [Authorize(Roles = AppUserRoles.SuperAdmin)]
         public async Task<IActionResult> Tambah(TambahVM tambahVM)
         {
             //Validasi
@@ -81,7 +78,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
         //Hapus Akun
         [HttpPost]
-        [Authorize(Roles = AppUserRoles.SuperAdmin)]
         public async Task<IActionResult> Hapus(int id)
         {
             var user = await _appDbContext.AppUserTable
@@ -115,43 +111,61 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //Ubah password
-        public IActionResult UbahPassword()
+        //Edit Akun
+        public async Task<IActionResult> Edit(int id)
         {
-            return View(new UbahPasswordVM());
+            var user = await _appDbContext.AppUserTable
+                .Where(u => u.Id == id).FirstOrDefaultAsync();
+
+            if (user is null) return NotFound();
+            
+            if(user.Role == AppUserRoles.SuperAdmin)
+            {
+                _logger.LogError("Mencoba mengubah akun dengan Role : {0}", AppUserRoles.SuperAdmin);
+                return BadRequest();
+            }
+
+            if (user.UserName == User.Identity?.Name)
+            {
+                _logger.LogError("Mencoba mengubah akun sendiri. User Name : {0}", user.UserName);
+                return BadRequest();
+            }
+
+            return View(new EditVM
+            {
+                Id = id,
+                UserName = user.UserName,
+            });
         }
 
         [HttpPost]
-        public async Task<IActionResult> UbahPassword(UbahPasswordVM ubahPasswordVM)
+        public async Task<IActionResult> Edit(EditVM editVM)
         {
             //Validasi
-            if (!ModelState.IsValid)
-                return View(ubahPasswordVM);
+            if(!ModelState.IsValid) return View(editVM);
 
-            var userName = User.Identity?.Name;
             var user = await _appDbContext.AppUserTable
-                .Where(p => p.UserName == userName).FirstOrDefaultAsync();
+                .Where(u => u.Id == editVM.Id).FirstOrDefaultAsync();
 
             if (user is null)
+                return RedirectToAction(nameof(Index));
+
+            var duplikasiNama = await _appDbContext.AppUserTable
+                .AnyAsync(u => u.Id != editVM.Id && u.UserName == editVM.UserName);
+
+            if(duplikasiNama)
             {
-                ModelState.AddModelError(string.Empty, "Anda harus login terlebih dahulu untuk merubah password");
-                return View(ubahPasswordVM);
-            }
-
-            var hasher = new PasswordHasher<AppUser>();
-
-            var verificationResult = hasher.VerifyHashedPassword(null,
-                user.PasswordHash, ubahPasswordVM.Password);
-
-            if (verificationResult == PasswordVerificationResult.Success ||
-                verificationResult == PasswordVerificationResult.SuccessRehashNeeded)
-            {
-                ModelState.AddModelError(nameof(UbahPasswordVM.Password), "Password baru sama dengan password lama");
-                return View(ubahPasswordVM);
+                ModelState.AddModelError(nameof(EditVM.UserName), $"{editVM.UserName} sudah digunakan");
+                return View(editVM);
             }
 
             //Simpan ke database
-            user.PasswordHash = hasher.HashPassword(null, ubahPasswordVM.Password);
+            var hasher = new PasswordHasher<AppUser>();
+
+            user.UserName = editVM.UserName;
+
+            if (!string.IsNullOrEmpty(editVM.Password))
+                user.PasswordHash = hasher.HashPassword(null, editVM.Password);
 
             try
             {
@@ -159,66 +173,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Error saat menyimpan data. Silahkan laporkan ke administrator");
-                _logger.LogError(
-                """
-                    Ubah Password Gagal. 
-                    User = {0}.
-                    Exception : {1}
-                """, userName, ex.ToString());
-                return View(ubahPasswordVM);
+                ModelState.AddModelError(string.Empty, "Terjadi error saat menyimpan data. Laporkan error ke adminintrator");
+                _logger.LogError("Edit Akun. Error Simpan Data. User Id : {0}. Exception : {1}"
+                    , editVM.Id, ex.ToString());
+                return View(editVM);
             }
 
-            return RedirectToAction(nameof(HomeController.Index), "Home", new { Area = "Dashboard" });
-        }
-
-        //Ubah user name
-        public IActionResult UbahUserName()
-        {
-            return View(new UbahUserNameVM());
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> UbahUserName(UbahUserNameVM ubahUserNameVM)
-        {
-            //Validasi
-            if (!ModelState.IsValid) return View(ubahUserNameVM);
-
-            var userName = User.Identity?.Name;
-
-            var user = await _appDbContext.AppUserTable
-                .Where(u => u.UserName == userName).FirstOrDefaultAsync();
-
-            if(user is null)
-            {
-                ModelState.AddModelError(string.Empty, "Anda harus login terlebih dahulu sebelum merubah user name");
-                return View(ubahUserNameVM);
-            }
-
-            var duplikasiNama = await _appDbContext.AppUserTable
-                .AnyAsync(u => u.Id != user.Id && u.UserName == userName);
-
-            if (duplikasiNama)
-            {
-                ModelState.AddModelError(nameof(UbahUserNameVM.UserName),
-                    $"{ubahUserNameVM.UserName} sudah digunakan!. Gunakan nama lain.");
-                return View(ubahUserNameVM);
-            }
-
-            user.UserName = ubahUserNameVM.UserName;
-
-            try
-            {
-                await _appDbContext.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, "Simpan gagal, terjadi error saat menyimpan ke database. Silahkan hubungi administrator");
-                _logger.LogError("UbahUserName. Error simpan ke database. UserName : {0}. Exception : {1}", userName, ex.ToString());
-                return View(ubahUserNameVM);
-            }
-
-            return RedirectToAction(nameof(HomeController.Index), "Home", new { Area = "Dashboard" });
+            return RedirectToAction(nameof(Index));
         }
     }
 }

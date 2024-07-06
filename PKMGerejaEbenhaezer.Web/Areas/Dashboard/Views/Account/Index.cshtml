@@ -37,19 +37,27 @@
                         <td>
                             @if (User.Identity?.Name != appUser.UserName)
                             {
-                                <!-- Button trigger modal -->
-                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(appUser.Id)">
-                                    <i class="fa fa-regular fa-trash"></i>
-                                </a>
+                                <div class="d-flex gap-1 justify-content-start align-items-center">
+                                    <a class="btn" asp-action="Edit" asp-route-id="@appUser.Id">
+                                        <i class="fas fa-pen-square"></i>
+                                    </a>
 
-                                var modalVM = new DeleteConfirmationModalVM
-                                {
-                                    ModalId = $"exampleModal{appUser.Id}",
-                                    ModalTitle = "Hapus Akun",
-                                    FormAction = Url.Action("Hapus", "Account", new { Area = "Dashboard", id = appUser.Id })!,
-                                };
+                                    <!-- Button trigger modal -->
+                                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(appUser.Id)">
+                                        <i class="fa fa-regular fa-trash"></i>
+                                    </a>
 
-                                <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
+                                    @{
+                                        var modalVM = new DeleteConfirmationModalVM
+                                        {
+                                            ModalId = $"exampleModal{appUser.Id}",
+                                            ModalTitle = "Hapus Akun",
+                                            FormAction = Url.Action("Hapus", "Account", new { Area = "Dashboard", id = appUser.Id })!,
+                                        };
+                                    }
+
+                                    <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
+                                </div>
                             }
                         </td>
                     </tr>
