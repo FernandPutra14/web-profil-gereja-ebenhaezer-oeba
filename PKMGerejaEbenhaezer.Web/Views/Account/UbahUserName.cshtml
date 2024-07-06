@@ -4,7 +4,7 @@
     ViewData["Title"] = "Ubah User Name";
 }
 
-<div class="container">
+<div class="container mt-5">
     <form asp-action="UbahUserName">
         <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <p class="form-text">Setelah User Name berhasil diubah anda akan log out dan diarahkan ke halaman login untuk login dengan User Name baru.</p>
@@ -27,4 +27,21 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+        $(function () {
+            $('.main-navbar').css({
+                'position': 'fixed',
+                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
+                'background-color': 'var(--primary-clr)',
+            });
+            $(function () {
+                $('.badan-utama').css({
+                    'padding-left': '0',
+                    'padding-right': '0',
+                    'padding-top': '8rem',
+                });
+            });
+        });
+    </script>
 }
