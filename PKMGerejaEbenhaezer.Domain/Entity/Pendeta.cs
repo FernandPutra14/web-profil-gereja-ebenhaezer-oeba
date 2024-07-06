@@ -13,5 +13,7 @@ namespace PKMGerejaEbenhaezer.Domain.Entity
         public Uri? FacebookProfileLink { get; set; }
         public Uri? InstagramProfileLink { get; set; }
         public Uri? YoutubeProfileLink { get; set; }
+
+        public List<Ibadah> DaftarIbadah { get; set; } = new();
     }
 }

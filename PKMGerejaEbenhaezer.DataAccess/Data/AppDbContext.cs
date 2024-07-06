@@ -27,6 +27,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         public DbSet<Foto> FotoTable { get; set; }
         public DbSet<WartaJemaat> WartaJemaatTable { get; set; }
         public DbSet<Pendeta> PendetaTable { get; set; }
+        public DbSet<KategoriIbadah> KategoriIbadahTable { get; set; }
 
         public override int SaveChanges()
         {
@@ -101,7 +102,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
             modelBuilder.Entity<WartaJemaat>().HasIndex(w => w.TanggalWarta);
 
             modelBuilder.Entity<Pendeta>().HasKey(p => p.Id);
-            modelBuilder.Entity<Pendeta>().HasOne(p => p.Foto).WithMany().OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Pendeta>().HasOne(p => p.Foto).WithMany()
+                .OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<Pendeta>().HasIndex(p => p.Nama).IsUnique();
             modelBuilder.Entity<Pendeta>().Property(p => p.FacebookProfileLink)
                 .HasConversion(l => l.ToString(), l => new Uri(l));
@@ -109,6 +111,16 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 .HasConversion(l => l.ToString(), l => new Uri(l));
             modelBuilder.Entity<Pendeta>().Property(p => p.YoutubeProfileLink)
                 .HasConversion(l => l.ToString(), l => new Uri(l));
+
+            modelBuilder.Entity<KategoriIbadah>().HasKey(k => k.Id);
+
+            modelBuilder.Entity<Ibadah>().HasKey(i => i.Id);
+            modelBuilder.Entity<Ibadah>().HasOne(i => i.KategoriIbadah)
+                .WithMany(k => k.DaftarIbadah).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Ibadah>().HasOne(i => i.Pendeta)
+                .WithMany(p => p.DaftarIbadah).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Ibadah>().Property(i => i.TanggalIbadah)
+                .HasColumnType("timestamp without time zone");
 
             ///Seeding Data
             var daftarUser = new AppUser[]
@@ -342,6 +354,63 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     Id = 5,
                     Nama = "Ita Tassi Adoe, S.Th.",
                     FotoId = daftarFoto[daftarFoto.Length - 1].Id
+                }
+            );
+
+            modelBuilder.Entity<KategoriIbadah>().HasData(
+                new KategoriIbadah
+                {
+                    Id = 1,
+                    Nama = "Kebaktian Umum",
+                    Durasi = new TimeSpan(2, 0, 0)
+                },
+                new KategoriIbadah
+                {
+                    Id = 2,
+                    Nama = "Perjamuan",
+                    Durasi = new TimeSpan(2, 0, 0)
+                },
+                new KategoriIbadah
+                {
+                    Id = 3,
+                    Nama = "Persiapan Perjamuan",
+                    Durasi = new TimeSpan(2, 0, 0)
+                }
+            );
+
+            modelBuilder.Entity<Ibadah>().HasData(
+                new
+                {
+                    Id = 1,
+                    Judul = "Kebaktian Pagi Pertama",
+                    Deskripsi = "Kebaktian hari minggu pagi pertama",
+                    NasPembimbing = "Mazmur 12:15",
+                    TanggalIbadah = new DateTime(2024, 06, 23, 6, 0, 0),
+                    Tempat = "Gedung Gereja Ebenhaezer Oeba",
+                    KategoriIbadahId = 1,
+                    PendetaId = 1,
+                },
+                new
+                {
+                    Id = 2,
+                    Judul = "Kebaktian Pagi Kedua",
+                    Deskripsi = "Kebaktian hari minggu pagi kedua",
+                    NasPembimbing = "Mazmur 12:15",
+                    TanggalIbadah = new DateTime(2024, 06, 23, 8, 0, 0),
+                    Tempat = "Gedung Gereja Ebenhaezer Oeba",
+                    KategoriIbadahId = 1,
+                    PendetaId = 3,
+                },
+                new
+                {
+                    Id = 3,
+                    Judul = "Perjamuan Bulan Juni",
+                    Deskripsi = "Perjamuan Bulan Juni",
+                    NasPembimbing = "Matius 3:16",
+                    TanggalIbadah = new DateTime(2024, 7, 5, 8, 0, 0),
+                    Tempat = "Gedung Gereja Ebenhaezer Oeba",
+                    KategoriIbadahId = 2,
+                    PendetaId = 2,
                 }
             );
         }
