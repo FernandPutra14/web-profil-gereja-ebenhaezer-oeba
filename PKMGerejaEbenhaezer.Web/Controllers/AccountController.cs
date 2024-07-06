@@ -16,7 +16,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         private readonly AppDbContext _appDbContext;
         private readonly ILogger<AccountController> _logger;
 
-        public AccountController(ISignInManager signInManager, 
+        public AccountController(ISignInManager signInManager,
             AppDbContext appDbContext, ILogger<AccountController> logger)
         {
             _signInManager = signInManager;
@@ -68,18 +68,22 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             return View();
         }
 
-        //Ubah password
-        public IActionResult UbahPassword()
+        //Edit Akun
+        public IActionResult Edit()
         {
-            return View(new UbahPasswordVM());
+            var userName = User.Identity?.Name;
+
+            if (userName is null) return RedirectToAction(nameof(Login));
+
+            return View(new EditVM { UserName = userName });
         }
 
         [HttpPost]
-        public async Task<IActionResult> UbahPassword(UbahPasswordVM ubahPasswordVM)
+        public async Task<IActionResult> Edit(EditVM editVM)
         {
             //Validasi
             if (!ModelState.IsValid)
-                return View(ubahPasswordVM);
+                return View(editVM);
 
             var userName = User.Identity?.Name;
             var user = await _appDbContext.AppUserTable
@@ -88,23 +92,39 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             if (user is null)
             {
                 ModelState.AddModelError(string.Empty, "Anda harus login terlebih dahulu untuk merubah password");
-                return View(ubahPasswordVM);
+                return View(editVM);
+            }
+
+            var duplikasiNama = await _appDbContext.AppUserTable
+                .AnyAsync(u => u.Id != user.Id && u.UserName == editVM.UserName);
+
+            if (duplikasiNama)
+            {
+                ModelState.AddModelError(nameof(editVM.UserName),
+                    $"{editVM.UserName} sudah digunakan!. Gunakan nama lain.");
+                return View(editVM);
             }
 
             var hasher = new PasswordHasher<AppUser>();
 
-            var verificationResult = hasher.VerifyHashedPassword(null,
-                user.PasswordHash, ubahPasswordVM.Password);
-
-            if (verificationResult == PasswordVerificationResult.Success ||
-                verificationResult == PasswordVerificationResult.SuccessRehashNeeded)
+            if (editVM.Password is not null)
             {
-                ModelState.AddModelError(nameof(UbahPasswordVM.Password), "Password baru sama dengan password lama");
-                return View(ubahPasswordVM);
+                var verificationResult = hasher.VerifyHashedPassword(null,
+                    user.PasswordHash, editVM.Password);
+
+                if (verificationResult == PasswordVerificationResult.Success ||
+                    verificationResult == PasswordVerificationResult.SuccessRehashNeeded)
+                {
+                    ModelState.AddModelError(nameof(editVM.Password), "Password baru sama dengan password lama");
+                    return View(editVM);
+                }
             }
 
             //Simpan ke database
-            user.PasswordHash = hasher.HashPassword(null, ubahPasswordVM.Password);
+            user.UserName = editVM.UserName;
+
+            if (editVM.Password is not null)
+                user.PasswordHash = hasher.HashPassword(null, editVM.Password);
 
             try
             {
@@ -112,63 +132,14 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Error saat menyimpan data. Silahkan laporkan ke administrator");
+                ModelState.AddModelError(string.Empty, "Simpan gagal, terjadi error saat menyimpan ke database. Silahkan laporkan ke administrator");
                 _logger.LogError(
                 """
-                    Ubah Password Gagal. 
+                    Edit Akun Gagal. 
                     User = {0}.
                     Exception : {1}
                 """, userName, ex.ToString());
-                return View(ubahPasswordVM);
-            }
-
-            return RedirectToAction(nameof(Login));
-        }
-
-        //Ubah user name
-        public IActionResult UbahUserName()
-        {
-            return View(new UbahUserNameVM());
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> UbahUserName(UbahUserNameVM ubahUserNameVM)
-        {
-            //Validasi
-            if (!ModelState.IsValid) return View(ubahUserNameVM);
-
-            var userName = User.Identity?.Name;
-
-            var user = await _appDbContext.AppUserTable
-                .Where(u => u.UserName == userName).FirstOrDefaultAsync();
-
-            if (user is null)
-            {
-                ModelState.AddModelError(string.Empty, "Anda harus login terlebih dahulu sebelum merubah user name");
-                return View(ubahUserNameVM);
-            }
-
-            var duplikasiNama = await _appDbContext.AppUserTable
-                .AnyAsync(u => u.Id != user.Id && u.UserName == userName);
-
-            if (duplikasiNama)
-            {
-                ModelState.AddModelError(nameof(UbahUserNameVM.UserName),
-                    $"{ubahUserNameVM.UserName} sudah digunakan!. Gunakan nama lain.");
-                return View(ubahUserNameVM);
-            }
-
-            user.UserName = ubahUserNameVM.UserName;
-
-            try
-            {
-                await _appDbContext.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, "Simpan gagal, terjadi error saat menyimpan ke database. Silahkan hubungi administrator");
-                _logger.LogError("UbahUserName. Error simpan ke database. UserName : {0}. Exception : {1}", userName, ex.ToString());
-                return View(ubahUserNameVM);
+                return View(editVM);
             }
 
             return RedirectToAction(nameof(Login));
