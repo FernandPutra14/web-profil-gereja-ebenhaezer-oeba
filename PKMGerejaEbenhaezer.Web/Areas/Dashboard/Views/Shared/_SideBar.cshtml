@@ -47,7 +47,10 @@
 
 
         <!-- Akun -->
-        <li><a asp-area="Dashboard" asp-controller="Account" asp-action="Index"><i class="ri-account-box-fill icon"></i>Akun</a></li>
+        @if (User.IsInRole(AppUserRoles.SuperAdmin))
+        {
+            <li><a asp-area="Dashboard" asp-controller="Account" asp-action="Index"><i class="ri-account-box-fill icon"></i>Akun</a></li>
+        }
         <!-- Akhir Akun -->
 
 

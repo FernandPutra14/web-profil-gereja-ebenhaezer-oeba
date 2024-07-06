@@ -9,7 +9,7 @@ using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Account;
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
-    [Authorize(Roles = "Super Admin")]
+    [Authorize(Roles = AppUserRoles.SuperAdmin)]
     public class AccountController : Controller
     {
         private readonly AppDbContext _appDbContext;
