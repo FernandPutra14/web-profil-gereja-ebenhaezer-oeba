@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Account;
-using System.Security.Cryptography;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -174,6 +173,52 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         }
 
         //Ubah user name
+        public IActionResult UbahUserName()
+        {
+            return View(new UbahUserNameVM());
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> UbahUserName(UbahUserNameVM ubahUserNameVM)
+        {
+            //Validasi
+            if (!ModelState.IsValid) return View(ubahUserNameVM);
+
+            var userName = User.Identity?.Name;
+
+            var user = await _appDbContext.AppUserTable
+                .Where(u => u.UserName == userName).FirstOrDefaultAsync();
+
+            if(user is null)
+            {
+                ModelState.AddModelError(string.Empty, "Anda harus login terlebih dahulu sebelum merubah user name");
+                return View(ubahUserNameVM);
+            }
+
+            var duplikasiNama = await _appDbContext.AppUserTable
+                .AnyAsync(u => u.Id != user.Id && u.UserName == userName);
+
+            if (duplikasiNama)
+            {
+                ModelState.AddModelError(nameof(UbahUserNameVM.UserName),
+                    $"{ubahUserNameVM.UserName} sudah digunakan!. Gunakan nama lain.");
+                return View(ubahUserNameVM);
+            }
+
+            user.UserName = ubahUserNameVM.UserName;
+
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Simpan gagal, terjadi error saat menyimpan ke database. Silahkan hubungi administrator");
+                _logger.LogError("UbahUserName. Error simpan ke database. UserName : {0}. Exception : {1}", userName, ex.ToString());
+                return View(ubahUserNameVM);
+            }
+
+            return RedirectToAction(nameof(HomeController.Index), "Home", new { Area = "Dashboard" });
+        }
     }
 }
