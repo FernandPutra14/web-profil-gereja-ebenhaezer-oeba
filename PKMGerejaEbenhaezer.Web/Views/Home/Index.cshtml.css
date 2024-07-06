@@ -16,7 +16,6 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    z-index: 10;
 }
 
     #hero h1 {
@@ -44,6 +43,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: -1;
 }
 
     #sejarah ::deep .row-container {
@@ -90,7 +90,6 @@
 #pendeta {
     padding: 5vw 8vw 0 8vw;
     text-align: center;
-    z-index: 999;
 }
 
     #pendeta h1 {
