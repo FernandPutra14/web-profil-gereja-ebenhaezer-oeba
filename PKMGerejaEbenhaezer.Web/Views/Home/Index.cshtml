@@ -25,8 +25,6 @@
     <h1 data-aos="fade-up">Selamat Datang</h1>
 </section>
 <!-- Akhir Hero Section -->
-
-
 <!-- Sejarah Section -->
 <section id="sejarah">
     <div class="row-container">
@@ -36,23 +34,21 @@
         <div class="content-sej">
             <h2>Sejarah GMIT Ebenhaezer Oeba Kupang</h2>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Gravida in fermentum et sollicitudin ac orci phasellus egestas. Vestibulum morbi blandit cursus risus at. At in tellus integer 
-                feugiat. Augue mauris augue neque gravida in fermentum. Sed risus pretium quam vulputate. Netus et malesuada fames ac turpis egestas. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Gravida in fermentum et sollicitudin ac orci phasellus egestas. Vestibulum morbi blandit cursus risus at. At in tellus integer
+                feugiat. Augue mauris augue neque gravida in fermentum. Sed risus pretium quam vulputate. Netus et malesuada fames ac turpis egestas.
                 At imperdiet dui accumsan sit.
             </p>
             <p>
                 Turpis massa tincidunt dui ut ornare lectus sit.
                 Sagittis id consectetur purus ut. Dignissim diam quis enim lobortis. Amet est placerat in egestas erat imperdiet
-                sed euismod nisi. At imperdiet dui accumsan sit. Imperdiet nulla malesuada pellentesque elit eget gravida cum sociis natoque. 
+                sed euismod nisi. At imperdiet dui accumsan sit. Imperdiet nulla malesuada pellentesque elit eget gravida cum sociis natoque.
                 Urna cursus eget nunc scelerisque viverra mauris in aliquam sem.
             </p>
         </div>
     </div>
 </section>
 <!-- Akhir Sejarah Section -->
-
-
 <!-- Pendeta Section -->
 <section id="pendeta">
     <h1>Pendeta GMIT Ebenhaezer Oeba</h1>
@@ -60,13 +56,13 @@
     <div class="pendeta-box">
         <div class="owl-carousel owl-theme fernand">
 
-            @foreach(var pendeta in Model.DaftarPendeta)
+            @foreach (var pendeta in Model.DaftarPendeta)
             {
                 <div class="profile">
                     <div class="gambar-pen">
-                        @if(pendeta.Foto is not null)
+                        @if (pendeta.Foto is not null)
                         {
-                            <img src="@Url.Action("Index", "Foto", new { Area = "", id = pendeta.Foto.Id})"/>
+                            <img src="@Url.Action("Index", "Foto", new { Area = "", id = pendeta.Foto.Id})" />
                         }
                         else
                         {
@@ -76,26 +72,20 @@
                     <h6>@pendeta.Nama</h6>
                     <p>Pendeta</p>
                     <div class="pen-link">
-                        @if(pendeta.FacebookProfileLink is not null)
-                        {
-                            <a href="@pendeta.FacebookProfileLink.AbsoluteUri">
-                                <i class="ri-facebook-fill"></i>
-                            </a>
-                        }
+                        <a @(pendeta.FacebookProfileLink is not null ?
+                            $"href={pendeta.FacebookProfileLink.AbsoluteUri}" : "")>
+                            <i class="ri-facebook-fill"></i>
+                        </a>
 
-                        @if (pendeta.InstagramProfileLink is not null)
-                        {
-                            <a href="@pendeta.InstagramProfileLink.AbsoluteUri">
-                                <i class="ri-instagram-fill"></i>
-                            </a>
-                        }
+                        <a @(pendeta.InstagramProfileLink is not null ?
+                            $"href={pendeta.InstagramProfileLink.AbsoluteUri}" : "")>
+                            <i class="ri-instagram-fill"></i>
+                        </a>
 
-                        @if (pendeta.YoutubeProfileLink is not null)
-                        {
-                            <a href="@pendeta.YoutubeProfileLink.AbsoluteUri">
-                                <i class="ri-youtube-fill"></i>
-                            </a>
-                        }
+                        <a @(pendeta.YoutubeProfileLink is not null ?
+                            $"href={pendeta.YoutubeProfileLink.AbsoluteUri}" : "")>
+                            <i class="ri-youtube-fill"></i>
+                        </a>
                     </div>
                 </div>
             }
@@ -103,23 +93,19 @@
     </div>
 </section>
 <!-- Akhir Pendeta Section -->
-
-
 <!-- Injil Section -->
 <section id="injil">
     <div class="injil-text">
         <h6 class="mt-3">
             "Karena tidak ada seorangpun yang dapat meletakkan dasar lain dari pada dasar yang telah diletakkan, yaitu Yesus Kristus.
             Entahkah orang membangun di atas dasar ini dengan emas, perak, batu permata, kayu, rumput kering atau jerami,
-            sekali kelak pekerjaan masing-masing orang akan nampak. Karena hari Tuhan akan menyatakannya, sebab ia akan nampak 
+            sekali kelak pekerjaan masing-masing orang akan nampak. Karena hari Tuhan akan menyatakannya, sebab ia akan nampak
             dengan api dan bagaimana pekerjaan masing-masing orang akan diuji oleh api itu."
         </h6>
         <p class="mt-4">( 1 Korintus 3:11-13 )</p>
-    </div> 
+    </div>
 </section>
 <!-- Akhir Injil Section -->
-
-
 <!-- Char Jemaat Section -->
 <section id="about-container">
     <!-- Char -->
@@ -130,13 +116,13 @@
                 Type = ChartType.Doughnut,
                 Label = "Jemaat Gereja",
                 Data = new Dictionary<string, double>
-                {
-                    {"Lansia", Model.TotalLansia},
-                    {"Dewasa", Model.TotalDewasa},
-                    {"Pemuda", Model.TotalPemuda},
-                    {"Remaja", Model.TotalRemaja},
-                    {"Anak", Model.TotalAnak},
-                },
+        {
+        {"Lansia", Model.TotalLansia},
+        {"Dewasa", Model.TotalDewasa},
+        {"Pemuda", Model.TotalPemuda},
+        {"Remaja", Model.TotalRemaja},
+        {"Anak", Model.TotalAnak},
+        },
             };
         }
 
@@ -177,8 +163,6 @@
     </div>
 </section>
 <!-- Akhir Chart Section -->
-
-
 <!-- Warta Section -->
 <section class="warta">
     <!-- Header Warta Section -->
@@ -196,7 +180,7 @@
     <!-- Content Warta Section -->
     <div class="warta-contents">
         <div class="owl-carousel owl-theme fajar">
-            @foreach(var warta in Model.DaftarWartaJemaat)
+            @foreach (var warta in Model.DaftarWartaJemaat)
             {
                 <!-- Ini Cardnya -->
                 <div class="item warta-card">
@@ -213,13 +197,12 @@
                     <a href="@warta.DocumentLink.AbsoluteUri" class="tombolbaca">Baca Warta Jemaat</a>
                 </div>
                 <!-- Ini Akhir Cardnya -->
-            }           
+            }
         </div>
     </div>
     <!-- Akhir Content Warta Section -->
 </section>
 <!-- Akhir Warta Section -->
-
 <!-- Pengumuman Section -->
 <section class="peng mb-5">
     <!-- Header Pengumuman Section -->
@@ -272,20 +255,18 @@
     <!-- Akhir Content Pengumuman Section -->
 </section>
 <!-- Akhir Pengumuman Section -->
-
-
 @section Scripts {
     <script type="text/javascript" src="~/js/parallax.js"></script>
     <script type="text/javascript" src="~/js/counter.js"></script>
     <script type="text/javascript" src="~/js/transisiNavbar.js"></script>
-    
+
     <script type="text/javascript">
         $(function () {
             $('.badan-utama').css({
                 'padding-left': '0',
                 'padding-right': '0',
                 'padding-top': '0rem',
-            });          
+            });
         });
     </script>
 }
