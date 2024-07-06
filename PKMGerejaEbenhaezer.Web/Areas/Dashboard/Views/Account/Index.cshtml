@@ -3,50 +3,65 @@
     ViewData["Title"] = "Akun";
 }
 
-<div class="container-fluid">
-    <h1 class="text-center text-capitalize">
+<div class="akunn">
+    <h1 class="title">Akun Admin</h1>
+    <ul class="breadcrumbs mb-4">
+        <li><a href="#">Informasi</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Akun Admin</a></li>
+    </ul>
+    <div class="mb-4 mt-4">
+        <a style="" class="btn w-100" asp-area="Dashboard" asp-controller="Account" asp-action="Tambah"> + Tambah Akun</a>
+    </div>
+    <div class="container">
+        @* <h1 class="text-center text-capitalize">
         Daftar Akun
-    </h1>
+        </h1>
 
-    <a class="btn btn-primary" asp-action="Tambah">Tambah</a>
+        <a class="btn btn-primary" asp-action="Tambah">Tambah</a> *@
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var appUser in Model)
-            {
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td>@appUser.Id</td>
-                    <td>@appUser.UserName</td>
-                    <td>
-                        @if (User.Identity?.Name != appUser.UserName)
-                        {
-                            <!-- Button trigger modal -->
-                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(appUser.Id)">
-                                <i class="fa fa-regular fa-trash"></i>
-                            </a>
-
-                            var modalVM = new DeleteConfirmationModalVM
-                            {
-                                ModalId = $"exampleModal{appUser.Id}",
-                                ModalTitle = "Hapus Akun",
-                                FormAction = Url.Action("Hapus", "Account", new { Area = "Dashboard", id = appUser.Id })!,
-                            };                         
-
-                            <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
-                        }
-                    </td>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Aksi</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var appUser in Model)
+                {
+                    <tr>
+                        <td>@appUser.Id</td>
+                        <td>@appUser.UserName</td>
+                        <td>
+                            @if (User.Identity?.Name != appUser.UserName)
+                            {
+                                <!-- Button trigger modal -->
+                                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal@(appUser.Id)">
+                                    <i class="fa fa-regular fa-trash"></i>
+                                </a>
+
+                                var modalVM = new DeleteConfirmationModalVM
+                    {
+                        ModalId = $"exampleModal{appUser.Id}",
+                        ModalTitle = "Hapus Akun",
+                        FormAction = Url.Action("Hapus", "Account", new { Area = "Dashboard", id = appUser.Id })!,
+                    };
+
+                                <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+
+
+
+
 
 @section Scripts {
     <partial name="_DataTablePartial" />
