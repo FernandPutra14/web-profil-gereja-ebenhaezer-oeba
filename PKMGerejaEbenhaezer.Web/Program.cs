@@ -42,7 +42,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
         options.SlidingExpiration = true;
+        options.EventsType = typeof(CustomCookieAuthenticationEvents);
     });
+
+builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

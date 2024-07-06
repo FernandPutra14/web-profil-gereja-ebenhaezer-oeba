@@ -32,6 +32,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         {
             try
             {
+                UpdateAppUserLastChanged();
                 AuditAuditableEntity();
                 return base.SaveChanges();
             }
@@ -49,6 +50,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         {
             try
             {
+                UpdateAppUserLastChanged();
                 AuditAuditableEntity();
 
                 return await base.SaveChangesAsync(cancellationToken);
@@ -82,6 +84,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
 
             modelBuilder.Entity<AppUser>().HasKey(e => e.Id);
             modelBuilder.Entity<AppUser>().HasIndex(e => e.UserName).IsUnique();
+            modelBuilder.Entity<AppUser>().Property(e => e.LastChanged)
+                .HasColumnType("timestamp without time zone");
 
             modelBuilder.Entity<Foto>().HasKey(e => e.Id);
 
@@ -107,14 +111,27 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 .HasConversion(l => l.ToString(), l => new Uri(l));
 
             ///Seeding Data
-            var user = new AppUser
+            var daftarUser = new AppUser[]
             {
-                Id = 1,
-                UserName = "admin",
-                PasswordHash = new PasswordHasher<AppUser>().HashPassword(null, "admin"),
+                new AppUser
+                {
+                    Id = 1,
+                    UserName = "admin",
+                    PasswordHash = new PasswordHasher<AppUser>().HashPassword(null, "admin"),
+                    Role = AppUserRoles.Admin,
+                    LastChanged = new DateTime(2024, 07, 06),
+                },
+                new AppUser
+                {
+                    Id = 2,
+                    UserName = "super",
+                    PasswordHash = new PasswordHasher<AppUser>().HashPassword(null, "super"),
+                    Role = AppUserRoles.SuperAdmin,
+                    LastChanged = new DateTime(2024, 07, 06),
+                },
             };
 
-            modelBuilder.Entity<AppUser>().HasData(user);
+            modelBuilder.Entity<AppUser>().HasData(daftarUser);
 
             var daftarFoto = new[]
             {
@@ -124,7 +141,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     PathFoto = "wwwroot/img/pengumuman/natall.jpg",
                     PathFotoKompresi = "wwwroot/img/pengumuman/natall.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
                 new
                 {
@@ -132,7 +149,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     PathFoto = "wwwroot/img/pengumuman/rapatt.jpg",
                     PathFotoKompresi = "wwwroot/img/pengumuman/rapatt.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
                 new
                 {
@@ -140,7 +157,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     PathFoto = "wwwroot/img/pengumuman/tripp.jpg",
                     PathFotoKompresi = "wwwroot/img/pengumuman/tripp.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
                 new
                 {
@@ -148,7 +165,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     PathFoto = "wwwroot/img/pengumuman/donasii.jpg",
                     PathFotoKompresi = "wwwroot/img/pengumuman/donasii.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
                 new
                 {
@@ -156,7 +173,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     PathFoto = "wwwroot/img/pengumuman/pelayanann.jpg",
                     PathFotoKompresi = "wwwroot/img/pengumuman/pelayanann.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
                 new
                 {
@@ -164,7 +181,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     PathFoto = @"wwwroot/img/generaluser.png",
                     PathFotoKompresi = @"wwwroot/img/generaluser.png",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
             };
 
@@ -179,7 +196,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[0].Id,
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
                 new
                 {
@@ -189,7 +206,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[1].Id,
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
                 new
                 {
@@ -199,7 +216,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[2].Id,
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
                 new
                 {
@@ -209,7 +226,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[3].Id,
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 },
                 new
                 {
@@ -219,7 +236,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     HaveDocument = false,
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     FotoId = daftarFoto[4].Id,
-                    PembuatId = user.Id
+                    PembuatId = daftarUser[0].Id
                 }
             );
 
@@ -275,7 +292,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     TanggalWarta = new DateOnly(2024, 7, 7),
                     DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                     TanggalDiBuat = new DateTime(2024, 7, 7, 0, 0, 0, DateTimeKind.Unspecified),
-                    PembuatId = user.Id,
+                    PembuatId = daftarUser[0].Id,
                 },
                 new
                 {
@@ -283,7 +300,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     TanggalWarta = new DateOnly(2024, 7, 7),
                     DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                     TanggalDiBuat = new DateTime(2024, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
-                    PembuatId = user.Id,
+                    PembuatId = daftarUser[0].Id,
                 },
                 new
                 {
@@ -291,7 +308,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                     TanggalWarta = new DateOnly(2024, 7, 7),
                     DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                     TanggalDiBuat = new DateTime(2024, 7, 21, 0, 0, 0, DateTimeKind.Unspecified),
-                    PembuatId = user.Id,
+                    PembuatId = daftarUser[0].Id,
                 }
             );
 
@@ -357,6 +374,17 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
                 {
                     entry.Entity.TanggalDiUbah = DateTime.Now;
                 }
+            }
+        }
+
+        private void UpdateAppUserLastChanged()
+        {
+            var entries = ChangeTracker.Entries<AppUser>()
+                .Where(e => e.State == EntityState.Modified || e.State == EntityState.Added);
+
+            foreach (var item in entries)
+            {
+                item.Entity.LastChanged = DateTime.Now;
             }
         }
     }

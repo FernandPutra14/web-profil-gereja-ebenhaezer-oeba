@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240706045055_UbahKolomLastChangedDiAppUser")]
+    partial class UbahKolomLastChangedDiAppUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +53,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("AppUserTable", (string)null);
+                    b.ToTable("AppUserTable");
 
                     b.HasData(
                         new
@@ -100,7 +103,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("PembuatId");
 
-                    b.ToTable("FotoTable", (string)null);
+                    b.ToTable("FotoTable");
 
                     b.HasData(
                         new
@@ -184,7 +187,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                     b.HasIndex("Nama")
                         .IsUnique();
 
-                    b.ToTable("PendetaTable", (string)null);
+                    b.ToTable("PendetaTable");
 
                     b.HasData(
                         new
@@ -259,7 +262,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("PembuatId");
 
-                    b.ToTable("PengumumanTable", (string)null);
+                    b.ToTable("PengumumanTable");
 
                     b.HasData(
                         new
@@ -358,7 +361,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("FotoKetuaId");
 
-                    b.ToTable("RayonTable", (string)null);
+                    b.ToTable("RayonTable");
 
                     b.HasData(
                         new
@@ -435,7 +438,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("TanggalWarta");
 
-                    b.ToTable("WartaJemaatTable", (string)null);
+                    b.ToTable("WartaJemaatTable");
 
                     b.HasData(
                         new

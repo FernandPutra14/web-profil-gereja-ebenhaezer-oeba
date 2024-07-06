@@ -9,5 +9,14 @@ namespace PKMGerejaEbenhaezer.Domain.Entity
     {
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
+        public string Role { get; set; }
+
+        public DateTime LastChanged { get; set; }
+    }
+
+    public static class AppUserRoles
+    {
+        public const string Admin = "Admin";
+        public const string SuperAdmin = "SuperAdmin";
     }
 }

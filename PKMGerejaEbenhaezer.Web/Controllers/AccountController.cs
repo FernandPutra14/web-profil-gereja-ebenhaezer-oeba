@@ -40,5 +40,12 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             var result = await _signInManager.SignOut();
             return RedirectToAction("Index", "Home", new { Area = "" });
         }
+
+        public IActionResult AccessDenied(string? returnUrl)
+        {
+            ViewData["returnUrl"] = returnUrl;
+
+            return View();
+        }
     }
 }

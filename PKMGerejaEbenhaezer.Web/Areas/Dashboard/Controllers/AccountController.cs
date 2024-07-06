@@ -9,7 +9,7 @@ using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Account;
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
-    [Authorize]
+    [Authorize(Roles = "Super Admin")]
     public class AccountController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -56,7 +56,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = 0,
                 UserName = tambahVM.UserName,
-                PasswordHash = hasher.HashPassword(null, tambahVM.Password)
+                PasswordHash = hasher.HashPassword(null, tambahVM.Password),
+                Role = AppUserRoles.Admin,
             };
             _appDbContext.AppUserTable.Add(appUser);
 
@@ -79,19 +80,22 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         [HttpPost]
         public async Task<IActionResult> Hapus(int id)
         {
-            var loggedUser = await _appDbContext.AppUserTable
-                .Where(a => a.UserName == User.Identity!.Name).FirstOrDefaultAsync();
-
-            if (loggedUser?.Id == id) 
-            {
-                _logger.LogError("Mencoba menghapus akun yang sendiri");
-                return BadRequest();
-            }
-
             var user = await _appDbContext.AppUserTable
                 .Where(a => a.Id == id).FirstOrDefaultAsync();
 
             if (user is null) return NotFound();
+
+            if (user.UserName == User.Identity?.Name)
+            {
+                _logger.LogError("Mencoba menghapus akun sendiri");
+                return BadRequest();
+            }
+
+            if (user.Role == AppUserRoles.SuperAdmin)
+            {
+                _logger.LogError("Mencoba menghapus akun super admin");
+                return BadRequest();
+            }
 
             _appDbContext.AppUserTable.Remove(user);
 
@@ -107,11 +111,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //Edit Akun
+
+
         //Ubah password
 
 
         //Ubah user name
-
 
     }
 }

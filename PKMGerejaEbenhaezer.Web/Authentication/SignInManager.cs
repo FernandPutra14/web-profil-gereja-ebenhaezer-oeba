@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,20 +25,21 @@ namespace PKMGerejaEbenhaezer.Web.Authentication
         {
             //Cek apakah akun ada
             var user = await _appDbContext.AppUserTable.Where(a => a.UserName == userName).FirstOrDefaultAsync();
-            if(user == null) return false;
+            if (user is null) return false;
 
             //Bandingkan password dengan password di database
             var hasher = new PasswordHasher<AppUser>();
             var result = hasher.VerifyHashedPassword(null, user.PasswordHash, password);
-            if(result == PasswordVerificationResult.Failed) return false;
+            if (result == PasswordVerificationResult.Failed) return false;
 
             //Buat claim
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Role, "Administrator"),
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim(CustomClaimTypes.LastChanged, user.LastChanged.Ticks.ToString(), ClaimValueTypes.Integer64),
             };
-            
+
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 

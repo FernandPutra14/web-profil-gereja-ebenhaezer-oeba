@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240706035339_TambahKolomRoleDiAppUserDanTambahSeedData")]
+    partial class TambahKolomRoleDiAppUserDanTambahSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("LastChanged")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -50,22 +50,20 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("AppUserTable", (string)null);
+                    b.ToTable("AppUserTable");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAEBtqXD88FuipibsfI6BGsf0EiwvvzozmwvCvKDDJvmli0O4Flol3b7e6oGP/ofAT4Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED8SjIC3zIZNRDEfFOyMQItGyy9z3Js+dHxUuRKhYBEid40lS8h12wXnLDwvG5aueA==",
                             Role = "Admin",
                             UserName = "admin"
                         },
                         new
                         {
                             Id = 2,
-                            LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAEGV88RS2VrTHO1uya97wkLooTKf2zULvgBX7Z9jfKnF0ICxTzDCFmkKejkOkKuKvUw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH/+BB5KUfPY5zDqsvmwNhCA8Zm1BHrO2UwNSYs8fgQWcuyPImU01YWH8Fv3sxAX5g==",
                             Role = "Super Admin",
                             UserName = "super"
                         });
@@ -100,7 +98,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("PembuatId");
 
-                    b.ToTable("FotoTable", (string)null);
+                    b.ToTable("FotoTable");
 
                     b.HasData(
                         new
@@ -184,7 +182,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                     b.HasIndex("Nama")
                         .IsUnique();
 
-                    b.ToTable("PendetaTable", (string)null);
+                    b.ToTable("PendetaTable");
 
                     b.HasData(
                         new
@@ -259,7 +257,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("PembuatId");
 
-                    b.ToTable("PengumumanTable", (string)null);
+                    b.ToTable("PengumumanTable");
 
                     b.HasData(
                         new
@@ -358,7 +356,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("FotoKetuaId");
 
-                    b.ToTable("RayonTable", (string)null);
+                    b.ToTable("RayonTable");
 
                     b.HasData(
                         new
@@ -435,7 +433,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 
                     b.HasIndex("TanggalWarta");
 
-                    b.ToTable("WartaJemaatTable", (string)null);
+                    b.ToTable("WartaJemaatTable");
 
                     b.HasData(
                         new
