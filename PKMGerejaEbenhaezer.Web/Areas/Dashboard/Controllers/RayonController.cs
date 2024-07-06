@@ -72,9 +72,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             try
             {
-                var result = await _appDbContext.SaveChangesAsync();
-
-                if (result <= 0) throw new Exception("Jumlah entitas yang disimpan 0");
+                await _appDbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -157,10 +155,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             try
-            {
-                var result = await _appDbContext.SaveChangesAsync();
-
-                if (result <= 0) throw new Exception("Tidak ada data yang disimpan");
+            { 
+               await _appDbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {

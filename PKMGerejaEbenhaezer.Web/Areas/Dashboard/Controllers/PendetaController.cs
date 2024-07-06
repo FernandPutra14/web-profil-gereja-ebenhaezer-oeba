@@ -161,12 +161,18 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (editVM.FacebookProfileLink is not null)
                 pendeta.FacebookProfileLink = new Uri(editVM.FacebookProfileLink);
+            else
+                pendeta.FacebookProfileLink = null;
 
             if (editVM.InstagramProfileLink is not null)
                 pendeta.InstagramProfileLink = new Uri(editVM.InstagramProfileLink);
+            else
+                pendeta.InstagramProfileLink = null;
 
             if (editVM.YoutubeProfileLink is not null)
                 pendeta.YoutubeProfileLink = new Uri(editVM.YoutubeProfileLink);
+            else
+                pendeta.YoutubeProfileLink = null;
 
             if (!ValidasiAkunMediaSosial(pendeta.FacebookProfileLink, pendeta.InstagramProfileLink,
                 pendeta.YoutubeProfileLink))
@@ -219,7 +225,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if(facebookProfileLink is not null)
             {
-                if(facebookProfileLink.Host != "www.facebook.com")
+                if(!facebookProfileLink.Host.EndsWith("facebook.com"))
                 {
                     ModelState.AddModelError(nameof(facebookProfileLink), "Bukan URL Facebook valid");
                     isValid = false;
@@ -228,7 +234,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (instagramProfileLink is not null) 
             {
-                if (instagramProfileLink.Host != "www.instagram.com")
+                if (!instagramProfileLink.Host.EndsWith("instagram.com"))
                 {
                     ModelState.AddModelError(nameof(instagramProfileLink), "Bukan URL Instagram Valid");
                     isValid = false;
@@ -237,7 +243,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (youtubeProfileLink is not null)
             {
-                if (youtubeProfileLink.Host != "www.youtube.com")
+                if (!youtubeProfileLink.Host.EndsWith("youtube.com"))
                 {
                     ModelState.AddModelError(nameof(youtubeProfileLink), "Bukan URL Facebook Valid");
                     isValid = false;

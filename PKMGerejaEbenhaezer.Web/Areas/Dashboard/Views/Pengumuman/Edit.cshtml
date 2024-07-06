@@ -28,6 +28,10 @@
             <div style="display:flex; justify-content: center; align-items: center;">
                 <vc:upload-foto id-foto=Model.IdFoto></vc:upload-foto>
             </div>
+
+            <div class="row">
+                <span asp-validation-for="@Model.IdFoto" class="text-danger form-text"></span>
+            </div>
             
             <div class="row mb-3">
                 <div class="col-12 mt-3 input-box">
