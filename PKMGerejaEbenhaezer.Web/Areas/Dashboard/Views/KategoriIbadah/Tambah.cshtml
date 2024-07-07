@@ -1,9 +1,8 @@
-﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
-@model TambahKategoriVM
+﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.KategoriIbadah
+@model TambahVM
 @{
     ViewData["Title"] = "Tambah Kategori";
 }
-
 
 <div class="tamkatibd">
     <h1 class="title">Tambah Kategori Ibadah</h1>
@@ -13,7 +12,9 @@
         <li><a href="#" class="active">Tambah Kategori Ibadah</a></li>
     </ul>
     <div class="container-fluid cardplus">
-        <form asp-action="TambahKategori">
+        <form asp-action="Tambah">
+            <div asp-validation-summary="ModelOnly" class="text-danger form-text"></div>
+
             <div class="row">
                 <div class="col input-box">
                     <label asp-for="@Model.Nama" class="form-label"></label>
@@ -50,7 +51,6 @@
         </form>
     </div>
 </div>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

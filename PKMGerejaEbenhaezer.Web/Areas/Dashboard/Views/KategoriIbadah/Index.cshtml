@@ -1,9 +1,7 @@
-﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
-@model List<KategoriIbadah>
+﻿@model List<KategoriIbadah>
 @{
     ViewData["Title"] = "Kategori Ibadah";
 }
-
 
 <div class="katibadah">
     <h1 class="title">Kategori Ibadah</h1>
@@ -13,7 +11,7 @@
         <li><a href="#" class="active">kategori Ibadah</a></li>
     </ul>
     <div class="mb-4 mt-4">
-        <a style="" class="btn w-100" asp-area="Dashboard" asp-controller="Ibadah" asp-action="TambahKategori"> + Tambah Kategori Ibadah</a>
+        <a style="" class="btn w-100" asp-action="Tambah"> + Tambah Kategori Ibadah</a>
     </div>
     <div class="container">
         <table class="table table-bordered table-striped">
@@ -35,7 +33,7 @@
                         <td>@item.Durasi.ToString("h' jam 'm' menit'")</td>
                         <td>
                             <div class="d-flex gap-1 justify-content-start align-items-center">
-                                <a class="btn" asp-action="EditKategori" asp-route-id="@item.Id">
+                                <a class="btn" asp-action="Edit" asp-route-id="@item.Id">
                                     <i class="fas fa-pen-square"></i>
                                 </a>
                                 <!-- Button trigger modal -->
@@ -45,11 +43,11 @@
 
                                 @{
                                     var modalVM = new DeleteConfirmationModalVM()
-                {
-                    ModalId = $"exampleModal{item.Id}",
-                    ModalTitle = "Hapus Kategori Ibadah",
-                    FormAction = Url.Action("HapusKategori", "Ibadah", new { Area = "Dashboard", id = item.Id })!,
-                };
+                                    {
+                                        ModalId = $"exampleModal{item.Id}",
+                                        ModalTitle = "Hapus Kategori Ibadah",
+                                        FormAction = Url.Action("Hapus", "KategoriIbadah", new { Area = "Dashboard", id = item.Id })!,
+                                    };
                                 }
 
                                 <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
