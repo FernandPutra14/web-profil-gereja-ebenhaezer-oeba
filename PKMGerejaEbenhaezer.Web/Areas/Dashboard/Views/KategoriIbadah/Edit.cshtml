@@ -1,0 +1,59 @@
+﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.KategoriIbadah
+@model EditVM
+@{
+    ViewData["Title"] = "Edit Kategori";
+}
+
+<div class="tamkatibd">
+    <h1 class="title">Edit Kategori Ibadah</h1>
+    <ul class="breadcrumbs mb-4">
+        <li><a href="#">Kategori Ibadah</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">Edit Kategori Ibadah</a></li>
+    </ul>
+    <div class="container-fluid cardplus">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger form-text"></div>
+
+            <input hidden asp-for="@Model.Id"/>
+
+            <div class="row">
+                <div class="col input-box">
+                    <label asp-for="@Model.Nama" class="form-label"></label>
+                    <input asp-for="@Model.Nama" class="form-control" />
+                    <span asp-validation-for="@Model.Nama" class="form-text text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <label class="form-label">Durasi</label>
+
+                <div class="col-12 input-box">
+                    <span asp-validation-for="@Model.Durasi" class="form-text text-danger text-center"></span>
+                </div>
+
+                <div class="col-6 input-box">
+                    <label asp-for="@Model.TotalJam" class="form-label"></label>
+                    <input asp-for="@Model.TotalJam" class="form-control" />
+                    <span asp-validation-for="@Model.TotalJam" class="form-text text-danger"></span>
+                </div>
+
+                <div class="col-6 input-box">
+                    <label asp-for="@Model.TotalMenit" class="form-label"></label>
+                    <input asp-for="@Model.TotalMenit" class="form-control" />
+                    <span asp-validation-for="@Model.TotalMenit" class="form-text text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col">
+                    <button type="submit" class="btn" style="width:100%;">Simpan</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

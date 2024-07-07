@@ -1,10 +1,13 @@
 ﻿using PKMGerejaEbenhaezer.Web.CustomValidations;
 using System.ComponentModel.DataAnnotations;
 
-namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
+namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.KategoriIbadah
 {
-    public class TambahKategoriVM
+    public class EditVM
     {
+        [Required]
+        public int Id { get; set; }
+
         [Display(Name = "Nama Kategori Ibadah")]
         [Required(ErrorMessage = "{0} harus diisi")]
         public string Nama { get; set; } = string.Empty;
