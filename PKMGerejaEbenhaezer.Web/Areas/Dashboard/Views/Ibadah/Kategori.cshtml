@@ -1,0 +1,57 @@
+﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
+@model List<KategoriIbadah>
+@{
+    ViewData["Title"] = "Kategori Ibadah";
+}
+
+<h1>Kategori Ibadah</h1>
+
+<a asp-action="TambahKategori" class="btn btn-primary">Tambah Kategori</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Durasi</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Nama</td>
+                <td>@item.Durasi.ToString("h' jam 'm' menit'")</td>
+                <td>
+                    <div class="d-flex gap-1 justify-content-start align-items-center">
+                        <a class="btn" asp-action="EditKategori" asp-route-id="@item.Id">
+                            <i class="fas fa-pen-square"></i>
+                        </a>
+                        <!-- Button trigger modal -->
+                        <a class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)">
+                            <i class="fa fa-regular fa-trash"></i>
+                        </a>
+
+                        @{
+                            var modalVM = new DeleteConfirmationModalVM()
+                            {
+                                ModalId = $"exampleModal{item.Id}",
+                                ModalTitle = "Hapus Kategori Ibadah",
+                                FormAction = Url.Action("HapusKategori", "Ibadah", new { Area = "Dashboard", id = item.Id })!,
+                            };
+                        }
+
+                        <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <partial name="_DataTablePartial" />
+}
