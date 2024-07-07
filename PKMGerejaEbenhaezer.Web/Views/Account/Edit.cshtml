@@ -4,12 +4,22 @@
     ViewData["Title"] = "Edit Akun";
 }
 
-<div class="container mt-5">
+<div class="container">
+
+    <div class="jud">
+        <h1>
+            MANAJEMEN AKUN PENGGUNA
+        </h1>
+        <p>Setelah Akun berhasil diubah anda akan log out dan diarahkan ke halaman login untuk login dengan user name dan password baru!!</p>
+    </div>
+    
+
+
     <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 input-box">
                 <label asp-for="@Model.UserName" class="form-label"></label>
                 <input asp-for="@Model.UserName" class="form-control" type="text" autocomplete="new-username" />
                 <span asp-validation-for="@Model.UserName" class="form-text text-danger"></span>
@@ -17,25 +27,22 @@
         </div>
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-6 input-box">
                 <label asp-for="@Model.Password" class="form-label"></label>
                 <input asp-for="@Model.Password" type="password" class="form-control" autocomplete="new-password" />
                 <span asp-validation-for="@Model.Password" class="form-text text-danger"></span>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
+            <div class="col-6 input-box">
                 <label asp-for="@Model.PasswordConfirmation" class="form-label"></label>
                 <input asp-for="@Model.PasswordConfirmation" type="password" class="form-control" />
                 <span asp-validation-for="@Model.PasswordConfirmation" class="form-text text-danger"></span>
             </div>
         </div>
 
-        <div class="row mt-4">
+        
+        <div class="row mt-5">
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <p class="form-text">Setelah Akun berhasil diubah anda akan log out dan diarahkan ke halaman login untuk login dengan user name dan password baru.</p>
+                <button type="submit" class="btn" style="width:100%;">Simpan</button>               
             </div>
         </div>
     </form>

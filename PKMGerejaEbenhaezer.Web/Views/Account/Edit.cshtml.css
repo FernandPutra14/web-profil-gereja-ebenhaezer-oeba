@@ -1,0 +1,49 @@
+﻿.container {
+    margin-bottom: 60px;
+    margin-top: 40px;
+}
+
+
+.jud {
+    margin-bottom: 30px;
+}
+
+.jud h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+    .jud p {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+/* CSS type input Text dan Textarea */
+::deep .input-box label {
+    color: #333;
+    font-size: 14px;
+}
+
+::deep .input-box input {
+    position: relative;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+::deep .input-box textarea {
+    position: relative;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+/* Akhir CSS type input Text dan Textarea */
