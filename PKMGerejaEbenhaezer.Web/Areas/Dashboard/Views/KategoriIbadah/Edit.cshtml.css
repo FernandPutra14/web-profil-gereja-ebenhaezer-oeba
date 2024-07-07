@@ -5,35 +5,35 @@
     box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
 }
 
-.tamkatibd {
+.edikatib {
     width: 100%;
     padding: 24px 20px 20px 20px;
 }
 
-    .tamkatibd .title {
+    .edikatib .title {
         font-size: 28px;
         font-weight: 600;
         margin-bottom: 10px;
     }
 
-    .tamkatibd .breadcrumbs {
+    .edikatib .breadcrumbs {
         display: flex;
         grid-gap: 6px;
         padding: 0;
         margin: 0;
     }
 
-        .tamkatibd .breadcrumbs li,
-        .tamkatibd .breadcrumbs li a {
+        .edikatib .breadcrumbs li,
+        .edikatib .breadcrumbs li a {
             font-size: 14px;
         }
 
-            .tamkatibd .breadcrumbs li a {
+            .edikatib .breadcrumbs li a {
                 color: var(--blue);
             }
 
-                .tamkatibd .breadcrumbs li a.active,
-                .tamkatibd .breadcrumbs li.divider {
+                .edikatib .breadcrumbs li a.active,
+                .edikatib .breadcrumbs li.divider {
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
