@@ -4,53 +4,63 @@
     ViewData["Title"] = "Kategori Ibadah";
 }
 
-<h1>Kategori Ibadah</h1>
 
-<a asp-action="TambahKategori" class="btn btn-primary">Tambah Kategori</a>
+<div class="katibadah">
+    <h1 class="title">Kategori Ibadah</h1>
+    <ul class="breadcrumbs mb-4">
+        <li><a href="#">Informasi</a></li>
+        <li class="divider">/</li>
+        <li><a href="#" class="active">kategori Ibadah</a></li>
+    </ul>
+    <div class="mb-4 mt-4">
+        <a style="" class="btn w-100" asp-area="Dashboard" asp-controller="Ibadah" asp-action="TambahKategori"> + Tambah Kategori Ibadah</a>
+    </div>
+    <div class="container">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Durasi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nama</th>
-            <th>Durasi</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Nama</td>
+                        <td>@item.Durasi.ToString("h' jam 'm' menit'")</td>
+                        <td>
+                            <div class="d-flex gap-1 justify-content-start align-items-center">
+                                <a class="btn" asp-action="EditKategori" asp-route-id="@item.Id">
+                                    <i class="fas fa-pen-square"></i>
+                                </a>
+                                <!-- Button trigger modal -->
+                                <a class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)">
+                                    <i class="fa fa-regular fa-trash"></i>
+                                </a>
 
-    <tbody>
-        @foreach(var item in Model)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Nama</td>
-                <td>@item.Durasi.ToString("h' jam 'm' menit'")</td>
-                <td>
-                    <div class="d-flex gap-1 justify-content-start align-items-center">
-                        <a class="btn" asp-action="EditKategori" asp-route-id="@item.Id">
-                            <i class="fas fa-pen-square"></i>
-                        </a>
-                        <!-- Button trigger modal -->
-                        <a class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)">
-                            <i class="fa fa-regular fa-trash"></i>
-                        </a>
+                                @{
+                                    var modalVM = new DeleteConfirmationModalVM()
+                {
+                    ModalId = $"exampleModal{item.Id}",
+                    ModalTitle = "Hapus Kategori Ibadah",
+                    FormAction = Url.Action("HapusKategori", "Ibadah", new { Area = "Dashboard", id = item.Id })!,
+                };
+                                }
 
-                        @{
-                            var modalVM = new DeleteConfirmationModalVM()
-                            {
-                                ModalId = $"exampleModal{item.Id}",
-                                ModalTitle = "Hapus Kategori Ibadah",
-                                FormAction = Url.Action("HapusKategori", "Ibadah", new { Area = "Dashboard", id = item.Id })!,
-                            };
-                        }
-
-                        <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                                <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 @section Scripts {
     <partial name="_DataTablePartial" />

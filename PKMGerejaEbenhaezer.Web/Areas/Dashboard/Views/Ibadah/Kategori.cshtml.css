@@ -1,0 +1,95 @@
+﻿.katibadah {
+    width: 100%;
+    padding: 24px 20px 20px 20px;
+}
+
+    .katibadah .title {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .katibadah .breadcrumbs {
+        display: flex;
+        grid-gap: 6px;
+        padding: 0;
+        margin: 0;
+    }
+
+        .katibadah .breadcrumbs li,
+        .katibadah .breadcrumbs li a {
+            font-size: 14px;
+        }
+
+            .katibadah .breadcrumbs li a {
+                color: var(--blue);
+            }
+
+                .katibadah .breadcrumbs li a.active,
+                .katibadah .breadcrumbs li.divider {
+                    color: var(--dark-grey);
+                    pointer-events: none;
+                }
+
+/* CSS Datatable */
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .table th, .table td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .table thead th {
+        text-transform: uppercase;
+        background-color: var(--primary-clr);
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table tbody tr {
+        border-bottom: 1px solid #dddddd;
+    }
+
+        .table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+.img-fluid {
+    max-width: 50px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+::deep label {
+    margin-bottom: 10px;
+}
+/* Akhir CSS Datatable */
