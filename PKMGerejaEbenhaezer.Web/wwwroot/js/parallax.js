@@ -24,8 +24,11 @@ function restoreScrollPosition() {
 document.addEventListener('DOMContentLoaded', function () {
     if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
         restoreScrollPosition();
+        // Tambahkan event listener untuk memastikan penyesuaian latar belakang setelah posisi scroll dipulihkan
+        window.addEventListener('scroll', adjustBackgroundPosition, { once: true });
+    } else {
+        adjustBackgroundPosition();
     }
-    adjustBackgroundPosition();
 });
 
 document.addEventListener('scroll', function () {

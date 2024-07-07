@@ -41,76 +41,12 @@
     <!-- Akhir Body -->
     <!-- Footer -->
     <footer>
-        <div class="container-fluid">
-            <div class="sec gambar" style="text-align:center;">
-                <img src="~/img/logo_gereja.png" style="width:100px; padding-top: 50px;" />
-            </div>
-            <div class="sec quicklinks">
-                <h2>Link Cepat</h2>
-                <div class="sec quicklinks">
-                    <ul>
-                        <li><a class="foli" asp-area="" asp-controller="" asp-action="" onclick="">Home</a></li>
-                        <li><a class="foli" asp-area="" asp-controller="" asp-action="" onclick="">Warta</a></li>
-                        <li><a class="foli" asp-area="" asp-controller="" asp-action="" onclick="">Pengumuman</a></li>
-                        <li><a class="foli" asp-area="" asp-controller="" asp-action="" onclick="">Tentang Kami</a></li>
-                        <li><a class="foli" asp-area="" asp-controller="" asp-action="" onclick="">Kontak</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="sec contact">
-                <h2>Kontak Kami</h2>
-                <ul class="info">
-                    <li>
-                        <span><i class="ri-map-pin-fill"></i></span>
-                        <p>
-                            <a href="">
-                                Oeba, Kupang, NTT, Indonesia
-                            </a>
-                        </p>
-                    </li>
-                    <li>
-                        <span><i class="ri-phone-fill"></i></span>
-                        <p>
-                            <a href="">
-                                +62 2123 4567 89
-                            </a>
-                        </p>
-                    </li>
-                    <li>
-                        <span><i class="ri-mail-fill"></i></span>
-                        <p>
-                            <a href="">
-                                example@gmail.com
-                            </a>
-                        </p>
-                    </li>
-                </ul>
-            </div>
-            <div class="sec aboutus">
-                <h2>Media Sosial</h2>            
-                <ul class="sci">
-                    <li><a href=""><i class="ri-instagram-fill"></i></a></li>
-                    <li><a href=""><i class="ri-tiktok-fill"></i></a></li>
-                    <li><a href=""><i class="ri-youtube-fill"></i></a></li>
-                    <li><a href=""><i class="ri-twitter-x-fill"></i></a></li>
-                </ul>
-                <h2 style="padding-top:10px; margin-bottom: 5px;">Dipersembahkan Oleh</h2>
-                <ul class="scj">
-                    <li>
-                        <img src="~/img/logo_ilkom_undana.png" style="height:55px;" />
-                    </li>
-                    <li>
-                        <img src="~/img/LOGO-LP2M-w.png" style="height:47px" />
-                    </li>  
-                    
-                    @* <li><a href="https://discord.gg/e6H6FZkh"><i class="ri-discord-fill"></i></a></li> *@
-                </ul>
-            </div>
+        <div class="copyrightText">
+            <img src="~/img/LOGO-LP2M-w.png" />
+            <p>Copyright &copy;2024 LPPM Undana. All rights Reserved.</p>
         </div>
     </footer>
-    <div class="copyrightText">
-        <p>Copyright &copy;2024 LP2M Undana. All rights Reserved.</p>
-    </div>
+    
 
 
     <!-- Akhir Footer -->
@@ -123,7 +59,7 @@
     <script>
         AOS.init();
     </script>
-    <script type="text/javascript" src="~/js/parallax.js"></script>
+    <script src="~/js/parallax.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/goTop.js" asp-append-version="true"></script>
     <script src="~/js/carousel.js" asp-append-version="true"></script>
