@@ -26,6 +26,33 @@
                data-name="bulan">@(Model.MonthName(i))</a>
         }
     </div>
+    <div class="tengbutfil">
+        <button class="filter-button" onclick="openModal()">Filter</button>
+    </div>
+    @* Modal *@
+    <div id="filterModal" class="modal">
+        <div class="modal-content">
+            <div class="cos">
+                
+                    <h1 style="width:90%; margin-top:10px; vertical-align:middle;" class="">Pilihan Filter</h1>
+                
+                
+                    <span class="close" onclick="closeModal()"><i class="ri-close-fill"></i></span>
+               
+            </div>
+            
+            
+            <div class="filterbut-modal">
+                <a asp-action="Index" data-name="semua" class="@(Model.FilterCssClass())">Semua</a>
+                @for (int i = 1; i <= 12; i++)
+                {
+                    <a asp-action="Index" asp-route-bulan="@i"
+                       class="@(Model.FilterCssClass(i))"
+                       data-name="bulan">@(Model.MonthName(i))</a>
+                }
+            </div>
+        </div>
+    </div>
     @* AKhir Tombol Filter *@
 
     @* Search *@
@@ -114,7 +141,6 @@
 
 @section Scripts {
     <script type="text/javascript">
-
         $(function () {
             $('.badan-utama').css({
                 'padding-left': '0',
@@ -127,6 +153,21 @@
                 'background-color': 'var(--primary-clr)',
             });
         });
+
+        function openModal() {
+            document.getElementById("filterModal").style.display = "block";
+            
+        }
+
+        function closeModal() {
+            document.getElementById("filterModal").style.display = "none";
+           
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById("filterModal")) {
+                closeModal();
+            }
+        }
     </script>
 }
-
