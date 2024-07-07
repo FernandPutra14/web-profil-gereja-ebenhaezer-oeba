@@ -67,6 +67,7 @@
 
         #sejarah ::deep .row-container .content-sej {
             width: 50%;
+            padding-top: 4vw !important;
             padding: 3vw;
             vertical-align: middle;
         }
@@ -473,7 +474,7 @@ section.peng {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     text-overflow: ellipsis;
     line-height: 1.5em;
 }
@@ -516,9 +517,8 @@ section.peng {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     text-overflow: ellipsis;
-    line-height: 1.3;
 }
 
 .peng-card .peng-tanggal {

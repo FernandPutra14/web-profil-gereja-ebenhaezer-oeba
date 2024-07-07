@@ -16,13 +16,15 @@
             {
                 <img src="~/img/gereja1.jpg" />
             }
-            <h3>@Model.Judul</h3>
+            <h3 class="mb-3">@Model.Judul</h3>
             <div class="info-blog">
                 @if (Model.Pembuat is not null)
                 {
-                    <h4>Oleh : @Model.Pembuat.UserName</h4>
-                    <h4>@Model.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
-                        @Model.TanggalDiBuat.ToString("h:mm tt" , cultureInfo)</h4>
+                    <h4>Penulis : @Model.Pembuat.UserName</h4>
+                    <h4>
+                        @Model.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
+                        @Model.TanggalDiBuat.ToString("h:mm tt", cultureInfo)
+                    </h4>                                    
                 }
             </div>
             <p>@Model.Isi</p>
@@ -42,6 +44,13 @@
             'position': 'fixed',
             'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
             'background-color': 'var(--primary-clr)',
+        });
+        $(function () {
+            $('.badan-utama').css({
+                'padding-left': '0',
+                'padding-right': '0',
+                'padding-top': '8rem',
+            });
         });
     });
 </script>
