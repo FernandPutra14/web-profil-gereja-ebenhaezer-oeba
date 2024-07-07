@@ -28,6 +28,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         public DbSet<WartaJemaat> WartaJemaatTable { get; set; }
         public DbSet<Pendeta> PendetaTable { get; set; }
         public DbSet<KategoriIbadah> KategoriIbadahTable { get; set; }
+        public DbSet<Ibadah> IbadahTable { get; set; }
 
         public override int SaveChanges()
         {
@@ -91,7 +92,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
         private void AuditAuditableEntity()
         {
             var addedEntries = ChangeTracker.Entries<IAuditableEntity>()
-                    .Where(e => e.State == EntityState.Added);
+                .Where(e => e.State == EntityState.Added);
 
             var modifiedEntries = ChangeTracker.Entries<IAuditableEntity>()
                 .Where(e => e.State == EntityState.Modified);
