@@ -1,5 +1,5 @@
 ﻿const nav_header = document.querySelector(".head");
-const section_hero = document.querySelector("#hero");
+const section_hero = document.querySelector("#textscroll");
 
 
 const observer = new IntersectionObserver(

@@ -87,6 +87,41 @@
 
 
 
+#textscroll {
+    overflow: hidden;
+}
+
+.scrolltext {
+    display: flex;
+    padding: 15px 0px;
+    justify-content: flex-start;
+    background-color: var(--primary-clr);
+    overflow: hidden;
+}
+
+    .scrolltext h1 {
+        font-size: 32px;
+        text-transform: uppercase;
+        color: white;
+        padding: 0 1rem; /* Mengurangi padding untuk memastikan teks tidak terlalu jauh */
+        white-space: nowrap; /* Memastikan teks tidak pindah ke baris baru */
+        animation: move-rt1 6s linear infinite; /* Mengubah durasi animasi menjadi lebih lama */
+    }
+
+@keyframes move-rt1 {
+    0% {
+        transform: translateX(0%); /* Mulai dari posisi tersembunyi di kanan */
+    }
+
+    100% {
+        transform: translateX(-100%); /* Berakhir di luar layar sebelah kiri */
+    }
+}
+
+
+
+
+
 
 /* CSS Pendeta Section */
 #pendeta {
@@ -770,6 +805,15 @@ section.peng {
 
 
     /* CSS Sejarah Section */
+    #sejarah {
+        width: 100%;    
+        margin-top: 40px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+
+
     #sejarah .row-container {
         flex-direction: column;
         align-items: center;
@@ -803,6 +847,9 @@ section.peng {
             padding-right: 30px;
         }
     /* Akhir CSS Chart Jemaat Section */
+
+
+
 
 
     /* CSS warta Section */
