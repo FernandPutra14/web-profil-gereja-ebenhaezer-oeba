@@ -35,7 +35,7 @@
                         <td>@appUser.Role</td>
                         <td>@appUser.LastChanged.ToString("F", cultureInfo)</td>
                         <td>
-                            @if (User.Identity?.Name != appUser.UserName)
+                            @if (User.Identity?.Name != appUser.UserName && appUser.Role != AppUserRoles.SuperAdmin)
                             {
                                 <div class="d-flex gap-1 justify-content-start align-items-center">
                                     <a class="btn" asp-action="Edit" asp-route-id="@appUser.Id">
