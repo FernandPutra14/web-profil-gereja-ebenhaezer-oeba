@@ -1,0 +1,67 @@
+﻿@using System.Globalization
+@model List<Ibadah>
+@{
+    ViewData["Title"] = "Ibadah";
+    var cultureInfo = new CultureInfo("id-ID");
+}
+
+<h1>Daftar Ibadah</h1>
+
+<a asp-action="Tambah" class="btn btn-primary">Tambah Ibadah</a>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Judul</th>
+            <th>Deskripsi</th>
+            <th>Nas Pembimbing</th>
+            <th>Tempat</th>
+            <th>Tanggal Ibadah</th>
+            <th>Kategori Ibadah</th>
+            <th>Pendeta</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Judul</td>
+                <td>@item.Deskripsi</td>
+                <td>@item.NasPembimbing</td>
+                <td>@item.Tempat</td>
+                <td>@item.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @item.TanggalIbadah.ToString("HH:mm tt")</td>
+                <td>@(item.KategoriIbadah is null ? "Tidak Ada" : item.KategoriIbadah.Nama)</td>
+                <td>@(item.Pendeta is null ? "Tidak Ada" : item.Pendeta.Nama)</td>
+                <td>
+                    <div class="d-flex gap-1 justify-content-start align-items-center">
+                        <a class="btn" asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="fas fa-pen-square"></i>
+                        </a>
+                        <!-- Button trigger modal -->
+                        <a class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal@(item.Id)">
+                            <i class="fa fa-regular fa-trash"></i>
+                        </a>
+
+                        @{
+                            var modalVM = new DeleteConfirmationModalVM()
+                            {
+                                ModalId = $"exampleModal{item.Id}",
+                                ModalTitle = "Hapus Ibadah",
+                                FormAction = Url.Action("Hapus", "Ibadah", new { Area = "Dashboard", id = item.Id })!,
+                            };
+                        }
+
+                        <partial name="_DeleteConfirmationModalPartial" model="modalVM" />
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <partial name="_DataTablePartial" />
+}
