@@ -5,6 +5,7 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Web.Authentication;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Services.PDF;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,13 +46,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.EventsType = typeof(CustomCookieAuthenticationEvents);
     });
 
+builder.Services.AddSession();
 builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
-
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
 builder.Services.AddScoped<ISignInManager, SignInManager>();
-
 builder.Services.AddScoped<IPDFUploadService, PDFUploadService>();
+builder.Services.AddScoped<IToastrNotificationService, ToastrNotificationService>();
 
 var app = builder.Build();
 
@@ -70,6 +70,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapAreaControllerRoute(
     name: "admin",

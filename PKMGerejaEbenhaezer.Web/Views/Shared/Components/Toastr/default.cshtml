@@ -1,0 +1,44 @@
+﻿@using PKMGerejaEbenhaezer.Web.Services.ToastrNotification
+@model (string globalOptionsJson, string?)
+
+@if (Model.Item2 is not null)
+{
+    <link href="~/lib/Toastr/CSS/toastr.min.css" rel="stylesheet" />
+    <script src="~/lib/Toastr/JS/toastr.min.js"></script>
+
+    var id = Guid.NewGuid().ToString();
+
+    <input hidden id="options@(id)" value="@Model.globalOptionsJson" />
+    <input hidden id="notification@(id)" value="@Model.Item2" />
+
+    <script type="text/javascript">
+        const options = $('#options@(id)').val();
+        const notificationJSON = $('#notification@(id)').val();
+        const notification = JSON.parse(notificationJSON);
+
+        toastr.options = JSON.parse(options);
+
+        let type;
+
+        switch (notification.Type) {
+            case 0: {
+                type = 'success';
+                break;
+            }
+            case 1: {
+                type = 'warning';
+                break;
+            }
+            case 2: {
+                type = 'error';
+                break;
+            }
+            case 3: {
+                type = 'info';
+                break;
+            }
+        }
+
+        toastr[type](notification.Message, notification.Title, notification.Options);
+    </script>
+}

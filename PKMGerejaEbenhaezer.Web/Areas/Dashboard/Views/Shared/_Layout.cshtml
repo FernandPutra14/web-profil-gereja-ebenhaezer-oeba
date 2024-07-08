@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using PKMGerejaEbenhaezer.Web.Services.ToastrNotification
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,7 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
     <!-- Akhir Owl Carousel -->
-
     <!-- Font Awesome -->
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- Akhir Font Awesome-->
@@ -24,7 +24,7 @@
 
     <section id="content">
         <nav>
-            <i class="ri-menu-fill toggle-sidebar"></i>          
+            <i class="ri-menu-fill toggle-sidebar"></i>
             <form action="#">
                 <div class="form-group">
                     <input type="text" placeholder="Search...">
@@ -41,28 +41,28 @@
                         </a>
                     </li>
                     <li>
-						<a asp-action="Index" asp-controller="Home" asp-area="">
-							<i class="ri-arrow-go-back-fill"></i>Kembali
-						</a>
-					</li>
+                        <a asp-action="Index" asp-controller="Home" asp-area="">
+                            <i class="ri-arrow-go-back-fill"></i>Kembali
+                        </a>
+                    </li>
                     <li>
-						<form asp-action="Logout" asp-controller="Account" asp-area="" method="post" class="formuku">
-							<button class="tomboltoa" type="submit"><i class="ri-logout-box-fill"></i>Keluar</button>
-						</form>
-					</li>
+                        <form asp-action="Logout" asp-controller="Account" asp-area="" method="post" class="formuku">
+                            <button class="tomboltoa" type="submit"><i class="ri-logout-box-fill"></i>Keluar</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </nav>
 
-		<!-- Body -->
-		<div class="container-fluid">
-			<main role="main" class="pb-3">
-				@RenderBody()
-			</main>
-		</div>
-		<!-- Akhir Body -->
+        <!-- Body -->
+        <div class="container-fluid">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+        <!-- Akhir Body -->
     </section>
-    
+
     <!-- Script js -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/popper/popper.min.js"></script>
@@ -72,6 +72,25 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/carousel.js" asp-append-version="true"></script>
     <script src="~/js/sidebar.js" asp-append-version="true"></script>
+    @{
+        var options = new ToastrOptions
+        {
+            closeButton = true,
+            progressBar = true,
+            newestOnTop = true,
+            preventDuplicates = false,
+            timeOut = (int)TimeSpan.FromSeconds(5).TotalMilliseconds,
+            extendedTimeOut = (int)TimeSpan.FromSeconds(5).TotalMilliseconds,
+            showDuration = (int)TimeSpan.FromSeconds(1).TotalMilliseconds,
+            hideDuration = (int)TimeSpan.FromSeconds(1).TotalMilliseconds,
+            showEasing = Easings.Swing,
+            hideEasing = Easings.Swing,
+            showMethod = AnimationMethods.FadeIn,
+            hideMethod = AnimationMethods.FadeOut,
+            positionClass = PositionClasses.TopCenter,
+        };
+    }
+    <vc:toastr global-options=options></vc:toastr>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

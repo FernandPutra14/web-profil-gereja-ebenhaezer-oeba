@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Home;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -11,13 +12,16 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     public class HomeController : Controller
     {
         private readonly AppDbContext _appDbContext;
+        private readonly IToastrNotificationService _notificationService;
 
-		public HomeController(AppDbContext appDbContext)
-		{
-			_appDbContext = appDbContext;
-		}
+        public HomeController(AppDbContext appDbContext, 
+            IToastrNotificationService notificationService)
+        {
+            _appDbContext = appDbContext;
+            _notificationService = notificationService;
+        }
 
-		public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
 
