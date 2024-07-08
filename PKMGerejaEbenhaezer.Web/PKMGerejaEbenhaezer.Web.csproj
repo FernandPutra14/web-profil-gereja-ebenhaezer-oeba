@@ -7,22 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\carousel.js" />
-    <Content Remove="wwwroot\js\parallax.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\js\carousel.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\parallax.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\js\carousel.js" />
-    <None Include="wwwroot\js\parallax.js" />
-    <None Include="wwwroot\lib\popper\popper.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Emgu.CV" Version="4.7.0.5276" />
     <PackageReference Include="Emgu.CV.runtime.mini.ubuntu-x64" Version="4.7.0.5276" />
     <PackageReference Include="Emgu.CV.runtime.ubuntu-x64" Version="4.7.0.5276" />
@@ -43,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="img\" />
+    <Folder Include="pdf\" />
   </ItemGroup>
 
   <ItemGroup>
