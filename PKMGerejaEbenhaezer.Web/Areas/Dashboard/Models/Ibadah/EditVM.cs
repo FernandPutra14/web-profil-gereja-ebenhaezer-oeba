@@ -2,8 +2,11 @@
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
 {
-    public class TambahVM
+    public class EditVM
     {
+        [Required]
+        public int Id { get; set; }
+
         [Display(Name = "Judul")]
         [Required(ErrorMessage = "{0} harus diisi")]
         public string Judul { get; set; } = string.Empty;
@@ -27,10 +30,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
 
         [Display(Name = "Kategori Ibadah")]
         [Required(ErrorMessage = "{0} harus diisi")]
-        public int IdKategoriIbadah { get; set; }
+        public int? IdKategoriIbadah { get; set; }
 
         [Display(Name = "Pendeta")]
         [Required(ErrorMessage = "{0} harus diisi")]
-        public int IdPendeta { get; set; }
+        public int? IdPendeta { get; set; }
     }
 }

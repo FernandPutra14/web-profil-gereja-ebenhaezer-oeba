@@ -1,16 +1,16 @@
 ﻿@using Microsoft.EntityFrameworkCore
 @using PKMGerejaEbenhaezer.DataAccess.Data
 @inject AppDbContext AppDbContext
-@model TambahVM
+@model EditVM
 @{
-    ViewData["Title"] = "Tambah Ibadah";
+    ViewData["Title"] = "Edit Ibadah";
     var daftarKategori = await AppDbContext.KategoriIbadahTable.ToListAsync();
     var daftarPendeta = await AppDbContext.PendetaTable.ToListAsync();
 }
 
-<h1>Tambah Ibadah</h1>
+<h1>Edit Ibadah</h1>
 
-<form asp-action="Tambah">
+<form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
     <div class="row mb-3">
@@ -32,7 +32,7 @@
     <div class="row mb-3">
         <div class="col-12">
             <label asp-for="@Model.TanggalIbadah" class="form-label"></label>
-            <input asp-for="@Model.TanggalIbadah" class="form-control" value="" />
+            <input asp-for="@Model.TanggalIbadah" class="form-control"/>
             <span asp-validation-for="@Model.TanggalIbadah" class="form-text text-danger"></span>
         </div>
     </div>
@@ -49,6 +49,7 @@
         <div class="col-12">
             <label asp-for="@Model.IdKategoriIbadah" class="form-label"></label>
             <select asp-for="@Model.IdKategoriIbadah" class="form-control">
+                <option value="@null">Tidak Ada</option>
                 @foreach (var item in daftarKategori)
                 {
                     <option value="@item.Id">@item.Nama -- @item.Durasi.ToString("h' jam 'm'menit'")</option>
@@ -62,6 +63,7 @@
         <div class="col-12">
             <label asp-for="@Model.IdPendeta" class="form-label"></label>
             <select asp-for="@Model.IdPendeta" class="form-control">
+                <option value="@null">Tidak Ada</option>
                 @foreach (var item in daftarPendeta)
                 {
                     <option value="@item.Id">@item.Nama</option>

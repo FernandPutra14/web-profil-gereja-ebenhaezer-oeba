@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah;
+using System.Security.Cryptography;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -72,6 +73,95 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 ModelState.AddModelError(string.Empty, "Simpan gagal. Laporkan error ke administrator");
                 _logger.LogError("Tambah. Simpan Gagal. Exception {0}", ex.ToString());
                 return View(tambahVM);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        //Edit Ibadah
+        public async Task<IActionResult> Edit(int id)
+        {
+            var ibadah = await _appDbContext.IbadahTable
+                .Include(i => i.KategoriIbadah)
+                .Include(i => i.Pendeta)
+                .Where(i => i.Id == id).FirstOrDefaultAsync();
+
+            if (ibadah is null) return NotFound();
+
+            return View(new EditVM
+            {
+                Id = ibadah.Id,
+                Judul = ibadah.Judul,
+                Deskripsi = ibadah.Judul,
+                NasPembimbing = ibadah.NasPembimbing,
+                TanggalIbadah = ibadah.TanggalIbadah,
+                Tempat = ibadah.Tempat,
+                IdKategoriIbadah = ibadah.KategoriIbadah?.Id,
+                IdPendeta = ibadah.Pendeta?.Id,
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditVM editVM)
+        {
+            //Validasi
+            if (!ModelState.IsValid) return View(editVM);
+
+            var ibadah = await _appDbContext.IbadahTable
+                .Where(i => i.Id == editVM.Id).FirstOrDefaultAsync();
+
+            if(ibadah is null)
+            {
+                ModelState.AddModelError(string.Empty, "Ibadah yang ingin diubah tidak ditemukan");
+                return View(editVM);
+            }
+
+            //Simpan ke database
+            var kategori = await _appDbContext.KategoriIbadahTable
+                .Where(k => k.Id == editVM.IdKategoriIbadah).FirstOrDefaultAsync();
+            var pendeta = await _appDbContext.PendetaTable
+                .Where(k => k.Id == editVM.IdPendeta).FirstOrDefaultAsync();
+
+            ibadah.Judul = editVM.Judul;
+            ibadah.Deskripsi = editVM.Deskripsi;
+            ibadah.NasPembimbing = editVM.NasPembimbing;
+            ibadah.TanggalIbadah = editVM.TanggalIbadah;
+            ibadah.Tempat = editVM.Tempat;
+            ibadah.KategoriIbadah = kategori;
+            ibadah.Pendeta = pendeta;
+
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Simpan gagal. Laporkan error ke administrator!");
+                _logger.LogError("Edit. Simpan Gagal. Exception {0}", ex.ToString());
+                return View(editVM);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        //Hapus Ibadah
+        [HttpPost]
+        public async Task<IActionResult> Hapus(int id)
+        {
+            var ibadah = await _appDbContext.IbadahTable
+                .Where(i => i.Id == id).FirstOrDefaultAsync();
+
+            if (ibadah is null) return NotFound();
+
+            _appDbContext.IbadahTable.Remove(ibadah);
+
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("Hapus. Simpan Gagal. Exception {0}", ex.ToString());
             }
 
             return RedirectToAction(nameof(Index));
