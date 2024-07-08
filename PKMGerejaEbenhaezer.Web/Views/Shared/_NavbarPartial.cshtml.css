@@ -1,240 +1,264 @@
-﻿.stick {
+﻿/* Gaya Navbar Tetap */
+.stick {
     width: 100%;
-    max-height: 80px;
-    height: 8rem;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-    background-color: var(--primary-clr);
-    opacity: 0.9;
-    padding: 0px;
-    margin: 0px auto;
-    z-index: 100;
-    position: fixed;
-    transition: all 0.3s ease;
+    max-height: 80px; /* Tinggi maksimum untuk navbar tetap */
+    height: 8rem; /* Tinggi untuk navbar tetap */
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3); /* Efek bayangan untuk navbar */
+    background-color: var(--primary-clr); /* Warna latar belakang untuk navbar */
+    opacity: 0.9; /* Tingkat transparansi */
+    padding: 0px; /* Tanpa padding */
+    margin: 0px auto; /* Memusatkan navbar */
+    z-index: 100; /* Urutan lapisan, memastikan tetap di atas */
+    position: fixed; /* Posisi tetap agar navbar tidak bergerak saat di-scroll */
+    transition: all 0.3s ease; /* Transisi halus untuk setiap perubahan */
 }
 
-
-
+/* Gaya Navbar Utama */
 .main-navbar {
     width: 100%;
-    max-height: 80px;
-    height: 8rem;
-    position: absolute;
-    opacity: 0.9;
-    padding: 0px 8%;
-    margin: 0px auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
+    max-height: 80px; /* Tinggi maksimum untuk navbar utama */
+    height: 8rem; /* Tinggi untuk navbar utama */
+    position: absolute; /* Posisi absolut di atas */
+    opacity: 0.9; /* Tingkat transparansi */
+    padding: 0px 8%; /* Padding kanan-kiri 8% */
+    margin: 0px auto; /* Memusatkan navbar */
+    display: flex; /* Menampilkan elemen secara fleksibel */
+    justify-content: space-between; /* Menyebarkan elemen secara merata */
+    align-items: center; /* Menyelaraskan elemen secara vertikal */
+    z-index: 101; /* Urutan lapisan */
 }
 
+    /* Gaya untuk logo di navbar */
     .main-navbar .logo {
-        text-decoration: none;
+        text-decoration: none; /* Menghilangkan garis bawah */
     }
 
         .main-navbar .logo ::deep img {
-            width: 180px;
-            height: auto;
+            width: 180px; /* Lebar gambar logo */
+            height: auto; /* Tinggi otomatis sesuai proporsi */
         }
 
+    /* Gaya untuk daftar navigasi */
     .main-navbar .nav-list {
-        list-style: none;
+        list-style: none; /* Menghilangkan tanda titik/bulet pada list */
     }
 
         .main-navbar .nav-list li {
-            display: inline-block;
-            margin: 10px 10px;
-            padding-top: 15px;
+            display: inline-block; /* Menampilkan elemen dalam satu baris */
+            margin: 10px 10px; /* Margin sekitar elemen */
+            padding-top: 15px; /* Padding atas */
         }
 
+            /* Gaya untuk tautan tombol login */
             .main-navbar .nav-list li ::deep a.login-btn {
-                position: relative;
-               /* color: var(--light-heading-clr);*/
-                font-weight: 500;
-                font-size: 14px;
-                text-transform: uppercase;
-                text-decoration: none;
-                letter-spacing: 1px;
+                position: relative; /* Posisi relatif */
+                font-weight: 500; /* Ketebalan huruf */
+                font-size: 14px; /* Ukuran huruf */
+                text-transform: uppercase; /* Huruf kapital */
+                text-decoration: none; /* Menghilangkan garis bawah */
+                letter-spacing: 1px; /* Jarak antar huruf */
             }
 
                 .main-navbar .nav-list li ::deep a.login-btn::after {
-                    position: absolute;
-                    content: '';
-                    width: 100%;
-                    height: 2px;
-                    color: black;
-                    /*background-color: var(--light-heading-clr);*/
-                    left: 0;
-                    top: calc(100% + 2px);
-                    transition: all 0.3s;
-                    transform: scaleX(0);
+                    position: absolute; /* Posisi absolut untuk garis bawah */
+                    content: ''; /* Konten kosong */
+                    width: 100%; /* Lebar penuh */
+                    height: 2px; /* Tinggi garis */
+                    /*background-color: var(--light-heading-clr);*/ /* Warna garis bawah */
+                    left: 0; /* Posisi kiri 0 */
+                    top: calc(100% + 2px); /* Posisi atas di bawah teks */
+                    transition: all 0.3s; /* Transisi halus */
+                    transform: scaleX(0); /* Skala awal 0 */
                 }
 
                 .main-navbar .nav-list li ::deep a.login-btn:hover::after {
-                    transform: scaleX(1);
-                    color: black;
+                    transform: scaleX(1); /* Skala penuh saat di-hover */
+                    /*color: black;*/ /* Warna hitam */
                 }
 
+            /* Gaya untuk tautan di daftar navigasi */
             .main-navbar .nav-list li ::deep a {
-                position: relative;
-                color: var(--light-heading-clr);
-                font-weight: 500;
-                font-size: 14px;
-                text-transform: uppercase;
-                text-decoration: none;
-                letter-spacing: 1px;
+                position: relative; /* Posisi relatif */
+                color: var(--light-heading-clr); /* Warna teks */
+                font-weight: 500; /* Ketebalan huruf */
+                font-size: 14px; /* Ukuran huruf */
+                text-transform: uppercase; /* Huruf kapital */
+                text-decoration: none; /* Menghilangkan garis bawah */
+                letter-spacing: 1px; /* Jarak antar huruf */
             }
-          
+
                 .main-navbar .nav-list li ::deep a::after {
-                    position: absolute;
-                    content: '';
-                    width: 100%;
-                    height: 2px;
-                    background-color: var(--light-heading-clr);
-                    left: 0;
-                    top: calc(100% + 2px);
-                    transition: all 0.3s;
-                    transform: scaleX(0);
+                    position: absolute; /* Posisi absolut untuk garis bawah */
+                    content: ''; /* Konten kosong */
+                    width: 100%; /* Lebar penuh */
+                    height: 2px; /* Tinggi garis */
+                    background-color: var(--light-heading-clr); /* Warna garis bawah */
+                    left: 0; /* Posisi kiri 0 */
+                    top: calc(100% + 2px); /* Posisi atas di bawah teks */
+                    transition: all 0.3s; /* Transisi halus */
+                    transform: scaleX(0); /* Skala awal 0 */
                 }
 
                 .main-navbar .nav-list li ::deep a:hover::after {
-                    transform: scaleX(1);
+                    transform: scaleX(1); /* Skala penuh saat di-hover */
                 }
 
-    .main-navbar .li .login-btn {
-        background-color: var(--light-heading-clr);
-        color: var(--primary-clr);
-    }
-
-        .main-navbar .li .login-btn:hover {
-            background-color: var(--primary-clr);
-            color: var(--light-heading-clr);
-            border: 1px solid var(--light-heading-clr);
-        }
-
+    /* Gaya untuk tombol menu (menu-btn) */
     .main-navbar .menu-btn {
-        min-width: 30px;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        cursor: pointer;
-        display: none;
+        min-width: 30px; /* Lebar minimum tombol */
+        width: 30px; /* Lebar tombol */
+        height: 30px; /* Tinggi tombol */
+        display: flex; /* Menampilkan elemen secara fleksibel */
+        justify-content: flex-start; /* Menyelaraskan elemen di awal */
+        align-items: center; /* Menyelaraskan elemen secara vertikal */
+        cursor: pointer; /* Ganti kursor menjadi pointer */
+        display: none; /* Sembunyikan tombol di ukuran layar besar */
     }
 
         .main-navbar .menu-btn span {
-            position: relative;
-            display: block;
-            width: 100%;
-            height: 2px;
-            background-color: var(--light-heading-clr);
-            border-radius: 5px;
-            transition: all 0.4s;
+            position: relative; /* Posisi relatif */
+            display: block; /* Menampilkan sebagai blok */
+            width: 100%; /* Lebar penuh */
+            height: 2px; /* Tinggi garis */
+            background-color: var(--light-heading-clr); /* Warna garis */
+            border-radius: 5px; /* Sudut melengkung */
+            transition: all 0.4s; /* Transisi halus */
         }
 
             .main-navbar .menu-btn span::before,
             .main-navbar .menu-btn span::after {
-                position: absolute;
-                content: '';
-                top: 0;
-                left: 0;
-                width: 80%;
-                height: 100%;
-                background-color: var(--light-heading-clr);
-                transition: all 0.4s;
+                position: absolute; /* Posisi absolut */
+                content: ''; /* Konten kosong */
+                top: 0; /* Posisi atas 0 */
+                left: 0; /* Posisi kiri 0 */
+                width: 80%; /* Lebar 80% */
+                height: 100%; /* Tinggi penuh */
+                background-color: var(--light-heading-clr); /* Warna garis */
+                transition: all 0.4s; /* Transisi halus */
             }
 
             .main-navbar .menu-btn span::before {
-                transform: translateY(-9px);
+                transform: translateY(-9px); /* Geser ke atas */
             }
 
             .main-navbar .menu-btn span::after {
-                transform: translateY(9px);
+                transform: translateY(9px); /* Geser ke bawah */
             }
 
-/* Responsive */
-@media (max-width:968px) {
-    .main-navbar .menu-btn {
-        display: flex;
-        margin-left: 40px;
-        z-index: 101;
-    }
-
+        /* Gaya saat tombol menu aktif */
         .main-navbar .menu-btn.active span,
         .main-navbar .menu-btn.active span::before,
         .main-navbar .menu-btn.active span::after {
-            width: 100%;
+            width: 100%; /* Lebar penuh */
         }
 
             .main-navbar .menu-btn.active span::before {
-                transform: rotate(45deg) translateY(0px);
+                transform: rotate(45deg) translateY(0px); /* Putar dan geser */
             }
 
             .main-navbar .menu-btn.active span::after {
-                transform: rotate(-45deg) translateY(0px);
+                transform: rotate(-45deg) translateY(0px); /* Putar dan geser */
             }
 
         .main-navbar .menu-btn.active span {
-            background-color: transparent;
+            background-color: transparent; /* Warna latar belakang transparan */
         }
 
-    .main-navbar .nav-list {
+/* Responsif */
+@media (max-width:968px) {
+
+    /* Gaya Navbar Utama */
+    .main-navbar {
+        opacity: 1; /* Tingkat transparansi */
         position: fixed;
-        width: 100%;
-        height: 100vh;
-        top: 0;
-        right: -100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: var(--primary-clr);
-        transition: right 0.1s cubic-bezier(.1, .1, .1, .1);
-        z-index: 100;
+        background-color: var(--primary-clr); /* Warna latar belakang untuk navbar */
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3); /* Efek bayangan untuk navbar */
+    }
+
+    .stick {   
+        opacity: 1; /* Tingkat transparansi */       
+    }
+
+
+    .main-navbar .menu-btn {
+        display: flex; /* Tampilkan tombol menu */
+        margin-left: 40px; /* Margin kiri */
+        z-index: 101; /* Urutan lapisan */
+    }
+
+    .main-navbar .nav-list {
+        position: fixed; /* Posisi tetap */
+        width: 100%; /* Lebar penuh */
+        height: 100vh; /* Tinggi layar penuh */
+        top: 0; /* Posisi atas 0 */
+        right: -100%; /* Posisi awal di luar layar */
+        display: flex; /* Tampilkan elemen secara fleksibel */
+        flex-direction: column; /* Arahkan elemen ke kolom */
+        align-items: center; /* Menyelaraskan elemen di tengah */
+        background-color: var(--primary-clr); /* Warna latar belakang */     
+        transition: right 0.3s cubic-bezier(.1, .1, .1, .1); /* Transisi halus */
+        z-index: 100; /* Urutan lapisan */
     }
 
         .main-navbar .nav-list.active {
-            right: 0;
-            transition: all 0.1s;
+            right: 0; /* Pindahkan ke dalam layar */
+            transition: all 0.3s; /* Transisi halus */
+            opacity: 1;
         }
 
         .main-navbar .nav-list li {
-            margin: 25px 0px 0px;
+            margin: 25px 0px 0px; /* Margin atas */
         }
 
             .main-navbar .nav-list li:nth-child(1) {
-                margin-top: 150px;
+                margin-top: 30vw; /* Margin atas untuk elemen pertama */
             }
 
             .main-navbar .nav-list li ::deep a {
-                font-size: 20px;
-                letter-spacing: 1px;
+                font-size: 20px; /* Ukuran huruf lebih besar */
+                letter-spacing: 1px; /* Jarak antar huruf */
             }
 
     .main-navbar ::deep .login-btn {
-        margin-left: auto;
-        font-size: 20px;
+        margin-left: auto; /* Margin kiri otomatis */
+        font-size: 20px; /* Ukuran huruf lebih besar */
     }
 
-    .main-navbar .nav-list li ::deep a.login-btn { 
-        font-size: 20px;       
+    .main-navbar .nav-list li ::deep a.login-btn {
+        font-size: 20px; /* Ukuran huruf lebih besar */
     }
 }
 
 @media (max-width:768px) {
+    /* Tambahan gaya responsif untuk layar 768px ke bawah */
+
+    .main-navbar .nav-list li:nth-child(1) {
+        margin-top: 30vw; /* Margin atas untuk elemen pertama */
+    }
 }
 
-@media (max-width:668px) {
+@media (max-width:690px) {
+    /* Tambahan gaya responsif untuk layar 668px ke bawah */
 }
 
 @media (max-width:568px) {
+    /* Tambahan gaya responsif untuk layar 568px ke bawah */
+
+    .main-navbar .nav-list li:nth-child(1) {
+        margin-top: 40vw; /* Margin atas untuk elemen pertama */
+    }
 }
 
 @media (max-width:468px) {
 
-    .main-navbar .login-btn {
-        display: none;
+    .main-navbar .nav-list li:nth-child(1) {
+        margin-top: 50vw; /* Margin atas untuk elemen pertama */
     }
 }
 
-/* Akhir Responsive */
+@media (max-width:400px) {
+
+    .main-navbar .nav-list li:nth-child(1) {
+        margin-top: 35vw; /* Margin atas untuk elemen pertama */
+    }
+}
