@@ -1,14 +1,17 @@
 ﻿function adjustBackgroundPosition() {
     var scrollPosition = window.pageYOffset;
-    var elements = ['hero', 'kontak-us', 'peng-us'];
+    var elements = ['hero'];
 
-    elements.forEach(function (id) {
-        var element = document.getElementById(id);
-        if (element) {
-            element.style.backgroundPositionY = -(scrollPosition * 0.5) + 'px';
-        }
-    });
+    if (window.matchMedia('(min-width: 969px)').matches) {
+        elements.forEach(function (id) {
+            var element = document.getElementById(id);
+            if (element) {
+                element.style.backgroundPositionY = -(scrollPosition * 0.5) + 'px';
+            }
+        });
+    }
 }
+
 
 function saveScrollPosition() {
     sessionStorage.setItem('scrollPosition', window.pageYOffset);
