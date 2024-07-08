@@ -42,9 +42,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Dashboard\Models\Ibadah\" />
-    <Folder Include="Areas\Dashboard\Views\Ibadah\" />
     <Folder Include="img\" />
+  </ItemGroup>
+
+  <ItemGroup>
   </ItemGroup>
 
 </Project>
