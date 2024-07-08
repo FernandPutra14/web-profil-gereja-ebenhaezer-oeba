@@ -1,5 +1,5 @@
 ﻿const nav_header = document.querySelector(".head");
-const section_hero = document.querySelector("#textscroll");
+const section_hero = document.querySelector("#hero");
 
 
 const observer = new IntersectionObserver(
@@ -11,7 +11,7 @@ const observer = new IntersectionObserver(
     }, {
     root: null,
     rootMargin: "",
-    threshold: "",
+    threshold: 0.01,
 });
 
 observer.observe(section_hero);
