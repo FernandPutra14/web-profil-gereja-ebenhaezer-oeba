@@ -4,6 +4,7 @@
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
+    background-position-y: inherit;
     display: flex;
     flex-direction: column;
     margin: 0px auto;

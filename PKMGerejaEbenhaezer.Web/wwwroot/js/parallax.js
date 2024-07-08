@@ -1,6 +1,6 @@
 ﻿function adjustBackgroundPosition() {
     var scrollPosition = window.pageYOffset;
-    var elements = ['hero'];
+    var elements = ['hero', 'peng-us', 'kontak-us'];
 
     if (window.matchMedia('(min-width: 969px)').matches) {
         elements.forEach(function (id) {

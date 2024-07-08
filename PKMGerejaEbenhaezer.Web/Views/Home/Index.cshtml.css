@@ -728,6 +728,8 @@ section.peng {
     #hero {
         height: 100vh;
         background-attachment: scroll;
+        position: relative;
+        overflow: scroll;
     }
 
     #hero h1 {
