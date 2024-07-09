@@ -25,7 +25,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             _notificationService = notificationService;
         }
 
-
         //Daftar Kategori
         public async Task<IActionResult> Index()
         {
