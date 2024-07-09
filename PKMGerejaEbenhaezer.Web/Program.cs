@@ -63,6 +63,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseStatusCodePagesWithReExecute("/Home/Error/", "?statusCode={0}");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
