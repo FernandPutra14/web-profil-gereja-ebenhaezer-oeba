@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pendeta;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
@@ -16,12 +17,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly ILogger<PendetaController> _logger;
+        private readonly IToastrNotificationService _notificationService;
 
-        public PendetaController(AppDbContext appDbContext, 
-            ILogger<PendetaController> logger)
+        public PendetaController(AppDbContext appDbContext,
+            ILogger<PendetaController> logger,
+            IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         public async Task<IActionResult> Index()
@@ -96,6 +100,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(tambahVM);
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Pendeta Baru Berhasil Ditambahkan"
+            });
             return RedirectToAction(nameof(Index));
         }
 
@@ -190,6 +199,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Pengubahan data pendeta sukses!"
+            });
             return RedirectToAction(nameof(Index));
         }
 
@@ -207,10 +221,21 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 await _appDbContext.SaveChangesAsync();
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Hapus Pendeta berhasil"
+                });
             }
             catch(Exception ex)
             {
                 _logger.LogError("Hapus. Exception : {0}", ex.ToString());
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Hapus pendeta gagal",
+                    Message = "Error terjadi saat mencoba menghapus data dari database. Silahkan hubungi administrator",
+                });
             }
 
             return RedirectToAction(nameof(Index));
