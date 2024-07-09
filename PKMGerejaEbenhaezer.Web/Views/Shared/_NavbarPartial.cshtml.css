@@ -211,7 +211,8 @@
         }
 
             .main-navbar .nav-list li:nth-child(1) {
-                margin-top: 30vw; /* Margin atas untuk elemen pertama */
+                margin-top: calc(50% - 50px);
+                /*margin-top: 30vw;*/ /* Margin atas untuk elemen pertama */
             }
 
             .main-navbar .nav-list li ::deep a {
@@ -233,7 +234,7 @@
     /* Tambahan gaya responsif untuk layar 768px ke bawah */
 
     .main-navbar .nav-list li:nth-child(1) {
-        margin-top: 30vw; /* Margin atas untuk elemen pertama */
+        top: calc(50% - 50px);
     }
 }
 
@@ -245,20 +246,20 @@
     /* Tambahan gaya responsif untuk layar 568px ke bawah */
 
     .main-navbar .nav-list li:nth-child(1) {
-        margin-top: 40vw; /* Margin atas untuk elemen pertama */
+        /*top: calc(50% - 50px);*/
     }
 }
 
 @media (max-width:468px) {
 
     .main-navbar .nav-list li:nth-child(1) {
-        margin-top: 50vw; /* Margin atas untuk elemen pertama */
+        
     }
 }
 
 @media (max-width:400px) {
 
     .main-navbar .nav-list li:nth-child(1) {
-        margin-top: 35vw; /* Margin atas untuk elemen pertama */
+        
     }
 }

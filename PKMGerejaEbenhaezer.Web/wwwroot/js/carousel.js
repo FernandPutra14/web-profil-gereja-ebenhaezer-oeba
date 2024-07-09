@@ -46,10 +46,10 @@ $(document).ready(function () {
                 autoplay: false,
                 autoplayTimeout: 8000,
                 margin: 10,
-                nav: false,
+                nav: true,
                 navText: [
-                    "<i class='ri-arrow-left-s-fill'></i>",
-                    "<i class='ri-arrow-right-s-fill'></i>"
+                    "<i class='ri-arrow-left-s-line'></i>",
+                    "<i class='ri-arrow-right-s-line'></i>"
                 ],
                 responsive: {
                     0: {
