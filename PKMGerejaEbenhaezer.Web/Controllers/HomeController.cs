@@ -73,14 +73,14 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             return View();
         }
 
+        public IActionResult StatusCode404()
+        {
+            return View(); 
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int? statusCode = null)
         {
-            if(statusCode == 404)
-            {
-                return View("404");
-            }
-
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
