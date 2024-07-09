@@ -32,7 +32,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             var daftarUser = await _appDbContext.AppUserTable
                 .AsNoTracking().ToListAsync();
 
-            return View(daftarUser ?? new());
+            return View(daftarUser);
         }
 
         //Tambah Akun
@@ -52,7 +52,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (duplikasiNama)
             {
-                ModelState.AddModelError(nameof(TambahVM.UserName), "User Name sudah digunakan!");
+                ModelState.AddModelError(nameof(TambahVM.UserName), $"'{tambahVM.UserName}'sudah digunakan!");
                 return View(tambahVM);
             }
 
@@ -73,8 +73,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
             catch (Exception ex)
             {
-                ModelState
-                    .AddModelError(string.Empty, "Gagal menyimpan ke database. Silahkan hubungi administrator!");
+                ModelState.AddModelError(string.Empty, 
+                    "Gagal menyimpan ke database. Silahkan hubungi administrator!");
                 _logger.LogError("Tambah Akun. Exception : {0}", ex.ToString());
                 return View(tambahVM);
             }

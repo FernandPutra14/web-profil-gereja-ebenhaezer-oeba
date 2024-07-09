@@ -5,6 +5,7 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.FotoModels;
 using PKMGerejaEbenhaezer.Web.Configurations;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using PKMGerejaEbenhaezer.Web.Utlities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
@@ -19,16 +20,19 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly PhotoFileSettingsOptions _photoFileSettingsOptions;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<FotoController> _logger;
+        private readonly IToastrNotificationService _notificationService;
 
         public FotoController(AppDbContext appDbContext,
             PhotoFileSettingsOptions photoFileSettingsOptions,
             IWebHostEnvironment webHostEnvironment,
-            ILogger<FotoController> logger)
+            ILogger<FotoController> logger,
+            IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
             _photoFileSettingsOptions = photoFileSettingsOptions;
             _webHostEnvironment = webHostEnvironment;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         public async Task<IActionResult> Index(int? pageIndex)
@@ -97,6 +101,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Upload Foto Gagal. Error: {0}", ex.ToString());
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Upload Foto Gagal",
+                        Message = "Gagal menyimpan foto. Laporkan error ke administrator",
+                    }
+                );
                 return View("Index", indexVM);
             }
 
@@ -107,9 +119,32 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 PathFotoKompresi = fotoPathKompresi,
             };
 
-            var changeTracker = _appDbContext.FotoTable.Add(foto);
+            _appDbContext.FotoTable.Add(foto);
 
-            await _appDbContext.SaveChangesAsync();
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Success,
+                        Title = "Upload Foto Berhasil",
+                        Message = "Foto berhasil disimpan",
+                    }
+                );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("IndexPOST. Error : {0}", ex.ToString());
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Upload Foto Gagal",
+                        Message = "Gagal menyimpan foto. Laporkan error ke administrator",
+                    }
+                );
+            }
 
             daftarFoto = await _appDbContext.FotoTable
                 .Include(f => f.Pembuat)
@@ -155,9 +190,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
                 using (var fotoKompresi = Image.Load(fileFormContent))
                 {
-                    var encoder = new JpegEncoder 
-                    { 
-                        Quality = _photoFileSettingsOptions.CompressionQuality 
+                    var encoder = new JpegEncoder
+                    {
+                        Quality = _photoFileSettingsOptions.CompressionQuality
                     };
                     fotoKompresi.Save(fotoPathKompresi, encoder);
                 }
@@ -177,7 +212,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             var changeTracker = _appDbContext.FotoTable.Add(foto);
 
-            await _appDbContext.SaveChangesAsync();
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("Upload Foto Gagal. Error: {0}", ex.ToString());
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
 
             return Ok(changeTracker.Entity);
         }
@@ -190,9 +233,17 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 .Where(f => f.Id == id)
                 .FirstOrDefaultAsync();
 
-            if (foto == null)
+            if (foto is null)
             {
                 _logger.LogError("Hapus Foto Gagal! Id {0} tidak ditemukan", id);
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Hapus Foto Gagal!",
+                        Message = "Foto tidak ditemukan"
+                    }
+                );
                 return Redirect(returnUrl!);
             }
 
@@ -205,6 +256,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Hapus Foto Gagal! Simpan Database gagal! Ex : {0}", ex.ToString());
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Hapus Foto Gagal!",
+                        Message = "Hapus dari database gagal"
+                    }
+                );
                 return Redirect(returnUrl!);
             }
 
@@ -219,9 +278,25 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Hapus Foto Gagal! Hapus Foto di Storage Gagal! Ex : {0}", ex.ToString());
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Hapus Foto Gagal!",
+                        Message = "Hapus di penyimpanan gagal"
+                    }
+                );
                 return Redirect(returnUrl!);
             }
 
+            _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Success,
+                        Title = "Hapus Foto Berhasil!",
+                        Message = "Foto telah dihapus"
+                    }
+                );
             return Redirect(returnUrl!);
         }
 
