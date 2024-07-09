@@ -239,7 +239,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             //Validasi
             var pengumuman = await _appDbContext.PengumumanTable.Where(p => p.Id == id).FirstOrDefaultAsync();
-            if (pengumuman == null) return BadRequest(pengumuman);
+            if (pengumuman is null) return BadRequest(pengumuman);
 
             //Hapus pengumuman
             _appDbContext.PengumumanTable.Remove(pengumuman);

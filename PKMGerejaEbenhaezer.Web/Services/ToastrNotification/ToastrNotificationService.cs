@@ -17,19 +17,39 @@ namespace PKMGerejaEbenhaezer.Web.Services.ToastrNotification
 
         public void AddNotification(ToastrNotification notification)
         {
-            var json = JsonConvert.SerializeObject(notification, new JsonSerializerSettings
+            var notifications = GetTempData();
+
+            notifications.Add(notification);
+
+            var json = JsonConvert.SerializeObject(notifications, new JsonSerializerSettings
             {
-                NullValueHandling = NullValueHandling.Ignore,
                 Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore,
             });
+
             _tempDataDictionary[_tempDataKey] = json;
+            _tempDataDictionary.Keep(_tempDataKey);
+        }
+
+        private List<ToastrNotification> GetTempData()
+        {
+            var tempData = _tempDataDictionary[_tempDataKey];
+
+            if (tempData is null) return new();
+
+            if (tempData is not string notificationsJson) return new();
+
+            var notifications = JsonConvert.DeserializeObject<List<ToastrNotification>>(notificationsJson);
+
+            return notifications ?? new();
         }
 
         public string? GetNotificationJson()
         {
-            var notification = _tempDataDictionary[_tempDataKey];
+            var notifications = _tempDataDictionary[_tempDataKey];
+            _tempDataDictionary.Remove(_tempDataKey);
 
-            return notification is not null && notification is string json ? json : null;
+            return notifications is not null && notifications is string json ? json : null;
         }
     }
 }

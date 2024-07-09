@@ -19,32 +19,40 @@
 
     <script type="text/javascript">
         const options = $('#options@(id)').val();
-        const notificationJSON = $('#notification@(id)').val();
-        const notification = JSON.parse(notificationJSON);
+        const notificationsJSON = $('#notification@(id)').val();
+        const notifications = JSON.parse(notificationsJSON);
 
         toastr.options = JSON.parse(options);
 
-        let type;
+        console.log(notifications);
 
-        switch (notification.Type) {
-            case 0: {
-                type = 'success';
-                break;
+        for (let i = 0; i < notifications.length; i++) {
+            const notification = notifications[i];
+
+            console.log(notification);
+
+            let type;
+
+            switch (notification.Type) {
+                case 0: {
+                    type = 'success';
+                    break;
+                }
+                case 1: {
+                    type = 'warning';
+                    break;
+                }
+                case 2: {
+                    type = 'error';
+                    break;
+                }
+                case 3: {
+                    type = 'info';
+                    break;
+                }
             }
-            case 1: {
-                type = 'warning';
-                break;
-            }
-            case 2: {
-                type = 'error';
-                break;
-            }
-            case 3: {
-                type = 'info';
-                break;
-            }
+
+            toastr[type](notification.Message, notification.Title, notification.Options);
         }
-
-        toastr[type](notification.Message, notification.Title, notification.Options);
     </script>
 }
