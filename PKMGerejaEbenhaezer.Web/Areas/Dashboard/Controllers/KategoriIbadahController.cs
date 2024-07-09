@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.KategoriIbadah;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -13,11 +14,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly ILogger<IbadahController> _logger;
+        private readonly IToastrNotificationService _notificationService;
 
-        public KategoriIbadahController(AppDbContext appDbContext, ILogger<IbadahController> logger)
+        public KategoriIbadahController(AppDbContext appDbContext,
+            ILogger<IbadahController> logger,
+            IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
 
@@ -47,7 +52,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (duplikasiNama)
             {
-                ModelState.AddModelError(nameof(TambahVM.Nama), $"{tambahVM.Nama} sudah digunakan!. Gunakan nama lain");
+                ModelState.AddModelError(nameof(TambahVM.Nama), 
+                    $"{tambahVM.Nama} sudah digunakan!. Gunakan nama lain");
                 return View(tambahVM);
             }
 
@@ -72,6 +78,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(tambahVM);
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Kategori ibadah baru berhasil ditambah"
+            });
             return RedirectToAction(nameof(Index));
         }
 
@@ -131,6 +142,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Kategori ibadah berhasil diubah"
+            });
             return RedirectToAction(nameof(Index));
         }
 
@@ -153,8 +169,19 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Hapus Kategori. Simpan Gagal. Exception : {0}", ex.ToString());
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Hapus Kategori Ibadah Gagal",
+                    Message = "Error terjadi saat mencoba menghapus data dari database. Silahkan laporkan ke administrator"
+                });
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Kategori Ibadah sukses dihapus"
+            });
             return RedirectToAction(nameof(Index));
         }
     }
