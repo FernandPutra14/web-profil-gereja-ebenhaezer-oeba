@@ -6,6 +6,7 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Authentication;
 using PKMGerejaEbenhaezer.Web.Models.Account;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {
@@ -15,13 +16,17 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         private readonly ISignInManager _signInManager;
         private readonly AppDbContext _appDbContext;
         private readonly ILogger<AccountController> _logger;
+        private readonly IToastrNotificationService _notificationService;
 
         public AccountController(ISignInManager signInManager,
-            AppDbContext appDbContext, ILogger<AccountController> logger)
+            AppDbContext appDbContext, 
+            ILogger<AccountController> logger, 
+            IToastrNotificationService notificationService)
         {
             _signInManager = signInManager;
             _appDbContext = appDbContext;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         [AllowAnonymous]
@@ -50,6 +55,11 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 return View(loginVM);
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Info,
+                Title = $"Selamat datang kembali {loginVM.UserName}"
+            });
             return Redirect(returnUrl!);
         }
 
@@ -142,6 +152,12 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 return View(editVM);
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Akun Sukses Diubah",
+                Message = "Silahkan login dengan Username dan Password baru anda"
+            });
             return RedirectToAction(nameof(Login));
         }
     }
