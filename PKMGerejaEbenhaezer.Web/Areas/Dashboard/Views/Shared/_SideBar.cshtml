@@ -46,13 +46,16 @@
         <!-- Akhir Kategori Ibadah -->
 
 
+        <!-- Ibadah -->
+        <li><a asp-area="Dashboard" asp-controller="Ibadah" asp-action="Index"><i class="ri-service-fill icon"></i>Ibadah</a></li>
+        <!-- Akhir Ibadah -->
+
+
         <!-- Pendeta -->
         <li><a asp-area="Dashboard" asp-controller="Pendeta" asp-action="Index"><i class="ri-user-2-fill icon"></i>Pendeta</a></li>
         <!-- Akhir Pendeta -->
 
-        <!-- Ibadah -->
-        <li><a asp-area="Dashboard" asp-controller="Ibadah" asp-action="Index"><i class="ri-user-2-fill icon"></i>Ibadah</a></li>
-        <!-- Akhir Ibadah -->
+        
 
         <!-- Akun -->
         @if (User.IsInRole(AppUserRoles.SuperAdmin))

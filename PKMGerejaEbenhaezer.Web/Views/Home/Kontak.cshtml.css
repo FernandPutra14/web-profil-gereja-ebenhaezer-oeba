@@ -5,6 +5,7 @@
     background-size: cover;
     background-position: center;
     display: flex;
+    background-position-y: inherit;
     flex-direction: column;
     margin: 0px auto;
     width: 100%;
