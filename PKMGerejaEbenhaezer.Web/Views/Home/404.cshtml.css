@@ -1,0 +1,25 @@
+﻿.containerku {
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'poppins';
+    padding-bottom: 40px;
+}
+
+    .containerku h1 {
+        font-size: 40px;
+        margin-top: 10px;
+        color: #333;
+        font-weight: bold;   
+    }
+
+    .containerku h3 {
+        font-size: 18px;
+        color: var(--dark-text-clr);
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .containerku ::deep img {
+        max-width: 100%;
+        height: auto;
+    }
