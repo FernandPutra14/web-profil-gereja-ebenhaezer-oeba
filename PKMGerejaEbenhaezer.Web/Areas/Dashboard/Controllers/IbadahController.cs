@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using System.Security.Cryptography;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
@@ -14,11 +15,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly ILogger<IbadahController> _logger;
+        private readonly IToastrNotificationService _notificationService;
 
-        public IbadahController(AppDbContext appDbContext, ILogger<IbadahController> logger)
+        public IbadahController(AppDbContext appDbContext, 
+            ILogger<IbadahController> logger, 
+            IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         public async Task<IActionResult> Index()
@@ -75,6 +80,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(tambahVM);
             }
 
+            _notificationService.AddNotification(
+                new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Ibadah baru sukses ditambah"
+                }
+            );
             return RedirectToAction(nameof(Index));
         }
 
@@ -112,8 +124,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if(ibadah is null)
             {
-                ModelState.AddModelError(string.Empty, "Ibadah yang ingin diubah tidak ditemukan");
-                return View(editVM);
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Simpan Gagal!",
+                        Message = "Ibadah yang akan diubah tidak ditemukan"
+                    }
+                );
+                return RedirectToAction(nameof(Index));
             }
 
             //Simpan ke database
@@ -141,6 +160,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
+            _notificationService.AddNotification(
+                new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Ibadah sukses diubah"
+                }
+            );
             return RedirectToAction(nameof(Index));
         }
 
@@ -158,10 +184,25 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 await _appDbContext.SaveChangesAsync();
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Success,
+                        Title = "Ibadah sukses dihapus"
+                    }
+                );
             }
             catch(Exception ex)
             {
                 _logger.LogError("Hapus. Simpan Gagal. Exception {0}", ex.ToString());
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Ibadah gagal dihapus",
+                        Message = "Error terjadi saat mencoba menghapus ibadah dari database. Silahkan laporkan ke administrator"
+                    }
+                );
             }
 
             return RedirectToAction(nameof(Index));

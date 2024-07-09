@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.WartaJemaat;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -13,12 +14,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly ILogger<WartaJemaatController> _logger;
+        private readonly IToastrNotificationService _notificationService;
 
-        public WartaJemaatController(AppDbContext appDbContext, 
-            ILogger<WartaJemaatController> logger)
+        public WartaJemaatController(AppDbContext appDbContext,
+            ILogger<WartaJemaatController> logger,
+            IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         public async Task<IActionResult> Index()
@@ -43,25 +47,25 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Validasi
             if (!ModelState.IsValid) return View(tambahVM);
 
-            var warta = await _appDbContext.WartaJemaatTable
-                .Where(w => w.TanggalWarta == tambahVM.TanggalWarta)
-                .FirstOrDefaultAsync();
+            var dupllikasiTanggal = await _appDbContext.WartaJemaatTable
+                .AnyAsync(w => w.TanggalWarta == tambahVM.TanggalWarta); 
 
-            if (warta is not null)
+            if(dupllikasiTanggal)
             {
-                ModelState.AddModelError(nameof(TambahVM.TanggalWarta), "Tanggal Sudah Digunakan Untuk Warta Lain!");
+                ModelState.AddModelError(nameof(TambahVM.TanggalWarta), 
+                    "Tanggal Sudah Digunakan Untuk Warta Lain!");
                 return View(tambahVM);
             }
 
             //Simpan ke database
-            var wartaBaru = new WartaJemaat
+            var warta = new WartaJemaat
             {
                 Id = 0,
                 TanggalWarta = tambahVM.TanggalWarta,
                 DocumentLink = new Uri(tambahVM.DocumentLink)
             };
 
-            _appDbContext.WartaJemaatTable.Add(wartaBaru);
+            _appDbContext.WartaJemaatTable.Add(warta);
 
             try
             {
@@ -74,6 +78,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(tambahVM);
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Warta Jemaat Baru Sukses Ditambahkan"
+            });
             return RedirectToAction(nameof(Index));
         }
 
@@ -132,6 +141,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Warta Jemaat Berhasil Diubah"
+            });
             return RedirectToAction(nameof(Index));
         }
 
@@ -151,10 +165,21 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 await _appDbContext.SaveChangesAsync();
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Warta Jemaat Sukses Dihapus"
+                });
             }
             catch (Exception ex)
             {
                 _logger.LogError("Hapus. Exception : {0}", ex.ToString());
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Hapus Warta Jemaat Gagal",
+                    Message = "Terjadi error saat mencoba menghapus data dari database. Silahkan hubungi administrator"
+                });
             }
 
             return Redirect(returnUrl!);
