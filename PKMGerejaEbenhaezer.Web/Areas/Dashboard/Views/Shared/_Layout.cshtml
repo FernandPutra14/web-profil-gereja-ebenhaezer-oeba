@@ -78,7 +78,7 @@
             closeButton = true,
             progressBar = true,
             newestOnTop = true,
-            preventDuplicates = false,
+            preventDuplicates = true,
             timeOut = (int)TimeSpan.FromSeconds(5).TotalMilliseconds,
             extendedTimeOut = (int)TimeSpan.FromSeconds(5).TotalMilliseconds,
             showDuration = (int)TimeSpan.FromSeconds(1).TotalMilliseconds,
@@ -87,7 +87,7 @@
             hideEasing = Easings.Swing,
             showMethod = AnimationMethods.FadeIn,
             hideMethod = AnimationMethods.FadeOut,
-            positionClass = PositionClasses.TopCenter,
+            positionClass = PositionClasses.TopFullWidth,
         };
     }
     <vc:toastr global-options=options></vc:toastr>

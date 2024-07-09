@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Emgu.CV.Features2D;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Account;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -14,11 +16,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly ILogger<AccountController> _logger;
+        private readonly IToastrNotificationService _notificationService;
 
-        public AccountController(AppDbContext appDbContext, ILogger<AccountController> logger)
+        public AccountController(AppDbContext appDbContext,
+            ILogger<AccountController> logger,
+            IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         public async Task<IActionResult> Index()
@@ -73,6 +79,18 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(tambahVM);
             }
 
+            _notificationService.AddNotification(
+                new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Tambah Akun Berhasil!",
+                    Message = $"Akun {appUser.UserName} berhasil ditambahkan",
+                    Options = new ToastrOptions
+                    {
+                        positionClass = PositionClasses.TopFullWidth
+                    }
+                }
+            );
             return RedirectToAction(nameof(Index));
         }
 
@@ -102,10 +120,30 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 await _appDbContext.SaveChangesAsync();
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Success,
+                        Title = "Hapus Akun Berhasil!",
+                        Message = $"Akun {user.UserName} berhasil dihapus",
+                        Options = new ToastrOptions
+                        {
+                            positionClass = PositionClasses.TopRight
+                        }
+                    }
+                );
             }
             catch (Exception ex)
             {
                 _logger.LogError("Hapus. Error saat menyimpan. Exception : {0}", ex.ToString());
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Hapus Akun Gagal!",
+                        Message = $"Akun '{user.UserName} gagal dihapus. Silahkan hubungi administrator",
+                    }
+                );
             }
 
             return RedirectToAction(nameof(Index));
@@ -118,8 +156,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 .Where(u => u.Id == id).FirstOrDefaultAsync();
 
             if (user is null) return NotFound();
-            
-            if(user.Role == AppUserRoles.SuperAdmin)
+
+            if (user.Role == AppUserRoles.SuperAdmin)
             {
                 _logger.LogError("Mencoba mengubah akun dengan Role : {0}", AppUserRoles.SuperAdmin);
                 return BadRequest();
@@ -142,7 +180,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         public async Task<IActionResult> Edit(EditVM editVM)
         {
             //Validasi
-            if(!ModelState.IsValid) return View(editVM);
+            if (!ModelState.IsValid) return View(editVM);
 
             var user = await _appDbContext.AppUserTable
                 .Where(u => u.Id == editVM.Id).FirstOrDefaultAsync();
@@ -153,7 +191,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             var duplikasiNama = await _appDbContext.AppUserTable
                 .AnyAsync(u => u.Id != editVM.Id && u.UserName == editVM.UserName);
 
-            if(duplikasiNama)
+            if (duplikasiNama)
             {
                 ModelState.AddModelError(nameof(EditVM.UserName), $"{editVM.UserName} sudah digunakan");
                 return View(editVM);

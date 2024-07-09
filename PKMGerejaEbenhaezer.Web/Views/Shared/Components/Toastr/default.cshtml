@@ -6,6 +6,12 @@
     <link href="~/lib/Toastr/CSS/toastr.min.css" rel="stylesheet" />
     <script src="~/lib/Toastr/JS/toastr.min.js"></script>
 
+    <style>
+        .toast {
+            font-size: 1.5rem;
+        }
+    </style>
+
     var id = Guid.NewGuid().ToString();
 
     <input hidden id="options@(id)" value="@Model.globalOptionsJson" />
