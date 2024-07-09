@@ -121,6 +121,22 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (pengumuman == null) return NotFound();
 
+            if (pengumuman.HaveDocument && !System.IO.File.Exists(pengumuman.PathPDF))
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Warning,
+                    Title = "File Dokumen Pengumuman Tidak Ada",
+                    Message = "Hilangkan centang Ada Dokumen atau upload file PDF baru"
+                });
+
+            if (pengumuman.Foto is null)
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Warning,
+                    Title = "Pengumuman Tidak Ada Foto",
+                    Message = "Upload foto baru atau pilih dari foto yang sudah ada"
+                });
+
             return View(new EditVM
             {
                 Id = id,
@@ -141,7 +157,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (pengumuman is null)
             {
-                ModelState.AddModelError(string.Empty, $"Pengumuman dengan yang akan diubah tidak ditemukan");
+                ModelState.AddModelError(string.Empty, "Pengumuman dengan yang akan diubah tidak ditemukan");
                 return View(editVM);
             }
 
@@ -157,7 +173,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 }
             }
 
-            if (editVM.HaveDocument && pengumuman.PathPDF is null && editVM.PDFFormFile is null)
+            if (editVM.HaveDocument && !pengumuman.HaveDocument && editVM.PDFFormFile is null)
             {
                 ModelState.AddModelError(nameof(editVM.PDFFormFile), "Dokumen harus diisi jika Ada Dokumen di centang!");
                 return View(editVM);
@@ -166,29 +182,34 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Update Pengumuman
             pengumuman.Judul = editVM.Judul;
             pengumuman.Isi = editVM.Isi;
-            pengumuman.HaveDocument = editVM.HaveDocument;
 
             if (editVM.IdFoto is not null)
-            {
                 pengumuman.Foto = await _appDbContext.FotoTable.Where(f => f.Id == editVM.IdFoto)
                     .AsNoTracking().FirstOrDefaultAsync();
-            }
 
-            if (editVM.HaveDocument && editVM.PDFFormFile is not null)
+            if (editVM.HaveDocument)
             {
-                var pdfPath = await _pDFUploadService.UploadAsync<EditVM>(ModelState, editVM.PDFFormFile);
-                if (!ModelState.IsValid || pdfPath is null)
+                if(editVM.PDFFormFile is not null)
                 {
-                    return View(editVM);
-                }
+                    var pdfPath = await _pDFUploadService.UploadAsync<EditVM>(ModelState, editVM.PDFFormFile);
+                    if (!ModelState.IsValid || pdfPath is null)
+                        return View(editVM);
 
-                if (pengumuman.PathPDF is not null && System.IO.File.Exists(pengumuman.PathPDF))
-                {
-                    System.IO.File.Delete(pengumuman.PathPDF);
-                }
+                    if (pengumuman.HaveDocument && System.IO.File.Exists(pengumuman.PathPDF))
+                        System.IO.File.Delete(pengumuman.PathPDF);
 
-                pengumuman.PathPDF = pdfPath;
+                    pengumuman.PathPDF = pdfPath;
+                }
             }
+            else
+            {
+                if (pengumuman.HaveDocument && System.IO.File.Exists(pengumuman.PathPDF))
+                    System.IO.File.Delete(pengumuman.PathPDF);
+
+                pengumuman.PathPDF = null;
+            }
+
+            pengumuman.HaveDocument = editVM.HaveDocument;
 
             try
             {
