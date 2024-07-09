@@ -141,7 +141,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                     {
                         Type = ToastrNotificationType.Error,
                         Title = "Hapus Akun Gagal!",
-                        Message = $"Akun '{user.UserName} gagal dihapus. Silahkan hubungi administrator",
+                        Message = $"Akun '{user.UserName}' gagal dihapus. Silahkan hubungi administrator",
                     }
                 );
             }
@@ -186,7 +186,17 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 .Where(u => u.Id == editVM.Id).FirstOrDefaultAsync();
 
             if (user is null)
+            {
+                _notificationService.AddNotification(
+                    new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Edit Gagal!",
+                        Message = "Akun yang akan diubah tidak ada."
+                    }
+                );
                 return RedirectToAction(nameof(Index));
+            }
 
             var duplikasiNama = await _appDbContext.AppUserTable
                 .AnyAsync(u => u.Id != editVM.Id && u.UserName == editVM.UserName);
@@ -217,6 +227,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
+            _notificationService.AddNotification(
+                new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Edit Akun Berhasil!",
+                    Message = $"Akun '{user.UserName}' berhasil diubah"
+                }
+            );
             return RedirectToAction(nameof(Index));
         }
     }
