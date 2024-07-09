@@ -5,6 +5,7 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pengumuman;
 using PKMGerejaEbenhaezer.Web.Services.PDF;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -15,15 +16,18 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly AppDbContext _appDbContext;
         private readonly ILogger<PengumumanController> _logger;
         private readonly IPDFUploadService _pDFUploadService;
+        private readonly IToastrNotificationService _notificationService;
 
         public PengumumanController(
             AppDbContext appDbContext,
             ILogger<PengumumanController> logger,
-            IPDFUploadService pDFUploadService)
+            IPDFUploadService pDFUploadService,
+            IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
             _pDFUploadService = pDFUploadService;
+            _notificationService = notificationService;
         }
 
         public async Task<IActionResult> Index()
@@ -63,7 +67,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (tambahVM.HaveDocument && tambahVM.PDFFormFile is null)
             {
-                ModelState.AddModelError(nameof(tambahVM.PDFFormFile), "Dokumen harus diisi jika Ada Dokumen di centang!");
+                ModelState.AddModelError(nameof(tambahVM.PDFFormFile), "Dokumen harus ada jika Ada Dokumen di centang!");
                 return View(tambahVM);
             }
 
@@ -86,7 +90,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             //Simpan pengumuman ke database
-            var changeTracker = _appDbContext.PengumumanTable.Add(newPengumuman);
+            _appDbContext.PengumumanTable.Add(newPengumuman);
 
             try
             {
@@ -99,8 +103,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(tambahVM);
             }
 
-            _logger.LogInformation("Pengumuman dengan Id {0} ditambahkan", changeTracker.Entity.Id);
-
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Pengumuman baru sukses ditambahkan"
+            });
             return RedirectToAction("Index");
         }
 
@@ -132,18 +139,18 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             if (!ModelState.IsValid) return View(editVM);
             var pengumuman = _appDbContext.PengumumanTable.Where(p => p.Id == editVM.Id).FirstOrDefault();
 
-            if (pengumuman == null)
+            if (pengumuman is null)
             {
-                ModelState.AddModelError(string.Empty, $"Pengumuman dengan Id {editVM.Id} tidak ditemukan");
+                ModelState.AddModelError(string.Empty, $"Pengumuman dengan yang akan diubah tidak ditemukan");
                 return View(editVM);
             }
 
-            if (editVM.IdFoto != null)
+            if (editVM.IdFoto is not null)
             {
                 var foto = await _appDbContext.FotoTable.Where(f => f.Id == editVM.IdFoto)
                     .AsNoTracking().FirstOrDefaultAsync();
 
-                if (foto == null)
+                if (foto is null)
                 {
                     ModelState.AddModelError(nameof(editVM.IdFoto), "Foto tidak ditemukan");
                     return View(editVM);
@@ -161,7 +168,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             pengumuman.Isi = editVM.Isi;
             pengumuman.HaveDocument = editVM.HaveDocument;
 
-            if (editVM.IdFoto != null)
+            if (editVM.IdFoto is not null)
             {
                 pengumuman.Foto = await _appDbContext.FotoTable.Where(f => f.Id == editVM.IdFoto)
                     .AsNoTracking().FirstOrDefaultAsync();
@@ -170,12 +177,12 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             if (editVM.HaveDocument && editVM.PDFFormFile is not null)
             {
                 var pdfPath = await _pDFUploadService.UploadAsync<EditVM>(ModelState, editVM.PDFFormFile);
-                if(!ModelState.IsValid || pdfPath is null)
+                if (!ModelState.IsValid || pdfPath is null)
                 {
                     return View(editVM);
                 }
 
-                if(pengumuman.PathPDF is not null && System.IO.File.Exists(pengumuman.PathPDF))
+                if (pengumuman.PathPDF is not null && System.IO.File.Exists(pengumuman.PathPDF))
                 {
                     System.IO.File.Delete(pengumuman.PathPDF);
                 }
@@ -183,10 +190,23 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 pengumuman.PathPDF = pdfPath;
             }
 
-            await _appDbContext.SaveChangesAsync();
+            try
+            {
+                await _appDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Edit Pengumuman. Exception : {0}", ex.ToString());
+                ModelState.AddModelError(string.Empty,
+                    "Error terjadi saat mencoba menyimpan perubahan ke database. Silahkan hubungi administrator");
+                return View(editVM);
+            }
 
-            _logger.LogInformation("Pengumuman dengan id {0} berhasil diupdate", editVM.Id);
-
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Pengumuman berhasil diubah"
+            });
             return RedirectToAction("Index");
         }
 
@@ -210,11 +230,17 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Hapus Pengumuman Gagal! Exception : {0}", ex.Message);
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Hapus Pengumuman Gagal",
+                    Message = "Error terjadi ssat mencoba menghapus data dari database. Silahkan hubungi administrator"
+                });
                 return Redirect(returnUrl!);
             }
 
             //Hapus PDF
-            if (pengumuman.HaveDocument) 
+            if (pengumuman.HaveDocument)
             {
                 try
                 {
@@ -226,10 +252,21 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 catch (Exception ex)
                 {
                     _logger.LogError("Hapus PDF Pengumuman Gagal! Exception : {0}", ex.Message);
+                    _notificationService.AddNotification(new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = "Hapus File PDF Pengumuman Gagal",
+                        Message = "Pengumuman berhasil dihapus tapi file PDF-nya tidak! Laporkan error ini ke administrator!"
+                    });
                     return Redirect(returnUrl!);
                 }
             }
 
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Pengumuman berhasil dihapus"
+            });
             return Redirect(returnUrl!);
         }
     }
