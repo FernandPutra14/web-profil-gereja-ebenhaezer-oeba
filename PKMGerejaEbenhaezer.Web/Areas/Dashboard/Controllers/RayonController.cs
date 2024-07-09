@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Rayon;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using PKMGerejaEbenhaezer.Web.Utlities;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
@@ -14,13 +15,16 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly ILogger<RayonController> _logger;
+        private readonly IToastrNotificationService _notificationService;
 
         public RayonController(
             AppDbContext appDbContext,
-            ILogger<RayonController> logger)
+            ILogger<RayonController> logger,
+            IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
+            _notificationService = notificationService;
         }
 
         public async Task<IActionResult> Index()
@@ -46,9 +50,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             var foto = await _appDbContext.FotoTable.Where(f => f.Id == tambahVM.IdFoto)
                 .FirstOrDefaultAsync();
 
-            if(foto == null)
+            if(foto is null)
             {
-                ModelState.AddModelError(string.Empty, "Foto tidak ada");
+                ModelState.AddModelError(nameof(TambahVM.IdFoto), "Foto tidak ada");
                 return View(tambahVM);
             }
 
@@ -67,8 +71,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 JumlahDewasa = tambahVM.JumlahDewasa,
                 JumlahLansia = tambahVM.JumlahLansia,
             };
-
-            var changeTracker = _appDbContext.RayonTable.Add(newRayon);
+            
+            _appDbContext.RayonTable.Add(newRayon);
 
             try
             {
@@ -81,9 +85,12 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(tambahVM);
             }
 
-            _logger.LogInformation("Tambah Rayon Sukses! Id : {0}", changeTracker.Entity.Id);
-
-            return RedirectToAction("Index");
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Rayon Baru Berhasil Ditambahkan"
+            });
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -92,7 +99,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 .Include(r => r.FotoKetua)
                 .AsNoTracking().FirstOrDefaultAsync();
 
-            if (rayon == null) return NotFound();
+            if (rayon is null) return NotFound();
 
             return View(new EditVM
             {
@@ -117,9 +124,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             if (!ModelState.IsValid) return View(editVM);
 
             var rayon = await _appDbContext.RayonTable.Where(r => r.Id == editVM.Id).FirstOrDefaultAsync();
-            if (rayon == null)
+            if (rayon is null)
             {
-                ModelState.AddModelError(string.Empty, "Data yang akan disimpan tidak ada di database!");
+                ModelState.AddModelError(string.Empty, "Data yang akan diubah tidak di ditemukan!");
                 _logger.LogError("Edit Rayon Gagal! Data dengan Id {0} tidak ada!", editVM.Id);
                 return View(editVM);
             }
@@ -132,7 +139,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
                 if(foto is null)
                 {
-                    ModelState.AddModelError(string.Empty, "Foto tidak ada");
+                    ModelState.AddModelError(nameof(EditVM.IdFoto), "Foto tidak ada");
                     return View(editVM);
                 }
             }
@@ -165,9 +172,12 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
-            _logger.LogInformation("Edit Rayon Sukses : Id {0}", editVM.Id);
-
-            return RedirectToAction("Index");
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Rayon berhasil diubah"
+            });
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -175,17 +185,28 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         {
             var rayon = await _appDbContext.RayonTable.Where(r => r.Id == id).FirstOrDefaultAsync();
 
-            if (rayon == null) return NotFound(id);
+            if (rayon is null) return NotFound(id);
 
             _appDbContext.RayonTable.Remove(rayon);
 
             try
             {
                 await _appDbContext.SaveChangesAsync();
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Rayon Berhasil Dihapus"
+                });
             }
             catch (Exception ex)
             {
                 _logger.LogError("Hapus Rayon Gagal Id {0} : {1}", id, ex.Message);
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Hapus Rayon Gagal",
+                    Message = "Terjadi error saat mencova menghapus data dari database. Silahkan hubungi administrator"
+                });
             }
 
             return RedirectToAction("Index");
