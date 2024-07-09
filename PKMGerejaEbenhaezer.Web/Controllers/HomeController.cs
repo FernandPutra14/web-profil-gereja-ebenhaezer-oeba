@@ -39,6 +39,12 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 .Include(p => p.Foto)
                 .AsNoTracking().ToListAsync();
 
+            var daftarIbadah = await _appDbContext.IbadahTable
+                .Include(i => i.Pendeta).ThenInclude(p => p.Foto)
+                .Include(i => i.KategoriIbadah)
+                .OrderByDescending(i => i.TanggalIbadah)
+                .Take(3).AsNoTracking().ToListAsync();
+
             var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
 
             daftarRayon ??= new List<Rayon>();
@@ -48,6 +54,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 DaftarPengumuman = daftarPengumuman,
                 DaftarWartaJemaat = daftarWarta,
                 DaftarPendeta = daftarPendeta,
+                DaftarIbadah = daftarIbadah,
                 TotalAnak = daftarRayon.Sum(r => r.JumlahAnak),
                 TotalRemaja = daftarRayon.Sum(r => r.JumlahRemaja),
                 TotalPemuda = daftarRayon.Sum(r => r.JumlahPemuda),
