@@ -1,5 +1,5 @@
 ﻿/* CSS Bagian Top dan Judul */
-#warta-us {
+#wartaus {
     background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
     background-attachment: fixed;
     background-size: cover;
@@ -16,10 +16,316 @@
     z-index: 101;
 }
 
-    #warta-us h2 {
+    #wartaus h2 {
         color: #fff;
         padding-top: 60px;
         font-size: 40px;
         font-weight: bold;
     }
 /* Akhir CSS Bagian Top dan Judul */
+
+
+/* CSS Warta Section */
+section.warta {
+    width: 100%;
+    padding: 3% 100px 30px;
+}
+
+.warta .section-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .warta .section-header ::deep .warta-btn {
+        position: absolute;
+        right: 0;
+        bottom: 40px;
+    }
+
+.tombolbaca {
+    padding: 10px 18px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    background: var(--primary-clr);
+    width: 100%;
+    font-size: 15px;
+    border: 1px solid var(--primary-clr);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    .tombolbaca:hover {
+        background-color: var(--light-heading-clr);
+        color: var(--primary-clr);
+    }
+
+.warta .warta-contents {
+    flex-wrap: wrap;
+    display: flex;
+    justify-items: center;
+    height: 100%;
+}
+.warta .warta-contents h1 {
+    width: 100%;
+    padding: 70px 0 70px;
+}
+
+    .warta .warta-contents .warta-card {
+        display: flex;
+        flex-direction: column;
+        flex-basis: calc(calc(100% / 3) - 1.2%);
+        position: relative;
+        height: auto;
+        border: 1px solid #eee;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 5px 5px 5px 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+        .warta .warta-contents .warta-card:hover {
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        }
+
+.warta-contents .warta-card ::deep img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.image-wrapper {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+    .image-wrapper img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 5px;
+    }
+
+.warta .warta-contents .warta-card .tanggal {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(16, 49, 107, 0.9);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+    .warta .warta-contents .warta-card .tanggal h3 {
+        font-size: 43px;
+        color: #fafaf1;
+        font-family: "Noto Serif Display", serif;
+        margin: 0;
+    }
+
+.tanggal-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.warta .warta-contents .warta-card .tanggal h4 {
+    font-size: 11px;
+    color: #fff;
+    font-family: "Noto Serif Display", serif;
+    margin: 0;
+}
+
+.warta .warta-contents .warta-card .tanggal h5 {
+    font-size: 15px;
+    padding-top: 10px;
+    padding-right: 5px;
+    color: #fff;
+    font-family: "Noto Serif Display", serif;
+    margin: 0;
+}
+/* Akhir CSS Warta Section */
+
+
+
+/* CSS type input Text dan Textarea */
+::deep .input-box label {
+    color: #333;
+    font-size: 14px;
+}
+
+::deep .input-box input {
+    position: relative;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+::deep .input-box select {
+    position: relative;
+    font-size: 14px;
+    height: 40px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+::deep .input-box textarea {
+    position: relative;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    color: #707070;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+/* Akhir CSS type input Text dan Textarea */
+
+
+/* CSS Search dan Pagination */
+::deep .penc .form-inline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+::deep .penc .input-group {
+    flex-wrap: nowrap;
+    width: 60%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+::deep .penc .form-control {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 16px;
+}
+
+::deep .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left: -1px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+::deep .penc .input-group-append .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+::deep .penc {
+    padding: 30px 10px 30px;
+    margin: 0;
+}
+
+::deep .pagination {
+    padding: 30px 0px 10px;
+    margin: 0;
+    font-size: 16px;
+}
+
+::deep .page-item {
+    margin: 0 5px;
+}
+
+::deep .page-link {
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+::deep .page-item.active .page-link {
+    background-color: var(--primary-clr);
+    border-color: var(--primary-clr);
+    color: white;
+}
+/* Akhir CSS Search dan Pagination */
+
+
+/* --------------------------------- Responsive  ----------------------------------------- */
+/*  Responsive 968  */
+@media (max-width:1160px) {
+
+    section.warta {
+        padding: 8% 10px 30px;
+    }
+
+    #wartaus {
+        background-attachment: scroll;
+    }
+
+    .warta .warta-contents .warta-card {
+        flex-basis: calc(calc(100% / 2) - 1.5%);
+    }
+
+    .warta .section-header {
+        flex-direction: column;
+    }
+
+        .warta .section-header ::deep .peng-btn.btn {
+            position: relative;
+            align-self: flex-start;
+            margin-top: 20px;
+        }
+}
+
+
+/* Responsive 768 */
+@media (max-width:768px) {
+
+    ::deep .penc .input-group {
+        width: 100%;
+    }
+
+    section.warta {
+        width: 100%;
+    }
+}
+
+
+/* Responsive 690 */
+@media (max-width:690px) {
+
+    .warta .warta-contents .warta-card {
+        flex-basis: 100%;
+    }
+
+    .filterbut {
+        display: none;
+    }
+
+    .filter-button {
+        display: block;
+    }
+}
+
+
+/* Responsive 568 */
+@media (max-width:568px) {
+
+    #wartaus h2 {
+        font-size: 30px;
+        padding-top: 70px;
+    }
+}
+
+
+/* Responsive 468 */
+@media (max-width:468px) {
+
+    #wartaus h2 {
+        font-size: 25px;
+        padding-top: 70px;
+    }
+}

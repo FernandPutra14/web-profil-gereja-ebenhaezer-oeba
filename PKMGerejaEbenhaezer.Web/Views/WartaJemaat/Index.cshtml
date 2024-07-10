@@ -6,66 +6,107 @@
 }
 
 @* Bagian Top dan Judul *@
-<section id="warta-us">
+<section id="wartaus">
     <h2>
         WARTA JEMAAT@(Model.Title())
     </h2>
 </section>
 @* Akhir Bagian Top dan Judul *@
 
-<form asp-action="Index" method="get">
-    <div class="row">
-        <div class="col">
-            <label asp-for="@Model.Tahun" class="form-label"></label>
-            <select asp-for="@Model.Tahun" class="form-control">
-                <option value="@null">Semua</option>
-                @for (int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
-                {
-                    <option value="@tahun">@tahun</option>
-                }
-            </select>
-        </div>
-        <div class="col">
-            <label asp-for="@Model.Bulan" class="form-label"></label>
-            <select asp-for="@Model.Bulan" class="form-control">
-                <option value="@null">Semua</option>
-                @for (int bulan = 1; bulan <= 12; bulan++)
-                {
-                    <option value="@bulan">@Model.MonthName(bulan)</option>
-                }
-            </select>
-        </div>
-        <div class="col">
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
-    </div>
-</form>
 
-@* Pagination *@
-<nav>
-    <ul class="pagination justify-content-center">
-        <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
-            <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)"
-               asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun">
-                Sebelumnya
-            </a>
-        </li>
-        @for (var i = 1; i <= Model.Items.TotalPages; i++)
+<section class="warta">
+    <form asp-action="Index" method="get">
+        <div class="row mb-5">
+            <div class="col-md-5 col-6 input-box">
+                <label asp-for="@Model.Tahun" class="form-label">Filter Tahun</label>
+                <select asp-for="@Model.Tahun" class="form-control">
+                    <option value="@null">Semua</option>
+                    @for (int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
+                    {
+                        <option value="@tahun">@tahun</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-5 col-6 input-box">
+                <label asp-for="@Model.Bulan" class="form-label">Filter Bulan</label>
+                <select asp-for="@Model.Bulan" class="form-control">
+                    <option value="@null">Semua</option>
+                    @for (int bulan = 1; bulan <= 12; bulan++)
+                    {
+                        <option value="@bulan">@Model.MonthName(bulan)</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2 col-12 mb-3" style="padding-top:23px;">
+                <button type="submit" class="btn" style="width:100%;">Filter</button>
+            </div>
+        </div>
+    </form>
+
+
+
+
+    <div class="warta-contents">      
+        @if (Model.Items.Count > 0)
         {
-            <li class="page-item @(Model.Items.PageIndex == i ? "active" : "")">
-                <a class="page-link" asp-action="Index" asp-route-pageIndex="@i" asp-route-bulan="@Model.Bulan"
-                   asp-route-tahun="@Model.Tahun">@i</a>
-            </li>
+            @foreach (var item in Model.Items)
+            {
+                <!-- Ini Cardnya -->
+                <div class="item warta-card">
+                    <div class="image-wrapper">
+                        <img src="~/img/default4_warta_jemaat.png" />
+                        <div class="tanggal">
+                            <div class="tanggal-text mb-1">
+                                <h5></h5>
+                                <h3>@item.TanggalWarta.Day</h3>
+                            </div>
+                            <h4>@item.TanggalWarta.ToString("MMMM, yyyy", cultureInfo)</h4>
+                        </div>
+                    </div>
+                    <a href="@item.DocumentLink.AbsoluteUri" class="tombolbaca">Baca Warta Jemaat</a>
+                </div>
+                <!-- Ini Akhir Cardnya -->
+            }
+        }  
+        else
+        {
+            <h1 class="text-center">Tidak Ada Warta Jemaat</h1>
         }
-        <li class="page-item @(Model.Items.HasNextPage ? "" : "disabled")">
-            <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)"
-               asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun">
-                Selanjutnya
-            </a>
-        </li>
-    </ul>
-</nav>
-@* Akhir Pagination *@
+    </div>
+        
+
+
+
+
+    @* Pagination *@
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)"
+                   asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun">
+                    Sebelumnya
+                </a>
+            </li>
+            @for (var i = 1; i <= Model.Items.TotalPages; i++)
+            {
+                <li class="page-item @(Model.Items.PageIndex == i ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-pageIndex="@i" asp-route-bulan="@Model.Bulan"
+                       asp-route-tahun="@Model.Tahun">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.Items.HasNextPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)"
+                   asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun">
+                    Selanjutnya
+                </a>
+            </li>
+        </ul>
+    </nav>
+    @* Akhir Pagination *@
+</section>
+
+
+
 
 @section Scripts {
     <script type="text/javascript">

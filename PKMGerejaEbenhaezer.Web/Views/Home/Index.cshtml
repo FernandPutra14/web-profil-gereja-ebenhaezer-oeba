@@ -169,7 +169,7 @@
                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
         </div>
-        <a asp-action="Index" asp-controller="Pengumuman" class="warta-btn btn">Lihat Semua</a>
+        <a asp-action="Index" asp-controller="WartaJemaat" class="warta-btn btn">Lihat Semua</a>
     </header>
     <!-- Akhir Header Warta Section -->
     <!-- Content Warta Section -->
@@ -226,16 +226,16 @@
                     <div class="info-atas">
                         <div class="date-kiri">
                             <div style="text-align:center; display: flex">
-                                <i class="ri-map-pin-range-line" style="padding-right: 5px;"></i>
-                                <h2>@ibadah.Tempat</h2>
+
+                                <h2><i class="ri-map-pin-range-line" style="padding-right: 5px;"></i> @ibadah.Tempat</h2>
                             </div>
 
                         </div>
                         <div class="date-kanan">
                             <div style="text-align:center; display:flex;">
-                                <i class="ri-calendar-schedule-line" style="padding-right: 5px;"></i>
+                                
                                 <div style="display:flex; flex-direction:column;">
-                                    <h2>@ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</h2>
+                                    <h2><i class="ri-calendar-schedule-line" style="padding-right:5px;"></i> @ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</h2>
                                     <h2>
                                         <i class="ri-time-line" style="padding-right: 5px;"></i>
                                         @ibadah.TanggalIbadah.ToString("hh.mm tt")
