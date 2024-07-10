@@ -23,10 +23,12 @@
                     <th>Id</th>
                     <th>Judul</th>
                     <th>Deskripsi</th>
+                    <th>Kategori Ibadah</th>
                     <th>Nas Pembimbing</th>
                     <th>Tempat</th>
                     <th>Tanggal Ibadah</th>
-                    <th>Kategori Ibadah</th>
+                    <th>Jam Mulai</th>
+                    <th>Jam Selesai</th>
                     <th>Pendeta</th>
                     <th>Aksi</th>
                 </tr>
@@ -38,10 +40,17 @@
                         <td>@item.Id</td>
                         <td>@item.Judul</td>
                         <td>@item.Deskripsi</td>
+                        <td>@(item.KategoriIbadah is null ? "Tidak Ada" : item.KategoriIbadah.Nama)</td>
                         <td>@item.NasPembimbing</td>
                         <td>@item.Tempat</td>
-                        <td>@item.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @item.TanggalIbadah.ToString("HH:mm tt")</td>
-                        <td>@(item.KategoriIbadah is null ? "Tidak Ada" : item.KategoriIbadah.Nama)</td>
+                        <td>@item.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</td>
+                        <td>@item.TanggalIbadah.ToString("hh:mm tt")</td>
+                        <td>
+                            @if (item.KategoriIbadah is not null)
+                            {
+                                @item.TanggalIbadah.Add(item.KategoriIbadah.Durasi).ToString("hh:mm tt")    
+                            }
+                        </td>
                         <td>@(item.Pendeta is null ? "Tidak Ada" : item.Pendeta.Nama)</td>
                         <td>
                             <div class="d-flex gap-1 justify-content-start align-items-center">

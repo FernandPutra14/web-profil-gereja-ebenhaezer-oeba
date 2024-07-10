@@ -10,8 +10,6 @@
     <h1 data-aos="fade-up">Selamat Datang</h1>
 </section>
 <!-- Akhir Hero Section -->
-
-
 @* <section id="textscroll">
     <div class="scrolltext">
         <h1>JEO - JEMAAT EBENHAEZER OEBA</h1>
@@ -19,13 +17,13 @@
         <h1>JEO - JEMAAT EBENHAEZER OEBA</h1>
         <h1>JEO - JEMAAT EBENHAEZER OEBA</h1>
         <h1>JEO - JEMAAT EBENHAEZER OEBA</h1>
-    </div> 
+    </div>
 </section> *@
 
 
 <!-- Sejarah Section -->
 <section id="sejarah">
-    <div class="row-container">       
+    <div class="row-container">
         <div class="content-sej">
             <h2>Sejarah GMIT Ebenhaezer Oeba Kupang</h2>
             <p>
@@ -46,8 +44,6 @@
     </div>
 </section>
 <!-- Akhir Sejarah Section -->
-
-
 <!-- Pendeta Section -->
 <section id="pendeta">
     <h1>Pendeta GMIT Ebenhaezer Oeba</h1>
@@ -92,8 +88,6 @@
     </div>
 </section>
 <!-- Akhir Pendeta Section -->
-
-
 <!-- Injil Section -->
 <section id="injil">
     <div class="injil-text">
@@ -107,8 +101,6 @@
     </div>
 </section>
 <!-- Akhir Injil Section -->
-
-
 <!-- Char Jemaat Section -->
 <section id="about-container">
     <!-- Char -->
@@ -119,13 +111,13 @@
                 Type = ChartType.Doughnut,
                 Label = "Jemaat Gereja",
                 Data = new Dictionary<string, double>
-                {
-                    {"Lansia", Model.TotalLansia},
-                    {"Dewasa", Model.TotalDewasa},
-                    {"Pemuda", Model.TotalPemuda},
-                    {"Remaja", Model.TotalRemaja},
-                    {"Anak", Model.TotalAnak},
-                },
+        {
+        {"Lansia", Model.TotalLansia},
+        {"Dewasa", Model.TotalDewasa},
+        {"Pemuda", Model.TotalPemuda},
+        {"Remaja", Model.TotalRemaja},
+        {"Anak", Model.TotalAnak},
+        },
             };
         }
 
@@ -166,8 +158,6 @@
     </div>
 </section>
 <!-- Akhir Chart Section -->
-
-
 <!-- Warta Section -->
 <section class="warta">
     <!-- Header Warta Section -->
@@ -208,8 +198,6 @@
     <!-- Akhir Content Warta Section -->
 </section>
 <!-- Akhir Warta Section -->
-
-
 <!-- Ibadah Section -->
 <section class="ibadah">
     <!-- Header Ibadah Section -->
@@ -228,7 +216,7 @@
     <div class="ibadah-contents">
         <div class="owl-carousel owl-theme fajar">
 
-            @foreach(var ibadah in Model.DaftarIbadah)
+            @foreach (var ibadah in Model.DaftarIbadah)
             {
                 <!-- Awal Card -->
                 <div class="ibadah-card">
@@ -248,9 +236,16 @@
                                 <i class="ri-calendar-schedule-line" style="padding-right: 5px;"></i>
                                 <div style="display:flex; flex-direction:column;">
                                     <h2>@ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</h2>
-                                    <h2><i class="ri-time-line" style="padding-right: 5px;"></i>@ibadah.TanggalIbadah.ToString("hh.mm tt") - @ibadah.TanggalIbadah.Add(ibadah.KategoriIbadah!.Durasi).ToString("hh.mm tt")</h2>
+                                    <h2>
+                                        <i class="ri-time-line" style="padding-right: 5px;"></i>
+                                        @ibadah.TanggalIbadah.ToString("hh.mm tt")
+                                        @if (ibadah.KategoriIbadah is not null)
+                                        {
+                                            @($"- {ibadah.TanggalIbadah.Add(ibadah.KategoriIbadah.Durasi).ToString("hh.mm tt")}")
+                                        }
+                                    </h2>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -260,7 +255,7 @@
                             <h3>@ibadah.KategoriIbadah?.Nama</h3>
                         </div>
                         <div class="gambar-pendeta">
-                            @if(ibadah.Pendeta?.Foto is not null)
+                            @if (ibadah.Pendeta?.Foto is not null)
                             {
                                 <img src="@Url.Action("Index", "Foto", new {Area = "", id = ibadah.Pendeta.Foto.Id})" />
                             }
@@ -277,21 +272,18 @@
                         @ibadah.Judul
                     </h2>
                     <p>@ibadah.Deskripsi</p>
-                    
+
                     <div class="ibadah-info">
                         <button class="btn" style="width:100%;">Baca Selengkapnya...</button>
                     </div>
                 </div>
                 <!-- Akhir Card -->
             }
-        </div>          
+        </div>
     </div>
     <!-- Akhir Content Ibadah Section -->
 </section>
 <!-- Akhir Ibadah Section -->
-
-
-
 <!-- Pengumuman Section -->
 <section class="peng">
     <!-- Header Pengumuman Section -->
@@ -322,7 +314,7 @@
                         else
                         {
                             <img src="~/img/gereja1.jpg" />
-                        }                        
+                        }
                         <h2 class="peng-title">@pengumuman.Judul</h2>
                         <p>@pengumuman.Isi</p>
                         <div class="peng-tanggal">
@@ -339,12 +331,10 @@
     <!-- Akhir Content Pengumuman Section -->
 </section>
 <!-- Akhir Pengumuman Section -->
-
-
 @section Scripts {
-   
+
     <script type="text/javascript" src="~/js/counter.js"></script>
-    
+
     <script type="text/javascript">
         $(function () {
             $('.badan-utama').css({
