@@ -336,6 +336,11 @@ section.peng {
 
     section.peng {
         padding: 8% 10px 30px;
+
+    }
+
+    #peng-us {
+        background-attachment: scroll;
     }
 
     .peng .peng-contents .peng-card {

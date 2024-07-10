@@ -1191,7 +1191,7 @@ section.peng {
         }
 
         #about-container ::deep .about-char {
-            padding-right: 30px;
+            padding-left: 100px;
         }
     /* Akhir CSS Chart Jemaat Section */
 
@@ -1256,9 +1256,8 @@ section.peng {
         align-items: center;
     }
 
-    #about-container[b-t5jt8ugovc] .about-char {
-        padding-left: 0px;
-        padding-right: 0px;
+    #about-container ::deep .about-char {
+        padding-left: 80px;
     }
     /* Akhir CSS Chart Jemaat Section */
 
@@ -1378,6 +1377,10 @@ section.peng {
         }
     /* Akhir CSS Sejarah Section */
 
+
+    #about-container ::deep .about-char {
+        padding-left: 20px;
+    }
 
     /* CSS Injil Section */
     #injil {

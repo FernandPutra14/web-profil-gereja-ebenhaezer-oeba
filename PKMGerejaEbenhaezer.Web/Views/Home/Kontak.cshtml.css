@@ -189,6 +189,10 @@
 /* Responsive 968px */
 @media (max-width:968px) {
 
+    #kontak-us {
+        background-attachment: scroll;
+    }
+
     #contact {
         padding: 4vw 4vw;
     }
