@@ -1,10 +1,9 @@
 ﻿using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Utlities;
-using System.ComponentModel.DataAnnotations;
 
-namespace PKMGerejaEbenhaezer.Web.Models.PengumumanController
+namespace PKMGerejaEbenhaezer.Web.Models
 {
-    public class IndexVM
+    public class IndexVM<T>
     {
         private List<string> _monthName = new List<string>()
         {
@@ -12,7 +11,9 @@ namespace PKMGerejaEbenhaezer.Web.Models.PengumumanController
             "Agustus", "September", "Oktober", "November", "Desember",
         };
 
-        public PaginatedList<Pengumuman> Items { get; set; } = PaginatedList<Pengumuman>.Empty();
+        public PaginatedList<T> Items { get; set; } = PaginatedList<T>.Empty();
+
+        public int? Tahun { get; set; }
 
         public int? Bulan { get; set; }
 
@@ -29,14 +30,14 @@ namespace PKMGerejaEbenhaezer.Web.Models.PengumumanController
         {
             if (Bulan is null && filter is null) return "active";
 
-            if(filter == Bulan) return "active";
+            if (filter == Bulan) return "active";
 
             return "";
         }
 
         public string MonthName(int month)
         {
-            if(month < 1 || month > 12) 
+            if (month < 1 || month > 12)
                 throw new ArgumentOutOfRangeException(nameof(month), month, "{0} harus antara 1 dan 12");
 
             return _monthName[month - 1];

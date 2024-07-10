@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
-using PKMGerejaEbenhaezer.Web.Models.PengumumanController;
+using PKMGerejaEbenhaezer.Web.Models;
 using PKMGerejaEbenhaezer.Web.Utlities;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
@@ -40,7 +40,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
             int pageSize = 6;
 
-            var model = new IndexVM
+            var model = new IndexVM<Pengumuman>
             {
                 Items = PaginatedList<Pengumuman>.Create(daftarPengumuman, pageIndex ?? 1, pageSize),
                 Bulan = bulan,

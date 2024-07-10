@@ -1,4 +1,11 @@
-﻿@* Bagian Top dan Judul *@
+﻿@using System.Globalization
+@model IndexVM<WartaJemaat>
+@{
+    ViewData["Title"] = "Warta Jemaat";
+    var cultureInfo = new CultureInfo("id-ID");
+}
+
+@* Bagian Top dan Judul *@
 <section id="warta-us">
     <h2>
         WARTA JEMAAT
@@ -6,8 +13,11 @@
 </section>
 @* Akhir Bagian Top dan Judul *@
 
-
-
+@foreach (var item in Model.Items)
+{
+    <h1>@item.TanggalWarta.ToString(cultureInfo)</h1>
+    <br />
+}
 
 @section Scripts {
     <script type="text/javascript">

@@ -27,6 +27,8 @@
 
   <ItemGroup>
     <Folder Include="img\" />
+    <Folder Include="Models\PengumumanModels\" />
+    <Folder Include="Models\WartaJemaatModels\" />
     <Folder Include="pdf\" />
   </ItemGroup>
 

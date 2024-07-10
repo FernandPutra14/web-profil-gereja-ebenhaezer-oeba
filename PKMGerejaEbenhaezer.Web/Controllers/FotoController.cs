@@ -39,12 +39,8 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 return NotFound();
             }
 
-            _logger.LogInformation(_webHostEnvironment.ContentRootPath);
-
             var path = Path.IsPathFullyQualified(foto.PathFoto) ? foto.PathFoto
                 : _webHostEnvironment.ContentRootPath + "/" + foto.PathFoto;
-
-            _logger.LogInformation(path);
 
             if (System.IO.File.Exists(path) == false)
             {
@@ -68,12 +64,8 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 return NotFound();
             }
 
-            _logger.LogInformation(_webHostEnvironment.ContentRootPath);
-
             var path = Path.IsPathFullyQualified(foto.PathFotoKompresi) ? foto.PathFotoKompresi
                 : _webHostEnvironment.ContentRootPath + "/" + foto.PathFotoKompresi;
-
-            _logger.LogInformation(path);
 
             if (System.IO.File.Exists(path) == false)
             {
