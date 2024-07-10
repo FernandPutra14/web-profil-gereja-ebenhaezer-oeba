@@ -62,7 +62,7 @@
                 @if (Model.OldDocumentExist)
                 {
                     <div class="col-12">
-                        <a href="@Url.ActionLink("Dokumen", "Pengumuman", new { Area = "", id = Model.Id})">Dokumen</a>
+                        <a href="@Url.Action("Dokumen", "Pengumuman", new { Area = "", id = Model.Id})">Dokumen</a>
                     </div>
                 }
                 <div class="col-12 box">
