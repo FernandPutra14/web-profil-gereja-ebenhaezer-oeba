@@ -1,9 +1,12 @@
-﻿@using Microsoft.EntityFrameworkCore
+﻿@using Humanizer
+@using Microsoft.EntityFrameworkCore
 @using PKMGerejaEbenhaezer.DataAccess.Data
+@using System.Globalization
 @inject AppDbContext AppDbContext
 @model EditVM
 @{
     ViewData["Title"] = "Edit Ibadah";
+    var cultureInfo = new CultureInfo("id-ID");
     var daftarKategori = await AppDbContext.KategoriIbadahTable.ToListAsync();
     var daftarPendeta = await AppDbContext.PendetaTable.ToListAsync();
 }
@@ -59,7 +62,7 @@
                         <option value="@null">Tidak Ada</option>
                         @foreach (var item in daftarKategori)
                         {
-                            <option value="@item.Id">@item.Nama -- @item.Durasi.ToString("h' jam 'm'menit'")</option>
+                            <option value="@item.Id">@item.Nama -- @item.Durasi.Humanize(culture: cultureInfo)</option>
                         }
                     </select>
                     <span asp-validation-for="@Model.IdKategoriIbadah" class="form-text text-danger"></span>

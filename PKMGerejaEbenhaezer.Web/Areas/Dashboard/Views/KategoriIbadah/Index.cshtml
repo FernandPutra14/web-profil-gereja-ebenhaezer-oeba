@@ -1,6 +1,9 @@
-﻿@model List<KategoriIbadah>
+﻿@using Humanizer
+@using System.Globalization
+@model List<KategoriIbadah>
 @{
     ViewData["Title"] = "Kategori Ibadah";
+    var cultureInfo = new CultureInfo("id-ID");
 }
 
 <div class="katibadah">
@@ -30,7 +33,7 @@
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.Nama</td>
-                        <td>@item.Durasi.ToString("h' jam 'm' menit'")</td>
+                        <td>@item.Durasi.Humanize(culture: cultureInfo)</td>
                         <td>
                             <div class="d-flex gap-1 justify-content-start align-items-center">
                                 <a class="btn" asp-action="Edit" asp-route-id="@item.Id">
