@@ -13,6 +13,24 @@
 </section>
 @* Akhir Bagian Top dan Judul *@
 
+<form asp-action="Index" method="get">
+    <select asp-for="@Model.Tahun" class="form-control">
+        <option value="@null">Semua</option>
+        @for(int tahun = 2024; tahun >= 2000; tahun--)
+        {
+            <option value="@tahun">@tahun</option>
+        }
+    </select>
+    <select asp-for="@Model.Bulan" class="form-control">
+        <option value="@null">Semua</option>
+        @for (int bulan = 1; bulan <= 12; bulan++)
+        {
+            <option value="@bulan">@Model.MonthName(bulan)</option>
+        }
+    </select>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
 @foreach (var item in Model.Items)
 {
     <h1>@item.TanggalWarta.ToString(cultureInfo)</h1>

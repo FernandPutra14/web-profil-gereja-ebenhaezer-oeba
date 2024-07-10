@@ -1,5 +1,6 @@
 ﻿using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Utlities;
+using System.ComponentModel.DataAnnotations;
 
 namespace PKMGerejaEbenhaezer.Web.Models
 {
@@ -17,6 +18,7 @@ namespace PKMGerejaEbenhaezer.Web.Models
 
         public int? Bulan { get; set; }
 
+        [Display(Name = "Cari Warta Jemaat")]
         public string? SearchString { get; set; }
 
         public string Title()
