@@ -37,6 +37,32 @@
     <br />
 }
 
+@* Pagination *@
+<nav>
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
+            <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)"
+               asp-route-bulan="@Model.Bulan" asp-route-searchString="@Model.SearchString">
+                Sebelumnya
+            </a>
+        </li>
+        @for (var i = 1; i <= Model.Items.TotalPages; i++)
+        {
+            <li class="page-item @(Model.Items.PageIndex == i ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-pageIndex="@i" asp-route-bulan="@Model.Bulan"
+                   asp-route-searchString="@Model.SearchString">@i</a>
+            </li>
+        }
+        <li class="page-item @(Model.Items.HasNextPage ? "" : "disabled")">
+            <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)"
+               asp-route-bulan="@Model.Bulan" asp-route-searchString="@Model.SearchString">
+                Selanjutnya
+            </a>
+        </li>
+    </ul>
+</nav>
+@* Akhir Pagination *@
+
 @section Scripts {
     <script type="text/javascript">
         $(function () {
