@@ -36,7 +36,7 @@
     <ul class="pagination justify-content-center">
         <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
             <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)"
-               asp-route-bulan="@Model.Bulan" asp-route-searchString="@Model.SearchString">
+               asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun">
                 Sebelumnya
             </a>
         </li>
@@ -44,12 +44,12 @@
         {
             <li class="page-item @(Model.Items.PageIndex == i ? "active" : "")">
                 <a class="page-link" asp-action="Index" asp-route-pageIndex="@i" asp-route-bulan="@Model.Bulan"
-                   asp-route-searchString="@Model.SearchString">@i</a>
+                   asp-route-tahun="@Model.Tahun">@i</a>
             </li>
         }
         <li class="page-item @(Model.Items.HasNextPage ? "" : "disabled")">
             <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)"
-               asp-route-bulan="@Model.Bulan" asp-route-searchString="@Model.SearchString">
+               asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun">
                 Selanjutnya
             </a>
         </li>
