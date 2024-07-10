@@ -14,21 +14,31 @@
 @* Akhir Bagian Top dan Judul *@
 
 <form asp-action="Index" method="get">
-    <select asp-for="@Model.Tahun" class="form-control">
-        <option value="@null">Semua</option>
-        @for(int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
-        {
-            <option value="@tahun">@tahun</option>
-        }
-    </select>
-    <select asp-for="@Model.Bulan" class="form-control">
-        <option value="@null">Semua</option>
-        @for (int bulan = 1; bulan <= 12; bulan++)
-        {
-            <option value="@bulan">@Model.MonthName(bulan)</option>
-        }
-    </select>
-    <button type="submit" class="btn btn-primary">Filter</button>
+    <div class="row">
+        <div class="col">
+            <label asp-for="@Model.Tahun" class="form-label"></label>
+            <select asp-for="@Model.Tahun" class="form-control">
+                <option value="@null">Semua</option>
+                @for (int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
+                {
+                    <option value="@tahun">@tahun</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label asp-for="@Model.Bulan" class="form-label"></label>
+            <select asp-for="@Model.Bulan" class="form-control">
+                <option value="@null">Semua</option>
+                @for (int bulan = 1; bulan <= 12; bulan++)
+                {
+                    <option value="@bulan">@Model.MonthName(bulan)</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </div>
 </form>
 
 @* Pagination *@
