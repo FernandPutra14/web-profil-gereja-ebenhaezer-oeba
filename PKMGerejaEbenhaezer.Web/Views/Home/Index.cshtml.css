@@ -591,6 +591,7 @@ section.ibadah {
 .ibadah-card .category-pendeta-ibadah .subject-ibadah {
     padding: 8px 10px;
     background-color: var(--primary-light-clr);
+    border: 5px solid;
     border-radius: 5px;
 }
 

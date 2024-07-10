@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -252,19 +253,22 @@ namespace PKMGerejaEbenhaezer.DataAccess
                 {
                     Id = 1,
                     Nama = "Kebaktian Umum",
-                    Durasi = new TimeSpan(2, 0, 0)
+                    Durasi = new TimeSpan(2, 0, 0),
+                    Warna = Color.Blue,
                 },
                 new KategoriIbadah
                 {
                     Id = 2,
                     Nama = "Perjamuan",
-                    Durasi = new TimeSpan(2, 0, 0)
+                    Durasi = new TimeSpan(2, 0, 0),
+                    Warna = Color.Green,
                 },
                 new KategoriIbadah
                 {
                     Id = 3,
                     Nama = "Persiapan Perjamuan",
-                    Durasi = new TimeSpan(2, 0, 0)
+                    Durasi = new TimeSpan(2, 0, 0),
+                    Warna = Color.Red,
                 }
             );
 

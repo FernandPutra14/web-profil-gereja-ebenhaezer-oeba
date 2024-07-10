@@ -111,13 +111,13 @@
                 Type = ChartType.Doughnut,
                 Label = "Jemaat Gereja",
                 Data = new Dictionary<string, double>
-        {
-        {"Lansia", Model.TotalLansia},
-        {"Dewasa", Model.TotalDewasa},
-        {"Pemuda", Model.TotalPemuda},
-        {"Remaja", Model.TotalRemaja},
-        {"Anak", Model.TotalAnak},
-        },
+                {
+                    {"Lansia", Model.TotalLansia},
+                    {"Dewasa", Model.TotalDewasa},
+                    {"Pemuda", Model.TotalPemuda},
+                    {"Remaja", Model.TotalRemaja},
+                    {"Anak", Model.TotalAnak},
+                },
             };
         }
 
@@ -251,7 +251,8 @@
                     </div>
                     <img src="~/img/Ibadah Minggu9.png" />
                     <div class="category-pendeta-ibadah">
-                        <div class="subject-ibadah">
+                        <div class="subject-ibadah"
+                             style="border-color:rgb(@ibadah.KategoriIbadah?.Warna.R, @ibadah.KategoriIbadah?.Warna.G, @ibadah.KategoriIbadah?.Warna.B)">
                             <h3>@ibadah.KategoriIbadah?.Nama</h3>
                         </div>
                         <div class="gambar-pendeta">

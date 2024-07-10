@@ -7,6 +7,7 @@ using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Authentication;
 using PKMGerejaEbenhaezer.Web.Models.Account;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
+using System.Drawing;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {
