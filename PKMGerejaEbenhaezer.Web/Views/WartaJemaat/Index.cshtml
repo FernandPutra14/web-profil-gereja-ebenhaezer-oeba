@@ -31,12 +31,6 @@
     <button type="submit" class="btn btn-primary">Filter</button>
 </form>
 
-@foreach (var item in Model.Items)
-{
-    <h1>@item.TanggalWarta.ToString(cultureInfo)</h1>
-    <br />
-}
-
 @* Pagination *@
 <nav>
     <ul class="pagination justify-content-center">
