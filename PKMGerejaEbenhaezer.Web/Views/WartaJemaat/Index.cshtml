@@ -1,5 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@* Bagian Top dan Judul *@
+<section id="warta-us">
+    <h2>
+        WARTA JEMAAT
+    </h2>
+</section>
+@* Akhir Bagian Top dan Judul *@
+
+
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.badan-utama').css({
+                'padding-left': '0',
+                'padding-right': '0',
+                'padding-top': '0rem',
+            });
+            $('.main-navbar').css({
+                'position': 'fixed',
+                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
+                'background-color': 'var(--primary-clr)',
+            });
+        });
+
+        function openModal() {
+            document.getElementById("filterModal").style.display = "block";
+
+        }
+
+        function closeModal() {
+            document.getElementById("filterModal").style.display = "none";
+
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById("filterModal")) {
+                closeModal();
+            }
+        }
+    </script>
 }
