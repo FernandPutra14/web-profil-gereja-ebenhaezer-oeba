@@ -480,7 +480,7 @@ section.ibadah {
 
 .ibadah-contents .ibadah-card ::deep img {
     width: 100%;
-    height: 270px;
+    height: 380px;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -495,7 +495,7 @@ section.ibadah {
 .ibadah-card .nats {
     position: absolute;
     left: 0;
-    top: -245px;
+    top: -250px;
     width: 100%;
     height: 100%;
     display: flex;
@@ -509,6 +509,32 @@ section.ibadah {
         font-family: "Amarante", serif;
         font-weight: 500;
         font-size: 18px;
+    }
+
+.ibadah-card .info-atas {
+    position: absolute;
+    left: 0;
+    top: 44px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+}
+
+    .ibadah-card .info-atas h2 {
+        font-family: "Amarante", serif;
+        font-weight: 400;
+        font-size: 15px;
+    }
+
+    .ibadah-card .info-atas i {
+        font-family: "Amarante", serif;
+        font-weight: 400;
+        font-size: 15px;
     }
 
 .ibadah-card .category-pendeta-ibadah ::deep img {

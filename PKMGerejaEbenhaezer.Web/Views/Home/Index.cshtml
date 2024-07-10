@@ -235,7 +235,26 @@
                     <div class="nats">
                         <h2>"@ibadah.NasPembimbing"</h2>
                     </div>
-                    <img src="~/img/Ibadah Minggu7.png" />
+                    <div class="info-atas">
+                        <div class="date-kiri">
+                            <div style="text-align:center; display: flex">
+                                <i class="ri-map-pin-range-line" style="padding-right: 5px;"></i>
+                                <h2>@ibadah.Tempat</h2>
+                            </div>
+
+                        </div>
+                        <div class="date-kanan">
+                            <div style="text-align:center; display:flex;">
+                                <i class="ri-calendar-schedule-line" style="padding-right: 5px;"></i>
+                                <div style="display:flex; flex-direction:column;">
+                                    <h2>@ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</h2>
+                                    <h2><i class="ri-time-line" style="padding-right: 5px;"></i>@ibadah.TanggalIbadah.ToString("hh.mm tt")</h2>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <img src="~/img/Ibadah Minggu9.png" />
                     <div class="category-pendeta-ibadah">
                         <div class="subject-ibadah">
                             <h3>@ibadah.KategoriIbadah?.Nama</h3>
@@ -258,23 +277,7 @@
                         @ibadah.Judul
                     </h2>
                     <p>@ibadah.Deskripsi</p>
-                    <div class="ibadah-date">
-                        <div class="date-kiri">
-                            <div style="text-align:center;">
-                                <i class="ri-map-pin-range-fill"></i> <br />
-                                @ibadah.Tempat
-                            </div>
-
-                        </div>
-                        <div class="date-kanan">
-                            <div style="text-align:center;">
-                                <i class="ri-calendar-schedule-fill"></i> <br />
-                                @ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) 
-                                <br /> 
-                                @ibadah.TanggalIbadah.ToString("hh.mm tt")
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="ibadah-info">
                         <button class="btn" style="width:100%;">Baca Selengkapnya...</button>
                     </div>
