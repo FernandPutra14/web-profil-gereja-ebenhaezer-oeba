@@ -248,7 +248,7 @@
                                 <i class="ri-calendar-schedule-line" style="padding-right: 5px;"></i>
                                 <div style="display:flex; flex-direction:column;">
                                     <h2>@ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</h2>
-                                    <h2><i class="ri-time-line" style="padding-right: 5px;"></i>@ibadah.TanggalIbadah.ToString("hh.mm tt")</h2>
+                                    <h2><i class="ri-time-line" style="padding-right: 5px;"></i>@ibadah.TanggalIbadah.ToString("hh.mm tt") - @ibadah.TanggalIbadah.Add(ibadah.KategoriIbadah!.Durasi).ToString("hh.mm tt")</h2>
                                 </div>
                                 
                             </div>
