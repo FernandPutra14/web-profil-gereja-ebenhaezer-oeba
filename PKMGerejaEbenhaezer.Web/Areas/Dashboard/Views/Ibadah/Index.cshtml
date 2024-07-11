@@ -37,7 +37,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr style="@(item.KategoriIbadah is null || item.Pendeta is null ? "background-color:red" : "")">
                         <td>@item.Id</td>
                         <td>@item.Judul</td>
                         <td>@item.Deskripsi</td>

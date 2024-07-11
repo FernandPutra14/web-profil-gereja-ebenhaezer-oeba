@@ -33,6 +33,25 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 .Include(i => i.Pendeta)
                 .AsNoTracking().ToListAsync();
 
+            foreach (var ibadah in daftarIbadah)
+            {
+                if (ibadah.Pendeta is null)
+                    _notificationService.AddNotification(new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Warning,
+                        Title = $"Ibadah ID {ibadah.Id} tidak memiliki pendeta",
+                        Message = "Data pendeta telah dihapus. Ibadah tanpa pendeta tidak akan ditampilkan di Halaman Depan!. Segera pilih pendeta"
+                    });
+                
+                if(ibadah.KategoriIbadah is null)
+                    _notificationService.AddNotification(new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Warning,
+                        Title = $"Ibadah ID {ibadah.Id} tidak memiliki kategori ibadah",
+                        Message = "Data kategori telah dihapus. Ibadah tanpa kategori tidak akan ditampilkan di Halaman Depan!. Segera pilih kategori"
+                    });
+            }
+
             return View(daftarIbadah);
         }
 
