@@ -30,10 +30,7 @@
                     <select asp-for="@Model.WarnaArgb" class="form-control">
                         @foreach(var color in KategoriColors.Colors)
                         {
-                            <option value="@color.ToArgb()">
-                                <div style="background-color:rgb(@color.R, @color.G, @color.B); width:100px; height:100px">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                </div>
+                            <option value="@color.ToArgb()" style="background-color:rgb(@color.R, @color.G, @color.B); width:100px; height:100px;">
                             </option>
                         }
                     </select>
