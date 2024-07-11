@@ -62,6 +62,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Id = 0,
                 Nama = tambahVM.Nama,
                 Durasi = tambahVM.Durasi,
+                Warna = tambahVM.Warna,
             };
 
             _appDbContext.KategoriIbadahTable.Add(kategoriIbadah);
@@ -97,6 +98,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             { 
                 Id = id, 
                 Nama = kategori.Nama,
+                WarnaArgb = kategori.Warna.ToArgb(),
                 TotalJam = (int)kategori.Durasi.TotalHours,
                 TotalMenit = (int)kategori.Durasi.TotalMinutes % 60,
             });
@@ -129,6 +131,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Simpan ke database
             kategori.Nama = editVM.Nama;
             kategori.Durasi = editVM.Durasi;
+            kategori.Warna = editVM.Warna;
 
             try
             {

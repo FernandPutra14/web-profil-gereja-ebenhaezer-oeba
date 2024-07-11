@@ -1,4 +1,5 @@
-﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.KategoriIbadah
+﻿@using Humanizer
+@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.KategoriIbadah
 @model TambahVM
 @{
     ViewData["Title"] = "Tambah Kategori";
@@ -20,6 +21,23 @@
                     <label asp-for="@Model.Nama" class="form-label"></label>
                     <input asp-for="@Model.Nama" class="form-control" />
                     <span asp-validation-for="@Model.Nama" class="form-text text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col input-box">
+                    <label asp-for="@Model.WarnaArgb" class="form-label"></label>
+                    <select asp-for="@Model.WarnaArgb" class="form-control">
+                        @foreach(var color in KategoriColors.Colors)
+                        {
+                            <option value="@color.ToArgb()">
+                                <div style="background-color:rgb(@color.R, @color.G, @color.B); width:100px; height:100px">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+                            </option>
+                        }
+                    </select>
+                    <span asp-validation-for="@Model.WarnaArgb" class="form-text text-danger"></span>
                 </div>
             </div>
 

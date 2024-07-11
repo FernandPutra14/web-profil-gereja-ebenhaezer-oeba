@@ -26,5 +26,7 @@ namespace PKMGerejaEbenhaezer.Domain.Entity
         public static readonly Color Warna5 = Color.FromArgb(231, 251, 249);
         public static readonly Color Warna6 = Color.FromArgb(251, 241, 255);
         public static readonly Color Warna7 = Color.FromArgb(254, 254, 236);
+
+        public static readonly List<Color> Colors = new() { Warna1, Warna2, Warna3, Warna4, Warna5, Warna6, Warna7 };
     }
 }
