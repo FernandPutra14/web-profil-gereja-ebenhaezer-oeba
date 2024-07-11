@@ -25,19 +25,19 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col input-box">
-                    <label asp-for="@Model.WarnaArgb" class="form-label"></label>
-                    <select asp-for="@Model.WarnaArgb" class="form-control">
-                        @foreach (var color in KategoriColors.Colors)
-                        {
-                            <option value="@color.ToArgb()" style="background-color:rgb(@color.R, @color.G, @color.B); width:100px; height:100px;">
-                            </option>
-                        }
-                    </select>
-                    <span asp-validation-for="@Model.WarnaArgb" class="form-text text-danger"></span>
-                </div>
+            <label asp-for="@Model.WarnaArgb" class="form-label"></label>
+            <div class="filterbut">
+                <input hidden asp-for="@Model.WarnaArgb" />
+                @foreach (var color in KategoriColors.Colors)
+                {
+                    <a href="#">
+                        <input hidden id="value" value="@color.ToArgb()" />
+                        <div class="color-box" style="background-color:rgb(@color.R, @color.G, @color.B)">
+                        </div>
+                    </a>
+                }
             </div>
+            <span asp-validation-for="@Model.WarnaArgb" class="form-text text-danger"></span>
 
             <div class="row mt-4">
                 <label class="form-label">Durasi</label>
@@ -70,4 +70,43 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+        const inputWarna = $('#@(nameof(TambahVM.WarnaArgb))');
+
+        const daftarWarna = $('.filterbut>a');
+
+        const init = () => {
+            const inputWarnaVal = inputWarna.val();
+            daftarWarna.each((index, item) => {
+                const value = $(item).find('input#value').val();
+
+                if (value === inputWarnaVal) {
+                    $(item).addClass('active');
+                    return;
+                }
+            })
+        };
+
+        const updateUI = (itemIndex) => {
+            daftarWarna.each((index, item) => {
+                if (index === itemIndex) {
+                    $(item).addClass('active');
+                } else {
+                    $(item).removeClass('active');
+                }
+            })
+        }
+
+        init();
+
+        daftarWarna.each((index, item) => {
+            $(item).on('click', function () {
+                const value = $(item).find('input#value').val();
+                inputWarna.val(value);
+
+                updateUI(index);
+            });
+        });
+    </script>
 }

@@ -37,7 +37,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         //Tambah Kategori
         public IActionResult Tambah()
         {
-            return View(new TambahVM());
+            return View(new TambahVM { WarnaArgb = KategoriColors.Warna1.ToArgb()});
         }
 
         [HttpPost]

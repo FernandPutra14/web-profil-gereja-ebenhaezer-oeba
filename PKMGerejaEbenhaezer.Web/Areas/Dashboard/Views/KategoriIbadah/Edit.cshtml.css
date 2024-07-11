@@ -74,3 +74,42 @@
     padding: 0 15px;
 }
 /* Akhir CSS type input Text dan Textarea */
+
+/* Warna */
+.color-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.filterbut {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+    .filterbut ::deep a {
+        text-decoration: none;
+        box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 10px;
+        color: black;
+        font-size: 18px;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+    }
+
+        .filterbut ::deep a:hover {
+            color: #fff;
+            background-color: var(--primary-clr);
+        }
+
+        .filterbut ::deep a.active {
+            background-color: var(--primary-clr);
+            color: white;
+        }
+/* Akhir Warna */
