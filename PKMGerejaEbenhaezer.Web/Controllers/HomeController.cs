@@ -42,6 +42,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             var daftarIbadah = await _appDbContext.IbadahTable
                 .Include(i => i.Pendeta).ThenInclude(p => p.Foto)
                 .Include(i => i.KategoriIbadah)
+                .Where(i => i.Pendeta != null && i.KategoriIbadah != null)
                 .OrderByDescending(i => i.TanggalIbadah)
                 .Take(3).AsNoTracking().ToListAsync();
 
