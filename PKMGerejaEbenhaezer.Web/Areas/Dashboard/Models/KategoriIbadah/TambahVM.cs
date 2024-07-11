@@ -1,5 +1,6 @@
 ﻿using PKMGerejaEbenhaezer.Web.CustomValidations;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.KategoriIbadah
 {
@@ -8,6 +9,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.KategoriIbadah
         [Display(Name = "Nama Kategori Ibadah")]
         [Required(ErrorMessage = "{0} harus diisi")]
         public string Nama { get; set; } = string.Empty;
+
+        [Display(Name = "Warna")]
+        [Required(ErrorMessage = "{0} harus diisi")]
+        public Color Warna { get; set; }
 
         [Display(Name = "Total Jam")]
         [Required(ErrorMessage = "{0} harus diisi")]

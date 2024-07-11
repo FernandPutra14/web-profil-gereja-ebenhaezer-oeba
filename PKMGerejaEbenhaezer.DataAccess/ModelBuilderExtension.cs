@@ -254,21 +254,21 @@ namespace PKMGerejaEbenhaezer.DataAccess
                     Id = 1,
                     Nama = "Kebaktian Umum",
                     Durasi = new TimeSpan(2, 0, 0),
-                    Warna = Color.Blue,
+                    Warna = KategoriColors.Warna1,
                 },
                 new KategoriIbadah
                 {
                     Id = 2,
                     Nama = "Perjamuan",
                     Durasi = new TimeSpan(2, 0, 0),
-                    Warna = Color.Green,
+                    Warna = KategoriColors.Warna2,
                 },
                 new KategoriIbadah
                 {
                     Id = 3,
                     Nama = "Persiapan Perjamuan",
                     Durasi = new TimeSpan(2, 0, 0),
-                    Warna = Color.Red,
+                    Warna = KategoriColors.Warna3 ,
                 }
             );
 
