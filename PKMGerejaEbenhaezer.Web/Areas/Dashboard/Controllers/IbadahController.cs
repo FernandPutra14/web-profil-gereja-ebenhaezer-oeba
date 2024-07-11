@@ -61,6 +61,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Judul = tambahVM.Judul,
                 Deskripsi = tambahVM.Deskripsi,
                 NasPembimbing = tambahVM.NasPembimbing,
+                Renungan = tambahVM.Renungan,
                 TanggalIbadah = tambahVM.TanggalIbadah,
                 Tempat = tambahVM.Tempat,
                 KategoriIbadah = kategori,
@@ -106,6 +107,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Judul = ibadah.Judul,
                 Deskripsi = ibadah.Judul,
                 NasPembimbing = ibadah.NasPembimbing,
+                Renungan = ibadah.Renungan,
                 TanggalIbadah = ibadah.TanggalIbadah,
                 Tempat = ibadah.Tempat,
                 IdKategoriIbadah = ibadah.KategoriIbadah?.Id,
@@ -144,6 +146,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             ibadah.Judul = editVM.Judul;
             ibadah.Deskripsi = editVM.Deskripsi;
             ibadah.NasPembimbing = editVM.NasPembimbing;
+            ibadah.Renungan = editVM.Renungan;
             ibadah.TanggalIbadah = editVM.TanggalIbadah;
             ibadah.Tempat = editVM.Tempat;
             ibadah.KategoriIbadah = kategori;

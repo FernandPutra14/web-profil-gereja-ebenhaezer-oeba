@@ -12,6 +12,7 @@ namespace PKMGerejaEbenhaezer.Domain.Entity
         public string Judul { get; set; } = string.Empty;
         public string Deskripsi { get; set; } = string.Empty;
         public string NasPembimbing { get; set; } = string.Empty;
+        public string? Renungan {  get; set; }
         public string Tempat { get; set; } = string.Empty;
         public DateTime TanggalIbadah { get; set; }
 

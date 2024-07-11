@@ -19,6 +19,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
         [Required(ErrorMessage = "{0} harus diisi")]
         public string NasPembimbing { get; set; } = string.Empty;
 
+        [Display(Name = "Renungan")]
+        public string? Renungan { get; set; }
+
         [DataType(DataType.DateTime)]
         [Display(Name = "Tanggal Ibadah")]
         [Required(ErrorMessage = "{0} harus diisi")]

@@ -41,6 +41,14 @@
 
             <div class="row mb-3">
                 <div class="col-12 input-box">
+                    <label asp-for="@Model.Renungan" class="form-label"></label>
+                    <input asp-for="@Model.Renungan" class="form-control" />
+                    <span asp-validation-for="@Model.Renungan" class="form-text text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-12 input-box">
                     <label asp-for="@Model.TanggalIbadah" class="form-label"></label>
                     <input asp-for="@Model.TanggalIbadah" class="form-control" value="" />
                     <span asp-validation-for="@Model.TanggalIbadah" class="form-text text-danger"></span>

@@ -25,6 +25,7 @@
                     <th>Deskripsi</th>
                     <th>Kategori Ibadah</th>
                     <th>Nas Pembimbing</th>
+                    <th>Renungan</th>
                     <th>Tempat</th>
                     <th>Tanggal Ibadah</th>
                     <th>Jam Mulai</th>
@@ -42,6 +43,7 @@
                         <td>@item.Deskripsi</td>
                         <td>@(item.KategoriIbadah is null ? "Tidak Ada" : item.KategoriIbadah.Nama)</td>
                         <td>@item.NasPembimbing</td>
+                        <td>@(item.Renungan is null ? "Tidak Ada" : item.Renungan)</td>
                         <td>@item.Tempat</td>
                         <td>@item.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</td>
                         <td>@item.TanggalIbadah.ToString("hh:mm tt")</td>
