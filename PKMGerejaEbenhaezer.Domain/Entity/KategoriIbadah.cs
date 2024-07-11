@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +28,15 @@ namespace PKMGerejaEbenhaezer.Domain.Entity
         public static readonly Color Warna6 = Color.FromArgb(251, 241, 255);
         public static readonly Color Warna7 = Color.FromArgb(254, 254, 236);
 
-        public static readonly List<Color> Colors = new() { Warna1, Warna2, Warna3, Warna4, Warna5, Warna6, Warna7 };
+        public static List<Color> Colors {
+            get
+            {
+                return typeof(KategoriColors).GetFields(BindingFlags.Static | BindingFlags.Public)
+                    .Where(f => f.FieldType == typeof(Color))
+                    .Select(f => f.GetValue(f) as Color?)
+                    .Select(c => c!.Value)
+                    .ToList();
+            }
+        }
     }
 }
