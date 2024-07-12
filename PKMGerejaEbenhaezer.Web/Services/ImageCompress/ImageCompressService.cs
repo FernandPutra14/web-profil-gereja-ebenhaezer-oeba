@@ -46,6 +46,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
                         {
                             Size = newSize,
                             Mode = ResizeMode.Stretch,
+                            Sampler = KnownResamplers.Bicubic,
                         }));
                     }
 
