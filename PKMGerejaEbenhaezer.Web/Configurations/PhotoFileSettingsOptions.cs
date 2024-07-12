@@ -1,4 +1,6 @@
-﻿namespace PKMGerejaEbenhaezer.Web.Configurations
+﻿using System.Drawing;
+
+namespace PKMGerejaEbenhaezer.Web.Configurations
 {
     public class PhotoFileSettingsOptions
     {
@@ -9,5 +11,6 @@
         public long MaxSizeLimit { get; set; }
         public string FolderPath { get; set; } = string.Empty;
         public int CompressionQuality { get; set; }
+        public Size CompressionMaxSize { get; set; }
     }
 }
