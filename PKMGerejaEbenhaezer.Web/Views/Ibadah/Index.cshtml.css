@@ -46,7 +46,13 @@ section.ibadah {
 .ibadah .ibadah-contents {
     display: flex;
     flex-wrap: wrap;
+    justify-items: center;
 }
+
+    .ibadah .ibadah-contents h1 {
+        width: 100%;
+        padding: 70px 0 70px;
+    }
 
     .ibadah .ibadah-contents .ibadah-card {
         flex-basis: calc(calc(100% / 3) - 1.2%);
