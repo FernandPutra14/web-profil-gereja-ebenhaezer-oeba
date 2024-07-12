@@ -16,7 +16,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             _appDbContext = appDbContext;
         }
 
-        public async Task<IActionResult> Index(int? bulan, int? pageIndex, string? searchString)
+        public async Task<IActionResult> Index(int? bulan, int? tahun, int? pageIndex, string? searchString)
         {
             if (bulan is not null && (bulan < 1 || bulan > 12)) 
             {
@@ -31,6 +31,9 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             if (bulan is not null)
                 daftarPengumuman = daftarPengumuman.Where(p => p.TanggalDiBuat.Month == bulan).ToList();
 
+            if (tahun is not null)
+                daftarPengumuman = daftarPengumuman.Where(p => p.TanggalDiBuat.Year == tahun).ToList();
+
             if (searchString is not null)
                 daftarPengumuman = daftarPengumuman
                     .Where(p => p.Judul.ToLower().Contains(searchString.ToLower()) || p.Isi.ToLower().Contains(searchString.ToLower()))
@@ -44,6 +47,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             {
                 Items = PaginatedList<Pengumuman>.Create(daftarPengumuman, pageIndex ?? 1, pageSize),
                 Bulan = bulan,
+                Tahun = tahun,
                 SearchString = searchString,
             };
 
