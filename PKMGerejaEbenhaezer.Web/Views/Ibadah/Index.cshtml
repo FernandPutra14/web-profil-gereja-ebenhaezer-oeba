@@ -1,6 +1,9 @@
-﻿@model IndexVM<Ibadah>
+﻿@using System.Globalization
+@using Humanizer;
+@model IndexVM<Ibadah>
 @{
     ViewData["Title"] = "Ibadah";
+    var cultureInfo = new CultureInfo("id-ID");
 }
 
 @* Bagian Top dan Judul *@
