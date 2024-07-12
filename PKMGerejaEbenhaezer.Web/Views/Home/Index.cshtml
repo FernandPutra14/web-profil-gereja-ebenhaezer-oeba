@@ -221,7 +221,14 @@
                 <!-- Awal Card -->
                 <div class="ibadah-card">
                     <div class="nats">
-                        <h2>"@ibadah.NasPembimbing"</h2>
+                        @if (!string.IsNullOrEmpty(ibadah.Renungan))
+                        {
+                            <h2>"@ibadah.Renungan"</h2>
+                        }
+                        else
+                        {
+                            <h2>"@ibadah.NasPembimbing"</h2>
+                        }
                     </div>
                     <div class="info-atas">
                         <div class="date-kiri">

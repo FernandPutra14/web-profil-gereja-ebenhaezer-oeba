@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit Akun";
 }
 
-<div class="container">
+<div class="containerkun">
 
     <div class="jud">
         <h1>
@@ -19,7 +19,7 @@
         <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
         <div class="row">
-            <div class="col-12 input-box">
+            <div class="col-md-12 col-12 input-box">
                 <label asp-for="@Model.UserName" class="form-label"></label>
                 <input asp-for="@Model.UserName" class="form-control" type="text" autocomplete="new-username" />
                 <span asp-validation-for="@Model.UserName" class="form-text text-danger"></span>
@@ -27,12 +27,12 @@
         </div>
 
         <div class="row">
-            <div class="col-6 input-box">
+            <div class="col-md-6 col-12 input-box">
                 <label asp-for="@Model.Password" class="form-label"></label>
                 <input asp-for="@Model.Password" type="password" class="form-control" autocomplete="new-password" />
                 <span asp-validation-for="@Model.Password" class="form-text text-danger"></span>
             </div>
-            <div class="col-6 input-box">
+            <div class="col-md-6 col-12 input-box">
                 <label asp-for="@Model.PasswordConfirmation" class="form-label"></label>
                 <input asp-for="@Model.PasswordConfirmation" type="password" class="form-control" />
                 <span asp-validation-for="@Model.PasswordConfirmation" class="form-text text-danger"></span>

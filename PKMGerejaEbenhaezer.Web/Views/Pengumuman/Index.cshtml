@@ -50,7 +50,7 @@
     @* AKhir Tombol Filter *@
 
     <form asp-action="Index" method="get">
-        <div class="row mb-5">
+        <div class="row mb-2">
             <div class="col-md-5 col-6 input-box">
                 <label asp-for="@Model.Tahun" class="form-label">Filter Tahun</label>
                 <select asp-for="@Model.Tahun" class="form-control">
@@ -111,11 +111,11 @@
                     {
                         <img src="~/img/gereja1.jpg" />
                     }
-                    <div class="category">
+                    @* <div class="category">
                         <div class="subject">
                             <h3>Pengumuman</h3>
                         </div>
-                    </div>
+                    </div> *@
                     <h2 class="peng-title">@item.Judul</h2>
                     <p>@item.Isi</p>
                     <div class="peng-tanggal">
