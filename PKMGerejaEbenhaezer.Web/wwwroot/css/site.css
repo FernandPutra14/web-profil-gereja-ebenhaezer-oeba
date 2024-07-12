@@ -59,7 +59,6 @@ a.btn {
     cursor: pointer;
     transition: all 0.3s;
     text-decoration: none;
-    max-width: 300px; /* Batas maksimum lebar tombol */
 }
 
 button.btn:hover {

@@ -495,9 +495,10 @@ section.ibadah {
 .ibadah-card .nats {
     position: absolute;
     left: 0;
-    top: -250px;
+    top: 30px;
     width: 100%;
-    height: 100%;
+    height: auto;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -514,9 +515,10 @@ section.ibadah {
 .ibadah-card .info-atas {
     position: absolute;
     left: 0;
-    top: 36px;
+    top: 300px;
     width: 100%;
-    height: 100%;
+    height: auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;

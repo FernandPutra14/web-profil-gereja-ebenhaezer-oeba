@@ -369,3 +369,71 @@ section.ibadah {
     color: white;
 }
 /* Akhir CSS Search dan Pagination */
+
+
+/* --------------------------------- Responsive  ----------------------------------------- */
+/*  Responsive 968  */
+@media (max-width:1160px) {
+
+    section.ibadah {
+        padding: 8% 10px 30px;
+    }
+
+    #ibadahus {
+        background-attachment: scroll;
+    }
+
+    .ibadah .ibadah-contents .ibadah-card {
+        flex-basis: calc(calc(100% / 2) - 1.5%);
+    }
+}
+
+
+/* Responsive 768 */
+@media (max-width:768px) {
+
+    ::deep .penc .input-group {
+        width: 100%;
+    }
+
+    section.ibadah {
+        width: 100%;
+    }
+}
+
+
+/* Responsive 690 */
+@media (max-width:690px) {
+
+    .ibadah .ibadah-contents .ibadah-card {
+        flex-basis: 100%;
+    }
+
+    .filterbut {
+        display: none;
+    }
+
+    .filter-button {
+        display: block;
+    }
+}
+
+
+/* Responsive 568 */
+@media (max-width:568px) {
+
+    #ibadahus h2 {
+        font-size: 30px;
+        padding-top: 70px;
+    }
+}
+
+
+/* Responsive 468 */
+@media (max-width:468px) {
+
+    #ibadahus h2 {
+        font-size: 25px;
+        padding-top: 70px;
+    }
+}

@@ -18,6 +18,17 @@
         <div class="card">
             <div class="head">
                 <div>
+                    <h2>@Model.TotalAnak</h2>
+                    <p>Seluruh Jemaat</p>
+                </div>
+                <img src="~/img/dashboard/seluruh_jemaat.png" style="height: 60px;" />
+            </div>
+            <hr />
+            <span class="label">@(((double)Model.TotalLansia / Model.TotalJemaat * 100).ToString("F2"))%</span>
+        </div>
+        <div class="card">
+            <div class="head">
+                <div>
                     <h2>@Model.TotalLansia</h2>
                     <p>Lansia</p>
                 </div>

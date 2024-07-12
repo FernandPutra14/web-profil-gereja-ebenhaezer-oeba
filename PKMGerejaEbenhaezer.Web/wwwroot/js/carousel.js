@@ -1,7 +1,7 @@
 ﻿//Slider Pendeta Section
 $('.fernand').owlCarousel({
     loop: true,
-    autoplay: false,
+    autoplay: true,
     autoplayTimeout: 8000,
     margin: 10,
     nav: true,
