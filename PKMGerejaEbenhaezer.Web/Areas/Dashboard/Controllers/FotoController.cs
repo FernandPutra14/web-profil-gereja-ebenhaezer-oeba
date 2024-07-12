@@ -93,7 +93,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
                     $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                _imageCompressService.Compress(fileFormContent, fotoPathKompresi);
+                await _imageCompressService.Compress(fileFormContent, fotoPathKompresi);
             }
             catch (Exception ex)
             {
@@ -185,7 +185,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
                     $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                _imageCompressService.Compress(fileFormContent, fotoPathKompresi);
+                await _imageCompressService.Compress(fileFormContent, fotoPathKompresi);
             }
             catch (Exception ex)
             {

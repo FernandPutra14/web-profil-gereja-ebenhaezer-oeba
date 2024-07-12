@@ -2,6 +2,6 @@
 {
     public interface IImageCompressService
     {
-        void Compress(byte[] image, string outputPath);
+        Task Compress(byte[] image, string outputPath);
     }
 }

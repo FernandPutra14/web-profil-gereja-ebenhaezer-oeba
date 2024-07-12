@@ -17,7 +17,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
             _logger = logger;
         }
 
-        public void Compress(byte[] image, string outputPath)
+        public async Task Compress(byte[] image, string outputPath)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
                     {
                         Quality = _photoFileSettingsOptions.CompressionQuality
                     };
-                    fotoKompresi.Save(outputPath, encoder);
+                    await fotoKompresi.SaveAsync(outputPath, encoder);
                 }
             }
             catch (Exception ex)
