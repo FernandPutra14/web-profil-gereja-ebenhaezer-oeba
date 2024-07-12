@@ -57,7 +57,11 @@
                     <div class="gambar-pen">
                         @if (pendeta.Foto is not null)
                         {
-                            <img src="@Url.Action("Index", "Foto", new { Area = "", id = pendeta.Foto.Id})" />
+                            <picture>
+                                <source media="(max-width: 465px)"
+                                        srcset="@Url.Action("FotoKompresi", "Foto", new {Area = "", id = pendeta.Foto.Id})" />
+                                <img src="@Url.Action("Index", "Foto", new {Area = "", id = pendeta.Foto.Id})" alt="" />
+                            </picture>
                         }
                         else
                         {
@@ -158,8 +162,6 @@
     </div>
 </section>
 <!-- Akhir Chart Section -->
-
-
 <!-- Warta Section -->
 <section class="warta">
     <!-- Header Warta Section -->
@@ -200,8 +202,6 @@
     <!-- Akhir Content Warta Section -->
 </section>
 <!-- Akhir Warta Section -->
-
-
 <!-- Ibadah Section -->
 <section class="ibadah">
     <!-- Header Ibadah Section -->
@@ -237,14 +237,12 @@
                     <div class="info-atas">
                         <div class="date-kiri">
                             <div style="text-align:center; display: flex">
-
                                 <h2><i class="ri-map-pin-range-line" style="padding-right: 5px;"></i> @ibadah.Tempat</h2>
                             </div>
-
                         </div>
                         <div class="date-kanan">
                             <div style="text-align:center; display:flex;">
-                                
+
                                 <div style="display:flex; flex-direction:column;">
                                     <h2><i class="ri-calendar-schedule-line" style="padding-right:5px;"></i> @ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</h2>
                                     <h2>
@@ -269,7 +267,11 @@
                         <div class="gambar-pendeta">
                             @if (ibadah.Pendeta?.Foto is not null)
                             {
-                                <img src="@Url.Action("Index", "Foto", new {Area = "", id = ibadah.Pendeta.Foto.Id})" />
+                                <picture>
+                                    <source media="(max-width: 465px)"
+                                            srcset="@Url.Action("FotoKompresi", "Foto", new {Area = "", id = ibadah.Pendeta.Foto.Id})" />
+                                    <img src="@Url.Action("Index", "Foto", new {Area = "", id = ibadah.Pendeta.Foto.Id})" alt="" />
+                                </picture>
                             }
                             else
                             {
@@ -321,7 +323,11 @@
                     <div class="item peng-card">
                         @if (pengumuman.Foto != null)
                         {
-                            <img src="@Url.Action("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" />
+                            <picture>
+                                <source media="(max-width: 465px)"
+                                        srcset="@Url.Action("FotoKompresi", "Foto", new {Area = "", id = pengumuman.Foto.Id})" />
+                                <img src="@Url.Action("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" alt="" />
+                            </picture>
                         }
                         else
                         {
