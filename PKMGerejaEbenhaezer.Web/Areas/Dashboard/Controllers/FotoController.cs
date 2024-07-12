@@ -5,6 +5,7 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.FotoModels;
 using PKMGerejaEbenhaezer.Web.Configurations;
+using PKMGerejaEbenhaezer.Web.Services.ImageCompress;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using PKMGerejaEbenhaezer.Web.Utlities;
 using SixLabors.ImageSharp;
@@ -21,18 +22,21 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<FotoController> _logger;
         private readonly IToastrNotificationService _notificationService;
+        private readonly IImageCompressService _imageCompressService;
 
         public FotoController(AppDbContext appDbContext,
             PhotoFileSettingsOptions photoFileSettingsOptions,
             IWebHostEnvironment webHostEnvironment,
             ILogger<FotoController> logger,
-            IToastrNotificationService notificationService)
+            IToastrNotificationService notificationService,
+            IImageCompressService imageCompressService)
         {
             _appDbContext = appDbContext;
             _photoFileSettingsOptions = photoFileSettingsOptions;
             _webHostEnvironment = webHostEnvironment;
             _logger = logger;
             _notificationService = notificationService;
+            _imageCompressService = imageCompressService;
         }
 
         public async Task<IActionResult> Index(int? pageIndex)
@@ -89,14 +93,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
                     $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                using (var fotoKompresi = Image.Load(fileFormContent))
-                {
-                    var encoder = new JpegEncoder
-                    {
-                        Quality = _photoFileSettingsOptions.CompressionQuality
-                    };
-                    fotoKompresi.Save(fotoPathKompresi, encoder);
-                }
+                _imageCompressService.Compress(fileFormContent, fotoPathKompresi);
             }
             catch (Exception ex)
             {
@@ -188,14 +185,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
                     $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                using (var fotoKompresi = Image.Load(fileFormContent))
-                {
-                    var encoder = new JpegEncoder
-                    {
-                        Quality = _photoFileSettingsOptions.CompressionQuality
-                    };
-                    fotoKompresi.Save(fotoPathKompresi, encoder);
-                }
+                _imageCompressService.Compress(fileFormContent, fotoPathKompresi);
             }
             catch (Exception ex)
             {

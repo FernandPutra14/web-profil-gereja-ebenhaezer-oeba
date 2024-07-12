@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Web.Authentication;
 using PKMGerejaEbenhaezer.Web.Configurations;
+using PKMGerejaEbenhaezer.Web.Services.ImageCompress;
 using PKMGerejaEbenhaezer.Web.Services.PDF;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
@@ -52,6 +53,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<ISignInManager, SignInManager>();
 builder.Services.AddScoped<IPDFUploadService, PDFUploadService>();
 builder.Services.AddScoped<IToastrNotificationService, ToastrNotificationService>();
+builder.Services.AddScoped<IImageCompressService, ImageCompressService>();
 
 var app = builder.Build();
 
