@@ -474,7 +474,7 @@ section.ibadah {
         transition: all 0.3s;
     }
 
-        .peng .ibadah-contents .ibadah-card:hover {
+        .ibadah .ibadah-contents .ibadah-card:hover {
             box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
         }
 

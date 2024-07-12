@@ -6,88 +6,192 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
+
 @* Bagian Top dan Judul *@
-<section id="ibadah-us">
+<section id="ibadahus">
     <h2>
         IBADAH MINGGUAN@(Model.Title())
     </h2>
 </section>
 @* Akhir Bagian Top dan Judul *@
 
-<form asp-action="Index" method="get">
-    <div class="row mb-2">
-        <div class="col-md-5 col-6 input-box">
-            <label asp-for="@Model.Tahun" class="form-label">Filter Tahun</label>
-            <select asp-for="@Model.Tahun" class="form-control">
-                <option value="@null">Semua</option>
-                @for (int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
-                {
-                    <option value="@tahun">@tahun</option>
-                }
-            </select>
-        </div>
-        <div class="col-md-5 col-6 input-box">
-            <label asp-for="@Model.Bulan" class="form-label">Filter Bulan</label>
-            <select asp-for="@Model.Bulan" class="form-control">
-                <option value="@null">Semua</option>
-                @for (int bulan = 1; bulan <= 12; bulan++)
-                {
-                    <option value="@bulan">@Model.MonthName(bulan)</option>
-                }
-            </select>
-        </div>
-        <div class="col-md-2 col-12 mb-3" style="padding-top:23px;">
-            <button type="submit" class="btn" style="width:100%;">Filter</button>
-        </div>
-    </div>
-</form>
 
-@* Search *@
-<div class="row penc">
-    <form asp-action="Index" method="get" class="form-inline w-100">
-        <div class="input-group" id="search">
-            <input type="hidden" name="bulan" id="bulan" value="@Model.Bulan" />
-            <input type="hidden" name="tahun" id="tahun" value="@Model.Tahun" />
-            <input type="text" id="searchString" name="searchString" value="@Model.SearchString"
-                   class="form-control" placeholder="Cari Pengumuman..." required
-                   oninvalid="this.setCustomValidity('Masukkan kata/kalimat yang ingin dicari')"
-                   oninput="this.setCustomValidity('')" />
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-primary">Cari</button>
+
+
+<section class="ibadah">
+    
+    
+    <form asp-action="Index" method="get">
+        <div class="row mb-2">
+            <div class="col-md-5 col-6 input-box">
+                <label asp-for="@Model.Tahun" class="form-label">Filter Tahun</label>
+                <select asp-for="@Model.Tahun" class="form-control">
+                    <option value="@null">Semua</option>
+                    @for (int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
+                    {
+                        <option value="@tahun">@tahun</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-5 col-6 input-box">
+                <label asp-for="@Model.Bulan" class="form-label">Filter Bulan</label>
+                <select asp-for="@Model.Bulan" class="form-control">
+                    <option value="@null">Semua</option>
+                    @for (int bulan = 1; bulan <= 12; bulan++)
+                    {
+                        <option value="@bulan">@Model.MonthName(bulan)</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2 col-12 mb-3" style="padding-top:23px;">
+                <button type="submit" class="btn" style="width:100%;">Filter</button>
             </div>
         </div>
     </form>
-</div>
-@* Akhir Search *@
 
-@* Pagination *@
-<nav>
-    <ul class="pagination justify-content-center">
-        <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
-            <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)"
-               asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun"
-               asp-route-searchString="@Model.SearchString">
-                Sebelumnya
-            </a>
-        </li>
-        @for (var i = 1; i <= Model.Items.TotalPages; i++)
+    @* Search *@
+    <div class="row penc mb-2">
+        <form asp-action="Index" method="get" class="form-inline w-100">
+            <div class="input-group" id="search">
+                <input type="hidden" name="bulan" id="bulan" value="@Model.Bulan" />
+                <input type="hidden" name="tahun" id="tahun" value="@Model.Tahun" />
+                <input type="text" id="searchString" name="searchString" value="@Model.SearchString"
+                       class="form-control" placeholder="Cari Pengumuman..." required
+                       oninvalid="this.setCustomValidity('Masukkan kata/kalimat yang ingin dicari')"
+                       oninput="this.setCustomValidity('')" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Cari</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    @* Akhir Search *@
+
+
+    <!-- Content Ibadah Section -->
+    <div class="ibadah-contents">
+        @if (Model.Items.Count > 0)
         {
-            <li class="page-item @(Model.Items.PageIndex == i ? "active" : "")">
-                <a class="page-link" asp-action="Index" asp-route-pageIndex="@i"
-                   asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun"
-                   asp-route-searchString="@Model.SearchString">@i</a>
-            </li>
+            @foreach (var item in Model.Items)
+            {
+                <!-- Awal Card -->
+                <div class="item ibadah-card">
+                    <div class="nats">
+                        @if (!string.IsNullOrEmpty(item.Renungan))
+                        {
+                            <h2>"@item.Renungan"</h2>
+                        }
+                        else
+                        {
+                            <h2>"@item.NasPembimbing"</h2>
+                        }
+                    </div>
+                    <div class="info-atas">
+                        <div class="date-kiri">
+                            <div style="text-align:center; display: flex">
+
+                                <h2><i class="ri-map-pin-range-line" style="padding-right: 5px;"></i> @item.Tempat</h2>
+                            </div>
+
+                        </div>
+                        <div class="date-kanan">
+                            <div style="text-align:center; display:flex;">
+
+                                <div style="display:flex; flex-direction:column;">
+                                    <h2><i class="ri-calendar-schedule-line" style="padding-right:5px;"></i> @item.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</h2>
+                                    <h2>
+                                        <i class="ri-time-line" style="padding-right: 5px;"></i>
+                                        @item.TanggalIbadah.ToString("hh.mm tt")
+                                        @if (item.KategoriIbadah is not null)
+                                        {
+                                            @($"- {item.TanggalIbadah.Add(item.KategoriIbadah.Durasi).ToString("hh.mm tt")}")
+                                        }
+                                    </h2>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <img src="~/img/Ibadah Minggu9.png" />
+                    <div class="category-pendeta-ibadah">
+                        <div class="subject-ibadah"
+                             style="background-color: rgb(@item.KategoriIbadah?.Warna.R, @item.KategoriIbadah?.Warna.G, @item.KategoriIbadah?.Warna.B)">
+                            <h3>@item.KategoriIbadah?.Nama</h3>
+                        </div>
+                        <div class="gambar-pendeta">
+                            @if (item.Pendeta?.Foto is not null)
+                            {
+                                <img src="@Url.Action("Index", "Foto", new {Area = "", id = item.Pendeta.Foto.Id})" />
+                            }
+                            else
+                            {
+                                <img src="~/img/pendeta-test.jpg" />
+                            }
+                            <div class="tooltip-pendeta">
+                                <h3>@item.Pendeta?.Nama</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="ibadah-title">
+                        @item.Judul
+                    </h2>
+                    <p>@item.Deskripsi</p>
+
+                    <div class="ibadah-info">
+                        <button class="btn" style="width:100%;">Baca Selengkapnya...</button>
+                    </div>
+                </div>
+                <!-- Akhir Card -->
+            }
         }
-        <li class="page-item @(Model.Items.HasNextPage ? "" : "disabled")">
-            <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)"
-               asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun"
-               asp-route-searchString="@Model.SearchString">
-                Selanjutnya
-            </a>
-        </li>
-    </ul>
-</nav>
-@* Akhir Pagination *@
+        else
+        {
+            <h1 class="text-center">Tidak Ada Ibadah</h1>
+        }
+    </div>
+    <!-- Akhir Content Ibadah Section -->
+
+
+
+    @* Pagination *@
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)"
+                   asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun"
+                   asp-route-searchString="@Model.SearchString">
+                    Sebelumnya
+                </a>
+            </li>
+            @for (var i = 1; i <= Model.Items.TotalPages; i++)
+            {
+                <li class="page-item @(Model.Items.PageIndex == i ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-pageIndex="@i"
+                       asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun"
+                       asp-route-searchString="@Model.SearchString">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.Items.HasNextPage ? "" : "disabled")">
+                <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)"
+                   asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun"
+                   asp-route-searchString="@Model.SearchString">
+                    Selanjutnya
+                </a>
+            </li>
+        </ul>
+    </nav>
+    @* Akhir Pagination *@
+
+
+
+
+
+</section>
+
+
+
+
+
 
 @section Scripts {
     <script type="text/javascript">
