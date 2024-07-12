@@ -1,11 +1,90 @@
-﻿@* Bagian Top dan Judul *@
+﻿@model IndexVM<Ibadah>
+@{
+    ViewData["Title"] = "Ibadah";
+}
+
+@* Bagian Top dan Judul *@
 <section id="ibadah-us">
     <h2>
-        IBADAH MINGGUAN
+        IBADAH MINGGUAN@(Model.Title())
     </h2>
 </section>
 @* Akhir Bagian Top dan Judul *@
 
+<form asp-action="Index" method="get">
+    <div class="row mb-2">
+        <div class="col-md-5 col-6 input-box">
+            <label asp-for="@Model.Tahun" class="form-label">Filter Tahun</label>
+            <select asp-for="@Model.Tahun" class="form-control">
+                <option value="@null">Semua</option>
+                @for (int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
+                {
+                    <option value="@tahun">@tahun</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-5 col-6 input-box">
+            <label asp-for="@Model.Bulan" class="form-label">Filter Bulan</label>
+            <select asp-for="@Model.Bulan" class="form-control">
+                <option value="@null">Semua</option>
+                @for (int bulan = 1; bulan <= 12; bulan++)
+                {
+                    <option value="@bulan">@Model.MonthName(bulan)</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2 col-12 mb-3" style="padding-top:23px;">
+            <button type="submit" class="btn" style="width:100%;">Filter</button>
+        </div>
+    </div>
+</form>
+
+@* Search *@
+<div class="row penc">
+    <form asp-action="Index" method="get" class="form-inline w-100">
+        <div class="input-group" id="search">
+            <input type="hidden" name="bulan" id="bulan" value="@Model.Bulan" />
+            <input type="hidden" name="tahun" id="tahun" value="@Model.Tahun" />
+            <input type="text" id="searchString" name="searchString" value="@Model.SearchString"
+                   class="form-control" placeholder="Cari Pengumuman..." required
+                   oninvalid="this.setCustomValidity('Masukkan kata/kalimat yang ingin dicari')"
+                   oninput="this.setCustomValidity('')" />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+        </div>
+    </form>
+</div>
+@* Akhir Search *@
+
+@* Pagination *@
+<nav>
+    <ul class="pagination justify-content-center">
+        <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
+            <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)"
+               asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun"
+               asp-route-searchString="@Model.SearchString">
+                Sebelumnya
+            </a>
+        </li>
+        @for (var i = 1; i <= Model.Items.TotalPages; i++)
+        {
+            <li class="page-item @(Model.Items.PageIndex == i ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-pageIndex="@i"
+                   asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun"
+                   asp-route-searchString="@Model.SearchString">@i</a>
+            </li>
+        }
+        <li class="page-item @(Model.Items.HasNextPage ? "" : "disabled")">
+            <a class="page-link" asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)"
+               asp-route-bulan="@Model.Bulan" asp-route-tahun="@Model.Tahun"
+               asp-route-searchString="@Model.SearchString">
+                Selanjutnya
+            </a>
+        </li>
+    </ul>
+</nav>
+@* Akhir Pagination *@
 
 @section Scripts {
     <script type="text/javascript">
@@ -20,6 +99,32 @@
                 'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
                 'background-color': 'var(--primary-clr)',
             });
-        });       
+        });
+
+        ('#@(nameof(Model.Bulan))').on('change', function () {
+            const bulan = $(this).val();
+            $('#search input#bulan').val(bulan);
+        })
+
+        $('#@(nameof(Model.Tahun))').on('change', function () {
+            const tahun = $(this).val();
+            $('#search input#tahun').val(tahun);
+        })
+
+        function openModal() {
+            document.getElementById("filterModal").style.display = "block";
+
+        }
+
+        function closeModal() {
+            document.getElementById("filterModal").style.display = "none";
+
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById("filterModal")) {
+                closeModal();
+            }
+        }
     </script>
 }
