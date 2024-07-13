@@ -252,6 +252,72 @@ section.warta {
 }
 /* Akhir CSS Search dan Pagination */
 
+/* Basic reset */
+::deep select.custom-select {
+    -webkit-appearance: none; /* Remove default styling */
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff; /* White background */
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 40px 5px 15px; /* Padding adjusted for the arrow */
+    font-size: 16px; /* Font size */
+    color: #333; /* Text color */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Make sure padding is included in width */
+    cursor: pointer; /* Pointer cursor */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transition for border and shadow */
+}
+
+    ::deep select.custom-select:focus {
+        border-color: #007bff; /* Blue border on focus */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Shadow on focus */
+        outline: none; /* Remove default outline */
+    }
+
+::deep .custom-select-wrapper {
+    position: relative; /* Relative positioning for arrow */
+}
+
+::deep .custom-arrow {
+    position: absolute; /* Position it */
+    top: 50%; /* Center vertically */
+    right: 15px; /* Distance from right */
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333; /* Arrow color */
+    pointer-events: none; /* Let clicks pass through */
+    transform: translateY(-50%); /* Center vertically */
+}
+
+/* Dropdown options */
+::deep select.custom-select option {
+    background-color: #fff; /* White background */
+    color: #333; /* Text color */
+}
+
+/* Scrollable dropdown options */
+::deep select.custom-select {
+    max-height: 200px; /* Maximum height for the dropdown */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    ::deep select.custom-select {
+        font-size: 14px; /* Smaller font on smaller screens */
+        padding: 8px 35px 8px 10px; /* Adjusted padding */
+    }
+
+    ::deep .custom-arrow {
+        right: 10px; 
+    }
+}
+
+
+
 
 /* --------------------------------- Responsive  ----------------------------------------- */
 /*  Responsive 968  */
