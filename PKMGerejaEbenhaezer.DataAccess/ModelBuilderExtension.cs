@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.Domain.Entity;
+using PKMGerejaEbenhaezer.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -278,8 +279,8 @@ namespace PKMGerejaEbenhaezer.DataAccess
                     Id = 1,
                     Judul = "Kebaktian Pagi Pertama",
                     Deskripsi = "Kebaktian hari minggu pagi pertama",
-                    NasPembimbing = "Mazmur 12:15",
-                    Renungan = "Renungan 1",
+                    NasPembimbing = new AyatAlkitab(Kitab.Mazmur, 12, new int[] { 15 }),
+                    Renungan = new AyatAlkitab(Kitab.Markus, 3, new int[] { 4, 15 }),
                     TanggalIbadah = new DateTime(2024, 06, 23, 6, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadahId = 1,
@@ -290,8 +291,8 @@ namespace PKMGerejaEbenhaezer.DataAccess
                     Id = 2,
                     Judul = "Kebaktian Pagi Kedua",
                     Deskripsi = "Kebaktian hari minggu pagi kedua",
-                    NasPembimbing = "Mazmur 12:15",
-                    Renungan = "Renungan 1",
+                    NasPembimbing = new AyatAlkitab(Kitab.Mazmur, 12, new int[] { 15 }),
+                    Renungan = new AyatAlkitab(Kitab.Markus, 3, 4, 15 ),
                     TanggalIbadah = new DateTime(2024, 06, 23, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadahId = 1,
@@ -302,7 +303,7 @@ namespace PKMGerejaEbenhaezer.DataAccess
                     Id = 3,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = "Matius 3:16",
+                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2024, 7, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadahId = 2,

@@ -1,5 +1,6 @@
 ﻿using Humanizer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
@@ -24,7 +25,14 @@ namespace PKMGerejaEbenhaezer.Domain.ValueObjects
         {
             Kitab = kitab;
             Pasal = pasal;
-            Ayat = ayat;
+            Ayat = ayat.Order().Distinct().ToArray();
+        }
+
+        public AyatAlkitab(Kitab kitab, int pasal, int ayat1, int ayat2)
+        {
+            Kitab = kitab;
+            Pasal = pasal;
+            Ayat = Enumerable.Range(ayat1, ayat2 + 1 - ayat1).ToArray();
         }
 
         public override string ToString()
@@ -34,9 +42,9 @@ namespace PKMGerejaEbenhaezer.Domain.ValueObjects
             if(Ayat.Length > 0)
             {
                 ayatString = ":";
-                if(Ayat.Length == 2)
+                if(IsAyatRange())
                 {
-                    ayatString += $"{Ayat[0]}-{Ayat[1]}";
+                    ayatString += $"{Ayat.First()}-{Ayat.Last()}";
                 }
                 else
                 {
@@ -95,8 +103,6 @@ namespace PKMGerejaEbenhaezer.Domain.ValueObjects
             var pasalString = splits[0];
             var pasal = int.Parse(pasalString);
 
-            var ayat = Array.Empty<int>();
-
             if(splits.Length == 2)
             {
                 var ayatsString = splits[1];
@@ -108,17 +114,26 @@ namespace PKMGerejaEbenhaezer.Domain.ValueObjects
                     if(ayatsStringSplit.Length != 2)
                         throw new FormatException();
 
-                    ayat = ayatsStringSplit.Select(c => int.Parse(c)).ToArray();
+                    var ayat1 = int.Parse(ayatsStringSplit[0]);
+                    var ayat2 = int.Parse(ayatsStringSplit[1]);
+
+                    return new AyatAlkitab(kitab, pasal, ayat1, ayat2);
                 }
                 else
                 {
+                    var ayat = Array.Empty<int>();
+
                     var ayatsStringSplit = ayatsString.Split(',');
 
                     ayat = ayatsStringSplit.Select(c => int.Parse(c)).ToArray();
+
+                    return new AyatAlkitab(kitab, pasal, ayat);
                 }
             }
-
-            return new AyatAlkitab(kitab, pasal, ayat);
+            else
+            {
+                return new AyatAlkitab(kitab, pasal, Array.Empty<int>());
+            }
         }
 
         public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out AyatAlkitab result)
@@ -134,6 +149,13 @@ namespace PKMGerejaEbenhaezer.Domain.ValueObjects
                 result = null;
                 return false;
             }
+        }
+
+        public bool IsAyatRange()
+        {
+            if (Ayat.Length < 2) return false;
+
+            return Ayat.Last() + 1 - Ayat.First() == Ayat.Length;
         }
     }
 

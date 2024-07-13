@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240713055838_UbahTipeNasPembimbingDanRenunganMenjadiAyatAlkitab")]
+    partial class UbahTipeNasPembimbingDanRenunganMenjadiAyatAlkitab
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 1,
                             LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAEIhoMqNTzf43/qX1OaAA3mwrqMCLN4/w9awv7MmJzCMVxh+4RTsQYY6MAYcuiI+SCw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEWfv5RFvpPV4QbwMTYxvOL5aeD75tRcq0MpU1N5J/VRBdeX7Lra76RKtV2jwxIhqA==",
                             Role = "Admin",
                             UserName = "admin"
                         },
@@ -65,7 +68,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 2,
                             LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAEBUbTOjkFaIciuZyc6VE2zdyaOLmQO8t3Po14eOYORPqh27TSv9sZfvYOdRiOgeJuQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJTA2H2BOok2TXqcB2eH3l/4Ux0etZIlwz/eS4x5wEv+qT14znQjR3LS+Y5Pf57Q7A==",
                             Role = "SuperAdmin",
                             UserName = "super"
                         });
@@ -206,7 +209,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             KategoriIbadahId = 1,
                             NasPembimbing = "Mazmur 12:15",
                             PendetaId = 1,
-                            Renungan = "Markus 3:4,15",
+                            Renungan = "Markus 3:4-15",
                             TanggalIbadah = new DateTime(2024, 6, 23, 6, 0, 0, 0, DateTimeKind.Unspecified),
                             Tempat = "Gedung Gereja Ebenhaezer Oeba"
                         },

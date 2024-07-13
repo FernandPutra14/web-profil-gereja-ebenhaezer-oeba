@@ -1,4 +1,5 @@
 ﻿using PKMGerejaEbenhaezer.Domain.Entity.Commons;
+using PKMGerejaEbenhaezer.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace PKMGerejaEbenhaezer.Domain.Entity
     {
         public string Judul { get; set; } = string.Empty;
         public string Deskripsi { get; set; } = string.Empty;
-        public string NasPembimbing { get; set; } = string.Empty;
-        public string? Renungan {  get; set; }
+        public AyatAlkitab NasPembimbing { get; set; }
+        public AyatAlkitab? Renungan {  get; set; }
         public string Tempat { get; set; } = string.Empty;
         public DateTime TanggalIbadah { get; set; }
 

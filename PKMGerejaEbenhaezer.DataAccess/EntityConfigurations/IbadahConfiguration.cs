@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PKMGerejaEbenhaezer.Domain.Entity;
+using PKMGerejaEbenhaezer.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,10 @@ namespace PKMGerejaEbenhaezer.DataAccess.EntityConfigurations
                 .WithMany(p => p.DaftarIbadah).OnDelete(DeleteBehavior.SetNull);
             builder.Property(i => i.TanggalIbadah)
                 .HasColumnType("timestamp without time zone");
+            builder.Property(i => i.NasPembimbing)
+                .HasConversion(i => i.ToString(), s => AyatAlkitab.Parse(s, null));
+            builder.Property(i => i.Renungan)
+                .HasConversion(i => i.ToString(), s => AyatAlkitab.Parse(s, null));
         }
     }
 }

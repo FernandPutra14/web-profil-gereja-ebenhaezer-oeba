@@ -225,7 +225,7 @@
                 <!-- Awal Card -->
                 <div class="ibadah-card">
                     <div class="nats">
-                        @if (!string.IsNullOrEmpty(ibadah.Renungan))
+                        @if (ibadah.Renungan is not null)
                         {
                             <h2>"@ibadah.Renungan"</h2>
                         }

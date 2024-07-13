@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PKMGerejaEbenhaezer.Domain.ValueObjects;
+using System.ComponentModel.DataAnnotations;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
 {
@@ -14,10 +15,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
 
         [Display(Name = "Nas Pembimbing")]
         [Required(ErrorMessage = "{0} harus diisi")]
-        public string NasPembimbing { get; set; } = string.Empty;
+        public AyatAlkitab NasPembimbing { get; set; }
 
         [Display(Name = "Renungan")]
-        public string? Renungan { get; set; }
+        public AyatAlkitab? Renungan { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Tanggal Ibadah")]

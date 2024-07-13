@@ -82,7 +82,7 @@ namespace PKMGerejaEbenhaezer.Test
         public AyatAlkitabTestData()
         {
             Add(new AyatAlkitab(Kitab.Kejadian, 2, new int[] { 2 }), "Kejadian 2:2");
-            Add(new AyatAlkitab(Kitab.Kejadian, 2, new int[] { 2, 5 }), "Kejadian 2:2-5");
+            Add(new AyatAlkitab(Kitab.Kejadian, 2, 2, 5), "Kejadian 2:2-5");
             Add(new AyatAlkitab(Kitab.Kejadian, 2, new int[] { 2, 5, 7 }), "Kejadian 2:2,5,7");
             Add(new AyatAlkitab(Kitab.Samuel1, 12, new int[] { 1 }), "1 Samuel 12:1");
             Add(new AyatAlkitab(Kitab.Samuel2, 12, Array.Empty<int>()), "2 Samuel 12");
