@@ -7,6 +7,51 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
+<style>
+    img {
+        max-width: 100%;
+        height: auto;
+        vertical-align: middle;
+        display: inline-block;
+    }
+
+    .grid-wrapper {
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-auto-rows: 200px;
+        grid-auto-flow: dense;
+    }
+
+        .grid-wrapper > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+            .grid-wrapper > div > img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                border-radius: 5px;
+            }
+
+        .grid-wrapper .wide {
+            grid-column: span 2;
+        }
+
+        .grid-wrapper .tall {
+            grid-row: span 2;
+        }
+
+        .grid-wrapper .big {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+</style>
+
 
 <div class="fotoo">
     <h1 class="title">Galeri</h1>
@@ -15,7 +60,74 @@
         <li class="divider">/</li>
         <li><a href="#" class="active">Galeri</a></li>
     </ul>
-    <div class="container-fluid mt-5">
+
+    <form asp-action="IndexPOST" class="row mb-5" method="post" enctype="multipart/form-data" asp-route-pIndex="@Model.Items!.PageIndex">
+        <div class="col-md-12 mb-3">
+            <input class="form-control" type="file" asp-for="@Model.FormFile" />
+            <span asp-validation-for="@Model.FormFile" class="text-danger"></span>
+        </div>
+        <div class="col-md-12">
+            <button class="btn w-100" type="submit">Upload</button>
+        </div>
+    </form>
+
+    <div class="grid-wrapper">
+        @foreach (var foto in Model.Items!)
+        {
+            <div>
+                <a data-fancybox="gallery" href="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })"
+                   data-caption="
+                   ID: @foto.Id <br>
+                           Tanggal Dibuat: @($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}") <br>
+                           Pembuat: @foto.Pembuat?.UserName <br>
+                           ">
+                        <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
+                    </a>              
+                <input type="hidden" id="idFoto" value="@foto.Id" />
+                <input type="hidden" id="tanggalDibuat" value="@($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}")" />
+                <input type="hidden" id="namaPembuat" value="@foto.Pembuat?.UserName" />
+                <input type="hidden" id="fileKompresiUrl" value="@Url.Action("FotoKompresi", "Foto", new { Area = "", id = foto.Id })" />
+            </div>
+        }
+    </div>
+
+
+    <!-- Konfirmasi Hapus Modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Hapus Foto</h5>
+                </div>
+                <div class="modal-body">Apakah anda yakin ingin menghapus foto ini?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-bs-dismiss="modal">Batal</button>
+                    <form id="deleteForm" method="post">
+                        <button type="submit" class="btn">Hapus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row mt-5">
+        @{
+            var hasPrevious = Model.Items.HasPreviousPage;
+            var hasNext = Model.Items.HasNextPage;
+        }
+
+        <div class="col-6">
+            <a asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)" asp-area="Dashboard" class="btn w-100 @(hasPrevious ? "" : " disabled")">Sebelumnya</a>
+        </div>
+        <div class="col-6">
+            <a asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)" asp-area="Dashboard" class="btn w-100 @(hasNext ? "" : " disabled")">Selanjutnya</a>
+        </div>
+    </div>
+
+
+    @* <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-lg-8 mb-4">
                 <form asp-action="IndexPOST" class="row" method="post" enctype="multipart/form-data" asp-route-pIndex="@Model.Items!.PageIndex">
@@ -99,7 +211,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> *@
 </div>
 
 
