@@ -17,6 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PKMGerejaEbenhaezer.DataAccess\PKMGerejaEbenhaezer.DataAccess.csproj" />
+    <ProjectReference Include="..\PKMGerejaEbenhaezer.Domain\PKMGerejaEbenhaezer.Domain.csproj" />
+    <ProjectReference Include="..\PKMGerejaEbenhaezer.Web\PKMGerejaEbenhaezer.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 
