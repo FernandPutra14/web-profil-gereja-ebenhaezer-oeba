@@ -72,6 +72,8 @@ namespace PKMGerejaEbenhaezer.Domain.ValueObjects
 
         public static bool operator==(AyatAlkitab a, AyatAlkitab b)
         {
+            if(a is null || b is null) return false;
+
             return a.Equals(b); 
         }
 

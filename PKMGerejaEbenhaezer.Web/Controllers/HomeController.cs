@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Models;
 using PKMGerejaEbenhaezer.Web.Models.Home;
+using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using System.Diagnostics;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
@@ -12,11 +15,18 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _appDbContext;
+        private readonly IBeebeleApiService _beebeleApiService;
+        private readonly IToastrNotificationService _toastrNotificationService;
 
-        public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext)
+        public HomeController(ILogger<HomeController> logger,
+            AppDbContext appDbContext,
+            IBeebeleApiService beebeleApiService,
+            IToastrNotificationService toastrNotificationService)
         {
             _logger = logger;
             _appDbContext = appDbContext;
+            _beebeleApiService = beebeleApiService;
+            _toastrNotificationService = toastrNotificationService;
         }
 
         [ResponseCache(Duration = 15, Location = ResponseCacheLocation.Any)]
@@ -49,6 +59,36 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
 
             daftarRayon ??= new List<Rayon>();
+
+            var list = await _beebeleApiService.List();
+            _toastrNotificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Info,
+                Title = "Passage List",
+                Message = list?.ToJson() ?? "null",
+                Options = new ToastrOptions
+                {
+                    positionClass = PositionClasses.TopFullWidth,
+                }
+            });
+
+            if (daftarIbadah.Count > 0)
+            {
+                foreach (var item in daftarIbadah)
+                {
+                    var response = await _beebeleApiService.PassageContent(item.NasPembimbing);
+                    _toastrNotificationService.AddNotification(new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Info,
+                        Title = item.NasPembimbing.ToString(),
+                        Message = response?.ToJson() ?? "null",
+                        Options = new ToastrOptions
+                        {
+                            positionClass = PositionClasses.TopFullWidth,
+                        }
+                    });
+                }
+            }
 
             return View(new IndexVM
             {
