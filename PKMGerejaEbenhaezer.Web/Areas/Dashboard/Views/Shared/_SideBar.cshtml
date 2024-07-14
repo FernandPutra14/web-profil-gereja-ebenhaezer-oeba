@@ -5,10 +5,10 @@
         <li><a href="" class="active"><i class="ri-dashboard-fill icon"></i>Dashboard</a></li>
 
         <!-- Sesi 1 -->
-        <li class="divider" data-text="utama">Utama</li>
+        <li class="divider" data-text="dashboard">Dashboard</li>
         <li><a asp-area="Dashboard" asp-controller="Home" asp-action="Index"><i class="ri-table-fill icon"></i>Beranda</a></li>
         <li>
-            <a href=""><i class="ri-booklet-fill icon"></i>Contoh<i class="ri-arrow-right-s-line icon-right"></i></a>
+            <a href=""><i class="ri-booklet-fill icon"></i>Statistik<i class="ri-arrow-right-s-line icon-right"></i></a>
             <ul class="side-dropdown">
                 <li><a href="">Pertama</a></li>
                 <li><a href="">Kedua</a></li>
@@ -20,20 +20,10 @@
 
 
         <!-- Sesi 2 -->
-        <li class="divider" data-text="informasi" >Informasi</li>
+        <li class="divider" data-text="informasi & media" >Informasi & Media</li>
         <!-- Pengumuman -->       
         <li><a asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Index"><i class="ri-megaphone-fill icon"></i>Pengumuman</a></li>
         <!-- Akhir Pengumuman -->
-
-
-        <!-- Rayon -->
-        <li><a asp-area="Dashboard" asp-controller="Rayon" asp-action="Index"><i class="ri-map-2-fill icon"></i>Rayon</a></li>
-        <!-- Akhir Rayon -->
-
-
-        <!-- Foto -->
-        <li><a asp-area="Dashboard" asp-controller="Foto" asp-action="Index"><i class="ri-camera-lens-fill icon"></i>Galeri</a></li>
-        <!-- Akhir Foto -->
 
 
         <!-- Warta Jemaat -->
@@ -41,20 +31,35 @@
         <!-- Akhir Warta Jemaat -->
 
 
+        <!-- Foto -->
+        <li><a asp-area="Dashboard" asp-controller="Foto" asp-action="Index"><i class="ri-camera-lens-fill icon"></i>Galeri</a></li>
+        <!-- Akhir Foto -->
+
+
+        <li class="divider" data-text="ibadah & kegiatan">Ibadah & Kegiatan</li>
+
         <!-- Kategori Ibadah -->
         <li><a asp-area="Dashboard" asp-controller="KategoriIbadah" asp-action="Index"><i class="ri-layout-line icon"></i>Kategori Ibadah</a></li>
         <!-- Akhir Kategori Ibadah -->
-
 
         <!-- Ibadah -->
         <li><a asp-area="Dashboard" asp-controller="Ibadah" asp-action="Index"><i class="ri-service-fill icon"></i>Ibadah</a></li>
         <!-- Akhir Ibadah -->
 
+        <li class="divider" data-text="manajemen jemaat">Manajemen Jemaat</li>
+
+
+        <!-- Rayon -->
+        <li><a asp-area="Dashboard" asp-controller="Rayon" asp-action="Index"><i class="ri-map-2-fill icon"></i>Rayon</a></li>
+        <!-- Akhir Rayon -->
+
 
         <!-- Pendeta -->
         <li><a asp-area="Dashboard" asp-controller="Pendeta" asp-action="Index"><i class="ri-user-2-fill icon"></i>Pendeta</a></li>
         <!-- Akhir Pendeta -->
+        
 
+        <li class="divider" data-text="manajemen pengguna">Manajemen Pengguna</li>
         
 
         <!-- Akun -->
