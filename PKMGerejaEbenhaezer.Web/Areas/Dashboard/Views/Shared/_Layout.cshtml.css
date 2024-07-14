@@ -28,8 +28,13 @@ nav {
 }
 
     nav .toggle-sidebar {
+        display: block;
         font-size: 18px;
         cursor: pointer;
+    }
+
+    nav .toggle-sidebar-hp {
+        display: none;
     }
 
     nav ::deep form {
@@ -165,7 +170,7 @@ nav {
     }
 /* NAVBAR */
 
-@media screen (max-width: 768px) {
+@media screen and (max-width: 768px) {
     #content {
         position: relative;
         width: calc(100% - 60px);
@@ -176,4 +181,37 @@ nav {
     nav .divider {
         display: none;
     }
+}
+
+@media screen and (max-width: 568px) {
+    #content {
+        width: 100%;
+        left: 0;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    nav .toggle-sidebar {
+        display: none;
+    }
+
+        nav .toggle-sidebar-hp {
+            display: block;
+            font-size: 18px;
+        }
+
+    #sidebar {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 200;
+    }
+
+        #sidebar.show {
+            display: block;
+        }
 }

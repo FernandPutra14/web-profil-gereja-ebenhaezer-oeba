@@ -142,3 +142,14 @@
     }
 
 /* Akhir Sidebar */
+
+@media screen and (max-width: 568px) {
+    #sidebar {
+        display: block;
+        left: -300px;
+    }
+
+    #sidebar.show {
+        left: 0px;
+    }
+}
