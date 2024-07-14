@@ -16,26 +16,39 @@
 <section class="warta">
     <form asp-action="Index" method="get">
         <div class="row mb-5">
-            <div class="col-md-5 col-6 input-box">
+
+
+
+            <div class="col-md-5 col-6 input-box select-container">
                 <label asp-for="@Model.Tahun" class="form-label">Filter Tahun</label>
-                <select asp-for="@Model.Tahun" class="form-control">
-                    <option value="@null">Semua</option>
-                    @for (int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
-                    {
-                        <option value="@tahun">@tahun</option>
-                    }
-                </select>
+                <div class="custom-select-wrapper">
+                    <select asp-for="@Model.Tahun" class="custom-select">
+                        <option value="@null">Semua</option>
+                        @for (int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
+                        {
+                            <option value="@tahun">@tahun</option>
+                        }
+                    </select>
+                    <div class="custom-arrow"></div>
+                </div>
             </div>
-            <div class="col-md-5 col-6 input-box">
+
+            <div class="col-md-5 col-6 input-box select-container">
                 <label asp-for="@Model.Bulan" class="form-label">Filter Bulan</label>
-                <select asp-for="@Model.Bulan" class="form-control">
-                    <option value="@null">Semua</option>
-                    @for (int bulan = 1; bulan <= 12; bulan++)
-                    {
-                        <option value="@bulan">@Model.MonthName(bulan)</option>
-                    }
-                </select>
+                <div class="custom-select-wrapper">
+                    <select asp-for="@Model.Bulan" class="custom-select">
+                        <option value="@null">Semua</option>
+                        @for (int bulan = 1; bulan <= 12; bulan++)
+                        {
+                            <option value="@bulan">@Model.MonthName(bulan)</option>
+                        }
+                    </select>
+                    <div class="custom-arrow"></div>
+                </div>
             </div>
+
+
+
             <div class="col-md-2 col-12 mb-3" style="padding-top:23px;">
                 <button type="submit" class="btn" style="width:100%;">Filter</button>
             </div>
