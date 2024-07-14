@@ -16,9 +16,16 @@ namespace PKMGerejaEbenhaezer.Web.Services.BeebleApi
             _logger = logger;
         }
 
-        public async Task<BeebleApiListResponse?> List()
+        public async Task<Book[]?> List()
         {
-            return await _httpClient.GetFromJsonAsync<BeebleApiListResponse?>("list");
+            var response = await _httpClient.GetFromJsonAsync<Dictionary<string, object?>>("list");
+
+            if(response is null) return null;
+
+            if(response.TryGetValue("data", out object? data))
+                return data as Book[];
+
+            return null;
         }
 
         public async Task<BeebleApiPassageResponse?> PassageContent(AyatAlkitab ayatAlkitab)

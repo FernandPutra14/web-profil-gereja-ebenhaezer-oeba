@@ -4,7 +4,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.BeebleApi
 {
     public interface IBeebeleApiService
     {
-        Task<BeebleApiListResponse?> List();
+        Task<Book[]?> List();
         Task<BeebleApiPassageResponse?> PassageContent(AyatAlkitab ayatAlkitab);
     }
 }
