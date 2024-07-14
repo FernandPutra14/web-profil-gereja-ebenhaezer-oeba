@@ -1,11 +1,11 @@
 ﻿/* CSS Hero Section */
 #hero {
     background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
-    /* Parallax */
+    /* Effect Parallax */
     background-attachment: fixed;
     position: relative;
     overflow: hidden;
-    /* Akhir Parallax */
+    /* Akhir Effect Parallax */
     margin: 0px auto;
     width: 100%;
     height: 100vh;
@@ -81,41 +81,7 @@
                 text-align: justify;
                 font-size: 16px;
             }
-
 /* Akhir CSS Sejarah Section */
-
-
-
-#textscroll {
-    overflow: hidden;
-}
-
-.scrolltext {
-    display: flex;
-    padding: 15px 0px;
-    justify-content: flex-start;
-    background-color: var(--primary-clr);
-    overflow: hidden;
-}
-
-    .scrolltext h1 {
-        font-size: 32px;
-        text-transform: uppercase;
-        color: white;
-        padding: 0 1rem; /* Mengurangi padding untuk memastikan teks tidak terlalu jauh */
-        white-space: nowrap; /* Memastikan teks tidak pindah ke baris baru */
-        animation: move-rt1 6s linear infinite; /* Mengubah durasi animasi menjadi lebih lama */
-    }
-
-@keyframes move-rt1 {
-    0% {
-        transform: translateX(0%); /* Mulai dari posisi tersembunyi di kanan */
-    }
-
-    100% {
-        transform: translateX(-100%); /* Berakhir di luar layar sebelah kiri */
-    }
-}
 
 
 /* CSS Pendeta Section */
@@ -434,11 +400,7 @@ section.warta {
 /* Akhir CSS Warta Section */
 
 
-
-
-
 /* CSS Ibadah Section */
-
 section.ibadah {
     width: 100%;
     padding-bottom: 30px;
@@ -680,8 +642,6 @@ section.ibadah {
 /* CSS Akhir Ibadah Section */
 
 
-
-
 /* CSS Pengumuman Section */
 section.peng {
     width: 100%;
@@ -880,7 +840,8 @@ section.peng {
 /* Akhir CSS Slider Pendeta */
 
 
-/* CSS Slider */
+
+/* CSS Slider Umum */
 .owl-carousel ::deep .owl-nav .owl-next {
     width: 50px;
     height: 50px;
@@ -923,11 +884,12 @@ section.peng {
 #pendeta .owl-carousel .owl-dots.active span {
     background-color: var(--primary-clr) !important;
 }
-/* Akhir CSS Slider */
+/* Akhir CSS Slider Umum*/
 
+
+/* --------------------------------------------------- Responsive --------------------------------------------------- */
 /* Responsive 1200 */
 @media (max-width:1200px) {
-
 
     /* CSS Injil Section */
     #injil {
@@ -1040,7 +1002,6 @@ section.peng {
 @media (max-width:968px) {
 
     /* CSS Hero Section */
-
     #hero {
         height: 100vh;
         background-attachment: scroll;
@@ -1093,7 +1054,6 @@ section.peng {
     /* Akhir CSS warta Section */
 
 
-
     /* CSS Ibadah Section */
     section.ibadah {
         padding-bottom: 30px;
@@ -1116,7 +1076,6 @@ section.peng {
             margin-top: 20px;
         }
     /* Akhir CSS Ibadah Section */
-
 
 
     /* CSS Pengumuman Section */
@@ -1162,7 +1121,6 @@ section.peng {
     }
     
 
-
     #sejarah .row-container {
         flex-direction: column;
         align-items: center;
@@ -1198,9 +1156,6 @@ section.peng {
     /* Akhir CSS Chart Jemaat Section */
 
 
-
-
-
     /* CSS warta Section */
     section.warta {
         width: 100%;
@@ -1210,6 +1165,7 @@ section.peng {
         padding-top: 0px;
     }
     /* Akhir CSS warta Section */
+
 
     /* CSS Ibadah Section */
     section.ibadah {
@@ -1250,6 +1206,7 @@ section.peng {
     }
     /* Akhir CSS Pendeta Section */
 
+
     /* CSS Chart Jemaat Section */
     #about-container .about-char {
         height: 300px;
@@ -1263,17 +1220,20 @@ section.peng {
     }
     /* Akhir CSS Chart Jemaat Section */
 
+
     /* CSS warta Section */
     .warta .warta-contents .warta-card {
         flex-basis: 100%;
     }
     /* Akhir CSS warta Section */
 
+
     /* CSS Ibadah Section */
     .ibadah .ibadah-contents .ibadah-card {
         flex-basis: 100%;
     }
     /* Akhir CSS Ibadah Section */
+
 
     /* CSS Pengumuman Section */
     .peng .peng-contents .peng-card {
@@ -1339,6 +1299,7 @@ section.peng {
     }
     /* Akhir CSS warta Section */
 
+
     /* CSS Ibadah Section */
     section.ibadah {
         width: 100%;
@@ -1364,7 +1325,6 @@ section.peng {
 /* Responsive 468 */
 @media (max-width:468px) {
 
-
     /* CSS Sejarah Section */
     #sejarah {
         margin-top: 10vw;
@@ -1383,6 +1343,7 @@ section.peng {
     #about-container ::deep .about-char {
         padding-left: 20px;
     }
+
 
     /* CSS Injil Section */
     #injil {

@@ -1,4 +1,4 @@
-﻿/* CSS Bagian Top dan Judul */
+﻿/* CSS Pengumuman Bagian Top */
 #peng-us {
     background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
     background-attachment: fixed;
@@ -22,135 +22,15 @@
         font-size: 40px;
         font-weight: bold;
     }
-/* Akhir CSS Bagian Top dan Judul */
+/* Akhir CSS Pengumuman Bagian Top */
 
+
+/* CSS Content Pengumuman Section */
 section.peng {
     width: 100%;
     padding: 3% 100px 30px;
 }
 
-/* Tombol Filter */
-.filterbut {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 10px;
-}
-
-    .filterbut ::deep a {
-        text-decoration: none;
-        box-shadow: 0 0 10px rgba(0,0,0,0.05);
-        background: #fff;
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 10px;
-        color: black;
-        font-size: 18px;
-        padding: 10px 20px;
-        transition: all 0.3s ease;
-    }
-
-        .filterbut ::deep a:hover {
-            color: #fff;
-            background-color: var(--primary-clr);
-        }
-
-        .filterbut ::deep a.active {
-            background-color: var(--primary-clr);
-            color: white;
-        }
-
-
-.tengbutfil {
-    display: flex;
-    justify-content: center;
-}
-
-.filter-button {
-    display: none;
-    background-color: var(--primary-clr);
-    color: #fff;
-    width: 120px;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4); /* Warna latar belakang transparan */
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%;
-    max-width: 600px; /* Maksimal lebar konten modal */
-    border-radius: 10px;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-::deep .filterbut-modal {
-    display: flex;
-    flex-direction: column;
-}
-
-.filterbut-modal ::deep a {
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    background: var(--primary-clr);
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 10px;
-    color: #fff;
-    font-size: 14px;
-    padding: 10px 20px;
-    margin: 5px;
-    transition: all 0.3s ease;
-}
-
-.cos {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 10px;
-}
-
-.close {
-    align-content: end;
-    align-items: end;
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-
-/* Akhir Tombol Filter */
-
-
-/* Content Pengumuman */
 .peng .peng-contents {
     display: flex;
     flex-wrap: wrap;
@@ -252,7 +132,6 @@ section.peng {
             font-size: 24px;
         }
 
-/* Tombol Baca Selengkapnya */
 ::deep .tombolseleng {
     text-decoration: none;
     border: 1px solid transparent;
@@ -270,10 +149,10 @@ section.peng {
         color: var(--primary-clr);
         border: 1px solid var(--primary-clr);
     }
-/* Akhir Tombol Baca Selengkapnya */
+/* Akhir CSS Content Pengumuman Section */
 
 
-/* CSS type input Text dan Textarea */
+/* CSS Type Input Text dan Select dan Textarea */
 ::deep .input-box label {
     color: #333;
     font-size: 14px;
@@ -313,7 +192,57 @@ section.peng {
     border-radius: 6px;
     padding: 0 15px;
 }
-/* Akhir CSS type input Text dan Textarea */
+
+::deep select.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 40px 5px 15px;
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+    ::deep select.custom-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+
+::deep .custom-select-wrapper {
+    position: relative;
+}
+
+::deep .custom-arrow {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+::deep select.custom-select option {
+    background-color: #fff;
+    color: #333;
+}
+
+
+::deep select.custom-select {
+    max-height: 200px;
+    overflow-y: auto;
+}
+/* Akhir CSS Type Input Text dan Select dan Textarea */
 
 
 /* CSS Search dan Pagination */
@@ -375,58 +304,40 @@ section.peng {
 /* Akhir CSS Search dan Pagination */
 
 
-::deep select.custom-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px 40px 5px 15px;
-    font-size: 16px;
-    color: #333;
-    width: 100%;
-    box-sizing: border-box;
-    cursor: pointer;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
+/* --------------------------------- Responsive  ----------------------------------------- */
+/*  Responsive 1160 */
+@media (max-width:1160px) {
 
-    ::deep select.custom-select:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        outline: none;
+    /* CSS Pengumuman Bagian Top */
+    #peng-us {
+        background-attachment: scroll;
+    }
+    /* Akhir CSS Pengumuman Bagian Top */
+
+
+    /* CSS Content Pengumuman Section */
+    section.peng {
+        padding: 8% 10px 30px;
     }
 
-::deep .custom-select-wrapper {
-    position: relative;
-}
-
-::deep .custom-arrow {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #333;
-    pointer-events: none;
-    transform: translateY(-50%);
-}
-
-::deep select.custom-select option {
-    background-color: #fff;
-    color: #333;
+    .peng .peng-contents .peng-card {
+        flex-basis: calc(calc(100% / 2) - 1.5%);
+    }
+    /* Akhir CSS Content Pengumuman Section */
 }
 
 
-::deep select.custom-select {
-    max-height: 200px;
-    overflow-y: auto;
-}
+/* Responsive 768 */
+@media (max-width:768px) {
 
-/* Responsive */
-@media (max-width: 768px) {
+    /* CSS Content Pengumuman Section */
+    section.peng {
+        width: 100%;
+    }
+    /* Akhir CSS Content Pengumuman Section */
+
+
+    /* CSS Type Input Text dan Select dan Textarea */
     ::deep select.custom-select {
         font-size: 14px;
         padding: 8px 35px 8px 10px;
@@ -435,83 +346,47 @@ section.peng {
     ::deep .custom-arrow {
         right: 10px;
     }
-}
+    /* Akhir CSS Type Input Text dan Select dan Textarea */
 
 
-/* --------------------------------- Responsive  ----------------------------------------- */
-/*  Responsive 968  */
-@media (max-width:1160px) {
-
-    section.peng {
-        padding: 8% 10px 30px;
-
-    }
-
-    #peng-us {
-        background-attachment: scroll;
-    }
-
-    .peng .peng-contents .peng-card {
-        flex-basis: calc(calc(100% / 2) - 1.5%);
-    }
-
-    .peng .section-header {
-        flex-direction: column;
-    }
-
-        .peng .section-header ::deep .peng-btn.btn {
-            position: relative;
-            align-self: flex-start;
-            margin-top: 20px;
-        }
-}
-
-
-/* Responsive 768 */
-@media (max-width:768px) {
-
+    /* CSS Search dan Pagination */
     ::deep .penc .input-group {
         width: 100%;
     }
-
-    section.peng {
-        width: 100%;
-    }
+    /* Akhir CSS Search dan Pagination */
 }
 
 
 /* Responsive 690 */
 @media (max-width:690px) {
 
+    /* CSS Content Pengumuman Section */
     .peng .peng-contents .peng-card {
         flex-basis: 100%;
     }
-
-    .filterbut {
-        display: none;
-    }
-
-    .filter-button {
-        display: block;
-    }
+    /* Akhir CSS Content Pengumuman Section */
 }
 
 
 /* Responsive 568 */
 @media (max-width:568px) {
 
+    /* CSS Pengumuman Bagian Top */
     #peng-us h2 {
         font-size: 30px;
         padding-top: 70px;
     }
+    /* Akhir CSS Pengumuman Bagian Top */
 }
 
 
 /* Responsive 468 */
 @media (max-width:468px) {
 
+    /* CSS Pengumuman Bagian Top */
     #peng-us h2 {
         font-size: 25px;
         padding-top: 70px;
     }
+    /* Akhir CSS Pengumuman Bagian Top */
 }

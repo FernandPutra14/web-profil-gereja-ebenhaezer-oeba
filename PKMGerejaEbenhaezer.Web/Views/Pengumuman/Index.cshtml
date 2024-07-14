@@ -5,52 +5,21 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
-@* Bagian Top dan Judul *@
+<!-- Pengumuman Bagian Top -->
 <section id="peng-us">
     <h2>
         PENGUMUMAN@(Model.Title())
     </h2>
 </section>
-@* Akhir Bagian Top dan Judul *@
+<!-- Akhir Pengumuman Bagian Top -->
 
 <section class="peng">
 
-    @* Tombol Filter *@
-    @* <div class="filterbut">
-        <a asp-action="Index" data-name="semua" class="@(Model.FilterCssClass())">Semua</a>
-        @for (int i = 1; i <= 12; i++)
-        {
-            <a asp-action="Index" asp-route-bulan="@i"
-               class="@(Model.FilterCssClass(i))"
-               data-name="bulan">@(Model.MonthName(i))</a>
-        }
-    </div>
-    <div class="tengbutfil">
-        <button class="filter-button" onclick="openModal()">Filter</button>
-    </div> *@
-    @* Modal *@
-    @* <div id="filterModal" class="modal">
-        <div class="modal-content">
-            <div class="cos">
-                <h1 style="width:90%; margin-top:10px; vertical-align:middle;" class="">Pilihan Filter</h1>
-                <span class="close" onclick="closeModal()"><i class="ri-close-fill"></i></span>
-            </div>
-
-            <div class="filterbut-modal">
-                <a asp-action="Index" data-name="semua" class="@(Model.FilterCssClass())">Semua</a>
-                @for (int i = 1; i <= 12; i++)
-                {
-                    <a asp-action="Index" asp-route-bulan="@i"
-                       class="@(Model.FilterCssClass(i))"
-                       data-name="bulan">@(Model.MonthName(i))</a>
-                }
-            </div>
-        </div>
-    </div> *@
-    @* AKhir Tombol Filter *@
-
+    <!-- Filter Tahun dan Bulan -->
     <form asp-action="Index" method="get">
         <div class="row mb-2">
+
+            <!-- Filter Tahun -->
             <div class="col-md-5 col-6 input-box select-container">
                 <label asp-for="@Model.Tahun" class="form-label">Filter Tahun</label>
                 <div class="custom-select-wrapper">
@@ -62,8 +31,12 @@
                     }
                 </select>
                 <div class="custom-arrow"></div>
+                </div>
             </div>
-            </div>
+            <!-- Akhir Filter Tahun -->
+
+
+            <!-- Filter Bulan -->
             <div class="col-md-5 col-6 input-box select-container">
                 <label asp-for="@Model.Bulan" class="form-label">Filter Bulan</label>
                 <div class="custom-select-wrapper">
@@ -74,16 +47,22 @@
                         <option value="@bulan">@Model.MonthName(bulan)</option>
                     }
                 </select>
-            <div class="custom-arrow"></div>
-        </div>
+                <div class="custom-arrow"></div>
+                </div>
             </div>
+            <!-- Akhir Filter Bulan -->
+
+
             <div class="col-md-2 col-12 mb-3" style="padding-top:23px;">
                 <button type="submit" class="btn" style="width:100%;">Filter</button>
             </div>
+
         </div>
     </form>
+    <!-- Akhir Filter Tahun dan Bulan -->
 
-    @* Search *@
+
+    <!-- Menu Pencarian -->
     <div class="row penc">
         <form asp-action="Index" method="get" class="form-inline w-100">
             <div class="input-group" id="search">
@@ -99,15 +78,16 @@
             </div>
         </form>
     </div>
-    @* Akhir Search *@
+    <!-- Akhir Menu Pencarian -->
 
-    @* Content Pengumuman *@
+
+    <!-- Content Pengumuman Section -->
     <div class="peng-contents">
         @if (Model.Items.Count > 0)
         {
             @foreach (var item in Model.Items)
             {
-                <!-- Ini Cardnya Bang -->
+                <!-- Awal Card -->
                 <div class="item peng-card">
                     @if (item.Foto != null)
                     {
@@ -117,11 +97,6 @@
                     {
                         <img src="~/img/gereja1.jpg" />
                     }
-                    @* <div class="category">
-                        <div class="subject">
-                            <h3>Pengumuman</h3>
-                        </div>
-                    </div> *@
                     <h2 class="peng-title">@item.Judul</h2>
                     <p>@item.Isi</p>
                     <div class="peng-tanggal">
@@ -130,7 +105,7 @@
                            class="tombolseleng">Baca Selengkapnya...</a>
                     </div>
                 </div>
-                <!-- Ini Akhir Cardnya Bang -->
+                <!-- Akhir Card -->
             }
         }
         else
@@ -139,9 +114,10 @@
         }
 
     </div>
-    @* Akhir Content Pengumuman *@
+    <!-- Content Pengumuman Section -->
 
-    @* Pagination *@
+
+    <!-- Pagination -->
     <nav>
         <ul class="pagination justify-content-center">
             <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
@@ -168,9 +144,12 @@
             </li>
         </ul>
     </nav>
-    @* Akhir Pagination *@
+    <!-- Akhir Pagination -->
+
 </section>
 
+
+<!-- Script JS -->
 @section Scripts {
     <script type="text/javascript">
         $(function () {

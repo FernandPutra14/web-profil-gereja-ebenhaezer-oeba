@@ -6,21 +6,22 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
-
-@* Bagian Top dan Judul *@
+<!-- Ibadah Bagian Top -->
 <section id="ibadahus">
     <h2>
         IBADAH MINGGUAN@(Model.Title())
     </h2>
 </section>
-@* Akhir Bagian Top dan Judul *@
+<!-- Akhir Ibadah Bagian Top -->
 
 
 <section class="ibadah">
-    
-    
+
+    <!-- Filter Tahun dan Bulan -->
     <form asp-action="Index" method="get">
         <div class="row mb-2">
+
+            <!-- Filter Tahun -->
             <div class="col-md-5 col-6 input-box select-container">
                 <label asp-for="@Model.Tahun" class="form-label">Filter Tahun</label>
                 <div class="custom-select-wrapper">
@@ -34,6 +35,10 @@
                 <div class="custom-arrow"></div>
                 </div>
             </div>
+            <!-- Akhir Filter Tahun -->
+
+
+            <!-- Filter Bulan -->
             <div class="col-md-5 col-6 input-box select-container">
                 <label asp-for="@Model.Bulan" class="form-label">Filter Bulan</label>
                 <div class="custom-select-wrapper">
@@ -47,13 +52,19 @@
                 <div class="custom-arrow"></div>
                 </div>
             </div>
+            <!-- Akhir Filter Bulan -->
+
+
             <div class="col-md-2 col-12 mb-3" style="padding-top:23px;">
                 <button type="submit" class="btn" style="width:100%;">Filter</button>
-            </div>
+            </div>           
+
         </div>
     </form>
+    <!-- Akhir Filter Tahun dan Bulan -->
 
-    @* Search *@
+
+    <!-- Menu Pencarian -->
     <div class="row penc mb-2">
         <form asp-action="Index" method="get" class="form-inline w-100">
             <div class="input-group" id="search">
@@ -69,7 +80,7 @@
             </div>
         </form>
     </div>
-    @* Akhir Search *@
+    <!-- Akhir Menu Pencarian -->
 
 
     <!-- Content Ibadah Section -->
@@ -156,8 +167,7 @@
     <!-- Akhir Content Ibadah Section -->
 
 
-
-    @* Pagination *@
+    <!-- Pagination -->
     <nav>
         <ul class="pagination justify-content-center">
             <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
@@ -184,12 +194,12 @@
             </li>
         </ul>
     </nav>
-    @* Akhir Pagination *@
+    <!-- Akhir Pagination -->
 
 </section>
 
 
-
+<!-- Script JS -->
 @section Scripts {
     <script type="text/javascript">
         $(function () {

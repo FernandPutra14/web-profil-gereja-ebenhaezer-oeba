@@ -1,4 +1,6 @@
-﻿* {
+﻿/* Ini adalah style CSS Global Dashboard Admin */
+
+* {
     font-family: 'poppins';
     margin: 0;
     padding: 0;
@@ -28,8 +30,4 @@ a {
 
 li {
     list-style: none;
-}
-
-a.btn {
-    
 }
