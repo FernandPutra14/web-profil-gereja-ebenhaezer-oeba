@@ -77,10 +77,9 @@
             <div>
                 <a data-fancybox="gallery" href="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })"
                    data-caption="
-                   ID: @foto.Id <br>
-                           Tanggal Dibuat: @($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}") <br>
-                           Pembuat: @foto.Pembuat?.UserName <br>
-                           ">
+                    ID: @foto.Id <br>
+                    Tanggal Dibuat: @($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}") <br>
+                    Pembuat: @foto.Pembuat?.UserName <br>">
                         <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
                     </a>              
                 <input type="hidden" id="idFoto" value="@foto.Id" />
@@ -90,7 +89,6 @@
             </div>
         }
     </div>
-
 
     <!-- Konfirmasi Hapus Modal-->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -109,7 +107,6 @@
             </div>
         </div>
     </div>
-
 
 
     <div class="row mt-5">
@@ -214,9 +211,9 @@
     </div> *@
 </div>
 
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <partial name="_FancyBoxPartial" />
 
     <script>
         function hideImg() {
