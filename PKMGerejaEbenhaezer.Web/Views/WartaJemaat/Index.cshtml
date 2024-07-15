@@ -5,20 +5,22 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
-@* Bagian Top dan Judul *@
+<!-- Warta Bagian Top -->
 <section id="wartaus">
     <h2>
         WARTA JEMAAT@(Model.Title())
     </h2>
 </section>
-@* Akhir Bagian Top dan Judul *@
+<!-- Akhir Warta Bagian Top -->
+
 
 <section class="warta">
+
+    <!-- Filter Tahun dan Bulan -->
     <form asp-action="Index" method="get">
         <div class="row mb-5">
 
-
-
+            <!-- Filter Tahun -->
             <div class="col-md-5 col-6 input-box select-container">
                 <label asp-for="@Model.Tahun" class="form-label">Filter Tahun</label>
                 <div class="custom-select-wrapper">
@@ -32,7 +34,10 @@
                     <div class="custom-arrow"></div>
                 </div>
             </div>
+            <!-- Akhir Filter Tahun -->
 
+
+            <!-- Filter Bulan -->
             <div class="col-md-5 col-6 input-box select-container">
                 <label asp-for="@Model.Bulan" class="form-label">Filter Bulan</label>
                 <div class="custom-select-wrapper">
@@ -46,21 +51,25 @@
                     <div class="custom-arrow"></div>
                 </div>
             </div>
-
+            <!-- Akhir Filter Bulan -->
 
 
             <div class="col-md-2 col-12 mb-3" style="padding-top:23px;">
                 <button type="submit" class="btn" style="width:100%;">Filter</button>
             </div>
+
         </div>
     </form>
+    <!-- Akhir Filter Tahun dan Bulan -->
 
+
+    <!-- Content Warta Section -->
     <div class="warta-contents">      
         @if (Model.Items.Count > 0)
         {
             @foreach (var item in Model.Items)
             {
-                <!-- Ini Cardnya -->
+                <!-- Awal Card -->
                 <div class="item warta-card">
                     <div class="image-wrapper">
                         <img src="~/img/default4_warta_jemaat.png" />
@@ -74,7 +83,7 @@
                     </div>
                     <a href="@item.DocumentLink.AbsoluteUri" class="tombolbaca">Baca Warta Jemaat</a>
                 </div>
-                <!-- Ini Akhir Cardnya -->
+                <!-- Akhir Card -->
             }
         }  
         else
@@ -82,8 +91,10 @@
             <h1 class="text-center">Tidak Ada Warta Jemaat</h1>
         }
     </div>
+    <!-- Akhir Content Warta Section -->
 
-    @* Pagination *@
+
+    <!-- Pagination -->
     <nav>
         <ul class="pagination justify-content-center">
             <li class="page-item @(Model.Items.HasPreviousPage ? "" : "disabled")">
@@ -107,9 +118,13 @@
             </li>
         </ul>
     </nav>
-    @* Akhir Pagination *@
+    <!-- Akhir Pagination -->
+
+
 </section>
 
+
+<!-- Script JS -->
 @section Scripts {
     <script type="text/javascript">
         $(function () {

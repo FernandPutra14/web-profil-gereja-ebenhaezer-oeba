@@ -1,4 +1,6 @@
-/* Inisialisasi Google Font Tinos (Times New Roman) */
+/* Ini adalah style CSS Global (Tidak termasuk Dashboard Admin) */
+
+/* Inisialisasi Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amarante&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
@@ -6,10 +8,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-/* akhir Inisialisasi Google Font Tinos (Times New Roman) */
+/* Akhir Inisialisasi Google Font */
 
-
-/* Style Global */
 * {
     font-family: 'Barlow Semi Condensed';
     margin: 0;
@@ -18,7 +18,6 @@
 }
 
 html {
-    /*--primary-clr: #208245;*/
     --primary-clr: #10316B;
     --primary-medium-clr: #d8e9df;
     --primary-light-clr: #edfaf1;
@@ -38,6 +37,7 @@ body {
     flex-direction: column;
 }
 
+/* Style Global Button btn */
 button.btn {
     padding: 10px 18px;
     background-color: var(--primary-clr);
@@ -49,6 +49,14 @@ button.btn {
     transition: all 0.3s;
 }
 
+    button.btn:hover {
+        background-color: var(--light-heading-clr);
+        color: var(--primary-clr);
+        border: 1px solid var(--primary-clr);
+    }
+/* Akhir Style Global Button btn */
+
+/* Style Global Anchor Mirip Button btn */
 a.btn {
     padding: 10px 18px;
     background-color: var(--primary-clr);
@@ -61,18 +69,15 @@ a.btn {
     text-decoration: none;
 }
 
-button.btn:hover {
-    background-color: var(--light-heading-clr);
-    color: var(--primary-clr);
-    border: 1px solid var(--primary-clr);
-}
+    a.btn:hover {
+        background-color: var(--light-heading-clr);
+        color: var(--primary-clr);
+        border: 1px solid var(--primary-clr);
+    }
+/* Akhir Style Global Anchor Mirip Button btn */
 
-a.btn:hover {
-    background-color: var(--light-heading-clr);
-    color: var(--primary-clr);
-    border: 1px solid var(--primary-clr);
-}
 
+/* Style Global Section Header */
 .section-header h1{
     position: relative;
     font-size: 32px;
@@ -81,15 +86,15 @@ a.btn:hover {
     margin-bottom: 20px;
 }
 
-.section-header h1::before {
-    position: absolute;
-    content: '';
-    width: 100px;
-    height: 1px;
-    left: 0;
-    top: calc(100% + 5px);
-    background-color: var(--dark-text-clr);
-}
+    .section-header h1::before {
+        position: absolute;
+        content: '';
+        width: 100px;
+        height: 1px;
+        left: 0;
+        top: calc(100% + 5px);
+        background-color: var(--dark-text-clr);
+    }
 
     .section-header h1::after {
         position: absolute;
@@ -101,9 +106,10 @@ a.btn:hover {
         background-color: var(--primary-clr);
     }
 
-.section-header p{
+.section-header p {
     color: var(--dark-text-clr);
     margin-bottom: 40px;
     font-size: 15px;
     max-width: 700px;
 }
+/* Akhir Style Global Section Header */

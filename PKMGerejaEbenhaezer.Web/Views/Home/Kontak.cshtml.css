@@ -1,4 +1,4 @@
-﻿/* CSS stop Kontak */
+﻿/* CSS Kontak Bagian Top */
 #kontak-us {
     background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
     background-attachment: fixed;
@@ -22,8 +22,10 @@
         font-weight: bold;
         letter-spacing: 1px;
     }
-/* Akhir CSS stop Kontak */
+/* Akhir CSS Kontak Bagian Top */
 
+
+/* CSS Section Contact */
 #contact {
     padding: 4vw 8vw;
     display: flex;
@@ -172,7 +174,10 @@
             color: rgb(21, 21, 100);
             border: 1px solid rgb(21, 21, 100);
         }
+/* Akhir CSS Section Contact */
 
+
+/* CSS Section Peta */
 #peta {
     width: 100%;
     height: 70vh;
@@ -183,16 +188,21 @@
     width: 100%;
     height: 100%;
 }
+/* Akhir CSS Section Peta */
 
 
-/* --------------------------------- Responsive  ----------------------------------------- */
+/* --------------------------------------------------- Responsive --------------------------------------------------- */
 /* Responsive 968px */
 @media (max-width:968px) {
-
+    
+    /* CSS Kontak Bagian Top */
     #kontak-us {
         background-attachment: scroll;
     }
+    /* Akhir CSS Kontak Bagian Top */
 
+
+    /* CSS Section Contact */
     #contact {
         padding: 4vw 4vw;
     }
@@ -200,11 +210,14 @@
         #contact .getin {
             width: 250px;
         }
+    /* Akhir CSS Section Contact */
 }
 
 
 /* Responsive 768px */
 @media (max-width:768px) {
+
+    /* CSS Section Contact */
     #contact {
         padding: 4vw 4vw;       
     }
@@ -223,11 +236,14 @@
             #contact .formko .form-row input {
                 width: 100%;
             }
+    /* Akhir CSS Section Contact */
 }
 
-/* Responsive 668px */
-@media (max-width:668px) {
 
+/* Responsive 690px */
+@media (max-width:690px) {
+
+    /* CSS Section Contact */
     #contact {
         padding: 9vw 4vw;
         flex-direction: column;
@@ -255,11 +271,13 @@
                 #contact .formko .form-row input {
                     width: 100%;
                 }
-
+    /* Akhir CSS Section Contact */
 }
 
+/* Responsive 568px */
 @media (max-width:568px) {
 
+    /* CSS Section Contact */
     #contact {
         padding: 13vw 5vw;
     }
@@ -272,10 +290,14 @@
         #contact .getin h3 {           
             margin-bottom: 10px;
         }
+    /* Akhir CSS Section Contact */
 
+
+    /* CSS Section Peta */
     #peta {
         width: 100%;
         height: 50vh;
         margin-bottom: 30px;
     }
+    /* Akhir CSS Section Peta */
 }

@@ -1,10 +1,14 @@
-﻿.badan-utama {
+﻿/* CSS Body */
+.badan-utama {
     margin: 0;
     padding: 0;
     padding-left: 0;
     padding-right: 0;    
 }
+/* Akhir CSS Body */
 
+
+/* CSS Go to top Section */
 #progress {
     background-color: var(--primary-clr);
     position: fixed;
@@ -33,7 +37,10 @@
     color: #001a2e;
     transition: all 1s ease;
 }
+/* Akhir CSS Go to top Section */
 
+
+/* CSS Footer */
 footer {
     position: relative;
     width: 100%;
@@ -62,17 +69,17 @@ footer {
         height: 50px;
         max-width: 100%;
     }
+/* Akhir CSS Footer */
 
 
-@media (max-width: 991px) {
-}
-
+/* --------------------------------------------------- Responsive --------------------------------------------------- */
+/*  Responsive 768 */
 @media (max-width: 768px) {
 
+    /* CSS Footer */
     footer {
         padding: 0px 10px 0px 10px;
     }
-
 
     .copyrightText p {
         margin-top: 12px;
@@ -82,9 +89,13 @@ footer {
     .copyrightText ::deep img {
         height: 44px;
     }
+    /* Akhir CSS Footer */
 }
 
+/*  Responsive 468 */
 @media (max-width: 468px) {
+
+    /* CSS Footer */
     .copyrightText {
         flex-direction: column;
         align-items: center; /* Center align items in column direction */
@@ -93,4 +104,5 @@ footer {
         .copyrightText img {
             margin-bottom: 10px; /* Add margin to separate image from text */
         }
+    /* Akhir CSS Footer */
 }

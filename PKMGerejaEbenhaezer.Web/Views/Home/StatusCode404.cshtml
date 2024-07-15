@@ -1,23 +1,29 @@
-﻿<div class="containerku">
+﻿<!-- Content 404 Section -->
+<div class="containerku">
     <img src="~/img/page_not_found2.png"/>
     <h1>Halaman Tidak Ditemukan</h1>
-    <h3>Halama yang anda cari tidak ditemukan!!</h3>
+    <h3>Halaman yang anda cari tidak ditemukan!!</h3>
     <a class="btn">Kembali ke Beranda</a>
 </div>
+<!-- Akhir Content 404 Section -->
 
-<script type="text/javascript">
-    $(function () {
-        $('.main-navbar').css({
-            'position': 'fixed',
-            'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
-            'background-color': 'var(--primary-clr)',
-        });
+
+<!-- Script JS -->
+@section Scripts {
+    <script type="text/javascript">
         $(function () {
-            $('.badan-utama').css({
-                'padding-left': '0',
-                'padding-right': '0',
-                'padding-top': '8rem',
+            $('.main-navbar').css({
+                'position': 'fixed',
+                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
+                'background-color': 'var(--primary-clr)',
+            });
+            $(function () {
+                $('.badan-utama').css({
+                    'padding-left': '0',
+                    'padding-right': '0',
+                    'padding-top': '8rem',
+                });
             });
         });
-    });
-</script>
+    </script>
+}

@@ -1,38 +1,38 @@
-﻿<header class="head">
-<!-- Navbar -->
-<nav class="main-navbar">
-    <a href="#" class="logo">
-        <img src="~/img/logo_gereja_text.png" />
-    </a>
-    <ul class="nav-list">
-        <li>
-            <a asp-action="Index" asp-controller="Home" asp-area="">Home</a>
-        </li>
-        <li><a asp-action="Index" asp-controller="WartaJemaat" asp-area="">Warta</a></li>
-        <li><a asp-action="Index" asp-controller="Ibadah" asp-area="">Ibadah</a></li>
-        <li><a asp-action="Index" asp-controller="Pengumuman" asp-area="">Pengumuman</a></li>
-        <li><a href="">Tentang Kami</a></li>
-        <li>
-            <a asp-action="Kontak" asp-controller="Home" asp-area="">Kontak</a>
-        </li>
-        <li>
-            @if (User.Identity != null && User.Identity.IsAuthenticated)
-            {
-                <a asp-action="Index" asp-controller="Home" asp-area="Dashboard" class="login-btn">
-                    Dashboard
-                </a>               
-            }
-            else
-            {
-                <a asp-action="Login" asp-controller="Account" asp-area="" class="login-btn">
-                    Login
-                </a>
-            }
-        </li>
-    </ul>
-    <div class="menu-btn">
-        <span></span>
-    </div>
-</nav>
-<!-- Akhir Navbar -->
+﻿<!-- Navbar -->
+<header class="head">
+    <nav class="main-navbar">
+        <a href="#" class="logo">
+            <img src="~/img/logo_gereja_text.png" />
+        </a>
+        <ul class="nav-list">
+            <li>
+                <a asp-action="Index" asp-controller="Home" asp-area="">Home</a>
+            </li>
+            <li><a asp-action="Index" asp-controller="WartaJemaat" asp-area="">Warta</a></li>
+            <li><a asp-action="Index" asp-controller="Ibadah" asp-area="">Ibadah</a></li>
+            <li><a asp-action="Index" asp-controller="Pengumuman" asp-area="">Pengumuman</a></li>
+            <li><a href="">Tentang Kami</a></li>
+            <li>
+                <a asp-action="Kontak" asp-controller="Home" asp-area="">Kontak</a>
+            </li>
+            <li>
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Index" asp-controller="Home" asp-area="Dashboard" class="login-btn">
+                        Dashboard
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Login" asp-controller="Account" asp-area="" class="login-btn">
+                        Login
+                    </a>
+                }
+            </li>
+        </ul>
+        <div class="menu-btn">
+            <span></span>
+        </div>
+    </nav>
 </header>
+<!-- Navbar -->

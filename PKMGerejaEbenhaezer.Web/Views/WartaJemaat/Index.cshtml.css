@@ -1,4 +1,4 @@
-﻿/* CSS Bagian Top dan Judul */
+﻿/* CSS Warta Bagian Top */
 #wartaus {
     background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
     background-attachment: fixed;
@@ -22,26 +22,14 @@
         font-size: 40px;
         font-weight: bold;
     }
-/* Akhir CSS Bagian Top dan Judul */
+/* Akhir CSS Warta Bagian Top */
 
 
-/* CSS Warta Section */
+/* CSS Content Warta Section */
 section.warta {
     width: 100%;
     padding: 3% 100px 30px;
 }
-
-.warta .section-header {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-}
-
-    .warta .section-header ::deep .warta-btn {
-        position: absolute;
-        right: 0;
-        bottom: 40px;
-    }
 
 .tombolbaca {
     padding: 10px 18px;
@@ -147,11 +135,10 @@ section.warta {
     font-family: "Noto Serif Display", serif;
     margin: 0;
 }
-/* Akhir CSS Warta Section */
+/* Akhir CSS Content Warta Section */
 
 
-
-/* CSS type input Text dan Textarea */
+/* CSS Type Input Text dan Select dan Textarea */
 ::deep .input-box label {
     color: #333;
     font-size: 14px;
@@ -191,7 +178,57 @@ section.warta {
     border-radius: 6px;
     padding: 0 15px;
 }
-/* Akhir CSS type input Text dan Textarea */
+
+::deep select.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 40px 5px 15px;
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+    ::deep select.custom-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+
+::deep .custom-select-wrapper {
+    position: relative;
+}
+
+::deep .custom-arrow {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+::deep select.custom-select option {
+    background-color: #fff;
+    color: #333;
+}
+
+
+::deep select.custom-select {
+    max-height: 200px;
+    overflow-y: auto;
+}
+/* Akhir CSS Type Input Text dan Select dan Textarea */
 
 
 /* CSS Search dan Pagination */
@@ -253,73 +290,11 @@ section.warta {
 /* Akhir CSS Search dan Pagination */
 
 
-::deep select.custom-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff; 
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px 40px 5px 15px; 
-    font-size: 16px; 
-    color: #333;
-    width: 100%;
-    box-sizing: border-box; 
-    cursor: pointer; 
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-    ::deep select.custom-select:focus {
-        border-color: #007bff; 
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
-        outline: none;
-    }
-
-::deep .custom-select-wrapper {
-    position: relative;
-}
-
-::deep .custom-arrow {
-    position: absolute; 
-    top: 50%; 
-    right: 15px;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #333; 
-    pointer-events: none; 
-    transform: translateY(-50%); 
-}
-
-::deep select.custom-select option {
-    background-color: #fff; 
-    color: #333;
-}
-
-
-::deep select.custom-select {
-    max-height: 200px;
-    overflow-y: auto; 
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    ::deep select.custom-select {
-        font-size: 14px; 
-        padding: 8px 35px 8px 10px; 
-    }
-
-    ::deep .custom-arrow {
-        right: 10px; 
-    }
-}
-
-
-/* --------------------------------- Responsive  ----------------------------------------- */
-/*  Responsive 968  */
+/* --------------------------------------------------- Responsive --------------------------------------------------- */
+/* Responsive 1160 */
 @media (max-width:1160px) {
 
+    /* CSS Content Warta Section */
     section.warta {
         padding: 8% 10px 30px;
     }
@@ -331,64 +306,70 @@ section.warta {
     .warta .warta-contents .warta-card {
         flex-basis: calc(calc(100% / 2) - 1.5%);
     }
-
-    .warta .section-header {
-        flex-direction: column;
-    }
-
-        .warta .section-header ::deep .peng-btn.btn {
-            position: relative;
-            align-self: flex-start;
-            margin-top: 20px;
-        }
+    /* Akhir CSS Content Warta Section */
 }
 
 
 /* Responsive 768 */
 @media (max-width:768px) {
 
-    ::deep .penc .input-group {
-        width: 100%;
-    }
-
+    /* CSS Content Warta Section */
     section.warta {
         width: 100%;
     }
+    /* Akhir CSS Content Warta Section */
+
+
+    /* CSS Type Input Text dan Select dan Textarea */
+    ::deep select.custom-select {
+        font-size: 14px;
+        padding: 8px 35px 8px 10px;
+    }
+
+    ::deep .custom-arrow {
+        right: 10px;
+    }
+    /* Akhir CSS Type Input Text dan Select dan Textarea */
+
+
+    /* CSS Search dan Pagination */
+    ::deep .penc .input-group {
+        width: 100%;
+    }
+    /* Akhir CSS Search dan Pagination */
 }
 
 
 /* Responsive 690 */
 @media (max-width:690px) {
 
+    /* CSS Content Warta Section */
     .warta .warta-contents .warta-card {
         flex-basis: 100%;
     }
-
-    .filterbut {
-        display: none;
-    }
-
-    .filter-button {
-        display: block;
-    }
+    /* Akhir CSS Content Warta Section */
 }
 
 
 /* Responsive 568 */
 @media (max-width:568px) {
 
+    /* CSS Content Warta Section */
     #wartaus h2 {
         font-size: 30px;
         padding-top: 70px;
     }
+    /* Akhir CSS Content Warta Section */
 }
 
 
 /* Responsive 468 */
 @media (max-width:468px) {
 
+    /* CSS Content Warta Section */
     #wartaus h2 {
         font-size: 25px;
         padding-top: 70px;
     }
+    /* Akhir CSS Content Warta Section */
 }

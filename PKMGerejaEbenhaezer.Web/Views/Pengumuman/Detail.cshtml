@@ -5,9 +5,11 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
+<!-- Content Detail Pengumuman Section -->
 <section id="blog-container">
     <div class="blogs">
         <div class="post">
+            <!-- Foto -->
             @if (Model.Foto is not null)
             {
                 <img src="@Url.Action("Index", "Foto", new {Area = "", id = Model.Foto.Id})" />
@@ -16,18 +18,23 @@
             {
                 <img src="~/img/gereja1.jpg" />
             }
+            <!-- Judul -->
             <h3 class="mb-3">@Model.Judul</h3>
             <div class="info-blog">
                 @if (Model.Pembuat is not null)
                 {
+                    <!-- Penulis -->
                     <h4>Penulis : @Model.Pembuat.UserName</h4>
+                    <!-- Tanggal Dibuat -->
                     <h4>
                         @Model.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
                         @Model.TanggalDiBuat.ToString("h:mm tt", cultureInfo)
                     </h4>                                    
                 }
             </div>
+            <!-- Isi pengumuman -->
             <p>@Model.Isi</p>
+            <!-- Dokumen PDF (Jika Ada) -->
             <div class="dokumen">
                 @if (Model.HaveDocument)
                 {
@@ -37,24 +44,25 @@
         </div>
     </div>
 </section>
+<!-- Akhir Content Detail Pengumuman Section -->
 
-<script type="text/javascript">
-    $(function () {
-        $('.main-navbar').css({
-            'position': 'fixed',
-            'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
-            'background-color': 'var(--primary-clr)',
-        });
+
+<!-- Script JS -->
+@section Scripts {
+    <script type="text/javascript">
         $(function () {
-            $('.badan-utama').css({
-                'padding-left': '0',
-                'padding-right': '0',
-                'padding-top': '8rem',
+            $('.main-navbar').css({
+                'position': 'fixed',
+                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
+                'background-color': 'var(--primary-clr)',
+            });
+            $(function () {
+                $('.badan-utama').css({
+                    'padding-left': '0',
+                    'padding-right': '0',
+                    'padding-top': '8rem',
+                });
             });
         });
-    });
-</script>
-
-
-
-
+    </script>
+}

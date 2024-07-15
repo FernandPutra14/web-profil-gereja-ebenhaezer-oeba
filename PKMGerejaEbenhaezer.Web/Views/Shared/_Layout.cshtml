@@ -1,4 +1,5 @@
-﻿@using PKMGerejaEbenhaezer.Web.Services.ToastrNotification
+﻿<!-- Layout Utama -->
+@using PKMGerejaEbenhaezer.Web.Services.ToastrNotification
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,33 +7,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Gereja Ebenhaezer Oeba</title>
     
+
+    <!-- Inisialisasi CSS Global -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!-- Akhir Inisialisasi CSS Global -->
+
+
+    <!-- Inisialisasi Bootstrap CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <!-- Owl Carousel -->
+    <!-- Akhir Inisialisasi Bootstrap CSS -->
+
+
+    <!-- Inisialisasi RemixIcon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" />
+    <!-- Akhir Inisialisasi RemixIcon -->
+
+
+    <!-- Inisialisasi Owl Carousel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
-    <!-- Akhir Owl Carousel -->
-    <!-- Font Awesome -->
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-    <!-- Akhir Font Awesome-->
-    <link rel="stylesheet" href="~/PKMGerejaEbenhaezer.Web.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- Akhir Inisialisasi Owl Carousel -->
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- Inisialisasi Font Awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Akhir Inisialisasi Font Awesome -->
+
+
+    <link rel="stylesheet" href="~/PKMGerejaEbenhaezer.Web.styles.css" asp-append-version="true" />
+
+
+    <!-- Inisialisasi Data-Aos Animation -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- Akhir Inisialisasi Data-Aos Animation -->
+
+ 
 </head>
 <body>
-    <!-- Go to top -->
+    <!-- Go to top Section -->
     <div id="progress">
         <span id="progress-value">
             <i class="ri-arrow-up-s-line"></i>
         </span>
     </div>
-    <!-- Akhir Go to top -->
+    <!-- Akhir Go to top Section -->
+
 
     <!-- Navbar -->
     <partial name="_NavbarPartial" />
-    <!-- Navbar -->
+    <!-- Akhir Navbar -->
+
+
     <!-- Body -->
     <div class="container-fluid badan-utama">
         <main role="main" class="pb-3">
@@ -40,6 +65,8 @@
         </main>
     </div>
     <!-- Akhir Body -->
+
+
     <!-- Footer -->
     <footer>
         <div class="copyrightText">
@@ -47,21 +74,41 @@
             <p>Copyright &copy;2024 LPPM Undana. All rights Reserved.</p>
         </div>
     </footer>
-    
-
-
     <!-- Akhir Footer -->
-    <!-- Akhir HomePage Section -->
-    <!-- Script js -->
+
+
+    <!-- Script-Script js -->
+    <!-- Inisisalisasi JQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Akhir Inisisalisasi JQuery -->
+
+
+    <!-- Inisisalisasi Chart.JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <!-- Akhir Inisisalisasi Chart.JS -->
+
+
+    <!-- Inisisalisasi Owl Carousel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <!-- Akhir Inisisalisasi Chart.JS -->
+
+
+    <!-- Inisisalisasi Bootstrap JS -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Akhir Inisisalisasi Bootstrap JS -->
+
+
+    <!-- Inisisalisasi Data-Aos Animation -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
     </script>
-    <script src="~/js/parallax.js"></script>
-    <script type="text/javascript" src="~/js/transisiNavbar.js"></script>
+    <!-- Akhir Inisisalisasi Data-Aos Animation -->
+
+
+    <!-- Inisisalisasi JS File -->
+    <script src="~/js/parallax.js" asp-append-version="true"></script>
+    <script src="~/js/transisiNavbar.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/goTop.js" asp-append-version="true"></script>
     <script src="~/js/carousel.js" asp-append-version="true"></script>
@@ -87,7 +134,7 @@
     <vc:toastr global-options=options></vc:toastr>
 
     <script type="text/javascript">
-        //Toggle Bang
+        //Toggle
         const menuBtn = $('.main-navbar .menu-btn');
         const menuList = $('.main-navbar .nav-list');
         const menuListItems = $('.nav-list li a');

@@ -1,4 +1,4 @@
-﻿/* CSS Bagian Top dan Judul */
+﻿/* CSS Ibadah Bagian Top */
 #ibadahus {
     background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
     background-attachment: fixed;
@@ -22,10 +22,10 @@
         font-size: 40px;
         font-weight: bold;
     }
-/* Akhir CSS Bagian Top dan Judul */
+/* AKhir CSS Ibadah Bagian Top */
 
-/* CSS Ibadah Section */
 
+/* CSS Content Ibadah Section */
 section.ibadah {
     width: 100%;
     padding: 3% 100px 30px;
@@ -180,7 +180,6 @@ section.ibadah {
     width: 17px;
 }
 
-
 .ibadah-card .category-pendeta-ibadah .subject-ibadah {
     padding: 8px 10px;
     background-color: var(--primary-light-clr);
@@ -267,9 +266,10 @@ section.ibadah {
     .ibadah-card .ibadah-info h5 {
         font-size: 14px;
     }
-/* CSS Akhir Ibadah Section */
+/* Akhir CSS Content Ibadah Section */
 
-/* CSS type input Text dan Textarea */
+
+/* CSS Type Input Text dan Select dan Textarea */
 ::deep .input-box label {
     color: #333;
     font-size: 14px;
@@ -309,7 +309,57 @@ section.ibadah {
     border-radius: 6px;
     padding: 0 15px;
 }
-/* Akhir CSS type input Text dan Textarea */
+
+::deep select.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 40px 5px 15px;
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+    ::deep select.custom-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+    }
+
+::deep .custom-select-wrapper {
+    position: relative;
+}
+
+::deep .custom-arrow {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+::deep select.custom-select option {
+    background-color: #fff;
+    color: #333;
+}
+
+
+::deep select.custom-select {
+    max-height: 200px;
+    overflow-y: auto;
+}
+/* Akhir CSS Type Input Text dan Select dan Textarea */
 
 
 /* CSS Search dan Pagination */
@@ -371,75 +421,11 @@ section.ibadah {
 /* Akhir CSS Search dan Pagination */
 
 
-
-::deep select.custom-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px 40px 5px 15px;
-    font-size: 16px;
-    color: #333;
-    width: 100%;
-    box-sizing: border-box;
-    cursor: pointer;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-    ::deep select.custom-select:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        outline: none;
-    }
-
-::deep .custom-select-wrapper {
-    position: relative;
-}
-
-::deep .custom-arrow {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #333;
-    pointer-events: none;
-    transform: translateY(-50%);
-}
-
-::deep select.custom-select option {
-    background-color: #fff;
-    color: #333;
-}
-
-
-::deep select.custom-select {
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    ::deep select.custom-select {
-        font-size: 14px;
-        padding: 8px 35px 8px 10px;
-    }
-
-    ::deep .custom-arrow {
-        right: 10px;
-    }
-}
-
-
-
-/* --------------------------------- Responsive  ----------------------------------------- */
-/*  Responsive 968  */
+/* --------------------------------------------------- Responsive --------------------------------------------------- */
+/*  Responsive 1160 */
 @media (max-width:1160px) {
 
+    /* CSS Content Ibadah Section */
     section.ibadah {
         padding: 8% 10px 30px;
     }
@@ -451,54 +437,70 @@ section.ibadah {
     .ibadah .ibadah-contents .ibadah-card {
         flex-basis: calc(calc(100% / 2) - 1.5%);
     }
+    /* Akhir CSS Content Ibadah Section */
 }
 
 
 /* Responsive 768 */
 @media (max-width:768px) {
 
-    ::deep .penc .input-group {
-        width: 100%;
-    }
-
+    /* CSS Content Ibadah Section */
     section.ibadah {
         width: 100%;
     }
+    /* Akhir CSS Content Ibadah Section */
+
+
+    /* CSS Type Input Text dan Select dan Textarea */
+    ::deep select.custom-select {
+        font-size: 14px;
+        padding: 8px 35px 8px 10px;
+    }
+
+    ::deep .custom-arrow {
+        right: 10px;
+    }
+    /* Akhir CSS Type Input Text dan Select dan Textarea */
+
+
+    /* CSS Search dan Pagination */
+    ::deep .penc .input-group {
+        width: 100%;
+    }
+    /* Akhir CSS Search dan Pagination */
 }
 
 
 /* Responsive 690 */
 @media (max-width:690px) {
 
+    /* CSS Content Ibadah Section */
     .ibadah .ibadah-contents .ibadah-card {
         flex-basis: 100%;
     }
-
-    .filterbut {
-        display: none;
-    }
-
-    .filter-button {
-        display: block;
-    }
+    /* Akhir CSS Content Ibadah Section */
 }
 
 
 /* Responsive 568 */
 @media (max-width:568px) {
 
+    /* CSS Content Ibadah Section */
     #ibadahus h2 {
         font-size: 30px;
         padding-top: 70px;
     }
+    /* Akhir CSS Content Ibadah Section */
 }
 
 
 /* Responsive 468 */
 @media (max-width:468px) {
 
+    /* CSS Content Ibadah Section */
     #ibadahus h2 {
         font-size: 25px;
         padding-top: 70px;
     }
+    /* Akhir CSS Content Ibadah Section */
 }
