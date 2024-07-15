@@ -129,29 +129,4 @@
                 .style.display = "none";
         }
     </script>
-
-    <script type="text/javascript">
-        const makeDeleteUrl = (id) => '/Dashboard/Foto/Hapus/' + id + '?returnUrl=%2FDashboard%2FFoto%2FIndex%3FpageIndex%3D@(Model.Items.PageIndex)';
-
-        $(function () {
-            $('.foto-container').each(function (index, item) {
-                $(item).on('click', function () {
-                    const src = $(item).find('img').attr('src');
-                    const idFoto = $(item).find('#idFoto').val();
-                    const tanggalDibuat = $(item).find('#tanggalDibuat').val();
-                    const namaPembuat = $(item).find('#namaPembuat').val();
-                    const fileKompresiUrl = $(item).find('#fileKompresiUrl').val();
-
-                    $('#detailsPane img').attr('src', src);
-                    $('#detailsPane #idFoto').html(idFoto);
-                    $('#detailsPane #tanggalDibuat').html(tanggalDibuat);
-                    $('#detailsPane #namaPembuat').html(namaPembuat);
-                    $('#detailsPane #fileUrl').html(src).attr('href', src);
-                    $('#detailsPane #fileKompresiUrl').html(fileKompresiUrl).attr('href', fileKompresiUrl);
-                    $('#detailsPane #buttonHapus').prop('hidden', false);
-                    $('#detailsPane #formHapus').attr('action', makeDeleteUrl(idFoto));
-                });
-            });
-        });
-    </script>
 }
