@@ -18,20 +18,26 @@ namespace PKMGerejaEbenhaezer.Web.Services.BeebleApi
 
         public async Task<Book[]?> List()
         {
-            var response = await _httpClient.GetFromJsonAsync<Dictionary<string, object?>>("list");
+            var response = await _httpClient.GetFromJsonAsync<Dictionary<string, Book[]?>?>("list");
 
-            if(response is null) return null;
+            if (response is null) return null;
 
-            if(response.TryGetValue("data", out object? data))
-                return data as Book[];
+            if (!response.TryGetValue("data", out Book[]? data)) return null;
 
-            return null;
+            return data;
         }
 
-        public async Task<BeebleApiPassageResponse?> PassageContent(AyatAlkitab ayatAlkitab)
+        public async Task<BeebleApiResponse?> PassageContent(AyatAlkitab ayatAlkitab)
         {
-            return await _httpClient.GetFromJsonAsync<BeebleApiPassageResponse?>(
+            var response = await _httpClient.GetFromJsonAsync<Dictionary<string, BeebleApiResponse?>?>(
                 $"{ayatAlkitab.Kitab.Humanize()}/{ayatAlkitab.Pasal}:{string.Join(',' ,ayatAlkitab.Ayat)}?ver=tb");
+
+            if (response is null) return null;
+
+            if(!response.TryGetValue("data", out BeebleApiResponse? data))
+                return null;
+
+            return data;
         }
     }
 }

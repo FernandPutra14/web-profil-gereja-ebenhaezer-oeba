@@ -1,16 +1,6 @@
 ﻿namespace PKMGerejaEbenhaezer.Web.Services.BeebleApi
 {
-    public class BeebleApiPassageResponse
-    {
-        public Data Data { get; set; }
-    }
-
-    public class BeebleApiListResponse
-    {
-        Book[] Data { get; set; }
-    }
-
-    public class Data
+    public class BeebleApiResponse
     {
         public Book Book { get; set; } = new();
         public VerseResponse[] Verses { get; set; } = Array.Empty<VerseResponse>();
