@@ -60,36 +60,6 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
             daftarRayon ??= new List<Rayon>();
 
-            var list = await _beebeleApiService.List();
-            _toastrNotificationService.AddNotification(new ToastrNotification
-            {
-                Type = ToastrNotificationType.Info,
-                Title = "Passage List",
-                Message = list?.ToJson() ?? "null",
-                Options = new ToastrOptions
-                {
-                    positionClass = PositionClasses.TopFullWidth,
-                }
-            });
-
-            if (daftarIbadah.Count > 0)
-            {
-                foreach (var item in daftarIbadah)
-                {
-                    var response = await _beebeleApiService.PassageContent(item.NasPembimbing);
-                    _toastrNotificationService.AddNotification(new ToastrNotification
-                    {
-                        Type = ToastrNotificationType.Info,
-                        Title = item.NasPembimbing.ToString(),
-                        Message = response?.ToJson() ?? "null",
-                        Options = new ToastrOptions
-                        {
-                            positionClass = PositionClasses.TopFullWidth,
-                        }
-                    });
-                }
-            }
-
             return View(new IndexVM
             {
                 DaftarPengumuman = daftarPengumuman,

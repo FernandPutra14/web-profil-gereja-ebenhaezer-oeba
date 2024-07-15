@@ -20,9 +20,9 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             int pageIndex = 1)
         {
             var daftarIbadah = await _appDbContext.IbadahTable
-                .Include(i => i.Pendeta).ThenInclude(p => p.Foto)
-                .Include(i => i.KategoriIbadah)
                 .Where(i => i.Pendeta != null && i.KategoriIbadah != null)
+                .Include(i => i.Pendeta).ThenInclude(p => p!.Foto)
+                .Include(i => i.KategoriIbadah)
                 .OrderByDescending(i => i.TanggalIbadah)
                 .AsNoTracking().ToListAsync();
 
@@ -52,6 +52,11 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 Bulan = bulan,
                 Tahun = tahun,
             });
+        }
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            return View();
         }
     }
 }

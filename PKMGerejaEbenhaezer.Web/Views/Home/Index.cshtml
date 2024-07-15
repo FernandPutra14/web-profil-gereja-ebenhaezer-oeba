@@ -66,17 +66,17 @@
                     <p>Pendeta</p>
                     <div class="pen-link">
                         <a @(pendeta.FacebookProfileLink is not null ?
-                            $"href={pendeta.FacebookProfileLink.AbsoluteUri}" : "")>
+                            $"href={pendeta.FacebookProfileLink.AbsoluteUri}" : "class=\"disable\"")>
                             <i class="ri-facebook-fill"></i>
                         </a>
 
                         <a @(pendeta.InstagramProfileLink is not null ?
-                            $"href={pendeta.InstagramProfileLink.AbsoluteUri}" : "")>
+                            $"href={pendeta.InstagramProfileLink.AbsoluteUri}" :  "class=\"disable\"")>
                             <i class="ri-instagram-fill"></i>
                         </a>
 
                         <a @(pendeta.YoutubeProfileLink is not null ?
-                            $"href={pendeta.YoutubeProfileLink.AbsoluteUri}" : "")>
+                            $"href={pendeta.YoutubeProfileLink.AbsoluteUri}" : "class=\"disable\"")>
                             <i class="ri-youtube-fill"></i>
                         </a>
                     </div>
