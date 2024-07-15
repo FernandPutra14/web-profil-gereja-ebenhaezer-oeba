@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.Features;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
@@ -33,6 +34,8 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         [ResponseCache(Duration = 15, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Index()
         {
+            throw new Exception("Tes");
+
             var daftarPengumuman = await _appDbContext.PengumumanTable
                 .OrderByDescending(p => p.TanggalDiBuat)
                 .Include(p => p.Foto)
@@ -103,9 +106,19 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            _logger.LogError("Unhandled Exception. Timestamp : {@dateTime}", DateTime.Now);
+            var exceptionHandlerFeature = HttpContext.Features.GetRequiredFeature<IExceptionHandlerPathFeature>();
 
-            return StatusCode500();
+            var error = exceptionHandlerFeature.Error;
+            var path = exceptionHandlerFeature.Path;
+
+            _logger.LogError(
+                "Unhandled Exception. Message : {@message}, Timestamp : {@dateTime}, Path : {@path}, Stack Trace : {@stackTrace}",
+                error.Message,
+                DateTime.Now,
+                path,
+                error.ToString());
+
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 }
