@@ -6,11 +6,11 @@
         'fullScreen',
         'download',
         'thumbs',
-        'close',
-        'delete'
+        'delete',
+        'close',     
     ];
 
-    $.fancybox.defaults.btnTpl.delete = '<button data-fancybox-delete class="fancybox-button fancybox-button--delete" title="Delete"><i class="fa fa-trash"></i></button>';
+    $.fancybox.defaults.btnTpl.delete = '<button data-fancybox-delete class="fancybox-button fancybox-button--delete" title="Delete"><i class="fa fa-trash" style="font-size:16px; padding-top:3px;"></i></button>';
 
     // CLick tombol Delete
     $(document).on('click', '[data-fancybox-delete]', function () {

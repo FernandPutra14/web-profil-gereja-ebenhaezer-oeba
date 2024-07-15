@@ -27,21 +27,22 @@
 
     <div class="grid-wrapper">
         @foreach (var foto in Model.Items!)
-        {
+        { 
             <div>
                 <a data-fancybox="gallery" href="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })"
-                   data-caption="
-                    ID: @foto.Id <br>
-                    Tanggal Dibuat: @($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}") <br>
-                    Pembuat: @foto.Pembuat?.UserName <br>">
-                        <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
+                   data-caption="ID: @foto.Id <br>
+                         Tanggal Dibuat: @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) 
+                            @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo) <br>
+                         Pembuat: @foto.Pembuat?.UserName" >
+            <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
                 </a>
-            </div>
+            </div> 
+
         }
     </div>
 
     <!-- Konfirmasi Hapus Modal-->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="z-index:99999;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
