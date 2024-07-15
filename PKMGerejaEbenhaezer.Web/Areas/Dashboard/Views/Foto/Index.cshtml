@@ -81,11 +81,7 @@
                     Tanggal Dibuat: @($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}") <br>
                     Pembuat: @foto.Pembuat?.UserName <br>">
                         <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
-                    </a>              
-                <input type="hidden" id="idFoto" value="@foto.Id" />
-                <input type="hidden" id="tanggalDibuat" value="@($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}")" />
-                <input type="hidden" id="namaPembuat" value="@foto.Pembuat?.UserName" />
-                <input type="hidden" id="fileKompresiUrl" value="@Url.Action("FotoKompresi", "Foto", new { Area = "", id = foto.Id })" />
+                </a>
             </div>
         }
     </div>
@@ -108,7 +104,6 @@
         </div>
     </div>
 
-
     <div class="row mt-5">
         @{
             var hasPrevious = Model.Items.HasPreviousPage;
@@ -122,93 +117,6 @@
             <a asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)" asp-area="Dashboard" class="btn w-100 @(hasNext ? "" : " disabled")">Selanjutnya</a>
         </div>
     </div>
-
-
-    @* <div class="container-fluid mt-5">
-        <div class="row">
-            <div class="col-lg-8 mb-4">
-                <form asp-action="IndexPOST" class="row" method="post" enctype="multipart/form-data" asp-route-pIndex="@Model.Items!.PageIndex">
-                    <div class="col-md-12 mb-3">
-                        <input class="form-control" type="file" asp-for="@Model.FormFile" />
-                        <span asp-validation-for="@Model.FormFile" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-12">
-                        <button class="btn w-100" type="submit">Upload</button>
-                    </div>
-                </form>
-                <div class="row mt-4">
-                    @foreach (var foto in Model.Items!)
-                    {
-                        <div class="col-6 col-md-3 foto-container">
-                            <img class="img-fluid" src="@Url.Action("Index", "Foto", new {Area = "", id = foto.Id})" />
-                            <input type="hidden" id="idFoto" value="@foto.Id" />
-                            <input type="hidden" id="tanggalDibuat" value="@($"{foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)} {foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)}")" />
-                            <input type="hidden" id="namaPembuat" value="@foto.Pembuat?.UserName" />
-                            <input type="hidden" id="fileKompresiUrl"
-                                   value="@Url.Action("FotoKompresi", "Foto", new {Area = "", id = foto.Id})" />
-                        </div>
-                    }
-                </div>
-                <div class="row">
-                    @{
-                        var hasPrevious = Model.Items.HasPreviousPage;
-                        var hasNext = Model.Items.HasNextPage;
-                    }
-
-                    <div class="col-6">
-                        <a asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex - 1)" asp-area="Dashboard" class="btn w-100 @(hasPrevious ? "" : " disabled")">Sebelumnya</a>
-                    </div>
-                    <div class="col-6">
-                        <a asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)" asp-area="Dashboard" class="btn w-100 @(hasNext ? "" : " disabled")">Selanjutnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4" id="detailsPane">
-                <div class="row">
-                    <img id="HideImg" class="img-fluid" src="" alt="" onerror="hideImg()" />
-                </div>
-                <div class="row">
-                    <div class="col-4">ID</div>
-                    <div class="col-8">: <span id="idFoto"></span></div>
-                </div>
-                <div class="row">
-                    <div class="col-4">Tanggal Dibuat</div>
-                    <div class="col-8">: <span id="tanggalDibuat"></span></div>
-                </div>
-                <div class="row">
-                    <div class="col-4">Pembuat</div>
-                    <div class="col-8">: <span id="namaPembuat"></span></div>
-                </div>
-                <div class="row">
-                    <div class="col-4">Url</div>
-                    <div class="col-8">: <a href="" id="fileUrl"></a></div>
-                </div>
-                <div class="row">
-                    <div class="col-4">Url Kompresi</div>
-                    <div class="col-8">: <a href="" id="fileKompresiUrl"></a></div>
-                </div>
-                <div class="row">
-                    <button class="btn" id="buttonHapus" hidden data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-regular fa-trash"></i> Hapus</button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModal">Hapus Pengumuman</h5>
-                                </div>
-                                <div class="modal-body">Apakah anda yakin ingin menghapus?</div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn" data-bs-dismiss="modal">Batal</button>
-                                    <form asp-action="Hapus" id="formHapus">
-                                        <button type="submit" class="btn">Hapus</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> *@
 </div>
 
 @section Scripts {
