@@ -3,10 +3,13 @@
     string idForm = (ViewData["idForm"] as string)!;
 }
 
+<!-- Tombol Piliha Gambar -->
 <input type="text" name="IdFoto" id="IdFoto" class="form-control" hidden value="@ViewData["idFoto"]" />
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Pilih Gambar</button>
+<!-- Akhir Tombol Piliha Gambar -->
 
-<!-- Modal -->
+
+<!-- Modal Upload Foto -->
 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -46,109 +49,114 @@
         </div>
     </div>
 </div>
+<!-- Akhir Modal Upload Foto -->
 
-<script type="text/javascript">
-    const selectedStyle = {
-        'background': 'var(--primary-clr)'
-    };
 
-    const unselectedStyle = {
-        'background': 'white'
-    };
+<!--Script JS -->
+@section Scripts {
+    <script type="text/javascript">
+        const selectedStyle = {
+            'background': 'var(--primary-clr)'
+        };
 
-    let idTerpilih = 0;
+        const unselectedStyle = {
+            'background': 'white'
+        };
 
-    const makeGetUrl = (id) => '/Foto/Index/' + id;
+        let idTerpilih = 0;
 
-    const updateUI = () => {
-        $('.foto-container').each(function (index, item) {
-            const id = $(this).find('#fotoId').val();
-            if (id !== idTerpilih) {
-                $(item).css(unselectedStyle);
-            }
+        const makeGetUrl = (id) => '/Foto/Index/' + id;
 
-            if (id === idTerpilih) {
-                $(item).css(selectedStyle);
-            }
-        });
-    }
+        const updateUI = () => {
+            $('.foto-container').each(function (index, item) {
+                const id = $(this).find('#fotoId').val();
+                if (id !== idTerpilih) {
+                    $(item).css(unselectedStyle);
+                }
 
-    const onFotoClick = function () {
-        const fotoId = $(this).find('#fotoId').val();
-
-        if (idTerpilih !== fotoId) {
-            idTerpilih = fotoId;
+                if (id === idTerpilih) {
+                    $(item).css(selectedStyle);
+                }
+            });
         }
 
-        updateUI();
-    };
+        const onFotoClick = function () {
+            const fotoId = $(this).find('#fotoId').val();
 
-    const init = () => {
-        const daftarFotoContainer = $('.foto-container');
+            if (idTerpilih !== fotoId) {
+                idTerpilih = fotoId;
+            }
 
-        daftarFotoContainer.each(function (index, item) {
-            $(item).on('click', onFotoClick);
-        });
-    }
+            updateUI();
+        };
 
-    document.addEventListener('DOMContentLoaded', function () {
-        $('#uploadFoto').on('click', async function () {
-            const formData = new FormData();
-            const inputFile = $('#formFile')[0].files[0];
+        const init = () => {
+            const daftarFotoContainer = $('.foto-container');
 
-            formData.append('formFile', inputFile);
+            daftarFotoContainer.each(function (index, item) {
+                $(item).on('click', onFotoClick);
+            });
+        }
 
-            $('#formFileVal').html('');
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#uploadFoto').on('click', async function () {
+                const formData = new FormData();
+                const inputFile = $('#formFile')[0].files[0];
 
-            $(this).html('');
-            $(this).append('Loading...');
-            $(this).prop('disabled', true);
-
-            const response = await fetch(
-                '/Dashboard/Foto/TambahJSON',
-                {
-                    credentials: 'same-origin',
-                    method: "POST",
-                    body: formData,
-                }
-            );
-
-            if (response.ok) {
-                const data = await response.json();
-
-                $('.foto-container').first().before(`
-                    <div class="col-3 p-1 foto-container">
-                        <input type="type" id="fotoId" value="` + data['id'] + `" hidden />
-                        <img class="img-thumbnail" src="` + makeGetUrl(data['id']) + `" />
-                    </div>`);
-
-                $('.foto-container > input#fotoId[value="' + data['id'] + '"]')
-                    .parent('.foto-container')
-                    .on('click', onFotoClick);
-            } else {
-                const data = await response.json();
-
-                console.log(data);
+                formData.append('formFile', inputFile);
 
                 $('#formFileVal').html('');
-                $('#formFileVal').append(data['formFile']);
-            }
 
-            $(this).html('');
-            $(this).append('Upload');
-            $(this).prop('disabled', false);
-        });
+                $(this).html('');
+                $(this).append('Loading...');
+                $(this).prop('disabled', true);
 
-        $('#buttonPilih').on('click', function () {
-            $('#IdFoto').val(idTerpilih);
+                const response = await fetch(
+                    '/Dashboard/Foto/TambahJSON',
+                    {
+                        credentials: 'same-origin',
+                        method: "POST",
+                        body: formData,
+                    }
+                );
 
-            if ($('#dvPreview') !== null && $('#dvPreview') !== undefined) {
-                $('#dvPreview').html('');
-                $('#dvPreview').append('<img class="img-fluid"/>');
-                $('#dvPreview img').attr('src', makeGetUrl(idTerpilih.toString()));
-            }
-        });
+                if (response.ok) {
+                    const data = await response.json();
 
-        init();
-    })
-</script>
+                    $('.foto-container').first().before(`
+                            <div class="col-3 p-1 foto-container">
+                                <input type="type" id="fotoId" value="` + data['id'] + `" hidden />
+                                <img class="img-thumbnail" src="` + makeGetUrl(data['id']) + `" />
+                            </div>`);
+
+                    $('.foto-container > input#fotoId[value="' + data['id'] + '"]')
+                        .parent('.foto-container')
+                        .on('click', onFotoClick);
+                } else {
+                    const data = await response.json();
+
+                    console.log(data);
+
+                    $('#formFileVal').html('');
+                    $('#formFileVal').append(data['formFile']);
+                }
+
+                $(this).html('');
+                $(this).append('Upload');
+                $(this).prop('disabled', false);
+            });
+
+            $('#buttonPilih').on('click', function () {
+                $('#IdFoto').val(idTerpilih);
+
+                if ($('#dvPreview') !== null && $('#dvPreview') !== undefined) {
+                    $('#dvPreview').html('');
+                    $('#dvPreview').append('<img class="img-fluid"/>');
+                    $('#dvPreview img').attr('src', makeGetUrl(idTerpilih.toString()));
+                }
+            });
+
+            init();
+        })
+    </script>
+}

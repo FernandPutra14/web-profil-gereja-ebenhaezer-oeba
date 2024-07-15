@@ -4,6 +4,7 @@
     ViewData["Title"] = "Login Admin";
 }
 
+<!-- Form Login Section -->
 <section id="login-form" class="">
     <div class="container">
         <h1>Masuk ke akun anda</h1>
@@ -15,6 +16,8 @@
                 <div class="line"></div>
             </div>
 
+
+            <!-- Username -->
             <label asp-for="@Model.UserName" class="form-label">Username:</label>
             <div class="custome-input">
                 <input asp-for="@Model.UserName" type="text" placeholder="Your Username" autocomplete="off" />
@@ -22,6 +25,8 @@
                 <span asp-validation-for="@Model.UserName" class="text-danger"></span>
             </div>
 
+
+            <!-- Password -->
             <label asp-for="@Model.Password">Password:</label>
             <div class="custome-input">
                 <input asp-for="@Model.Password" type="password" placeholder="Your Password" id="id_password" />
@@ -29,40 +34,49 @@
                 <span asp-validation-for="@Model.Password" class="text-danger"></span>
             </div>
 
+
+            <!-- Remember Me Checkbox -->
             <div class="form-check">
                 <input asp-for="@Model.RememberMe" type="checkbox" class="form-check-input" />
                 <label asp-for="@Model.RememberMe" class="form-check-label"></label>
             </div>
 
+
+            <!-- Tombol Login -->
             <button class="login">Masuk</button>           
         </form>
     </div>
 </section>
+<!-- Akhir Form Login Section -->
 
-<script type="text/javascript">
-    const togglePassword = $('#togglePassword');
-    const password = $('#id_password');
 
-    $(togglePassword).on('click', function (e) {
-        const type = $(password).attr('type') === 'password' ? 'text' : 'password';
-        $(password).attr('type', type);
-        $(this).toggleClass('ri-eye-off-line');
-    });
-</script>
+<!-- Script JS -->
+@section Scripts {
+    <script type="text/javascript">
+        const togglePassword = $('#togglePassword');
+        const password = $('#id_password');
 
-<script type="text/javascript">
-    $(function () {
-        $('.main-navbar').css({
-            'position': 'fixed',
-            'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
-            'background-color': 'var(--primary-clr)',
+        $(togglePassword).on('click', function (e) {
+            const type = $(password).attr('type') === 'password' ? 'text' : 'password';
+            $(password).attr('type', type);
+            $(this).toggleClass('ri-eye-off-line');
         });
+    </script>
+
+    <script type="text/javascript">
         $(function () {
-            $('.badan-utama').css({
-                'padding-left': '0',
-                'padding-right': '0',
-                'padding-top': '8rem',
+            $('.main-navbar').css({
+                'position': 'fixed',
+                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
+                'background-color': 'var(--primary-clr)',
+            });
+            $(function () {
+                $('.badan-utama').css({
+                    'padding-left': '0',
+                    'padding-right': '0',
+                    'padding-top': '8rem',
+                });
             });
         });
-    });
-</script>
+    </script>
+}

@@ -1,10 +1,10 @@
-﻿.containerkun {
+﻿/* CSS Content Manajemen Akun Section */
+.containerkun {
     padding-bottom: 30px;
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 2%;
 }
-
 
 .jud {
     margin-bottom: 30px;
@@ -19,8 +19,10 @@
         font-size: 14px;
         font-weight: 400;
     }
+/* Akhir CSS Content Manajemen Akun Section */
 
-/* CSS type input Text dan Textarea */
+
+/* CSS Type Input Text dan Select dan Textarea */
 ::deep .input-box label {
     color: #333;
     font-size: 14px;
@@ -48,9 +50,11 @@
     border-radius: 6px;
     padding: 0 15px;
 }
-/* Akhir CSS type input Text dan Textarea */
+/* Akhir CSS Type Input Text dan Select dan Textarea */
 
 
+/* --------------------------------------------------- Responsive --------------------------------------------------- */
+/*  Responsive 968 */
 @media (max-width:968px)  {
     .containerkun {
         padding-bottom: 30px;

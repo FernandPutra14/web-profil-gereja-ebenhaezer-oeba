@@ -4,8 +4,8 @@
     ViewData["Title"] = "Edit Akun";
 }
 
+<!-- Content Manajemen Akun Section -->
 <div class="containerkun">
-
     <div class="jud">
         <h1>
             MANAJEMEN AKUN PENGGUNA
@@ -13,11 +13,10 @@
         <p>Setelah Akun berhasil diubah anda akan log out dan diarahkan ke halaman login untuk login dengan user name dan password baru!!</p>
     </div>
     
-
-
     <form asp-action="Edit">
         <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
+        <!-- Username -->
         <div class="row">
             <div class="col-md-12 col-12 input-box">
                 <label asp-for="@Model.UserName" class="form-label"></label>
@@ -26,6 +25,7 @@
             </div>
         </div>
 
+        <!-- Password -->
         <div class="row">
             <div class="col-md-6 col-12 input-box">
                 <label asp-for="@Model.Password" class="form-label"></label>
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        
+        <!-- Tombol Simpan -->
         <div class="row mt-5">
             <div class="col-12">
                 <button type="submit" class="btn" style="width:100%;">Simpan</button>               
@@ -47,7 +47,10 @@
         </div>
     </form>
 </div>
+<!-- Akhir Content Manajemen Akun Section -->
 
+
+<!-- Script JS -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
