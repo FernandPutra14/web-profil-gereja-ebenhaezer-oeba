@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -89,10 +90,22 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             return View(); 
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(int? statusCode = null)
+        public IActionResult StatusCode400()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
+        }
+
+        public IActionResult StatusCode500()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            _logger.LogError("Unhandled Exception. Timestamp : {@dateTime}", DateTime.Now);
+
+            return StatusCode500();
         }
     }
 }

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Models;
+using PKMGerejaEbenhaezer.Web.Models.IbadahModels;
+using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
 using PKMGerejaEbenhaezer.Web.Utlities;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
@@ -10,19 +12,21 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
     public class IbadahController : Controller
     {
         private readonly AppDbContext _appDbContext;
+        private readonly IBeebeleApiService _beebeleApiService;
 
-        public IbadahController(AppDbContext appDbContext)
+        public IbadahController(AppDbContext appDbContext, IBeebeleApiService beebeleApiService)
         {
             _appDbContext = appDbContext;
+            _beebeleApiService = beebeleApiService;
         }
 
         public async Task<IActionResult> Index(int? bulan, int? tahun, string? searchString,
             int pageIndex = 1)
         {
             var daftarIbadah = await _appDbContext.IbadahTable
-                .Where(i => i.Pendeta != null && i.KategoriIbadah != null)
-                .Include(i => i.Pendeta).ThenInclude(p => p!.Foto)
+                .Include(i => i.Pendeta).ThenInclude(p => p.Foto)
                 .Include(i => i.KategoriIbadah)
+                .Where(i => i.Pendeta != null && i.KategoriIbadah != null)
                 .OrderByDescending(i => i.TanggalIbadah)
                 .AsNoTracking().ToListAsync();
 
@@ -56,7 +60,30 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
-            return View();
+            var ibadah = await _appDbContext.IbadahTable
+                .Include(i => i.KategoriIbadah)
+                .Include(i => i.Pendeta).ThenInclude(p => p.Foto)
+                .Where(i => i.Id == id)
+                .Where(i => i.Pendeta != null && i.KategoriIbadah != null)
+                .AsNoTracking().FirstOrDefaultAsync();
+
+            if (ibadah is null) return NotFound();
+
+            var isiNasPembimbing = await _beebeleApiService.PassageContent(ibadah.NasPembimbing);
+
+            var model = new DetailVM
+            {
+                Ibadah = ibadah,
+                NasPembimbing = isiNasPembimbing,
+            };
+
+            if(ibadah.Renungan is not null)
+            {
+                var isiRenungan = await _beebeleApiService.PassageContent(ibadah.Renungan);
+                model.Renungan = isiRenungan;
+            }
+
+            return View(model);
         }
     }
 }

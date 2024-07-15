@@ -153,7 +153,8 @@
                     <p>@item.Deskripsi</p>
 
                     <div class="ibadah-info">
-                        <button class="btn" style="width:100%;">Baca Selengkapnya...</button>
+                        <a asp-action="Detail" asp-controller="Ibadah" asp-area="" asp-route-id="@item.Id"
+                                class="btn" style="width:100%;">Baca Selengkapnya...</a>
                     </div>
                 </div>
                 <!-- Akhir Card -->
