@@ -34,8 +34,6 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         [ResponseCache(Duration = 15, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Index()
         {
-            throw new Exception("Tes");
-
             var daftarPengumuman = await _appDbContext.PengumumanTable
                 .OrderByDescending(p => p.TanggalDiBuat)
                 .Include(p => p.Foto)
