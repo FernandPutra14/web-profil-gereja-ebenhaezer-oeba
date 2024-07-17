@@ -7,14 +7,23 @@
 }
 
 <div class="pertama">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Beranda</h1>
     <ul class="breadcrumbs">
         <li><a href="#">Dashboard</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Beranda</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
 
+
+    <!-- Content Beranda -->
     <div class="info-data">
+
+
+        <!-- Card Jumlah Total Jemaat -->
         <div class="card">
             <div class="head">
                 <div>
@@ -25,6 +34,9 @@
             </div>
             <hr />
         </div>
+
+
+        <!-- Card Jumlah Lansia -->
         <div class="card">
             <div class="head">
                 <div>
@@ -36,6 +48,9 @@
             <hr />
             <span class="label">@(((double)Model.TotalLansia / Model.TotalJemaat * 100).ToString("F2"))%</span>
         </div>
+
+
+        <!-- Card Jumlah Dewasa -->
         <div class="card">
             <div class="head">
                 <div>
@@ -47,6 +62,9 @@
             <hr />
             <span class="label">@(((double)Model.TotalDewasa / Model.TotalJemaat * 100).ToString("F2"))%</span>
         </div>
+
+
+        <!-- Card Jumlah Pemuda -->
         <div class="card">
             <div class="head">
                 <div>
@@ -58,6 +76,9 @@
             <hr />
             <span class="label">@(((double)Model.TotalPemuda / Model.TotalJemaat * 100).ToString("F2"))%</span>
         </div>
+
+
+        <!-- Card Jumlah Remaja -->
         <div class="card">
             <div class="head">
                 <div>
@@ -69,6 +90,9 @@
             <hr />
             <span class="label">@(((double)Model.TotalRemaja / Model.TotalJemaat * 100).ToString("F2"))%</span>
         </div>
+
+
+        <!-- Card Jumlah Anak -->
         <div class="card">
             <div class="head">
                 <div>
@@ -82,7 +106,10 @@
         </div>
     </div>
 
+
     <div class="data">
+
+        <!-- Card Doughnut Chart -->
         <div class="content-data">
             <div class="head">
                 <h3>Doughnut Chart</h3>
@@ -107,6 +134,9 @@
                 <vc:chart chart-model=chartModel></vc:chart>
             </div>
         </div>
+
+
+        <!-- Card Pie Chart -->
         <div class="content-data">
             <div class="head">
                 <h3>Pie Chart</h3>
@@ -131,6 +161,9 @@
                 <vc:chart chart-model=chartModel1 ></vc:chart>
             </div>
         </div>
+
+
+        <!-- Card Polar Area Chart -->
         <div class="content-data">
             <div class="head">
                 <h3>Polar Area Chart</h3>
@@ -156,4 +189,7 @@
             </div>
         </div>
     </div>
+    <!-- Akhir Content Beranda -->
+
+
 </div>

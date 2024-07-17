@@ -3,6 +3,7 @@
     padding: 24px 20px 20px 20px;
 }
 
+    /* CSS Hyperlink */
     .pertama .title {
         font-size: 28px;
         font-weight: 600;
@@ -13,7 +14,7 @@
         display: flex;
         grid-gap: 6px;
         padding: 0;
-        margin: 0;   
+        margin: 0;
     }
 
         .pertama .breadcrumbs li,
@@ -30,7 +31,10 @@
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
+    /* Akhir CSS Hyperlink */
 
+
+    /* CSS Content Beranda */
     .pertama .info-data {
         margin-top: 36px;
         display: grid;
@@ -132,9 +136,9 @@ main .content-data .head {
         font-weight: 600;
     }
 
-            
+
 main .content-data .chart {
-    width: 100%;   
+    width: 100%;
     max-width: 100%;
     overflow-x: auto;
     scrollbar-width: none;
@@ -144,3 +148,4 @@ main .content-data .chart {
         display: none;
     }
 
+/* Akhir CSS Content Beranda */
