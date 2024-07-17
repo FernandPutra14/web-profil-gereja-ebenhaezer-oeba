@@ -13,12 +13,19 @@
 
 
 <div class="tambadah">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Tambah Ibadah Mingguan</h1>
     <ul class="breadcrumbs mb-4">
         <li><a asp-action="Index">Ibadah Mingguan</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Tambah Ibadah Mingguan</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
+
+
+    <!-- Container Input dan Tombol Simpan -->
     <div class="container-fluid cardplus">
         <form asp-action="Tambah">
             <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
@@ -102,8 +109,13 @@
             </div>
         </form>
     </div>
+    <!-- Akhir Container Input dan Tombol Simpan -->
+
+
 </div>
 
+
+<!-- Script JS -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

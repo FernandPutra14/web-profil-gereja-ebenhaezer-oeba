@@ -6,15 +6,26 @@
 }
 
 <div class="akunn">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Akun Admin</h1>
     <ul class="breadcrumbs mb-4">
         <li><a href="#">Manajemen Pengguna</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Akun Admin</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
+
+
+    <!-- Tombol Tambah Akun -->
     <div class="mb-4 mt-4">
         <a style="width:320px;" class="btn" asp-area="Dashboard" asp-controller="Account" asp-action="Tambah"> + Tambah Akun</a>
     </div>
+    <!-- Akhir Tombol Tambah Akun -->
+
+
+    <!-- Container Tabel Daftar -->
     <div class="container">
         <table class="table table-bordered table-striped">
             <thead>
@@ -65,12 +76,13 @@
             </tbody>
         </table>
     </div>
+    <!-- Akhir Container Tabel Daftar -->
+
+
 </div>
 
 
-
-
-
+<!-- Script JS -->
 @section Scripts {
     <partial name="_DataTablePartial" />
 }

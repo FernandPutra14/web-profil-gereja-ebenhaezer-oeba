@@ -6,14 +6,25 @@
 <div class="pendetaa">
 
     <h1 class="title">Pendeta</h1>
+
+
+    <!-- Hyperlink -->
     <ul class="breadcrumbs mb-4">
         <li><a href="#">Manajemen Jemaat</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Pendeta</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
+
+
+    <!-- Tombol Tambah Pendeta -->
     <div class="mb-4 mt-4">
         <a style="width:320px;" class="btn" asp-area="Dashboard" asp-controller="Pendeta" asp-action="Tambah"> + Tambah Pendeta</a>
     </div>
+    <!-- Akhir Tombol Tambah Pendeta -->
+
+
+    <!-- Container Tabel Daftar -->
     <div class="container">
         <table class="table table-bordered table-striped">
             <thead>
@@ -100,9 +111,13 @@
             </tbody>
         </table>
     </div>
+    <!-- Akhir Container Tabel Daftar -->
+
+
 </div>
 
 
+<!-- Script JS -->
 @section Scripts {
     <partial name="_DataTablePartial" />
 }

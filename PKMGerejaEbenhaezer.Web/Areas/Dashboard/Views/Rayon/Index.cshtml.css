@@ -3,6 +3,7 @@
     padding: 24px 20px 20px 20px;
 }
 
+    /* CSS Hyperlink */
     .dafray .title {
         font-size: 28px;
         font-weight: 600;
@@ -30,6 +31,8 @@
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
+/* Akhir CSS Hyperlink */
+
 
 /* CSS Datatable */
 .table {

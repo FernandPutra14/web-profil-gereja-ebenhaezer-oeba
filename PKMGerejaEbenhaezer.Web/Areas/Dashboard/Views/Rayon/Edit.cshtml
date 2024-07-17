@@ -5,13 +5,19 @@
 }
 
 <div class="editray">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Edit Rayon</h1>
     <ul class="breadcrumbs mb-4">
         <li><a asp-action="Index">Rayon</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Edit Rayon</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
 
+
+    <!-- Container Edit dan Tombol Simpan -->
     <div class="container-fluid cardedit">
         <form asp-action="Edit" method="post" class="container" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
@@ -92,9 +98,13 @@
             </div>
         </form>
     </div>
+    <!-- Akhir Container Edit dan Tombol Simpan -->
+
+
 </div>
 
 
+<!-- Script JS -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

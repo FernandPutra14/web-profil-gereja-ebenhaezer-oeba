@@ -5,12 +5,19 @@
 }
 
 <div class="plusakn">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Tambah Akun</h1>
     <ul class="breadcrumbs mb-4">
         <li><a asp-action="Index">Akun</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Tambah Akun</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
+
+
+    <!-- Container Input dan Tombol Simpan -->
     <div class="container-fluid cardplus">
         <form asp-action="Tambah" method="post">
             <div asp-validation-summary="ModelOnly"></div>
@@ -46,13 +53,13 @@
             </div>
         </form>
     </div>
+    <!-- Akhir Container Input dan Tombol Simpan -->
+
+
 </div>
 
 
-
-
-
-
+<!-- Script JS -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
