@@ -7,15 +7,26 @@
 }
 
 <div class="katibadah">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Kategori Ibadah</h1>
     <ul class="breadcrumbs mb-4">
         <li><a href="#">Ibadah & Kegiatan</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">kategori Ibadah</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
+
+
+    <!-- Tombol Tambah kategori Ibadah -->
     <div class="mb-4 mt-4">
         <a style="width:320px;" class="btn" asp-action="Tambah"> + Tambah Kategori Ibadah</a>
     </div>
+    <!-- Akhir Tombol Tambah kategori Ibadah -->
+
+
+    <!-- Container Tabel dan Tombol Simpan -->
     <div class="container">
         <table class="table table-bordered table-striped">
             <thead>
@@ -61,8 +72,13 @@
             </tbody>
         </table>
     </div>
+    <!-- Akhir Container Tabel dan Tombol Simpan -->
+
+
 </div>
 
+
+<!-- Script JS -->
 @section Scripts {
     <partial name="_DataTablePartial" />
 }

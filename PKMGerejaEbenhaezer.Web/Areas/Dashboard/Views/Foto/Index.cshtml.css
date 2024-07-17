@@ -3,6 +3,7 @@
     padding: 24px 20px 20px 20px;
 }
 
+    /* CSS Hyperlink */
     .fotoo .title {
         font-size: 28px;
         font-weight: 600;
@@ -30,20 +31,21 @@
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
+/* Akhir CSS Hyperlink */
 
 .foto-container {
     margin-bottom: 20px;
     text-align: center;
 }
 
-    ::deep .foto-container img {
-        width: 100%;
-        height: auto;
-        max-width: 200px;
-        max-height: 200px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+::deep .foto-container img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 
 .btn-primary, .btn-danger {
@@ -68,6 +70,8 @@
     display: inline-block;
 }
 
+
+/* CSS Content Galeri */
 .grid-wrapper {
     display: grid;
     grid-gap: 10px;
@@ -102,9 +106,14 @@
         grid-column: span 2;
         grid-row: span 2;
     }
+/* AKhir CSS Content Galeri */
 
-    @media (max-width: 768px) {
-        #detailsPane {
-            margin-top: 20px;
-        }
+
+/* --------------------------------------------------- Responsive --------------------------------------------------- */
+/* Responsive 768 */
+@media (max-width: 768px) {
+
+    #detailsPane {
+        margin-top: 20px;
     }
+}

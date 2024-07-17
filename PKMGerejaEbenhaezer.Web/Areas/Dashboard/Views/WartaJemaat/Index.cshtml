@@ -7,15 +7,26 @@
 
 
 <div class="wartaa">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Warta Jemaat</h1>
     <ul class="breadcrumbs mb-4">
         <li><a href="#">Informasi & Media</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Warta Jemaat</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
+
+
+    <!-- Tombol Tambah Warta Jemaat -->
     <div class="mb-4 mt-4">
         <a style="width:320px;" class="btn" asp-area="Dashboard" asp-controller="WartaJemaat" asp-action="Tambah"> + Tambah Warta Jemaat</a>
     </div>
+    <!-- Akhir Tombol Tambah Warta Jemaat -->
+
+
+    <!-- Container Tabel dan Tombol Simpan -->
     <div class="container">
         <table class="table table-bordered table-striped">
             <thead>
@@ -75,8 +86,13 @@
             </tbody>
         </table>
     </div>
+    <!-- Akhir Container Tabel dan Tombol Simpan -->
+
+
 </div>
 
+
+<!-- Script JS -->
 @section Scripts {
     <partial name="_DataTablePartial" />
 }
