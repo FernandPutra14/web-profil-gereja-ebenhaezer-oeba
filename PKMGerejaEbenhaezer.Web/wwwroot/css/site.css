@@ -37,6 +37,19 @@ body {
     flex-direction: column;
 }
 
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+    width: 1rem;
+    background: #ffffff ;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8894a7;
+    border-radius: .5rem;
+}
+
+
 /* Style Global Button btn */
 button.btn {
     padding: 10px 18px;
