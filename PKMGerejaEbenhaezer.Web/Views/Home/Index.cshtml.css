@@ -28,7 +28,7 @@
     }
 
     /* Masih Dinonaktifkan*/
-    #hero p {        
+    #hero p {
         font-family: 'Tinos';
         width: 50%;
         color: #fff;
@@ -76,11 +76,11 @@
                 font-size: 40px;
             }
 
-            #sejarah .row-container .content-sej p {
-                margin-bottom: 1vw;
-                text-align: justify;
-                font-size: 16px;
-            }
+    #sejarah .row-container .content-sej p {
+        margin-bottom: 1vw;
+        text-align: justify;
+        font-size: 16px;
+    }
 /* Akhir CSS Sejarah Section */
 
 
@@ -136,11 +136,16 @@
 .pen-link {
     margin-top: 18px;
 }
-    
+
     .pen-link a {
-        text-decoration : none;
+        text-decoration: none;
         color: #000;
     }
+
+        .pen-link a.disabled {
+            background: transparent;
+            color: #000;
+        }
 
     .pen-link i {
         font-size: 15px;
@@ -151,10 +156,10 @@
         transition: all 0.3s ease;
     }
 
-        .pen-link i:hover {
-            background: rgb(21, 21, 100);
-            color: #fff;
-        }
+    .pen-link a:not(.disabled) i:hover {
+        background: rgb(21, 21, 100);
+        color: #fff;
+    }
 /* Akhir Container Media Sosial */
 /* Akhir CSS Pendeta Section */
 
@@ -315,7 +320,7 @@ section.warta {
 
     .tombolbaca:hover {
         background-color: var(--light-heading-clr);
-        color: var(--primary-clr);       
+        color: var(--primary-clr);
     }
 
 .warta .warta-contents {
@@ -538,18 +543,18 @@ section.ibadah {
     top: 110%;
 }
 
-    .ibadah-card .category-pendeta-ibadah .tooltip-pendeta:before {
-        right: 20px;
-        position: absolute;
-        z-index: 104;
-        color: white;
-        background-color: var(--primary-clr);
-        top: -20%;
-        transform: translateX(-50%) rotate(45deg);
-        content: "";
-        height: 17px;
-        width: 17px;
-    }
+.ibadah-card .category-pendeta-ibadah .tooltip-pendeta:before {
+    right: 20px;
+    position: absolute;
+    z-index: 104;
+    color: white;
+    background-color: var(--primary-clr);
+    top: -20%;
+    transform: translateX(-50%) rotate(45deg);
+    content: "";
+    height: 17px;
+    width: 17px;
+}
 
 
 .ibadah-card .category-pendeta-ibadah .subject-ibadah {
@@ -576,7 +581,7 @@ section.ibadah {
     text-overflow: ellipsis;
 }
 
- .ibadah-card p {
+.ibadah-card p {
     margin-top: 10px;
     font-size: 13px;
     color: var(--dark-heading-clr);
@@ -605,10 +610,10 @@ section.ibadah {
     }
 
 
-.ibadah-card .ibadah-date .date-kiri i {
-    color: var(--primary-clr);
-    margin-right: 5px;
-}
+        .ibadah-card .ibadah-date .date-kiri i {
+            color: var(--primary-clr);
+            margin-right: 5px;
+        }
 
     .ibadah-card .ibadah-date .date-kanan {
         display: flex;
@@ -627,7 +632,6 @@ section.ibadah {
 
 
 .ibadah-card .ibadah-info {
-
     padding: 15px 0px 0px;
     display: flex;
     text-align: center;
@@ -868,11 +872,11 @@ section.peng {
     transition: all 0.3s ease;
 }
 
-.owl-carousel ::deep .owl-nav .owl-prev:hover {
-    background-color: var(--primary-clr);
-    opacity: 0.6;
-    color: #fff;
-}
+    .owl-carousel ::deep .owl-nav .owl-prev:hover {
+        background-color: var(--primary-clr);
+        opacity: 0.6;
+        color: #fff;
+    }
 
 .owl-carousel ::deep .owl-dots {
 }
@@ -1009,9 +1013,9 @@ section.peng {
         overflow: scroll;
     }
 
-    #hero h1 {
-        font-size: 120px;
-    }
+        #hero h1 {
+            font-size: 120px;
+        }
     /* Akhir CSS Hero Section */
 
 
@@ -1119,17 +1123,17 @@ section.peng {
         margin-left: 10px;
         margin-right: 10px;
     }
-    
 
-    #sejarah .row-container {
-        flex-direction: column;
-        align-items: center;
-    }
 
-        #sejarah .row-container .image-container,
-        #sejarah .row-container .content-sej {
-            width: 100%;
+        #sejarah .row-container {
+            flex-direction: column;
+            align-items: center;
         }
+
+            #sejarah .row-container .image-container,
+            #sejarah .row-container .content-sej {
+                width: 100%;
+            }
     /* Akhir CSS Sejarah Section */
 
 
@@ -1202,7 +1206,7 @@ section.peng {
 
     /* CSS Pendeta Section */
     #pendeta {
-        padding: 8vw 8vw 3vw 8vw; 
+        padding: 8vw 8vw 3vw 8vw;
     }
     /* Akhir CSS Pendeta Section */
 
@@ -1274,7 +1278,7 @@ section.peng {
     /* CSS Injil Section */
     #injil {
         margin-bottom: 2vw;
-    }        
+    }
 
         #injil .injil-text h6 {
             font-family: 'Tinos';
