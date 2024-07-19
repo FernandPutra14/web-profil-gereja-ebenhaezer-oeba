@@ -1,12 +1,9 @@
 ﻿@model List<Foto>
-@{
-    string idForm = (ViewData["idForm"] as string)!;
-}
 
-<!-- Tombol Piliha Gambar -->
+<!-- Tombol Pilihan Gambar -->
 <input type="text" name="IdFoto" id="IdFoto" class="form-control" hidden value="@ViewData["idFoto"]" />
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Pilih Gambar</button>
-<!-- Akhir Tombol Piliha Gambar -->
+<!-- Akhir Tombol Pilihan Gambar -->
 
 
 <!-- Modal Upload Foto -->

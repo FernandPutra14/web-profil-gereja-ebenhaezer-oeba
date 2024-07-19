@@ -34,7 +34,7 @@
                          Tanggal Dibuat: @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) 
                             @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo) <br>
                          Pembuat: @foto.Pembuat?.UserName" >
-            <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
+                    <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
                 </a>
             </div> 
 
