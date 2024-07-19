@@ -7,12 +7,19 @@
 }
 
 <div class="edwarta">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Edit Warta Jemaat</h1>
     <ul class="breadcrumbs mb-4">
         <li><a asp-action="Index">Warta Jemaat</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Edit Warta Jemaat</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
+
+
+    <!-- Container Edit dan Tombol Simpan -->
     <div class="container-fluid cardplus">
         <form asp-action="Edit" class="container">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -43,9 +50,13 @@
             </div>
         </form>
     </div>
+    <!-- Akhir Container Edit dan Tombol Simpan -->
+
+
 </div>
 
 
+<!-- Script JS -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 

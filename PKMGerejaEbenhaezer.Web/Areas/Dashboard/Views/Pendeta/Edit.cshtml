@@ -5,12 +5,19 @@
 }
 
 <div class="edpend">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Edit Pendeta</h1>
     <ul class="breadcrumbs mb-4">
         <li><a asp-action="Index">Pendeta</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Edit Pendeta</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
+
+
+    <!-- Container Edit dan Tombol Simpan -->
     <div class="container-fluid cardplus">
         <form asp-action="Edit" method="post" class="container" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
@@ -31,8 +38,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div style="display:flex; justify-content: center; align-items: center;">
                 <vc:upload-foto id-foto="@Model.IdFoto"></vc:upload-foto>
                 <span asp-validation-for="@Model.IdFoto"></span>
@@ -72,8 +77,13 @@
             </div>
         </form>
     </div>
+    <!-- Akhir Container Edit dan Tombol Simpan -->
+
+
 </div>
 
+
+<!-- Script JS -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

@@ -3,3 +3,67 @@
 @{
     ViewData["Title"] = "Ibadah";
 }
+
+
+<!-- Content Detail Pengumuman Section -->
+<section id="blog-container">
+    <div class="blogs">
+        <div class="post">         
+            <!-- Judul -->
+            <h3 class="mb-3">Perjamuan Bulan Agustus</h3>
+            <h4 class="mb-3">Perjamuan</h4>
+            <h6 class="mb-3">Pdt. Elen Th. Bailaen-Manafe, S.Si (Teol)</h6>
+            <div class="info-blog">
+                
+                    <!-- Penulis -->
+                <h5><i class="ri-map-pin-range-line" style="padding-right: 5px;"></i>Gedung Gereja Ebenhaezer Oeba</h5>
+                    <!-- Tanggal Dibuat -->
+                <h5><i class="ri-calendar-schedule-line" style="padding-right:5px;"></i>Minggu, 23 Juni 2024</h5>
+                <h5><i class="ri-time-line" style="padding-right: 5px;"></i>08.00 AM - 10.00 AM</h5>
+                
+            </div>
+            <!-- Isi pengumuman -->
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+                laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <!-- Dokumen PDF (Jika Ada) -->     
+            
+            <h5>Nats Renungan</h5>
+            <h5 class="nats-renungan">
+                "Sesudah dibaptis, Yesus segera keluar dari air dan pada waktu itu juga langit terbuka dan 
+                Ia melihat Roh Allah seperti burung merpati turun ke atas-Nya, lalu terdengarlah suara dari 
+                sorga yang mengatakan: ”Inilah Anak-Ku yang Kukasihi, kepada-Nyalah Aku berkenan.”
+            </h5>
+
+            <h5>Nats Pembimbing</h5>
+            <h5 class="nats-renungan">
+                "Sesudah dibaptis, Yesus segera keluar dari air dan pada waktu itu juga langit terbuka dan
+                Ia melihat Roh Allah seperti burung merpati turun ke atas-Nya, lalu terdengarlah suara dari
+                sorga yang mengatakan: ”Inilah Anak-Ku yang Kukasihi, kepada-Nyalah Aku berkenan.”
+            </h5>
+
+        </div>
+    </div>
+</section>
+<!-- Akhir Content Detail Pengumuman Section -->
+
+
+<!-- Script JS -->
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.main-navbar').css({
+                'position': 'fixed',
+                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
+                'background-color': 'var(--primary-clr)',
+            });
+            $(function () {
+                $('.badan-utama').css({
+                    'padding-left': '0',
+                    'padding-right': '0',
+                    'padding-top': '8rem',
+                });
+            });
+        });
+    </script>
+}

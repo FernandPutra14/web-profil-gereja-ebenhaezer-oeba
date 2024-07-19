@@ -1,8 +1,16 @@
-﻿.editray {
+﻿.cardedit {
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--light);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+}
+
+.editray {
     width: 100%;
     padding: 24px 20px 20px 20px;
 }
 
+    /* CSS Hyperlink */
     .editray .title {
         font-size: 28px;
         font-weight: 600;
@@ -30,13 +38,8 @@
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
+/* Akhir CSS Hyperlink */
 
-.cardedit {
-    padding: 20px;
-    border-radius: 10px;
-    background: var(--light);
-    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
-}
 
 #dvPreview {
     height: 300px;

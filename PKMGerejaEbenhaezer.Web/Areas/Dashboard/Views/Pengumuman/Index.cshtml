@@ -6,17 +6,27 @@
     var cultureInfo = new CultureInfo("id-ID");
 }
 
-
 <div class="pengumuman">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Pengumuman</h1>
     <ul class="breadcrumbs mb-4">
         <li><a href="#">Informasi & Media</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Pengumuman</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
+
+
+    <!-- Tombol Tambah Pengumuman -->
     <div class="mb-4 mt-4">
         <a style="width:320px;" class="btn" asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Tambah"> + Tambah Pengumuman</a>
     </div>
+    <!-- Akhir Tombol Tambah Pengumuman -->
+
+
+    <!-- Container Tabel Daftar -->
     <div class="container">
         <table class="table table-bordered table-striped">
             <thead>
@@ -100,8 +110,13 @@
             </tbody>
         </table>
     </div>
+    <!-- Akhir Container Tabel Daftar -->
+
+
 </div>
 
+
+<!-- Script JS -->
 @section Scripts {
     <partial name="_DataTablePartial" />
 }

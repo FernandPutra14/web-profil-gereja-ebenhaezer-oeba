@@ -98,11 +98,11 @@ footer {
     /* CSS Footer */
     .copyrightText {
         flex-direction: column;
-        align-items: center; /* Center align items in column direction */
+        align-items: center; 
     }
 
         .copyrightText img {
-            margin-bottom: 10px; /* Add margin to separate image from text */
+            margin-bottom: 10px;
         }
     /* Akhir CSS Footer */
 }

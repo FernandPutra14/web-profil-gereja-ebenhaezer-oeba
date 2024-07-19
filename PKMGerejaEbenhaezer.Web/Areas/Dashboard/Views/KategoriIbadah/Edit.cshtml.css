@@ -10,6 +10,7 @@
     padding: 24px 20px 20px 20px;
 }
 
+    /* CSS Hyperlink */
     .edikatib .title {
         font-size: 28px;
         font-weight: 600;
@@ -37,6 +38,7 @@
                     color: var(--dark-grey);
                     pointer-events: none;
                 }
+/* Akhir CSS Hyperlink */
 
 .form-label {
     font-size: 14px;
@@ -74,6 +76,7 @@
     padding: 0 15px;
 }
 /* Akhir CSS type input Text dan Textarea */
+
 
 /* Warna */
 .color-box {

@@ -8,13 +8,19 @@
 }
 
 <div class="fotoo">
+
+
+    <!-- Hyperlink -->
     <h1 class="title">Galeri</h1>
     <ul class="breadcrumbs mb-4">
         <li><a href="#">Informasi & Media</a></li>
         <li class="divider">/</li>
         <li><a href="#" class="active">Galeri</a></li>
     </ul>
+    <!-- Akhir Hyperlink -->
 
+
+    <!-- Form Upload Foto -->
     <form asp-action="IndexPOST" class="row mb-5" method="post" enctype="multipart/form-data" asp-route-pIndex="@Model.Items!.PageIndex">
         <div class="col-md-12 mb-3">
             <input class="form-control" type="file" asp-for="@Model.FormFile" />
@@ -24,7 +30,10 @@
             <button class="btn w-100" type="submit">Upload</button>
         </div>
     </form>
+    <!-- Akhir Form Upload Foto -->
 
+
+    <!-- Content Galeri -->
     <div class="grid-wrapper">
         @foreach (var foto in Model.Items!)
         { 
@@ -37,9 +46,10 @@
                     <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
                 </a>
             </div> 
-
         }
     </div>
+    <!-- Akhir Content Galeri -->
+
 
     <!-- Konfirmasi Hapus Modal-->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="z-index:99999;">
@@ -58,7 +68,9 @@
             </div>
         </div>
     </div>
+    <!-- Akhir Konfirmasi Hapus Modal-->
 
+    <!-- Pagination -->
     <div class="row mt-5">
         @{
             var hasPrevious = Model.Items.HasPreviousPage;
@@ -72,8 +84,13 @@
             <a asp-action="Index" asp-route-pageIndex="@(Model.Items.PageIndex + 1)" asp-area="Dashboard" class="btn w-100 @(hasNext ? "" : " disabled")">Selanjutnya</a>
         </div>
     </div>
+    <!-- Akhir Pagination -->
+
+
 </div>
 
+
+<!-- Script JS -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <partial name="_FancyBoxPartial" />
