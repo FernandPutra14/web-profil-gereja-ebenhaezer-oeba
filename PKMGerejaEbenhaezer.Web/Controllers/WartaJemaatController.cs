@@ -35,7 +35,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             if(bulan is not null)
                 daftarWarta = daftarWarta.Where(w => w.TanggalWarta.Month == bulan).ToList();
 
-            var pageSize = 5;
+            var pageSize = 6;
 
             var items = new PaginatedList<WartaJemaat>(daftarWarta, daftarWarta.Count, pageIndex, pageSize);
 
