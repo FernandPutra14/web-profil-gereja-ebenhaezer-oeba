@@ -342,6 +342,7 @@
                         <p>@pengumuman.Isi</p>
                         <div class="peng-tanggal">
                             <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
+                            <span><i class="ri-time-line"></i> 08.00 WITA</span>
                             <a asp-action="Detail" asp-controller="Pengumuman" asp-route-id="@pengumuman.Id" asp-area=""
                                class="tombolseleng">Baca Selengkapnya...</a>
                         </div>
