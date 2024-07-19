@@ -98,9 +98,13 @@ const profile = document.querySelector('nav .profile');
 const imgProfile = profile.querySelector('img');
 const dropdownProfile = profile.querySelector('.profile-link');
 
-imgProfile.addEventListener('click', function () {
+imgProfile.addEventListener('click', function (event) {
 	dropdownProfile.classList.toggle('show');
-})
+	event.stopPropagation();
+});
 
-
-
+document.addEventListener('click', function (event) {
+	if (dropdownProfile.classList.contains('show') && !profile.contains(event.target)) {
+		dropdownProfile.classList.remove('show');
+	}
+});
