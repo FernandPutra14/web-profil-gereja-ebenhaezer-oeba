@@ -38,8 +38,8 @@ body {
 }
 
 
-/* Scroll Bar */
-::-webkit-scrollbar {
+/* Scroll Bar Dinonaktifkan */
+/*::-webkit-scrollbar {
     width: 1rem;
     background: #ffffff ;
 }
@@ -47,7 +47,7 @@ body {
 ::-webkit-scrollbar-thumb {
     background: #8894a7;
     border-radius: .5rem;
-}
+}*/
 
 
 /* Style Global Button btn */
