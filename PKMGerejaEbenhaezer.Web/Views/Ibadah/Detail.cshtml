@@ -1,53 +1,73 @@
 ﻿@using PKMGerejaEbenhaezer.Web.Models.IbadahModels
+@using System.Globalization
 @model DetailVM
 @{
     ViewData["Title"] = "Ibadah";
+    var cultureInfo = new CultureInfo("id-ID");
 }
 
 
 <!-- Content Detail Pengumuman Section -->
 <section id="blog-container">
     <div class="blogs">
-        <div class="post">         
+        <div class="post">
             <!-- Judul -->
-            <h3 class="mb-3">Perjamuan Bulan Agustus</h3>
-            <h4 class="mb-3">Perjamuan</h4>
-            <h6 class="mb-3">Pdt. Elen Th. Bailaen-Manafe, S.Si (Teol)</h6>
+            <h3 class="mb-3">@Model.Ibadah.Judul</h3>
+            <h4 class="mb-3">@Model.Ibadah.KategoriIbadah!.Nama</h4>
+            <h6 class="mb-3">@Model.Ibadah.Pendeta!.Nama</h6>
             <div class="info-blog">
-                
-                    <!-- Penulis -->
-                <h5><i class="ri-map-pin-range-line" style="padding-right: 5px;"></i>Gedung Gereja Ebenhaezer Oeba</h5>
-                    <!-- Tanggal Dibuat -->
-                <h5><i class="ri-calendar-schedule-line" style="padding-right:5px;"></i>Minggu, 23 Juni 2024</h5>
-                <h5><i class="ri-time-line" style="padding-right: 5px;"></i>08.00 AM - 10.00 AM</h5>
-                
+
+                <!-- Penulis -->
+                <h5><i class="ri-map-pin-range-line" style="padding-right: 5px;"></i>@Model.Ibadah.Tempat</h5>
+                <!-- Tanggal Dibuat -->
+                <h5>
+                    <i class="ri-calendar-schedule-line" style="padding-right:5px;"></i>
+                    @Model.Ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
+                </h5>
+                <h5>
+                    <i class="ri-time-line" style="padding-right: 5px;"></i>
+                    @Model.Ibadah.TanggalIbadah.ToString("hh:mm tt") -
+                    @Model.Ibadah.TanggalIbadah.Add(Model.Ibadah.KategoriIbadah.Durasi).ToString("hh:mm tt")
+                </h5>
+
             </div>
             <!-- Isi pengumuman -->
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <!-- Dokumen PDF (Jika Ada) -->     
-            
-            <h5>Nats Renungan</h5>
-            <h5 class="nats-renungan">
-                "Sesudah dibaptis, Yesus segera keluar dari air dan pada waktu itu juga langit terbuka dan 
-                Ia melihat Roh Allah seperti burung merpati turun ke atas-Nya, lalu terdengarlah suara dari 
-                sorga yang mengatakan: ”Inilah Anak-Ku yang Kukasihi, kepada-Nyalah Aku berkenan.”
-            </h5>
+            <p>
+                @Model.Ibadah.Deskripsi
+            </p>
+            <!-- Dokumen PDF (Jika Ada) -->
+            @if (Model.Renungan is not null)
+            {
+                var title = Model.Renungan.Verses.FirstOrDefault(v => v.Type == "title");
+                <h5>Nats Renungan</h5>
+                <h5 class="nats-renungan">
+                    @Model.Ibadah.Renungan
+                    "@if (title is not null)
+                    {
+                        <b>Judul : @title.Content.</b>
+                    }
+                    @(string.Join(" ", Model.Renungan.Verses.Where(v => v.Type == "content").Select(v => v.Content)))"
+                </h5>
+            }
+
 
             <h5>Nats Pembimbing</h5>
-            <h5 class="nats-renungan">
-                "Sesudah dibaptis, Yesus segera keluar dari air dan pada waktu itu juga langit terbuka dan
-                Ia melihat Roh Allah seperti burung merpati turun ke atas-Nya, lalu terdengarlah suara dari
-                sorga yang mengatakan: ”Inilah Anak-Ku yang Kukasihi, kepada-Nyalah Aku berkenan.”
-            </h5>
-
+            @if (Model.NasPembimbing is not null)
+            {
+                var title = Model.NasPembimbing.Verses.FirstOrDefault(v => v.Type == "title");
+                <h5 class="nats-renungan">
+                    @Model.Ibadah.NasPembimbing
+                    "@if(title is not null)
+                    {
+                        <b>Judul : @title.Content.</b>
+                    }
+                    @(string.Join(" ", Model.NasPembimbing.Verses.Where(v => v.Type == "content").Select(v => v.Content)))"
+                </h5>
+            }
         </div>
     </div>
 </section>
 <!-- Akhir Content Detail Pengumuman Section -->
-
-
 <!-- Script JS -->
 @section Scripts {
     <script type="text/javascript">

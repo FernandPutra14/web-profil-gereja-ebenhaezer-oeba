@@ -9,7 +9,6 @@
 
 <div class="fotoo">
 
-
     <!-- Hyperlink -->
     <h1 class="title">Galeri</h1>
     <ul class="breadcrumbs mb-4">
@@ -18,8 +17,6 @@
         <li><a href="#" class="active">Galeri</a></li>
     </ul>
     <!-- Akhir Hyperlink -->
-
-
     <!-- Form Upload Foto -->
     <form asp-action="IndexPOST" class="row mb-5" method="post" enctype="multipart/form-data" asp-route-pIndex="@Model.Items!.PageIndex">
         <div class="col-md-12 mb-3">
@@ -31,26 +28,23 @@
         </div>
     </form>
     <!-- Akhir Form Upload Foto -->
-
-
     <!-- Content Galeri -->
     <div class="grid-wrapper">
         @foreach (var foto in Model.Items!)
-        { 
+        {
             <div>
                 <a data-fancybox="gallery" href="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })"
+                    data-id="@foto.Id"
                    data-caption="ID: @foto.Id <br>
-                         Tanggal Dibuat: @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) 
-                            @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo) <br>
-                         Pembuat: @foto.Pembuat?.UserName" >
-                    <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
-                </a>
-            </div> 
+                             Tanggal Dibuat: @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
+                @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo) <br>
+                             Pembuat: @foto.Pembuat?.UserName" >
+                        <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
+                    </a>
+            </div>
         }
     </div>
     <!-- Akhir Content Galeri -->
-
-
     <!-- Konfirmasi Hapus Modal-->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="z-index:99999;">
         <div class="modal-dialog">
@@ -61,7 +55,8 @@
                 <div class="modal-body">Apakah anda yakin ingin menghapus foto ini?</div>
                 <div class="modal-footer">
                     <button type="button" class="btn" data-bs-dismiss="modal">Batal</button>
-                    <form id="deleteForm" method="post">
+                    <form asp-action="Hapus" method="post">
+                        <input hidden name="id" id="id"/>
                         <button type="submit" class="btn">Hapus</button>
                     </form>
                 </div>
@@ -69,7 +64,6 @@
         </div>
     </div>
     <!-- Akhir Konfirmasi Hapus Modal-->
-
     <!-- Pagination -->
     <div class="row mt-5">
         @{
@@ -100,5 +94,38 @@
             document.getElementById("HideImg")
                 .style.display = "none";
         }
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $.fancybox.defaults.buttons = [
+                'slideShow',
+                'share',
+                'zoom',
+                'fullScreen',
+                'download',
+                'thumbs',
+                'delete',
+                'close',
+            ];
+
+            $.fancybox.defaults.btnTpl.delete = '<button data-fancybox-delete class="fancybox-button fancybox-button--delete" title="Delete"><i class="fa fa-trash" style="font-size:16px; padding-top:3px;"></i></button>';
+
+            // CLick tombol Delete
+            $(document).on('click', '[data-fancybox-delete]', function () {
+                var instance = $.fancybox.getInstance();
+                var current = instance.current;
+                var fotoId = $(current.opts.$orig).data('id');
+
+                console.log(fotoId);
+
+                //Memperlihatkan konfirmasi modal
+                $('#deleteModal input#id').val(fotoId);
+                $('#deleteModal').modal('show');
+            });
+
+            //Inisialisasi Fancybox dengan custom tombol hapus
+            $('[data-fancybox="gallery"]').fancybox();
+        });
     </script>
 }
