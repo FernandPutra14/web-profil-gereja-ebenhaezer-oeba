@@ -101,7 +101,7 @@
                     <p>@item.Isi</p>
                     <div class="peng-tanggal">
                         <span><i class="ri-calendar-fill"></i>@item.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
-                        <span><i class="ri-time-line"></i> 08.00 WITA</span>
+                        <span><i class="ri-time-line"></i> @item.TanggalDiBuat.ToString("hh:mm tt") WITA</span>
                         <a asp-action="Detail" asp-controller="Pengumuman" asp-route-id="@item.Id"
                            class="tombolseleng">Baca Selengkapnya...</a>
                     </div>
