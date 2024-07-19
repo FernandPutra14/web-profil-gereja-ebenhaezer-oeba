@@ -19,6 +19,25 @@
         font-size: 14px;
         font-weight: 400;
     }
+
+.input-wrapper {
+    position: relative;
+}
+
+    .input-wrapper input {
+        padding-right: 30px;
+    }
+
+    .input-wrapper .toggle-password {
+        position: absolute;
+        right: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #707070;
+    }
 /* Akhir CSS Content Manajemen Akun Section */
 
 
