@@ -81,6 +81,11 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             return View();
         }
 
+        public IActionResult TentangKami()
+        { 
+            return View(); 
+        }
+
         public IActionResult Privacy()
         {
             return View();
