@@ -107,10 +107,18 @@ section.peng {
     font-size: 13px;
 }
 
+.peng-card .peng-tombol {
+    padding: 15px 0px 0px;
+    display: flex;
+    text-align: center;
+    margin-right: 10px;
+    justify-content: center;
+    border-top: 1px solid #ccc;
+}
+
 .peng-card .peng-tanggal {
     display: flex;
     padding: 15px 0px 0px;
-    border-top: 1px solid #ccc;
     justify-content: space-between;
     align-items: center;
 }
