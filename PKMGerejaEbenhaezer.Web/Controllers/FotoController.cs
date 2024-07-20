@@ -11,12 +11,12 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 {
     public class FotoController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly PhotoFileSettingsOptions _photoFileSettingsOptions;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<FotoController> _logger;
 
-        public FotoController(AppDbContext appDbContext,
+        public FotoController(IAppDbContext appDbContext,
             PhotoFileSettingsOptions photoFileSettingsOptions,
             IWebHostEnvironment webHostEnvironment,
             ILogger<FotoController> logger)

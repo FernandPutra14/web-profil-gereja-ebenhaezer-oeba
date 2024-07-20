@@ -15,20 +15,23 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
     public class AccountController : Controller
     {
         private readonly ISignInManager _signInManager;
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<AccountController> _logger;
         private readonly IToastrNotificationService _notificationService;
+        private readonly IPasswordHasher<AppUser> _passwordHasher;
 
         public AccountController(
             ISignInManager signInManager,
-            AppDbContext appDbContext, 
-            ILogger<AccountController> logger, 
-            IToastrNotificationService notificationService)
+            IAppDbContext appDbContext,
+            ILogger<AccountController> logger,
+            IToastrNotificationService notificationService,
+            IPasswordHasher<AppUser> passwordHasher)
         {
             _signInManager = signInManager;
             _appDbContext = appDbContext;
             _logger = logger;
             _notificationService = notificationService;
+            _passwordHasher = passwordHasher;
         }
 
         [AllowAnonymous]
@@ -96,7 +99,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             //Validasi
             if (!ModelState.IsValid)
                 return View(editVM);
-
+            
             var user = await _signInManager.GetSignedInUser();
 
             if (user is null)
@@ -115,11 +118,10 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 return View(editVM);
             }
 
-            var hasher = new PasswordHasher<AppUser>();
 
             if (editVM.Password is not null)
             {
-                var verificationResult = hasher.VerifyHashedPassword(null,
+                var verificationResult = _passwordHasher.VerifyHashedPassword(null,
                     user.PasswordHash, editVM.Password);
 
                 if (verificationResult == PasswordVerificationResult.Success ||
@@ -134,7 +136,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             user.UserName = editVM.UserName;
 
             if (editVM.Password is not null)
-                user.PasswordHash = hasher.HashPassword(null, editVM.Password);
+                user.PasswordHash = _passwordHasher.HashPassword(null, editVM.Password);
 
             try
             {

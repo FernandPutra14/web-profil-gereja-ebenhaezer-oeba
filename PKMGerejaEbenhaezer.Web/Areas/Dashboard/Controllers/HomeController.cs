@@ -11,10 +11,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly IToastrNotificationService _notificationService;
 
-        public HomeController(AppDbContext appDbContext, 
+        public HomeController(IAppDbContext appDbContext, 
             IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;

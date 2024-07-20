@@ -9,9 +9,9 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 {
     public class PengumumanController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
 
-        public PengumumanController(AppDbContext appDbContext)
+        public PengumumanController(IAppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }

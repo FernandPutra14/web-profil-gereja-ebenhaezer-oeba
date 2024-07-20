@@ -15,11 +15,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     [Authorize]
     public class PendetaController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<PendetaController> _logger;
         private readonly IToastrNotificationService _notificationService;
 
-        public PendetaController(AppDbContext appDbContext,
+        public PendetaController(IAppDbContext appDbContext,
             ILogger<PendetaController> logger,
             IToastrNotificationService notificationService)
         {

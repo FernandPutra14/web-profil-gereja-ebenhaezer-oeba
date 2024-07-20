@@ -7,9 +7,9 @@ namespace PKMGerejaEbenhaezer.Web.Authentication
 {
     public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
 
-        public CustomCookieAuthenticationEvents(AppDbContext appDbContext)
+        public CustomCookieAuthenticationEvents(IAppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }

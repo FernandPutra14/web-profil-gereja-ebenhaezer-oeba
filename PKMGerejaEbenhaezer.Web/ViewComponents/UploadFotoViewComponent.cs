@@ -6,9 +6,9 @@ namespace PKMGerejaEbenhaezer.Web.ViewComponents
 {
     public class UploadFotoViewComponent : ViewComponent
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
 
-        public UploadFotoViewComponent(AppDbContext appDbContext)
+        public UploadFotoViewComponent(IAppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }

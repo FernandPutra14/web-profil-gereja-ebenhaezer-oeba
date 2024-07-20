@@ -12,11 +12,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     [Authorize]
     public class WartaJemaatController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<WartaJemaatController> _logger;
         private readonly IToastrNotificationService _notificationService;
 
-        public WartaJemaatController(AppDbContext appDbContext,
+        public WartaJemaatController(IAppDbContext appDbContext,
             ILogger<WartaJemaatController> logger,
             IToastrNotificationService notificationService)
         {

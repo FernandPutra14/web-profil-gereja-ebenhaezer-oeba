@@ -13,13 +13,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     [Authorize]
     public class PengumumanController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<PengumumanController> _logger;
         private readonly IPDFUploadService _pDFUploadService;
         private readonly IToastrNotificationService _notificationService;
 
         public PengumumanController(
-            AppDbContext appDbContext,
+            IAppDbContext appDbContext,
             ILogger<PengumumanController> logger,
             IPDFUploadService pDFUploadService,
             IToastrNotificationService notificationService)

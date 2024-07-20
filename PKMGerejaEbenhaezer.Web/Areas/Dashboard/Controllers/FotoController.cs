@@ -17,14 +17,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     [Authorize]
     public class FotoController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly PhotoFileSettingsOptions _photoFileSettingsOptions;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<FotoController> _logger;
         private readonly IToastrNotificationService _notificationService;
         private readonly IImageCompressService _imageCompressService;
 
-        public FotoController(AppDbContext appDbContext,
+        public FotoController(IAppDbContext appDbContext,
             PhotoFileSettingsOptions photoFileSettingsOptions,
             IWebHostEnvironment webHostEnvironment,
             ILogger<FotoController> logger,

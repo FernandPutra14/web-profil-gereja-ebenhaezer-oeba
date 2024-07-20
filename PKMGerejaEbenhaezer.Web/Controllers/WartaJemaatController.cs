@@ -9,10 +9,10 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 {
     public class WartaJemaatController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<WartaJemaatController> _logger;
 
-        public WartaJemaatController(AppDbContext appDbContext, 
+        public WartaJemaatController(IAppDbContext appDbContext, 
             ILogger<WartaJemaatController> logger)
         {
             _appDbContext = appDbContext;

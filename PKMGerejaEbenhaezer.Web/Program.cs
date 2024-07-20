@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using PKMGerejaEbenhaezer.DataAccess.Data;
+using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Authentication;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
@@ -55,6 +57,8 @@ builder.Services.AddScoped<ISignInManager, SignInManager>();
 builder.Services.AddScoped<IPDFUploadService, PDFUploadService>();
 builder.Services.AddScoped<IToastrNotificationService, ToastrNotificationService>();
 builder.Services.AddScoped<IImageCompressService, ImageCompressService>();
+builder.Services.AddScoped<IAppDbContext, AppDbContext>();
+builder.Services.AddScoped<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
 
 builder.Services.AddHttpClient<IBeebeleApiService, BeebleApiService>(options =>
 {

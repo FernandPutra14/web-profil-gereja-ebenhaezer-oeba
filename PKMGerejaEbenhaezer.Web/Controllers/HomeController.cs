@@ -16,19 +16,13 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly AppDbContext _appDbContext;
-        private readonly IBeebeleApiService _beebeleApiService;
-        private readonly IToastrNotificationService _toastrNotificationService;
+        private readonly IAppDbContext _appDbContext;
 
         public HomeController(ILogger<HomeController> logger,
-            AppDbContext appDbContext,
-            IBeebeleApiService beebeleApiService,
-            IToastrNotificationService toastrNotificationService)
+            IAppDbContext appDbContext)
         {
             _logger = logger;
             _appDbContext = appDbContext;
-            _beebeleApiService = beebeleApiService;
-            _toastrNotificationService = toastrNotificationService;
         }
 
         [ResponseCache(Duration = 15, Location = ResponseCacheLocation.Any)]

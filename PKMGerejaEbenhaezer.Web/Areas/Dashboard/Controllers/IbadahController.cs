@@ -13,11 +13,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     [Authorize]
     public class IbadahController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<IbadahController> _logger;
         private readonly IToastrNotificationService _notificationService;
 
-        public IbadahController(AppDbContext appDbContext, 
+        public IbadahController(IAppDbContext appDbContext, 
             ILogger<IbadahController> logger, 
             IToastrNotificationService notificationService)
         {

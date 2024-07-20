@@ -11,14 +11,20 @@ namespace PKMGerejaEbenhaezer.Web.Authentication
     public class SignInManager : ISignInManager
     {
         private readonly HttpContext _httpContext;
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<SignInManager> _logger;
+        private readonly IPasswordHasher<AppUser> _passwordHasher;
 
-        public SignInManager(ILogger<SignInManager> logger, AppDbContext appDbContext, IHttpContextAccessor httpContextAccessor)
+        public SignInManager(
+            ILogger<SignInManager> logger,
+            IAppDbContext appDbContext,
+            IHttpContextAccessor httpContextAccessor,
+            IPasswordHasher<AppUser> passwordHasher)
         {
             _logger = logger;
             _appDbContext = appDbContext;
             _httpContext = httpContextAccessor.HttpContext!;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<AppUser?> GetSignedInUser()
@@ -40,8 +46,7 @@ namespace PKMGerejaEbenhaezer.Web.Authentication
             if (user is null) return false;
 
             //Bandingkan password dengan password di database
-            var hasher = new PasswordHasher<AppUser>();
-            var result = hasher.VerifyHashedPassword(null, user.PasswordHash, password);
+            var result = _passwordHasher.VerifyHashedPassword(null, user.PasswordHash, password);
             if (result == PasswordVerificationResult.Failed) return false;
 
             //Buat claim

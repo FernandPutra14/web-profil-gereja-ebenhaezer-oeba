@@ -14,17 +14,20 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     [Authorize(Roles = AppUserRoles.SuperAdmin)]
     public class AccountController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<AccountController> _logger;
         private readonly IToastrNotificationService _notificationService;
+        private readonly IPasswordHasher<AppUser> _passwordHasher;
 
-        public AccountController(AppDbContext appDbContext,
+        public AccountController(IAppDbContext appDbContext,
             ILogger<AccountController> logger,
-            IToastrNotificationService notificationService)
+            IToastrNotificationService notificationService,
+            IPasswordHasher<AppUser> passwordHasher)
         {
             _appDbContext = appDbContext;
             _logger = logger;
             _notificationService = notificationService;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<IActionResult> Index()
@@ -57,12 +60,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             //Simpan ke database
-            var hasher = new PasswordHasher<AppUser>();
             var appUser = new AppUser
             {
                 Id = 0,
                 UserName = tambahVM.UserName,
-                PasswordHash = hasher.HashPassword(null, tambahVM.Password),
+                PasswordHash = _passwordHasher.HashPassword(null, tambahVM.Password),
                 Role = AppUserRoles.Admin,
             };
             _appDbContext.AppUserTable.Add(appUser);
@@ -208,12 +210,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             //Simpan ke database
-            var hasher = new PasswordHasher<AppUser>();
-
             user.UserName = editVM.UserName;
 
             if (!string.IsNullOrEmpty(editVM.Password))
-                user.PasswordHash = hasher.HashPassword(null, editVM.Password);
+                user.PasswordHash = _passwordHasher.HashPassword(null, editVM.Password);
 
             try
             {

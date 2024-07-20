@@ -13,12 +13,12 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     [Authorize]
     public class RayonController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<RayonController> _logger;
         private readonly IToastrNotificationService _notificationService;
 
         public RayonController(
-            AppDbContext appDbContext,
+            IAppDbContext appDbContext,
             ILogger<RayonController> logger,
             IToastrNotificationService notificationService)
         {

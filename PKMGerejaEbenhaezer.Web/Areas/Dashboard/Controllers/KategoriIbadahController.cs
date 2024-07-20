@@ -12,11 +12,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     [Area("Dashboard")]
     public class KategoriIbadahController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly ILogger<IbadahController> _logger;
         private readonly IToastrNotificationService _notificationService;
 
-        public KategoriIbadahController(AppDbContext appDbContext,
+        public KategoriIbadahController(IAppDbContext appDbContext,
             ILogger<IbadahController> logger,
             IToastrNotificationService notificationService)
         {

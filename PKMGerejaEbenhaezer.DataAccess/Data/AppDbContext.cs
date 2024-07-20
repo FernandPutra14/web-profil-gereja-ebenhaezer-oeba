@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace PKMGerejaEbenhaezer.DataAccess.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext, IAppDbContext
     {
         private readonly HttpContext _httpContext;
 

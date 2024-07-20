@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -15,24 +16,27 @@ namespace PKMGerejaEbenhaezer.Test.Controller
     public class AccountControllerTests
     {
         private readonly Mock<ISignInManager> _signInManager;
-        private readonly Mock<AppDbContext> _appDbContext;
+        private readonly Mock<IAppDbContext> _appDbContext;
         private readonly Mock<ILogger<AccountController>> _logger;
         private readonly Mock<IToastrNotificationService> _toastrNotificationService;
+        private readonly Mock<IPasswordHasher<AppUser>> _passwordHasher;
 
         private readonly AccountController _accountController;
 
         public AccountControllerTests()
         {
             _signInManager = new Mock<ISignInManager>();
-            _appDbContext = TestHelpers.GetMockDbContext();
+            _appDbContext = new Mock<IAppDbContext>();
             _logger = new Mock<ILogger<AccountController>>();
             _toastrNotificationService = new Mock<IToastrNotificationService>();
+            _passwordHasher = new Mock<IPasswordHasher<AppUser>>();
 
             _accountController = new AccountController(
                 _signInManager.Object,
                 _appDbContext.Object,
                 _logger.Object,
-                _toastrNotificationService.Object);
+                _toastrNotificationService.Object,
+                _passwordHasher.Object);
         }
 
         [Fact]
@@ -204,13 +208,13 @@ namespace PKMGerejaEbenhaezer.Test.Controller
         }
 
         [Fact]
-        public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenUserNameNotUnique()
+        public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenNewUserNameNotUnique()
         {
             //Arrange
             var duplicateUserName = "Name";
             var editVM = new EditVM { UserName = duplicateUserName};
-            var user = new AppUser { UserName = duplicateUserName };
-            var daftarAppUser = new AppUser[] { new AppUser { UserName = duplicateUserName } };
+            var user = new AppUser { Id = 1 };
+            var daftarAppUser = new AppUser[] { new AppUser { Id = 2, UserName = duplicateUserName } };
 
             _signInManager.Setup(x => x.GetSignedInUser()).ReturnsAsync(user);
             _appDbContext.Setup(x => x.AppUserTable).ReturnsDbSet(daftarAppUser);
@@ -221,6 +225,75 @@ namespace PKMGerejaEbenhaezer.Test.Controller
             //Assert
             var viewResult = result.Should().BeOfType<ViewResult>().Subject;
             viewResult.Model.Should().BeOfType<EditVM>();
+            _accountController.ModelState.IsValid.Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenNewPasswordEqualToOldPassword()
+        {
+            //Arrange
+            var password = "Password";
+            var editVM = new EditVM() { Password = password };
+            var user = new AppUser();
+
+            _signInManager.Setup(x => x.GetSignedInUser()).ReturnsAsync(user);
+            _appDbContext.Setup(x => x.AppUserTable).ReturnsDbSet(new List<AppUser>());
+            _passwordHasher.Setup(x => x.VerifyHashedPassword(null, user.PasswordHash, password))
+                .Returns(PasswordVerificationResult.Success);
+
+            //Act
+            var result = await _accountController.Edit(editVM);
+
+            //Assert
+            var viewResult = result.Should().BeOfType<ViewResult>().Subject;
+            viewResult.Model.Should().BeOfType<EditVM>();
+            _accountController.ModelState.IsValid.Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenSaveChangesAsyncThrow()
+        {
+            //Arrange
+            var editVM = new EditVM { UserName = "NewUserName", Password = "NewPassword" };
+            var user = new AppUser();
+
+            _signInManager.Setup(x => x.GetSignedInUser()).ReturnsAsync(user);
+            _appDbContext.Setup(x => x.AppUserTable).ReturnsDbSet(new List<AppUser>() { user });
+            _passwordHasher.Setup(x => x.VerifyHashedPassword(null, user.PasswordHash, editVM.Password))
+                .Returns(PasswordVerificationResult.Failed);
+            _appDbContext.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
+                .ThrowsAsync(It.IsAny<Exception>());
+
+            //Act
+            var result = await _accountController.Edit(editVM);
+
+            //Assert
+            var viewResult = result.Should().BeOfType<ViewResult>().Subject;
+            _accountController.ModelState.IsValid.Should().BeFalse();
+            _appDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once());
+        }
+
+        [Fact]
+        public async Task EditPOST_Should_ReturnRedirectToActionLoginResult_WhenSuccess()
+        {
+            //Arrange
+            var actionName = "Login";
+            var editVM = new EditVM { UserName = "NewUserName", Password = "NewPassword" };
+            var user = new AppUser();
+
+            _signInManager.Setup(x => x.GetSignedInUser()).ReturnsAsync(user);
+            _appDbContext.Setup(x => x.AppUserTable).ReturnsDbSet(new List<AppUser>() { user });
+            _passwordHasher.Setup(x => x.VerifyHashedPassword(null, user.PasswordHash, editVM.Password))
+                .Returns(PasswordVerificationResult.Failed);
+
+            //Act
+            var result = await _accountController.Edit(editVM);
+
+            //Assert
+            var redirectToActionResult = result.Should().BeOfType<RedirectToActionResult>().Subject;
+            redirectToActionResult.ActionName.Should().Be(actionName);
+            _accountController.ModelState.IsValid.Should().BeTrue();
+            _appDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once());
         }
     }
 }

@@ -11,10 +11,10 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 {
     public class IbadahController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IAppDbContext _appDbContext;
         private readonly IBeebeleApiService _beebeleApiService;
 
-        public IbadahController(AppDbContext appDbContext, IBeebeleApiService beebeleApiService)
+        public IbadahController(IAppDbContext appDbContext, IBeebeleApiService beebeleApiService)
         {
             _appDbContext = appDbContext;
             _beebeleApiService = beebeleApiService;
