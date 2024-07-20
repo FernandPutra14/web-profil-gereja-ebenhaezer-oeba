@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PKMGerejaEbenhaezer.Web.Configurations;
-using PKMGerejaEbenhaezer.Web.Utlities;
+using PKMGerejaEbenhaezer.Web.Utilities;
 
 namespace PKMGerejaEbenhaezer.Web.Services.PDF
 {

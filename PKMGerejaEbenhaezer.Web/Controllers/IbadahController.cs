@@ -5,7 +5,7 @@ using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Models;
 using PKMGerejaEbenhaezer.Web.Models.IbadahModels;
 using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
-using PKMGerejaEbenhaezer.Web.Utlities;
+using PKMGerejaEbenhaezer.Web.Utilities;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {

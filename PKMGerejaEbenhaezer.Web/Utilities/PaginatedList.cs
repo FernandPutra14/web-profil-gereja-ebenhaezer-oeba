@@ -1,4 +1,4 @@
-﻿namespace PKMGerejaEbenhaezer.Web.Utlities
+﻿namespace PKMGerejaEbenhaezer.Web.Utilities
 {
     public class PaginatedList<T> : List<T> 
     {

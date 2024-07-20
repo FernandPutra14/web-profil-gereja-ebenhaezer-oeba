@@ -7,7 +7,7 @@ using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.FotoModels;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Services.ImageCompress;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
-using PKMGerejaEbenhaezer.Web.Utlities;
+using PKMGerejaEbenhaezer.Web.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 

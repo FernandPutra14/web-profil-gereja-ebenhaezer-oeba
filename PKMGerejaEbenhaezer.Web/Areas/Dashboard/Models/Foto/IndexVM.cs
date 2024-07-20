@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PKMGerejaEbenhaezer.Domain.Entity;
-using PKMGerejaEbenhaezer.Web.Utlities;
+using PKMGerejaEbenhaezer.Web.Utilities;
 using System.ComponentModel.DataAnnotations;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.FotoModels

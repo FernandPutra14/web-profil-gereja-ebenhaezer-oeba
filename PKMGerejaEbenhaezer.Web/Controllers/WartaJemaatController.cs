@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Models;
-using PKMGerejaEbenhaezer.Web.Utlities;
+using PKMGerejaEbenhaezer.Web.Utilities;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {

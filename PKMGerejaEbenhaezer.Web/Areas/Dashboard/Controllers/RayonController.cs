@@ -5,7 +5,7 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Rayon;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
-using PKMGerejaEbenhaezer.Web.Utlities;
+using PKMGerejaEbenhaezer.Web.Utilities;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {

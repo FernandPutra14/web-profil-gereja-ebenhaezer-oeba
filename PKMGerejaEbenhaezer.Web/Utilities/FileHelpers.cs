@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Reflection;
 
-namespace PKMGerejaEbenhaezer.Web.Utlities
+namespace PKMGerejaEbenhaezer.Web.Utilities
 {
     public static class FileHelpers
     {
