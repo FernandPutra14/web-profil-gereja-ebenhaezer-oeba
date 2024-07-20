@@ -10,14 +10,11 @@ namespace PKMGerejaEbenhaezer.DataAccess.Data
     public class AppDbContext : DbContext
     {
         private readonly HttpContext _httpContext;
-        private readonly IHostEnvironment _webHostEnviroment;
 
         public AppDbContext(DbContextOptions<AppDbContext> options,
-            IHttpContextAccessor httpContextAccessor,
-            IHostEnvironment webHostEnviroment) : base(options)
+            IHttpContextAccessor httpContextAccessor) : base(options)
         {
             _httpContext = httpContextAccessor.HttpContext;
-            _webHostEnviroment = webHostEnviroment;
         }
 
         public DbSet<AppUser> AppUserTable { get; set; }

@@ -21,6 +21,18 @@ namespace PKMGerejaEbenhaezer.Web.Authentication
             _httpContext = httpContextAccessor.HttpContext!;
         }
 
+        public async Task<AppUser?> GetSignedInUser()
+        {
+            var userName = _httpContext.User.Identity?.Name;
+
+            if (userName is null) return null;
+
+            var user = await _appDbContext.AppUserTable
+                .Where(a => a.UserName == userName).FirstOrDefaultAsync();
+
+            return user;
+        }
+
         public async Task<bool> SignInAsync(string userName, string password, bool rememberMe)
         {
             //Cek apakah akun ada
@@ -56,10 +68,9 @@ namespace PKMGerejaEbenhaezer.Web.Authentication
             return true;
         }
 
-        public async Task<bool> SignOut()
+        public async Task SignOut()
         {
             await _httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return true;
         }
     }
 }

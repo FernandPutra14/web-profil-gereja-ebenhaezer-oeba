@@ -19,7 +19,8 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly IToastrNotificationService _notificationService;
 
-        public AccountController(ISignInManager signInManager,
+        public AccountController(
+            ISignInManager signInManager,
             AppDbContext appDbContext, 
             ILogger<AccountController> logger, 
             IToastrNotificationService notificationService)
@@ -67,7 +68,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            var result = await _signInManager.SignOut();
+            await _signInManager.SignOut();
             return RedirectToAction("Index", "Home", new { Area = "" });
         }
 
@@ -80,13 +81,13 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         }
 
         //Edit Akun
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit()
         {
-            var userName = User.Identity?.Name;
+            var user = await _signInManager.GetSignedInUser();
 
-            if (userName is null) return RedirectToAction(nameof(Login));
+            if (user is null) return RedirectToAction(nameof(Login));
 
-            return View(new EditVM { UserName = userName });
+            return View(new EditVM { UserName = user.UserName });
         }
 
         [HttpPost]
@@ -96,9 +97,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             if (!ModelState.IsValid)
                 return View(editVM);
 
-            var userName = User.Identity?.Name;
-            var user = await _appDbContext.AppUserTable
-                .Where(p => p.UserName == userName).FirstOrDefaultAsync();
+            var user = await _signInManager.GetSignedInUser();
 
             if (user is null)
             {
@@ -149,7 +148,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                     Edit Akun Gagal. 
                     User = {0}.
                     Exception : {1}
-                """, userName, ex.ToString());
+                """, user.UserName, ex.ToString());
                 return View(editVM);
             }
 
