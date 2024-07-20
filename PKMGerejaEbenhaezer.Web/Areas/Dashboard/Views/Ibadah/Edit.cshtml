@@ -39,31 +39,25 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-12 input-box">
-                    <label asp-for="@Model.NasPembimbing" class="form-label"></label>
+                <div class="col-md-6 col-12 input-box">
+                    <label asp-for="@Model.NasPembimbing" class="form-label">Nats Pembimbing</label>
                     <input asp-for="@Model.NasPembimbing" class="form-control" />
                     <span asp-validation-for="@Model.NasPembimbing" class="form-text text-danger"></span>
                 </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-12 input-box">
-                    <label asp-for="@Model.Renungan" class="form-label"></label>
+                <div class="col-md-6 col-12 input-box">
+                    <label asp-for="@Model.Renungan" class="form-label">Nats Renungan</label>
                     <input asp-for="@Model.Renungan" class="form-control" />
                     <span asp-validation-for="@Model.Renungan" class="form-text text-danger"></span>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <div class="col-12 input-box">
+                <div class="col-md-6 col-12 input-box">
                     <label asp-for="@Model.TanggalIbadah" class="form-label"></label>
                     <input asp-for="@Model.TanggalIbadah" class="form-control" />
                     <span asp-validation-for="@Model.TanggalIbadah" class="form-text text-danger"></span>
                 </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-12 input-box">
+                <div class="col-md-6 col-12 input-box">
                     <label asp-for="@Model.Tempat" class="form-label"></label>
                     <input asp-for="@Model.Tempat" class="form-control" />
                     <span asp-validation-for="@Model.Tempat" class="form-text text-danger"></span>
@@ -71,7 +65,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-12 input-box">
+                <div class="col-md-6 col-12 input-box">
                     <label asp-for="@Model.IdKategoriIbadah" class="form-label"></label>
                     <select asp-for="@Model.IdKategoriIbadah" class="form-control">
                         <option value="@null">Tidak Ada</option>
@@ -82,10 +76,7 @@
                     </select>
                     <span asp-validation-for="@Model.IdKategoriIbadah" class="form-text text-danger"></span>
                 </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-12 input-box">
+                <div class="col-md-6 col-12 input-box">
                     <label asp-for="@Model.IdPendeta" class="form-label"></label>
                     <select asp-for="@Model.IdPendeta" class="form-control">
                         <option value="@null">Tidak Ada</option>
@@ -107,7 +98,7 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col d-flex justify-content-end mt-4">
+                <div class="col d-flex justify-content-start mt-4">
                     <button type="submit" class="btn me-2">Simpan</button>
                     <a class="btndel" asp-action="Index" asp-controller="Ibadah" asp-area="Dashboard">Batal</a>
                 </div>

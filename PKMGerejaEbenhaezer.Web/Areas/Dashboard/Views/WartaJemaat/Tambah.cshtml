@@ -32,23 +32,25 @@
                 </div>
             </div>
 
+            <button type="button" id="authorize_button" onclick="handleAuthClick()" class="btn mb-2">
+                Pilih/Upload dari Google Drive
+            </button>
+
             <div class="row">
-                <div class="col-12 mb-4 input-box">
+                <div class="col-12 input-box">
                     <label asp-for="@Model.DocumentLink" class="form-label"></label>
                     <input asp-for="@Model.DocumentLink" id="documentLink" type="text" class="form-control" placeholder="Link Google Drive" />
                     <p class="form-text">
                         Copy link file warta dari google drive ke sini
                     </p>
                     <span asp-validation-for="@Model.DocumentLink" class="form-text text-danger"></span>
-                    <button type="button" id="authorize_button" onclick="handleAuthClick()" class="btn">
-                        Pilih/Upload dari Google Drive
-                    </button>
+                    
                 </div>
             </div>
 
 
             <div class="row mb-3">
-                <div class="col d-flex justify-content-end mt-4">
+                <div class="col d-flex justify-content-start mt-4">
                     <button type="submit" class="btn me-2">Simpan</button>
                     <a class="btndel" asp-action="Index" asp-controller="WartaJemaat" asp-area="Dashboard">Batal</a>
                 </div>
