@@ -110,13 +110,22 @@ document.addEventListener('click', function (event) {
 });
 
 
+const matchLink = (linkHref, currentUrl, match) => {
+	if (match === "partial") {
+		return currentUrl.startsWith(linkHref);
+	} else {
+		return currentUrl === linkHref
+	}
+}
+
 // LINK SIDEBAR ACTIVE
 document.addEventListener('DOMContentLoaded', () => {
 	const links = document.querySelectorAll('.dash-link');
+
 	const currentUrl = window.location.href;
 
 	links.forEach(link => {
-		if (currentUrl.startsWith(link.href)) {
+		if (matchLink(link.href, currentUrl, link.dataset.match)) {
 			link.classList.add('activee');
 		} else {
 			link.classList.remove('activee');
