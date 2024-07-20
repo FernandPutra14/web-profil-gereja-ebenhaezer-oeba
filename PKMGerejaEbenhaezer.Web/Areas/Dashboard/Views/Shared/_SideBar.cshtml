@@ -4,7 +4,7 @@
     <ul class="side-menu">
         
         <li class="divider" data-text="dashboard">Dashboard</li>
-        <li><a class="dash-link" asp-area="Dashboard" asp-controller="Home" asp-action="Index"><i class="ri-table-fill icon"></i>Beranda</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Home" asp-action="Index" class="dash-link"><i class="ri-table-fill icon"></i>Beranda</a></li>
 
         <!-- Nonaktif -->
         @* <li>
@@ -21,39 +21,39 @@
 
         <li class="divider" data-text="informasi & media">Informasi & Media</li>
         <!-- Pengumuman -->
-        <li><a class="dash-link" asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Index"><i class="ri-megaphone-fill icon"></i>Pengumuman</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Index" class="dash-link"><i class="ri-megaphone-fill icon"></i>Pengumuman</a></li>
         <!-- Akhir Pengumuman -->
         <!-- Warta Jemaat -->
-        <li><a class="dash-link" asp-area="Dashboard" asp-controller="WartaJemaat" asp-action="Index"><i class="ri-speak-fill icon"></i>Warta Jemaat</a></li>
+        <li><a asp-area="Dashboard" asp-controller="WartaJemaat" asp-action="Index" class="dash-link"><i class="ri-speak-fill icon"></i>Warta Jemaat</a></li>
         <!-- Akhir Warta Jemaat -->
         <!-- Foto -->
-        <li><a class="dash-link" asp-area="Dashboard" asp-controller="Foto" asp-action="Index"><i class="ri-camera-lens-fill icon"></i>Galeri</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Foto" asp-action="Index" class="dash-link"><i class="ri-camera-lens-fill icon"></i>Galeri</a></li>
         <!-- Akhir Foto -->
 
 
         <li class="divider" data-text="ibadah & kegiatan">Ibadah & Kegiatan</li>
 
         <!-- Kategori Ibadah -->
-        <li><a class="dash-link" asp-area="Dashboard" asp-controller="KategoriIbadah" asp-action="Index"><i class="ri-layout-line icon"></i>Kategori Ibadah</a></li>
+        <li><a asp-area="Dashboard" asp-controller="KategoriIbadah" asp-action="Index" class="dash-link"><i class="ri-layout-line icon"></i>Kategori Ibadah</a></li>
         <!-- Akhir Kategori Ibadah -->
         <!-- Ibadah -->
-        <li><a class="dash-link" asp-area="Dashboard" asp-controller="Ibadah" asp-action="Index"><i class="ri-service-fill icon"></i>Ibadah</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Ibadah" asp-action="Index" class="dash-link"><i class="ri-service-fill icon"></i>Ibadah</a></li>
         <!-- Akhir Ibadah -->
 
         <li class="divider" data-text="manajemen jemaat">Manajemen Jemaat</li>
 
 
         <!-- Rayon -->
-        <li><a class="dash-link" asp-area="Dashboard" asp-controller="Rayon" asp-action="Index"><i class="ri-map-2-fill icon"></i>Rayon</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Rayon" asp-action="Index" class="dash-link"><i class="ri-map-2-fill icon"></i>Rayon</a></li>
         <!-- Akhir Rayon -->
         <!-- Pendeta -->
-        <li><a class="dash-link" asp-area="Dashboard" asp-controller="Pendeta" asp-action="Index"><i class="ri-user-2-fill icon"></i>Pendeta</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Pendeta" asp-action="Index" class="dash-link"><i class="ri-user-2-fill icon"></i>Pendeta</a></li>
         <!-- Akhir Pendeta -->
         <!-- Akun -->
         @if (User.IsInRole(AppUserRoles.SuperAdmin))
         {
             <li class="divider" data-text="manajemen pengguna">Manajemen Pengguna</li>
-            <li><a class="dash-link" asp-area="Dashboard" asp-controller="Account" asp-action="Index"><i class="ri-account-box-fill icon"></i>Akun</a></li>
+            <li><a asp-area="Dashboard" asp-controller="Account" asp-action="Index" class="dash-link"><i class="ri-account-box-fill icon"></i>Akun</a></li>
         }
         <!-- Akhir Akun -->           
     </ul>
@@ -61,18 +61,3 @@
 <!-- Akhir Sidebar -->
 <!-- Navbar Dashboard Admin -->
 <!-- Akhir Navbar Dashboard Admin -->
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const links = document.querySelectorAll('.dash-link');
-        const currentUrl = window.location.href;
-
-        links.forEach(link => {
-            if (link.href === currentUrl) {
-                link.classList.add('activee');
-            } else {
-                link.classList.remove('activee');
-            }
-        });
-    });
-</script>   

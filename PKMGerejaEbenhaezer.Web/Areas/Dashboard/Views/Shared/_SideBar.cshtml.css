@@ -94,7 +94,7 @@
     #sidebar .side-menu ::deep > li > a.activee:hover {
         color: white;
         background-color: var(--primary-clr);
-        transition: all .3s ease;
+        transition: .2s ease;
     }
 
     #sidebar .divider {

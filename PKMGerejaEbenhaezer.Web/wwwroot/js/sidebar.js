@@ -108,3 +108,18 @@ document.addEventListener('click', function (event) {
 		dropdownProfile.classList.remove('show');
 	}
 });
+
+
+// LINK SIDEBAR ACTIVE
+document.addEventListener('DOMContentLoaded', () => {
+	const links = document.querySelectorAll('.dash-link');
+	const currentUrl = window.location.href;
+
+	links.forEach(link => {
+		if (link.href === currentUrl) {
+			link.classList.add('activee');
+		} else {
+			link.classList.remove('activee');
+		}
+	});
+});   

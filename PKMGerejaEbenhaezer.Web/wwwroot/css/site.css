@@ -75,6 +75,7 @@ a.btn {
     background-color: var(--primary-clr);
     color: var(--light-heading-clr);
     font-size: 15px;
+    text-align: center;
     border: 1px solid transparent;
     border-radius: 5px;
     cursor: pointer;
@@ -88,6 +89,30 @@ a.btn {
         border: 1px solid var(--primary-clr);
     }
 /* Akhir Style Global Anchor Mirip Button btn */
+
+
+/* Style Global Anchor Mirip Button btn */
+a.btndel {
+    padding: 10px 18px;
+    background-color: darkred;
+    text-align: center;
+    color: var(--light-heading-clr);
+    font-size: 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+    a.btndel:hover {
+        background-color: var(--light-heading-clr);
+        color: var(--primary-clr);
+        border: 1px solid var(--primary-clr);
+    }
+/* Akhir Style Global Anchor Mirip Button btn */
+
+
 
 
 /* Style Global Section Header */
