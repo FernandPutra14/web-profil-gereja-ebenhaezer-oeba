@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const currentUrl = window.location.href;
 
 	links.forEach(link => {
-		if (link.href === currentUrl) {
+		if (currentUrl.startsWith(link.href)) {
 			link.classList.add('activee');
 		} else {
 			link.classList.remove('activee');
