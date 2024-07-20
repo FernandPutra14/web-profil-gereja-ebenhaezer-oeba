@@ -102,7 +102,6 @@ section.peng {
     overflow: hidden;
     -webkit-line-clamp: 2;
     text-overflow: ellipsis;
-    line-height: 1.5em;
     margin-top: 10px;
     font-size: 13px;
 }
@@ -127,7 +126,7 @@ section.peng {
         color: var(--primary-clr);
         text-align: center;
         font-size: 14px;
-        font-weight: bold;
+        font-weight: 500;
     }
 
         .peng-card .peng-tanggal span:nth-child(1) i {

@@ -786,7 +786,7 @@ section.peng {
         color: var(--primary-clr);
         text-align: center;
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 500;
     }
 
         .peng-card .peng-tanggal span:nth-child(1) i {

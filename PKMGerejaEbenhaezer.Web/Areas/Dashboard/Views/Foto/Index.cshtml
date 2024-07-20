@@ -19,12 +19,12 @@
     <!-- Akhir Hyperlink -->
     <!-- Form Upload Foto -->
     <form asp-action="IndexPOST" class="row mb-5" method="post" enctype="multipart/form-data" asp-route-pIndex="@Model.Items!.PageIndex">
-        <div class="col-md-9 mb-3">
+        <div class="col-md-12 mb-3">
             <input class="form-control" type="file" asp-for="@Model.FormFile" style="font-size: 15px; margin-top: 0px;" />
             <span asp-validation-for="@Model.FormFile" class="text-danger"></span>
         </div>
-        <div class="col-md-3">
-            <button class="btn w-100" style="padding: 5px 18px;" type="submit">Upload</button>
+        <div class="col-md-12 d-flex justify-content-start">
+            <button class="btn" style="padding: 8px 100px;" type="submit">Upload</button>
         </div>
     </form>
     <!-- Akhir Form Upload Foto -->
