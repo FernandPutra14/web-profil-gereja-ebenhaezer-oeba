@@ -125,11 +125,12 @@
 
             #pendeta ::deep .pendeta-box .profile h6 {
                 padding-top: 10px;
-                font-size: 17px;
+                font-size: 15px;
+                font-weight: 500;
             }
 
             #pendeta ::deep .pendeta-box .profile p {
-                font-size: 16px;
+                font-size: 14px;
             }
 
 /* Container Media Sosial */
@@ -784,14 +785,14 @@ section.peng {
     .peng-card .peng-tanggal span {
         color: var(--primary-clr);
         text-align: center;
-        font-size: 14px;
-        font-weight: bold;
+        font-size: 13px;
+        font-weight: 600;
     }
 
         .peng-card .peng-tanggal span:nth-child(1) i {
             color: var(--primary-clr);
             padding-right: 10px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .peng-card .peng-tanggal span b {
