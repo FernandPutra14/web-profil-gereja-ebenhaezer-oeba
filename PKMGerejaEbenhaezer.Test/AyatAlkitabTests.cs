@@ -1,6 +1,6 @@
 ﻿using PKMGerejaEbenhaezer.Domain.ValueObjects;
 
-namespace PKMGerejaEbenhaezer.Test
+namespace PKMGerejaEbenhaezer.UnitTest
 {
     public class AyatAlkitabTests
     {

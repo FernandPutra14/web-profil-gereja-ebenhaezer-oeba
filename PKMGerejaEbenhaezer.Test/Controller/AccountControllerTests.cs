@@ -11,7 +11,7 @@ using PKMGerejaEbenhaezer.Web.Controllers;
 using PKMGerejaEbenhaezer.Web.Models.Account;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
-namespace PKMGerejaEbenhaezer.Test.Controller
+namespace PKMGerejaEbenhaezer.UnitTest.Controller
 {
     public class AccountControllerTests
     {

@@ -10,7 +10,7 @@ using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Controllers;
 
-namespace PKMGerejaEbenhaezer.Test.Controller
+namespace PKMGerejaEbenhaezer.UnitTest.Controller
 {
     public class FotoControllerTests
     {

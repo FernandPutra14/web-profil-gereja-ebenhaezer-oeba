@@ -8,7 +8,7 @@ using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Controllers;
 using PKMGerejaEbenhaezer.Web.Models.Home;
 
-namespace PKMGerejaEbenhaezer.Test.Controller
+namespace PKMGerejaEbenhaezer.UnitTest.Controller
 {
     public class HomeControllerTests
     {

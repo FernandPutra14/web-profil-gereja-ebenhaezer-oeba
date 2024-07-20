@@ -9,7 +9,7 @@ using PKMGerejaEbenhaezer.Web.Controllers;
 using PKMGerejaEbenhaezer.Web.Models;
 using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
 
-namespace PKMGerejaEbenhaezer.Test.Controller
+namespace PKMGerejaEbenhaezer.UnitTest.Controller
 {
     public class IbadahControllerTests
     {
