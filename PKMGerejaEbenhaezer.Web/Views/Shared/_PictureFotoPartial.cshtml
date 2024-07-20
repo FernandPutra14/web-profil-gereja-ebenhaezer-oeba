@@ -1,0 +1,7 @@
+﻿@model (int id, string cssClass)
+
+<picture>
+    <source media="(max-width: 465px)"
+            srcset="@Url.Action("Index", "Foto", new {Area = "", id = Model.id, kompresi = true})"/>
+    <img src="@Url.Action("Index", "Foto", new {Area = "", id = Model.id})" alt="" class="@Model.cssClass" />
+</picture>

@@ -14,7 +14,7 @@
         margin: 0 auto;
     }
 
-        #blog-container .blogs img {
+        #blog-container .blogs ::deep img {
             width: 40%;
             border-radius: 13px;
         }
@@ -59,7 +59,7 @@
         margin-top: 30px;
     }
 
-        #blog-container .blogs img {
+        #blog-container .blogs ::deep img {
             width: 100%;
             height: 50vh;
             object-fit: cover;

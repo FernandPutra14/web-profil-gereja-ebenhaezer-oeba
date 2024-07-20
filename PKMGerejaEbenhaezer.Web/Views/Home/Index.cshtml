@@ -51,11 +51,7 @@
                     <div class="gambar-pen">
                         @if (pendeta.Foto is not null)
                         {
-                            <picture>
-                                <source media="(max-width: 465px)"
-                                        srcset="@Url.Action("Index", "Foto", new {Area = "", id = pendeta.Foto.Id, kompresi = true})" />
-                                <img src="@Url.Action("Index", "Foto", new {Area = "", id = pendeta.Foto.Id})" alt="" />
-                            </picture>
+                            <partial name="_PictureFotoPartial" model=@((pendeta.Foto.Id, ""))/>
                         }
                         else
                         {
@@ -270,11 +266,7 @@
                         <div class="gambar-pendeta">
                             @if (ibadah.Pendeta?.Foto is not null)
                             {
-                                <picture>
-                                    <source media="(max-width: 465px)"
-                                            srcset="@Url.Action("Index", "Foto", new {Area = "", id = ibadah.Pendeta.Foto.Id, kompresi = true})" />
-                                    <img src="@Url.Action("Index", "Foto", new {Area = "", id = ibadah.Pendeta.Foto.Id})" alt="" />
-                                </picture>
+                                <partial name="_PictureFotoPartial" model=@((ibadah.Pendeta.Foto.Id, "")) />
                             }
                             else
                             {
@@ -329,11 +321,7 @@
                     <div class="item peng-card">
                         @if (pengumuman.Foto != null)
                         {
-                            <picture>
-                                <source media="(max-width: 465px)"
-                                        srcset="@Url.Action("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id, kompresi = true})" />
-                                <img src="@Url.Action("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" alt="" />
-                            </picture>
+                            <partial name="_PictureFotoPartial" model=@((pengumuman.Foto.Id, "")) />
                         }
                         else
                         {

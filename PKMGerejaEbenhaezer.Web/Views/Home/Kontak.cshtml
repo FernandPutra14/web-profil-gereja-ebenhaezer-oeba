@@ -79,18 +79,5 @@
 
 <!-- Script JS -->
 @section Scripts {
-    <script type="text/javascript">
-        $(function () {
-            $('.badan-utama').css({
-                'padding-left': '0',
-                'padding-right': '0',
-                'padding-top': '0rem',
-            });
-            $('.main-navbar').css({
-                'position': 'fixed',
-                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
-                'background-color': 'var(--primary-clr)',
-            });
-        });
-    </script>
+    <partial name="_NonTransparantNavbarPartial" />
 }

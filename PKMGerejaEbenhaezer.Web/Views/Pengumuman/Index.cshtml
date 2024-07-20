@@ -89,9 +89,9 @@
             {
                 <!-- Awal Card -->
                 <div class="item peng-card">
-                    @if (item.Foto != null)
+                    @if (item.Foto is not null)
                     {
-                        <img src="@Url.Action("Index", "Foto", new { Area = "", id = item.Foto!.Id })" />
+                        <partial name="_PictureFotoPartial" model=@((item.Foto.Id, "")) />
                     }
                     else
                     {
@@ -154,20 +154,9 @@
 
 <!-- Script JS -->
 @section Scripts {
-    <script type="text/javascript">
-        $(function () {
-            $('.badan-utama').css({
-                'padding-left': '0',
-                'padding-right': '0',
-                'padding-top': '0rem',
-            });
-            $('.main-navbar').css({
-                'position': 'fixed',
-                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
-                'background-color': 'var(--primary-clr)',
-            });
-        });
+    <partial name="_NonTransparantNavbarPartial" />
 
+    <script type="text/javascript">
         $('#@(nameof(Model.Bulan))').on('change', function () {
             const bulan = $(this).val();
             $('#search input#bulan').val(bulan);

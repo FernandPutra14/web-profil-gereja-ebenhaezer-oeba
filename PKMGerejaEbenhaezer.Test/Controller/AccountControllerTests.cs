@@ -153,7 +153,7 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
         }
 
         [Fact]
-        public async Task Edit_Should_ReturnRedirectToActionLoginResultWhenGetSignedInUserReturnNull()
+        public async Task Edit_Should_ReturnRedirectToActionLoginResult_WhenGetSignedInUserReturnNull()
         {
             //Arrange
             var actionName = "Login";
