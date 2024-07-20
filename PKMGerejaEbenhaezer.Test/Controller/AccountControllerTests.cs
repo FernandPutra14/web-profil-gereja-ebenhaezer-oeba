@@ -238,7 +238,7 @@ namespace PKMGerejaEbenhaezer.Test.Controller
 
             _signInManager.Setup(x => x.GetSignedInUser()).ReturnsAsync(user);
             _appDbContext.Setup(x => x.AppUserTable).ReturnsDbSet(new List<AppUser>());
-            _passwordHasher.Setup(x => x.VerifyHashedPassword(null, user.PasswordHash, password))
+            _passwordHasher.Setup(x => x.VerifyHashedPassword(It.IsAny<AppUser>(), user.PasswordHash, password))
                 .Returns(PasswordVerificationResult.Success);
 
             //Act
@@ -259,8 +259,12 @@ namespace PKMGerejaEbenhaezer.Test.Controller
 
             _signInManager.Setup(x => x.GetSignedInUser()).ReturnsAsync(user);
             _appDbContext.Setup(x => x.AppUserTable).ReturnsDbSet(new List<AppUser>() { user });
-            _passwordHasher.Setup(x => x.VerifyHashedPassword(null, user.PasswordHash, editVM.Password))
+
+            _passwordHasher.Setup(x => x.VerifyHashedPassword(It.IsAny<AppUser>(),
+                                                              user.PasswordHash,
+                                                              editVM.Password))
                 .Returns(PasswordVerificationResult.Failed);
+
             _appDbContext.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
                 .ThrowsAsync(It.IsAny<Exception>());
 
@@ -283,7 +287,7 @@ namespace PKMGerejaEbenhaezer.Test.Controller
 
             _signInManager.Setup(x => x.GetSignedInUser()).ReturnsAsync(user);
             _appDbContext.Setup(x => x.AppUserTable).ReturnsDbSet(new List<AppUser>() { user });
-            _passwordHasher.Setup(x => x.VerifyHashedPassword(null, user.PasswordHash, editVM.Password))
+            _passwordHasher.Setup(x => x.VerifyHashedPassword(It.IsAny<AppUser>(), user.PasswordHash, editVM.Password))
                 .Returns(PasswordVerificationResult.Failed);
 
             //Act

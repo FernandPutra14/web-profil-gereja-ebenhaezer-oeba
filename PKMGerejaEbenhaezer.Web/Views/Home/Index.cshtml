@@ -53,7 +53,7 @@
                         {
                             <picture>
                                 <source media="(max-width: 465px)"
-                                        srcset="@Url.Action("FotoKompresi", "Foto", new {Area = "", id = pendeta.Foto.Id})" />
+                                        srcset="@Url.Action("Index", "Foto", new {Area = "", id = pendeta.Foto.Id, kompresi = true})" />
                                 <img src="@Url.Action("Index", "Foto", new {Area = "", id = pendeta.Foto.Id})" alt="" />
                             </picture>
                         }
@@ -269,7 +269,7 @@
                             {
                                 <picture>
                                     <source media="(max-width: 465px)"
-                                            srcset="@Url.Action("FotoKompresi", "Foto", new {Area = "", id = ibadah.Pendeta.Foto.Id})" />
+                                            srcset="@Url.Action("Index", "Foto", new {Area = "", id = ibadah.Pendeta.Foto.Id, kompresi = true})" />
                                     <img src="@Url.Action("Index", "Foto", new {Area = "", id = ibadah.Pendeta.Foto.Id})" alt="" />
                                 </picture>
                             }
@@ -328,7 +328,7 @@
                         {
                             <picture>
                                 <source media="(max-width: 465px)"
-                                        srcset="@Url.Action("FotoKompresi", "Foto", new {Area = "", id = pengumuman.Foto.Id})" />
+                                        srcset="@Url.Action("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id, kompresi = true})" />
                                 <img src="@Url.Action("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" alt="" />
                             </picture>
                         }

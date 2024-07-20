@@ -1,80 +1,50 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
-using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Configurations;
-using PKMGerejaEbenhaezer.Web.Utlities;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {
     public class FotoController : Controller
     {
         private readonly IAppDbContext _appDbContext;
-        private readonly PhotoFileSettingsOptions _photoFileSettingsOptions;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<FotoController> _logger;
 
         public FotoController(IAppDbContext appDbContext,
-            PhotoFileSettingsOptions photoFileSettingsOptions,
             IWebHostEnvironment webHostEnvironment,
             ILogger<FotoController> logger)
         {
             _appDbContext = appDbContext;
-            _photoFileSettingsOptions = photoFileSettingsOptions;
             _webHostEnvironment = webHostEnvironment;
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int id, bool kompresi = false)
         {
             var foto = await _appDbContext.FotoTable
                 .Where(f => f.Id == id).AsNoTracking()
                 .FirstOrDefaultAsync();
 
-            if (foto == null)
+            if (foto is null)
             {
                 _logger.LogError("Foto dengan Id {0} tidak ditemukan di database", id);
                 return NotFound();
             }
 
-            var path = Path.IsPathFullyQualified(foto.PathFoto) ? foto.PathFoto
-                : _webHostEnvironment.ContentRootPath + "/" + foto.PathFoto;
+            var path = kompresi ? foto.PathFotoKompresi : foto.PathFoto;
 
-            if (System.IO.File.Exists(path) == false)
+            var fullPath = Path.IsPathFullyQualified(path) ? path
+                : _webHostEnvironment.ContentRootPath + "/" + path;
+
+            if (System.IO.File.Exists(fullPath) == false)
             {
-                _logger.LogError("File dengan path {0} tidak ditemukan", path);
-                return NotFound();
-            }
-
-            var ext = Path.GetExtension(foto.PathFoto).ToLowerInvariant().Remove(0, 1);
-            return PhysicalFile(path, $"image/{ext}");
-        }
-
-        public async Task<IActionResult> FotoKompresi(int id)
-        {
-            var foto = await _appDbContext.FotoTable
-                .Where(f => f.Id == id).AsNoTracking()
-                .FirstOrDefaultAsync();
-
-            if (foto == null)
-            {
-                _logger.LogError("Foto dengan Id {0} tidak ditemukan di database", id);
-                return NotFound();
-            }
-
-            var path = Path.IsPathFullyQualified(foto.PathFotoKompresi) ? foto.PathFotoKompresi
-                : _webHostEnvironment.ContentRootPath + "/" + foto.PathFotoKompresi;
-
-            if (System.IO.File.Exists(path) == false)
-            {
-                _logger.LogError("File dengan path {0} tidak ditemukan", path);
+                _logger.LogError("File dengan path {0} tidak ditemukan", fullPath);
                 return NotFound();
             }
 
             var ext = Path.GetExtension(path).ToLowerInvariant().Remove(0, 1);
-            return PhysicalFile(path, $"image/{ext}");
+            return PhysicalFile(fullPath, $"image/{ext}");
         }
     }
 }
