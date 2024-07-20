@@ -29,12 +29,18 @@
         <div class="row">
             <div class="col-md-6 col-12 input-box">
                 <label asp-for="@Model.Password" class="form-label"></label>
-                <input asp-for="@Model.Password" type="password" class="form-control" autocomplete="new-password" />
+                <div class="input-wrapper">
+                    <input asp-for="@Model.Password" type="password" class="form-control" id="password" autocomplete="new-password" />
+                    <i class="ri-eye-line toggle-password" id="togglePassword"></i>
+                </div>
                 <span asp-validation-for="@Model.Password" class="form-text text-danger"></span>
             </div>
             <div class="col-md-6 col-12 input-box">
                 <label asp-for="@Model.PasswordConfirmation" class="form-label"></label>
-                <input asp-for="@Model.PasswordConfirmation" type="password" class="form-control" />
+                <div class="input-wrapper">
+                    <input asp-for="@Model.PasswordConfirmation" type="password" class="form-control" id="password-confirmation" />
+                    <i class="ri-eye-line toggle-password" id="togglePasswordConfirmation"></i>
+                </div>
                 <span asp-validation-for="@Model.PasswordConfirmation" class="form-text text-danger"></span>
             </div>
         </div>
@@ -53,6 +59,18 @@
 <!-- Script JS -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.toggle-password').on('click', function () {
+                const passwordInput = $(this).siblings('input');
+                const type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+                passwordInput.attr('type', type);
+                $(this).toggleClass('ri-eye-off-line ri-eye-line');
+            });
+        });
+    </script>
+
 
     <script type="text/javascript">
         $(function () {

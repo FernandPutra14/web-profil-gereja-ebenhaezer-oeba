@@ -2,12 +2,9 @@
 <section id="sidebar">
     <a href="" class="brand"><i class="ri-admin-fill icon"></i>ADMIN</a>
     <ul class="side-menu">
-        <li><a href="" class="active"><i class="ri-dashboard-fill icon"></i>Dashboard</a></li>
-
-        <!-- Sesi 1 -->
+        
         <li class="divider" data-text="dashboard">Dashboard</li>
-        <li><a asp-area="Dashboard" asp-controller="Home" asp-action="Index"><i class="ri-table-fill icon"></i>Beranda</a></li>
-
+        <li><a asp-area="Dashboard" asp-controller="Home" asp-action="Index" class="dash-link"><i class="ri-table-fill icon"></i>Beranda</a></li>
 
         <!-- Nonaktif -->
         @* <li>
@@ -22,91 +19,43 @@
         <!-- Nonaktif -->
 
 
-        <!-- Akhir Sesi 1 -->
-        <!-- Sesi 2 -->
         <li class="divider" data-text="informasi & media">Informasi & Media</li>
         <!-- Pengumuman -->
-        <li><a asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Index"><i class="ri-megaphone-fill icon"></i>Pengumuman</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Index" class="dash-link"><i class="ri-megaphone-fill icon"></i>Pengumuman</a></li>
         <!-- Akhir Pengumuman -->
         <!-- Warta Jemaat -->
-        <li><a asp-area="Dashboard" asp-controller="WartaJemaat" asp-action="Index"><i class="ri-speak-fill icon"></i>Warta Jemaat</a></li>
+        <li><a asp-area="Dashboard" asp-controller="WartaJemaat" asp-action="Index" class="dash-link"><i class="ri-speak-fill icon"></i>Warta Jemaat</a></li>
         <!-- Akhir Warta Jemaat -->
         <!-- Foto -->
-        <li><a asp-area="Dashboard" asp-controller="Foto" asp-action="Index"><i class="ri-camera-lens-fill icon"></i>Galeri</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Foto" asp-action="Index" class="dash-link"><i class="ri-camera-lens-fill icon"></i>Galeri</a></li>
         <!-- Akhir Foto -->
 
 
         <li class="divider" data-text="ibadah & kegiatan">Ibadah & Kegiatan</li>
 
         <!-- Kategori Ibadah -->
-        <li><a asp-area="Dashboard" asp-controller="KategoriIbadah" asp-action="Index"><i class="ri-layout-line icon"></i>Kategori Ibadah</a></li>
+        <li><a asp-area="Dashboard" asp-controller="KategoriIbadah" asp-action="Index" class="dash-link"><i class="ri-layout-line icon"></i>Kategori Ibadah</a></li>
         <!-- Akhir Kategori Ibadah -->
         <!-- Ibadah -->
-        <li><a asp-area="Dashboard" asp-controller="Ibadah" asp-action="Index"><i class="ri-service-fill icon"></i>Ibadah</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Ibadah" asp-action="Index" class="dash-link"><i class="ri-service-fill icon"></i>Ibadah</a></li>
         <!-- Akhir Ibadah -->
 
         <li class="divider" data-text="manajemen jemaat">Manajemen Jemaat</li>
 
 
         <!-- Rayon -->
-        <li><a asp-area="Dashboard" asp-controller="Rayon" asp-action="Index"><i class="ri-map-2-fill icon"></i>Rayon</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Rayon" asp-action="Index" class="dash-link"><i class="ri-map-2-fill icon"></i>Rayon</a></li>
         <!-- Akhir Rayon -->
         <!-- Pendeta -->
-        <li><a asp-area="Dashboard" asp-controller="Pendeta" asp-action="Index"><i class="ri-user-2-fill icon"></i>Pendeta</a></li>
+        <li><a asp-area="Dashboard" asp-controller="Pendeta" asp-action="Index" class="dash-link"><i class="ri-user-2-fill icon"></i>Pendeta</a></li>
         <!-- Akhir Pendeta -->
         <!-- Akun -->
         @if (User.IsInRole(AppUserRoles.SuperAdmin))
         {
             <li class="divider" data-text="manajemen pengguna">Manajemen Pengguna</li>
-            <li><a asp-area="Dashboard" asp-controller="Account" asp-action="Index"><i class="ri-account-box-fill icon"></i>Akun</a></li>
+            <li><a asp-area="Dashboard" asp-controller="Account" asp-action="Index" class="dash-link"><i class="ri-account-box-fill icon"></i>Akun</a></li>
         }
-        <!-- Akhir Akun -->
-        @* <li>
-        <a asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Index"><i class="ri-sticky-note-fill icon"></i>Pengumuman <i class="ri-arrow-right-s-line icon-right"></i></a>
-        <ul class="side-dropdown">
-        <li><a asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Index">Daftar</a></li>
-        <li><a asp-area="Dashboard" asp-controller="Pengumuman" asp-action="Tambah">Tambah</a></li>
-        </ul>
-        </li>
-        <li>
-        <a asp-area="Dashboard" asp-controller="Rayon" asp-action="Index"><i class="ri-sticky-note-fill icon"></i>Rayon <i class="ri-arrow-right-s-line icon-right"></i></a>
-        <ul class="side-dropdown">
-        <li><a asp-area="Dashboard" asp-controller="Rayon" asp-action="Index">Daftar</a></li>
-        <li><a asp-area="Dashboard" asp-controller="Rayon" asp-action="Tambah">Tambah</a></li>
-        </ul>
-        </li>
-        <li>
-        <a asp-area="Dashboard" asp-controller="Foto" asp-action="Index"><i class="ri-sticky-note-fill icon"></i>Galeri <i class="ri-arrow-right-s-line icon-right"></i></a>
-        <ul class="side-dropdown">
-        <li><a asp-area="Dashboard" asp-controller="Foto" asp-action="Index">Daftar</a></li>
-        </ul>
-        </li>
-        <li>
-        <a asp-area="Dashboard" asp-controller="WartaJemaat" asp-action="Index"><i class="ri-sticky-note-fill icon"></i>Warta Jemaat <i class="ri-arrow-right-s-line icon-right"></i></a>
-        <ul class="side-dropdown">
-        <li><a asp-area="Dashboard" asp-controller="WartaJemaat" asp-action="Index">Daftar</a></li>
-        <li><a asp-area="Dashboard" asp-controller="WartaJemaat" asp-action="Tambah">Tambah</a></li>
-        </ul>
-        </li>
-        <li>
-        <a asp-area="Dashboard" asp-controller="Pendeta" asp-action="Index"><i class="ri-sticky-note-fill icon"></i>Pendeta <i class="ri-arrow-right-s-line icon-right"></i></a>
-        <ul class="side-dropdown">
-        <li><a asp-area="Dashboard" asp-controller="Pendeta" asp-action="Index">Daftar</a></li>
-        <li><a asp-area="Dashboard" asp-controller="Pendeta" asp-action="Tambah">Tambah</a></li>
-        </ul>
-        </li>
-        <li>
-        <a asp-area="Dashboard" asp-controller="Account" asp-action="Index"><i class="ri-sticky-note-fill icon"></i>Akun <i class="ri-arrow-right-s-line icon-right"></i></a>
-        <ul class="side-dropdown">
-        <li><a asp-area="Dashboard" asp-controller="Account" asp-action="Index">Daftar</a></li>
-        <li><a asp-area="Dashboard" asp-controller="Account" asp-action="Tambah">Tambah</a></li>
-        <li><a asp-area="Dashboard" asp-controller="Account" asp-action="UbahPassword">Ubah Password</a></li>
-        <li><a asp-area="Dashboard" asp-controller="Account" asp-action="UbahUserName">Ubah User Name</a></li>
-        </ul>
-        </li> *@
-
-
-        <!-- Akhir Sesi 2 -->
+        <!-- Akhir Akun -->           
     </ul>
 </section>
 <!-- Akhir Sidebar -->

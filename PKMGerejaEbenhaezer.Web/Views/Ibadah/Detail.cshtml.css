@@ -1,4 +1,9 @@
-﻿#blog-container {
+﻿* {
+    font-family: 'poppins';
+}
+
+
+#blog-container {
     display: flex;
     padding: 30px 50px 30px 50px;
     align-content: center;
@@ -24,24 +29,28 @@
 
         #blog-container .blogs .post h3 {
             color: #29303B;
-            padding: 15px 0 0px 0;
+            padding: 20px 0 0px 0;
             font-size: 38px;
             font-weight: 500;
         }
 
             #blog-container .blogs .post h4 {
                 color: #10316B;
-                padding: 10px 0 0px 0;
-                font-size: 25px;
-                font-weight: 500;
+                padding: 0px 0 0px 0;
+                font-size: 20px;
+                font-weight: 600;
             }
 
             #blog-container .blogs .post h5 {
                 display: flex;
-                text-align: start;
-                justify-content: flex-start;
+                font-size: 10px;
                 padding: 10px 0 0px 0;
                               
+            }
+
+            #blog-container .blogs .post h6 {
+                font-size: 11px;
+                padding: 0px 0 0px 0;
             }
 
         #blog-container .blogs .post .info-blog {
@@ -53,23 +62,32 @@
         }
 
             #blog-container .blogs .post .info-blog h5 {              
-                font-size: 14px;
+                font-size: 14px;              
             }
 
         #blog-container .blogs .post p {
             text-align: justify;
-            font-size: 16px;
-            margin: 0;
+            font-size: 14px;
+            margin-top: 10px;
+            margin-bottom: 20px;
         }
+
+            #blog-container .blogs .post .info-ibd {
+                display: flex;
+                text-align: center;
+                justify-content: center;
+                gap: 10px;
+            }
 
         #blog-container .blogs .post .dokumen {
             margin-top: 30px;
         }
 
-        #blog-container .blogs .post .nats-renungan {
-            font-family: 'Tinos';
-            font-size: 15px;
+        #blog-container .blogs .post .nats h5 {
+            font-size: 14px;
+            font-weight: bold;
         }
+
 
 
 /* --------------------------------------------------- Responsive --------------------------------------------------- */
@@ -91,4 +109,15 @@
             display: flex;
             flex-direction: column;
         }
+}
+
+/* Responsive 568 */
+@media(max-width: 568px) {
+
+    #blog-container .blogs .post .info-ibd {
+        display: flex;
+        flex-direction: column;
+        gap: normal;
+        align-items: center;
+    }
 }

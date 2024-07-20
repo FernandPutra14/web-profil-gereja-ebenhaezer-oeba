@@ -26,27 +26,32 @@
 
             <input hidden asp-for="@Model.Id" />
 
-            <div class="row">
-                <div class="col-12 mb-3 input-box">
+            <div class="row mb-3">
+                <div class="col-12 input-box">
                     <label asp-for="@Model.TanggalWarta" class="form-label"></label>
                     <input asp-for="@Model.TanggalWarta" type="date" value="@Model.TanggalWarta.ToString("yyyy-MM-dd")" class="form-control" />
                     <span asp-validation-for="@Model.TanggalWarta" class="text-danger"></span>
                 </div>
             </div>
 
+
+            <button type="button" id="authorize_button" onclick="handleAuthClick()" class="btn mb-2">
+                Pilih/Upload dari Google Drive
+            </button>
+
             <div class="row">
-                <div class="col-12 mb-4 input-box">
+                <div class="col-12 input-box">
                     <label asp-for="@Model.DocumentLink" class="form-label"></label>
                     <input asp-for="@Model.DocumentLink" id="documentLink" type="text" class="form-control" />
-                    <span asp-validation-for="@Model.DocumentLink" class="form-text text-danger"></span>
-                    <button type="button" id="authorize_button" onclick="handleAuthClick()" class="btn btn-primary">
-                        Pilih/Upload dari Google Drive
-                    </button>
+                    <span asp-validation-for="@Model.DocumentLink" class="form-text text-danger"></span>                
                 </div>
             </div>
 
-            <div class="row">
-                <button type="submit" class="btn btn-primary">Simpan</button>
+            <div class="row mb-3">
+                <div class="col d-flex justify-content-start mt-4">
+                    <button type="submit" class="btn me-2">Simpan</button>
+                    <a class="btndel" asp-action="Index" asp-controller="WartaJemaat" asp-area="Dashboard">Batal</a>
+                </div>
             </div>
         </form>
     </div>

@@ -78,19 +78,23 @@
         white-space: nowrap;
     }
 
-    #sidebar .side-menu > ::deep li > ::deep a:hover {
+    /*#sidebar .side-menu > li > ::deep a:hover {
         background-color: var(--primary-clr);
-    }
+        color: white;
+        transition: all .1s ease;
+    }*/
+
 
     #sidebar .side-menu ::deep > li > ::deep a.active .icon-right {
         transform: rotateZ(90deg);
     }
 
 
-    #sidebar .side-menu ::deep > li > a.active,
-    #sidebar .side-menu ::deep > li > a.active:hover {
+    #sidebar .side-menu ::deep > li > a.activee,
+    #sidebar .side-menu ::deep > li > a.activee:hover {
         color: white;
         background-color: var(--primary-clr);
+        transition: .2s ease;
     }
 
     #sidebar .divider {

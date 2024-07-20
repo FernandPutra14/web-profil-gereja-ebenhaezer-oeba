@@ -102,15 +102,22 @@ section.peng {
     overflow: hidden;
     -webkit-line-clamp: 2;
     text-overflow: ellipsis;
-    line-height: 1.5em;
     margin-top: 10px;
     font-size: 13px;
+}
+
+.peng-card .peng-tombol {
+    padding: 15px 0px 0px;
+    display: flex;
+    text-align: center;
+    margin-right: 10px;
+    justify-content: center;
+    border-top: 1px solid #ccc;
 }
 
 .peng-card .peng-tanggal {
     display: flex;
     padding: 15px 0px 0px;
-    border-top: 1px solid #ccc;
     justify-content: space-between;
     align-items: center;
 }
@@ -119,7 +126,7 @@ section.peng {
         color: var(--primary-clr);
         text-align: center;
         font-size: 14px;
-        font-weight: bold;
+        font-weight: 500;
     }
 
         .peng-card .peng-tanggal span:nth-child(1) i {

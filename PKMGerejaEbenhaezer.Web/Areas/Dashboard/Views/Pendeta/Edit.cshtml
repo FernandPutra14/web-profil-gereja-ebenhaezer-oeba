@@ -53,17 +53,17 @@
 
             <div class="row mb-5">
                 <label class="form-label">Akun Media Sosial (Opsional)</label>
-                <div class="col-4 input-box">
+                <div class="col-md-4 col-12 input-box">
                     <label asp-for="@Model.FacebookProfileLink" class="form-label"></label>
                     <input type="text" asp-for="@Model.FacebookProfileLink" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.FacebookProfileLink"></span>
                 </div>
-                <div class="col-4 input-box">
+                <div class="col-md-4 col-12 input-box">
                     <label asp-for="@Model.InstagramProfileLink" class="form-label"></label>
                     <input type="text" asp-for="@Model.InstagramProfileLink" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.InstagramProfileLink"></span>
                 </div>
-                <div class="col-4 input-box">
+                <div class="col-md-4 col-12 input-box">
                     <label asp-for="@Model.YoutubeProfileLink" class="form-label"></label>
                     <input type="text" asp-for="@Model.YoutubeProfileLink" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.YoutubeProfileLink"></span>
@@ -71,8 +71,9 @@
             </div>
 
             <div class="row mb-3">
-                <div class="col-12">
-                    <button type="submit" class="btn" style="width:100%;">Simpan</button>
+                <div class="col d-flex justify-content-start mt-4">
+                    <button type="submit" class="btn me-2">Simpan</button>
+                    <a class="btndel" asp-action="Index" asp-controller="Pendeta" asp-area="Dashboard">Batal</a>
                 </div>
             </div>
         </form>

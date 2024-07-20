@@ -125,11 +125,12 @@
 
             #pendeta ::deep .pendeta-box .profile h6 {
                 padding-top: 10px;
-                font-size: 17px;
+                font-size: 15px;
+                font-weight: 500;
             }
 
             #pendeta ::deep .pendeta-box .profile p {
-                font-size: 16px;
+                font-size: 14px;
             }
 
 /* Container Media Sosial */
@@ -765,9 +766,17 @@ section.peng {
     text-overflow: ellipsis;
 }
 
+.peng-card .peng-tombol {
+    padding: 15px 0px 0px;
+    display: flex;
+    text-align: center;
+    margin-right: 10px;
+    justify-content: center;
+    border-top: 1px solid #ccc;
+}
+
 .peng-card .peng-tanggal {
     padding: 15px 0px 0px;
-    border-top: 1px solid #ccc;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -776,14 +785,14 @@ section.peng {
     .peng-card .peng-tanggal span {
         color: var(--primary-clr);
         text-align: center;
-        font-size: 14px;
-        font-weight: bold;
+        font-size: 13px;
+        font-weight: 500;
     }
 
         .peng-card .peng-tanggal span:nth-child(1) i {
             color: var(--primary-clr);
             padding-right: 10px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .peng-card .peng-tanggal span b {

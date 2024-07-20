@@ -20,11 +20,11 @@
     <!-- Form Upload Foto -->
     <form asp-action="IndexPOST" class="row mb-5" method="post" enctype="multipart/form-data" asp-route-pIndex="@Model.Items!.PageIndex">
         <div class="col-md-12 mb-3">
-            <input class="form-control" type="file" asp-for="@Model.FormFile" />
+            <input class="form-control" type="file" asp-for="@Model.FormFile" style="font-size: 15px; margin-top: 0px;" />
             <span asp-validation-for="@Model.FormFile" class="text-danger"></span>
         </div>
-        <div class="col-md-12">
-            <button class="btn w-100" type="submit">Upload</button>
+        <div class="col-md-12 d-flex justify-content-start">
+            <button class="btn" style="padding: 8px 100px;" type="submit">Upload</button>
         </div>
     </form>
     <!-- Akhir Form Upload Foto -->
@@ -34,11 +34,10 @@
         {
             <div>
                 <a data-fancybox="gallery" href="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })"
-                    data-id="@foto.Id"
-                   data-caption="ID: @foto.Id <br>
-                             Tanggal Dibuat: @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
-                @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo) <br>
-                             Pembuat: @foto.Pembuat?.UserName" >
+                   data-id="@foto.Id"
+                   data-caption="
+                   Pengunggah : @foto.Pembuat?.UserName <br> Waktu diunggah : @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
+                @foto.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)  "  >
                         <img src="@Url.Action("Index", "Foto", new { Area = "", id = foto.Id })" />
                     </a>
             </div>

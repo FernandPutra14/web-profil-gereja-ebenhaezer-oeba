@@ -98,9 +98,28 @@ const profile = document.querySelector('nav .profile');
 const imgProfile = profile.querySelector('img');
 const dropdownProfile = profile.querySelector('.profile-link');
 
-imgProfile.addEventListener('click', function () {
+imgProfile.addEventListener('click', function (event) {
 	dropdownProfile.classList.toggle('show');
-})
+	event.stopPropagation();
+});
+
+document.addEventListener('click', function (event) {
+	if (dropdownProfile.classList.contains('show') && !profile.contains(event.target)) {
+		dropdownProfile.classList.remove('show');
+	}
+});
 
 
+// LINK SIDEBAR ACTIVE
+document.addEventListener('DOMContentLoaded', () => {
+	const links = document.querySelectorAll('.dash-link');
+	const currentUrl = window.location.href;
 
+	links.forEach(link => {
+		if (link.href === currentUrl) {
+			link.classList.add('activee');
+		} else {
+			link.classList.remove('activee');
+		}
+	});
+});   

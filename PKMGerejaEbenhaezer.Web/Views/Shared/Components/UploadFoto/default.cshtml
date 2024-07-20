@@ -16,7 +16,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <input class="form-control" id="formFile" name="formFile" data-val="true" type="file" />
+                            <input class="form-control" id="formFile" name="formFile" data-val="true" type="file" style="font-size:14px;" />
                             <span class="text-danger" id="formFileVal"></span>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         {
                             <div class="col-3 p-1 foto-container">
                                 <input id="fotoId" value="@foto.Id" hidden />
-                                <img class="img-thumbnail"
+                                <img class="img-thumbnail" style="width:100%; height:150px !important; object-fit:cover;"
                                      src="@Url.Action("Index", "Foto", new {Area = "", id = foto.Id})" />
                             </div>
                         }
@@ -115,19 +115,18 @@
             if (response.ok) {
                 const data = await response.json();
 
-                $('.foto-container').first().before(`
-                                <div class="col-3 p-1 foto-container">
-                                    <input type="type" id="fotoId" value="` + data['id'] + `" hidden />
-                                    <img class="img-thumbnail" src="` + makeGetUrl(data['id']) + `" />
-                                </div>`);
+                const newFotoContainer = $(`
+                        <div class="col-3 p-1 foto-container">
+                            <input type="hidden" id="fotoId" value="${data['id']}" />
+                            <img class="img-thumbnail" style="width:100%; height:150px !important; object-fit:cover;" src="${makeGetUrl(data['id'])}" />
+                        </div>
+                    `);
 
-                $('.foto-container > input#fotoId[value="' + data['id'] + '"]')
-                    .parent('.foto-container')
-                    .on('click', onFotoClick);
+                $('#fotoGrid').prepend(newFotoContainer);
+
+                newFotoContainer.on('click', onFotoClick);
             } else {
                 const data = await response.json();
-
-                console.log(data);
 
                 $('#formFileVal').html('');
                 $('#formFileVal').append(data['formFile']);

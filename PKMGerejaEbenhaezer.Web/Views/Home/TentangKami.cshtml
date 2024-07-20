@@ -1,3 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Tentang Kami";
 }
+
+<!-- Tentang Kami Bagian Top -->
+<section id="tentangus" class="mb-lg-5">
+    <h2>
+        TENTANG KAMI
+    </h2>
+</section>
+<!-- AKhir Tentang Kami Bagian Top -->
+
+
+<!-- Script JS -->
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('.badan-utama').css({
+                'padding-left': '0',
+                'padding-right': '0',
+                'padding-top': '0rem',
+            });
+            $('.main-navbar').css({
+                'position': 'fixed',
+                'box-shadow': '4px 4px 4px rgba(0, 0, 0, 0.3)',
+                'background-color': 'var(--primary-clr)',
+            });
+        });
+    </script>
+}
