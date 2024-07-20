@@ -7,67 +7,87 @@
 }
 
 
-<!-- Content Detail Pengumuman Section -->
+<!-- Content Detail Ibadah Section -->
 <section id="blog-container">
     <div class="blogs">
         <div class="post">
-            <!-- Judul -->
-            <h3 class="mb-3">@Model.Ibadah.Judul</h3>
-            <h4 class="mb-3">@Model.Ibadah.KategoriIbadah!.Nama</h4>
-            <h6 class="mb-3">@Model.Ibadah.Pendeta!.Nama</h6>
-            <div class="info-blog">
-
-                <!-- Penulis -->
-                <h5><i class="ri-map-pin-range-line" style="padding-right: 5px;"></i>@Model.Ibadah.Tempat</h5>
-                <!-- Tanggal Dibuat -->
-                <h5>
-                    <i class="ri-calendar-schedule-line" style="padding-right:5px;"></i>
-                    @Model.Ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
-                </h5>
-                <h5>
-                    <i class="ri-time-line" style="padding-right: 5px;"></i>
-                    @Model.Ibadah.TanggalIbadah.ToString("hh:mm tt") -
-                    @Model.Ibadah.TanggalIbadah.Add(Model.Ibadah.KategoriIbadah.Durasi).ToString("hh:mm tt")
-                </h5>
-
+            <!-- Image -->
+            <div class="row">
+                <img src="~/img/background1_gereja_testing.jpg" style="width: 100%; height:300px; object-fit:cover  ; border-radius:5%;" />
             </div>
-            <!-- Isi pengumuman -->
+            <!-- Judul -->
+            <div class="row">
+                <h3 class="mb-3" style="font-weight:bold">@Model.Ibadah.Judul</h3>
+            </div>
+            <!-- Kategori Ibadah -->
+            <div class="row">
+                <h4 class="">@Model.Ibadah.KategoriIbadah!.Nama</h4>
+            </div>
+            <!-- Tempat, Tanggal, Jam -->
+            <div class="info-ibd">
+                
+                    <h5><i class="ri-map-pin-range-line" style="padding-right: 5px;"></i>@Model.Ibadah.Tempat</h5>
+                    <h5>
+                        <i class="ri-calendar-schedule-line" style="padding-right:5px;"></i>
+                        @Model.Ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
+                    </h5>
+                    <h5>
+                        <i class="ri-time-line" style="padding-right: 5px;"></i>
+                        @Model.Ibadah.TanggalIbadah.ToString("hh:mm tt") -
+                        @Model.Ibadah.TanggalIbadah.Add(Model.Ibadah.KategoriIbadah.Durasi).ToString("hh:mm tt")
+                    </h5>   
+            </div>
+            <!-- Pendeta -->
+            <div class="row mt-3" style="margin-bottom: 30px;">
+                <h6 class="">@Model.Ibadah.Pendeta!.Nama</h6>
+            </div>
+                     
+            <!-- Deskripsi Ibadah -->
             <p>
                 @Model.Ibadah.Deskripsi
             </p>
-            <!-- Dokumen PDF (Jika Ada) -->
-            @if (Model.Renungan is not null)
-            {
-                var title = Model.Renungan.Verses.FirstOrDefault(v => v.Type == "title");
-                <h5>Nats Renungan</h5>
-                <h5 class="nats-renungan">
-                    @Model.Ibadah.Renungan
-                    "@if (title is not null)
-                    {
-                        <b>Judul : @title.Content.</b>
-                    }
-                    @(string.Join(" ", Model.Renungan.Verses.Where(v => v.Type == "content").Select(v => v.Content)))"
-                </h5>
-            }
-
-
-            <h5>Nats Pembimbing</h5>
-            @if (Model.NasPembimbing is not null)
-            {
-                var title = Model.NasPembimbing.Verses.FirstOrDefault(v => v.Type == "title");
-                <h5 class="nats-renungan">
-                    @Model.Ibadah.NasPembimbing
-                    "@if(title is not null)
-                    {
-                        <b>Judul : @title.Content.</b>
-                    }
-                    @(string.Join(" ", Model.NasPembimbing.Verses.Where(v => v.Type == "content").Select(v => v.Content)))"
-                </h5>
-            }
+            <!-- Renungan -->
+            <div class="nats">
+                <!-- Nats Renungan -->
+                @if (Model.Renungan is not null)
+                {
+                    var title = Model.Renungan.Verses.FirstOrDefault(v => v.Type == "title");
+                    <h5>Nats Renungan</h5>
+                    <p>
+                        @Model.Ibadah.Renungan
+                        <br />
+                        @if (title is not null)
+                        {
+                            <b>Judul : @title.Content.</b>
+                            <br />
+                        }                      
+                        @(string.Join(" ", Model.Renungan.Verses.Where(v => v.Type == "content").Select(v => v.Content)))
+                    </p>
+                }
+                <!-- Nats Pembimbing -->
+                @if (Model.NasPembimbing is not null)
+                {
+                    var title = Model.NasPembimbing.Verses.FirstOrDefault(v => v.Type == "title");
+                    <h5>Nats Pembimbing</h5>
+                    <p>
+                        @Model.Ibadah.NasPembimbing
+                        <br />
+                        @if (title is not null)
+                        {
+                            <b>Judul : @title.Content.</b>
+                            <br />
+                        }
+                        
+                        @(string.Join(" ", Model.NasPembimbing.Verses.Where(v => v.Type == "content").Select(v => v.Content)))"
+                    </p>
+                }
+            </div>
+            
         </div>
     </div>
 </section>
-<!-- Akhir Content Detail Pengumuman Section -->
+<!-- Akhir Content Detail Ibadah Section -->
+
 <!-- Script JS -->
 @section Scripts {
     <script type="text/javascript">
