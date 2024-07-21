@@ -3,6 +3,7 @@
 }
 
 #blog-container {
+    margin-top: 8rem;
     display: flex;
     padding: 30px 50px 30px 50px;
     align-items: flex-start;

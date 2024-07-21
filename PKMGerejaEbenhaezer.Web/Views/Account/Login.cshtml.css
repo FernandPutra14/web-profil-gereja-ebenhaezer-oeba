@@ -1,5 +1,6 @@
 ﻿/* Form Login Section */
 #login-form {
+    margin-top: 8rem;
     padding-top: 80px;
     padding-bottom: 80px;
     display: flex;
