@@ -102,7 +102,7 @@
                         <span><i class="ri-time-line"></i> @item.TanggalDiBuat.ToString("hh:mm tt") WITA</span>                        
                     </div>
                     <h2 class="peng-title">@item.Judul</h2>
-                    <p>@Html.Raw(item.Isi)</p>
+                    <div class="custom-text-ckeditor">@Html.Raw(item.Isi)</div>
                     <div class="peng-tombol">                        
                         <a asp-action="Detail" asp-controller="Pengumuman" asp-route-id="@item.Id"
                            class="btn" style="width:100%;">Baca Selengkapnya...</a>

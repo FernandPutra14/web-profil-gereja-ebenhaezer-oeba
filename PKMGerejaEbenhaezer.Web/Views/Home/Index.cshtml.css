@@ -711,8 +711,9 @@ section.peng {
     border-radius: 5px;
 }
 
-.peng-contents .peng-card p {
+.custom-text-ckeditor {
     margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 13px;
     color: var(--dark-heading-clr);
     display: -webkit-box;

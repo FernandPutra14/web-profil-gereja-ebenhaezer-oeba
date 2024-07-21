@@ -318,7 +318,7 @@
                             <span><i class="ri-time-line"></i> @pengumuman.TanggalDiBuat.ToString("hh:mm tt") WITA</span>
                         </div>
                         <h2 class="peng-title">@pengumuman.Judul</h2>
-                        <p>@Html.Raw(pengumuman.Isi)</p>
+                        <div class="custom-text-ckeditor">@Html.Raw(pengumuman.Isi)</div>
                         <div class="peng-tombol">
                             @* <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
                     <span><i class="ri-time-line"></i> @pengumuman.TanggalDiBuat.ToString("hh:mm tt") WITA</span> *@
