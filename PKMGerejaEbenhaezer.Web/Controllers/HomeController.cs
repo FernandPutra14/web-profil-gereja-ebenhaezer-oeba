@@ -85,6 +85,16 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             return View();
         }
 
+        public IActionResult ProblemBadRequest()
+        {
+            return BadRequest();
+        }
+
+        public IActionResult InternalServerError()
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
         public IActionResult StatusCode404()
         {
             return View(); 
