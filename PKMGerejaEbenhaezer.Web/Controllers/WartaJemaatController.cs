@@ -10,13 +10,10 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
     public class WartaJemaatController : Controller
     {
         private readonly IAppDbContext _appDbContext;
-        private readonly ILogger<WartaJemaatController> _logger;
 
-        public WartaJemaatController(IAppDbContext appDbContext, 
-            ILogger<WartaJemaatController> logger)
+        public WartaJemaatController(IAppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-            _logger = logger;
         }
 
         public async Task<IActionResult> Index(int? bulan = null, 
@@ -24,6 +21,11 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         {
             if (bulan is not null && (bulan < 1 || bulan > 12))
                 bulan = null;
+
+            if(tahun is not null && tahun <= 0)
+                tahun = null;
+
+            if(pageIndex <= 0) pageIndex = 1;
 
             var daftarWarta = await _appDbContext.WartaJemaatTable
                 .OrderByDescending(w => w.TanggalWarta)
@@ -37,7 +39,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
             var pageSize = 6;
 
-            var items = new PaginatedList<WartaJemaat>(daftarWarta, daftarWarta.Count, pageIndex, pageSize);
+            var items = PaginatedList<WartaJemaat>.Create(daftarWarta, pageIndex, pageSize);
 
             return View(new IndexVM<WartaJemaat>
             {

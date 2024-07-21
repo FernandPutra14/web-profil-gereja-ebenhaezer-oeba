@@ -19,9 +19,13 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         public async Task<IActionResult> Index(int? bulan, int? tahun, int? pageIndex, string? searchString)
         {
             if (bulan is not null && (bulan < 1 || bulan > 12)) 
-            {
                 bulan = null;
-            }
+
+            if (tahun is not null && tahun <= 0)
+                tahun = null;
+
+            if(pageIndex is not null && pageIndex <= 0)
+                pageIndex = null;
 
             var daftarPengumuman = await _appDbContext.PengumumanTable
                 .Include(p => p.Foto)
@@ -61,7 +65,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 .Include(p => p.Pembuat)
                 .FirstOrDefaultAsync();
 
-            if(pengumuman == null)
+            if(pengumuman is null)
                 return NotFound();
 
             return View(pengumuman);

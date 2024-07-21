@@ -69,8 +69,8 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
         {
             //Arrange
             var id = 1;
-            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Web\wwwroot\img\background_gereja_testing.jpg";
-            var pathKompresi = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Web\wwwroot\img\background1_gereja_testing.jpg";
+            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\background_gereja_testing.jpg";
+            var pathKompresi = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\background1_gereja_testing.jpg";
             var foto = new Foto { Id = id, PathFoto = path, PathFotoKompresi = pathKompresi };
             _appDbContext.Setup(x => x.FotoTable).ReturnsDbSet(new List<Foto> { foto });
 
@@ -87,8 +87,8 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
         {
             //Arrange
             var id = 1;
-            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Web\wwwroot\img\background_gereja_testing.jpg";
-            var pathKompresi = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Web\wwwroot\img\background1_gereja_testing.jpg";
+            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\background_gereja_testing.jpg";
+            var pathKompresi = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\background1_gereja_testing.jpg";
             var foto = new Foto { Id = id, PathFoto = path, PathFotoKompresi = pathKompresi };
             _appDbContext.Setup(x => x.FotoTable).ReturnsDbSet(new List<Foto> { foto });
 

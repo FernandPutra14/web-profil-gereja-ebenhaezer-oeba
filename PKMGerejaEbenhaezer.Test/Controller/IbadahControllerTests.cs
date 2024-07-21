@@ -32,7 +32,7 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
         public async Task Index_Should_ReturnViewResult()
         {
             //Arrange
-            var daftarIbadah = GetDataIbadah();
+            var daftarIbadah = new List<Ibadah>();
 
             _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(daftarIbadah);
 

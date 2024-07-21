@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PKMGerejaEbenhaezer.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PKMGerejaEbenhaezer.DataAccess", "PKMGerejaEbenhaezer.DataAccess\PKMGerejaEbenhaezer.DataAccess.csproj", "{F56E40B8-0D57-4E34-9B4B-B7E57BA7037C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{DA0D1E9A-B1D0-4B91-A976-C0CB76FB94F0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DA0D1E9A-B1D0-4B91-A976-C0CB76FB94F0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PKMGerejaEbenhaezer.UnitTest", "PKMGerejaEbenhaezer.Test\PKMGerejaEbenhaezer.UnitTest.csproj", "{C53E4A87-E968-4DE7-A59F-807296A7BD10}"
 EndProject

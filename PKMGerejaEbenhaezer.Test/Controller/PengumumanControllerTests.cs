@@ -19,13 +19,11 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
         public static IEnumerable<object[]> TahunData { get => Enumerable.Range(0, 12).Select(x => new object[] { 2024 - x }); }
         public static IEnumerable<object[]> SearchStringData { get => Enumerable.Range(0, 12).Select(x => new object[] { x.ToString() }); }
         public static IEnumerable<object[]> PageIndexData { get => Enumerable.Range(1, 12).Select(x => new object[] { x }); }
-        public static IEnumerable<object[]> InvalidBulanData 
-        { 
-            get => Enumerable.Range(1, 6).Select(x => new object[] { 1 - x })
-                .Concat(Enumerable.Range(1, 6).Select(x => new object[] {12 + x})); 
-        }
+        public static IEnumerable<object[]> InvalidBulanData { get => Enumerable.Range(1, 6).Select(x => new object[] { 1 - x })
+                .Concat(Enumerable.Range(1, 6).Select(x => new object[] {12 + x})); }
         public static IEnumerable<object[]> InvalidTahunData { get => Enumerable.Range(1, 12).Select(x => new object[] { 1 - x }); }
-        public static IEnumerable<object[]> NegativePageIndexData { get => Enumerable.Range(1, 12).Select(x => new object[] { 1 - x }); }
+        public static IEnumerable<object[]> NegativePageIndexData { get => Enumerable.Range(1, 12)
+                .Select(x => new object[] { 1 - x }); }
 
         public PengumumanControllerTests()
         {
@@ -220,6 +218,104 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             var model = viewResult.Model.Should().BeOfType<IndexVM<Pengumuman>>().Subject;
             model.Items.PageIndex.Should().Be(model.Items.TotalPages);
             model.Items.Should().NotBeEmpty();
+        }
+
+        [Fact]
+        public async Task Detail_Should_ReturnNotFoundResult_PengumumanWithIdNotFound()
+        {
+            //Arrange
+            var id = 1;
+            var pengumuman = new Pengumuman { Id = 2 };
+            _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(new Pengumuman[] { pengumuman });
+
+            //Act
+            var result = await _pengumumanController.Detail(id);
+
+            //Assert
+            result.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
+        public async Task Detail_Should_ReturnViewResult_WhenPengumumanWithIdFound()
+        {
+            //Arrange
+            var id = 1;
+            var pengumuman = new Pengumuman { Id = id };
+            _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(new Pengumuman[] { pengumuman });
+
+            //Act
+            var result = await _pengumumanController.Detail(id);
+
+            //Assert
+            var viewResult = result.Should().BeOfType<ViewResult>().Subject;
+            var model = viewResult.Model.Should().BeOfType<Pengumuman>().Subject;
+            model.Should().BeEquivalentTo(pengumuman);
+        }
+
+        [Fact]
+        public async Task Dokumen_Should_ReturnNotFoundResult_WhenPengumumanWithIdNotFound()
+        {
+            //Arrange
+            var id = 1;
+            var pengumuman = new Pengumuman { Id = 2 };
+            _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(new Pengumuman[] { pengumuman });
+
+            //Act
+            var result = await _pengumumanController.Dokumen(id);
+
+            //Assert
+            result.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
+        public async Task Dokumen_Should_ReturnBadRequestResult_WhenPengumumanDontHaveDocument()
+        {
+            //Arrange
+            var id = 1;
+            var pengumuman = new Pengumuman { Id = id, HaveDocument = false };
+            _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(new Pengumuman[] { pengumuman });
+
+            //Act
+            var result = await _pengumumanController.Dokumen(id);
+
+            //Assert
+            result.Should().BeOfType<BadRequestResult>();
+        }
+
+        [Fact]
+        public async Task Dokumen_Should_ReturnNotFoundResult_WhenPDFFileNotExist()
+        {
+            //Arrange
+            var id = 1;
+            var pengumuman = new Pengumuman { Id = id, HaveDocument = true, PathPDF = "sembarang.pdf" };
+            _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(new Pengumuman[] { pengumuman });
+
+            //Act
+            var result = await _pengumumanController.Dokumen(id);
+
+            //Assert
+            result.Should().BeOfType<NotFoundResult>();
+        }
+
+        [Fact]
+        public async Task Dokumen_Should_ReturnPhysicalFileResult_WhenSuccess()
+        {
+            //Arrange
+            var id = 1;
+            var pengumuman = new Pengumuman 
+            { 
+                Id = id, 
+                HaveDocument = true, 
+                PathPDF = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\PDF\BAB I.pdf"
+            };
+            _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(new Pengumuman[] { pengumuman });
+
+            //Act
+            var result = await _pengumumanController.Dokumen(id);
+
+            //Assert
+            var physicalFileResult = result.Should().BeOfType<PhysicalFileResult>().Subject;
+            physicalFileResult.FileName.Should().Be(pengumuman.PathPDF);
         }
 
         private List<Pengumuman> GetDataPengumuman()
