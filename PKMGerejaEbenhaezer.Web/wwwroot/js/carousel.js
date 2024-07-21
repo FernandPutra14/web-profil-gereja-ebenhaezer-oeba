@@ -20,7 +20,7 @@ $('.fernand').owlCarousel({
             items: 3
         },
         1370: {
-            items: 4
+            items: 3
         }
     }
 });
