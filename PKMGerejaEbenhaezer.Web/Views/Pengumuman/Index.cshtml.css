@@ -95,7 +95,7 @@ section.peng {
     font-weight: 600;
 }
 
-.peng-contents .peng-card p {
+.peng-contents .peng-card ::deep p {
     color: var(--dark-heading-clr);
     display: -webkit-box;
     -webkit-box-orient: vertical;
