@@ -33,7 +33,7 @@
                 }
             </div>
             <!-- Isi pengumuman -->
-            <p>@Model.Isi</p>
+            <p>@Html.Raw(Model.Isi)</p>
             <!-- Dokumen PDF (Jika Ada) -->
             <div class="dokumen">
                 @if (Model.HaveDocument)

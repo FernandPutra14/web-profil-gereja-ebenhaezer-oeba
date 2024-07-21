@@ -1,5 +1,10 @@
 {
   "version": "1.0",
   "defaultProvider": "cdnjs",
-  "libraries": []
+  "libraries": [
+    {
+      "library": "editor.js@2.26.5",
+      "destination": "wwwroot/lib/editor.js/"
+    }
+  ]
 }

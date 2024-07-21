@@ -59,7 +59,7 @@
                             }
                         </td>
                         <td>@pengumuman.Judul</td>
-                        <td>@pengumuman.Isi</td>
+                        <td>@Html.Raw(pengumuman.Isi)</td>
                         <td>@(pengumuman.HaveDocument ? "Ada" : "Tidak Ada")</td>
                         <td>
                             @if (pengumuman.HaveDocument)
