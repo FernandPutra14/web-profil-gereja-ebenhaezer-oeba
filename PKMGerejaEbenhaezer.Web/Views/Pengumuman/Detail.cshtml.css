@@ -39,12 +39,13 @@
             
         }
 
-        #blog-container .blogs .post p {
-            text-align: justify;
-            color: #757373;
-            font-size: 14px;
-            margin: 0;
-        }
+/* Ini paragraf */
+.custom-text-ckeditor {
+    text-align: justify;
+    color: #757373;
+    font-size: 14px;
+    margin: 0;
+}
 
         #blog-container .blogs .post .dokumen {            
             margin-top: 30px;

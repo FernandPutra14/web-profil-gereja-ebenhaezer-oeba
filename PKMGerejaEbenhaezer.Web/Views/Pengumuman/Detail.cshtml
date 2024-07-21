@@ -33,7 +33,7 @@
                 }
             </div>
             <!-- Isi pengumuman -->
-            <p>@Html.Raw(Model.Isi)</p>
+            <div class="custom-text-ckeditor">@Html.Raw(Model.Isi)</div>
             <!-- Dokumen PDF (Jika Ada) -->
             <div class="dokumen">
                 @if (Model.HaveDocument)
