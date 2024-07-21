@@ -146,9 +146,7 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             //Assert
             result.Should().NotBeNull();
             var viewResult = result.Should().BeOfType<ViewResult>().Subject;
-
             var model = viewResult.Model.Should().BeOfType<EditVM>().Subject;
-
             model.UserName.Should().Be(user.UserName);
         }
 
@@ -166,7 +164,6 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             //Assert
             result.Should().NotBeNull();
             var redirectToActionResult = result.Should().BeOfType<RedirectToActionResult>().Subject;
-
             redirectToActionResult.ActionName.Should().Be(actionName);
         }
 
@@ -183,7 +180,6 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             //Assert
             result.Should().NotBeNull();
             var viewResult = result.Should().BeOfType<ViewResult>().Subject;
-
             viewResult.Model.Should().BeOfType<EditVM>();
         }
 
@@ -202,7 +198,6 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             //Assert
             result.Should().NotBeNull();
             var viewResult = result.Should().BeOfType<ViewResult>().Subject;
-
             viewResult.Model.Should().BeOfType<EditVM>();
             _accountController.ModelState.IsValid.Should().BeFalse();
         }

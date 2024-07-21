@@ -51,8 +51,7 @@
                         <td>
                             @if (pengumuman.Foto is not null)
                             {
-                                <img src="@Url.Action("Index", "Foto", new {Area = "", id = pengumuman.Foto.Id})" 
-                                alt="@pengumuman.Id" class="img-fluid" />
+                                <partial name="_PictureFotoPartial" model=@((pengumuman.Foto.Id, "img-fluid")) />
                             }
                             else
                             {

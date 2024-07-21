@@ -11,8 +11,6 @@
     <h1 data-aos="fade-up">Selamat Datang</h1>
 </section>
 <!-- Akhir Hero Section -->
-
-
 <!-- Sejarah Section -->
 <section id="sejarah">
     <div class="row-container">
@@ -36,8 +34,6 @@
     </div>
 </section>
 <!-- Akhir Sejarah Section -->
-
-
 <!-- Pendeta Section -->
 <section id="pendeta">
     <h1>Pendeta GMIT Ebenhaezer Oeba</h1>
@@ -51,7 +47,7 @@
                     <div class="gambar-pen">
                         @if (pendeta.Foto is not null)
                         {
-                            <partial name="_PictureFotoPartial" model=@((pendeta.Foto.Id, ""))/>
+                            <partial name="_PictureFotoPartial" model=@((pendeta.Foto.Id, "")) />
                         }
                         else
                         {
@@ -67,7 +63,7 @@
                         </a>
 
                         <a @(pendeta.InstagramProfileLink is not null ?
-                            $"href={pendeta.InstagramProfileLink.AbsoluteUri}" :  "class=disabled")>
+                            $"href={pendeta.InstagramProfileLink.AbsoluteUri}" : "class=disabled")>
                             <i class="ri-instagram-fill"></i>
                         </a>
 
@@ -82,8 +78,6 @@
     </div>
 </section>
 <!-- Akhir Pendeta Section -->
-
-
 <!-- Injil Section -->
 <section id="injil">
     <div class="injil-text">
@@ -97,8 +91,6 @@
     </div>
 </section>
 <!-- Akhir Injil Section -->
-
-
 <!-- Char Jemaat Section -->
 <section id="about-container">
     <!-- Char -->
@@ -109,13 +101,13 @@
                 Type = ChartType.Doughnut,
                 Label = "Jemaat Gereja",
                 Data = new Dictionary<string, double>
-                {
-                    {"Lansia", Model.TotalLansia},
-                    {"Dewasa", Model.TotalDewasa},
-                    {"Pemuda", Model.TotalPemuda},
-                    {"Remaja", Model.TotalRemaja},
-                    {"Anak", Model.TotalAnak},
-                },
+        {
+        {"Lansia", Model.TotalLansia},
+        {"Dewasa", Model.TotalDewasa},
+        {"Pemuda", Model.TotalPemuda},
+        {"Remaja", Model.TotalRemaja},
+        {"Anak", Model.TotalAnak},
+        },
             };
         }
 
@@ -125,10 +117,10 @@
     <div class="about-text">
         <h2>Jumlah Jemaat GMIT Ebenhaezer Oeba</h2>
         <p>
-            Jumlah jemaat GMIT Ebenhaezer Oeba mencapai 
+            Jumlah jemaat GMIT Ebenhaezer Oeba mencapai
             <span style="font-weight:bold;">@(Model.TotalAnak + Model.TotalRemaja + Model.TotalPemuda + Model.TotalDewasa + Model.TotalLansia)</span>
-            anggota. Chart memperlihatkan distribusi jemaat, menyoroti keseimbangan yang ada di antara kelompok usia yang berbeda. 
-            Keberagaman ini menunjukkan kebersamaan yang kuat di antara jemaat, di mana semua usia berkontribusi pada kehidupan gereja. 
+            anggota. Chart memperlihatkan distribusi jemaat, menyoroti keseimbangan yang ada di antara kelompok usia yang berbeda.
+            Keberagaman ini menunjukkan kebersamaan yang kuat di antara jemaat, di mana semua usia berkontribusi pada kehidupan gereja.
         </p>
         <div class="counters">
             <div>
@@ -157,8 +149,6 @@
     </div>
 </section>
 <!-- Akhir Chart Section -->
-
-
 <!-- Warta Section -->
 <section class="warta">
     <!-- Header Warta Section -->
@@ -199,8 +189,6 @@
     <!-- Akhir Content Warta Section -->
 </section>
 <!-- Akhir Warta Section -->
-
-
 <!-- Ibadah Section -->
 <section class="ibadah">
     <!-- Header Ibadah Section -->
@@ -284,7 +272,7 @@
 
                     <div class="ibadah-info">
                         <a asp-action="Detail" asp-controller="Ibadah" asp-area="" asp-route-id="@ibadah.Id"
-                            class="btn" style="width:100%;">Baca Selengkapnya...</a>
+                           class="btn" style="width:100%;">Baca Selengkapnya...</a>
                     </div>
                 </div>
                 <!-- Akhir Card -->
@@ -294,8 +282,6 @@
     <!-- Akhir Content Ibadah Section -->
 </section>
 <!-- Akhir Ibadah Section -->
-
-
 <!-- Pengumuman Section -->
 <section class="peng">
     <!-- Header Pengumuman Section -->
@@ -329,13 +315,13 @@
                         }
                         <div class="peng-tanggal">
                             <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
-                            <span><i class="ri-time-line"></i> @pengumuman.TanggalDiBuat.ToString("hh:mm tt") WITA</span>                          
+                            <span><i class="ri-time-line"></i> @pengumuman.TanggalDiBuat.ToString("hh:mm tt") WITA</span>
                         </div>
                         <h2 class="peng-title">@pengumuman.Judul</h2>
                         <p>@pengumuman.Isi</p>
                         <div class="peng-tombol">
                             @* <span><i class="ri-calendar-fill"></i>@pengumuman.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</span>
-                            <span><i class="ri-time-line"></i> @pengumuman.TanggalDiBuat.ToString("hh:mm tt") WITA</span> *@
+                    <span><i class="ri-time-line"></i> @pengumuman.TanggalDiBuat.ToString("hh:mm tt") WITA</span> *@
                             <a asp-action="Detail" asp-controller="Pengumuman" asp-route-id="@pengumuman.Id" asp-area=""
                                class="btn" style="width:100%;">Baca Selengkapnya...</a>
                         </div>
@@ -348,11 +334,9 @@
     <!-- Akhir Content Pengumuman Section -->
 </section>
 <!-- Akhir Pengumuman Section -->
-
-
 <!-- Script JS -->
 @section Scripts {
-
+    <script src="~/js/transisiNavbar.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/counter.js"></script>
     <script type="text/javascript">
         $(function () {

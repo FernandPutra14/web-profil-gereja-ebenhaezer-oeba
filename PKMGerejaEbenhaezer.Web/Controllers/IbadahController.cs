@@ -55,6 +55,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 Items = PaginatedList<Ibadah>.Create(daftarIbadah, pageIndex, pageSize),
                 Bulan = bulan,
                 Tahun = tahun,
+                SearchString = searchString
             });
         }
 

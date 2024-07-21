@@ -90,6 +90,7 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             //Assert
             var viewResult = result.Should().BeOfType<ViewResult>().Subject;
             var model = viewResult.Model.Should().BeOfType<IndexVM<Ibadah>>().Subject;
+            model.Bulan.Should().Be(bulan);
             model.Items.Should().AllSatisfy(i => i.TanggalIbadah.Month.Should().Be(bulan));
         }
 
@@ -142,6 +143,7 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             //Assert
             var viewResult = result.Should().BeOfType<ViewResult>().Subject;
             var model = viewResult.Model.Should().BeOfType<IndexVM<Ibadah>>().Subject;
+            model.Tahun.Should().Be(tahun);
             model.Items.Should().AllSatisfy(i => i.TanggalIbadah.Year.Should().Be(tahun));
         }
 
@@ -162,6 +164,7 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             //Assert
             var viewResult = result.Should().BeOfType<ViewResult>().Subject;
             var model = viewResult.Model.Should().BeOfType<IndexVM<Ibadah>>().Subject;
+            model.SearchString.Should().Be(s);
             model.Items.Should().AllSatisfy(i => i.Judul.ToLower().Should().Contain(s.ToLower()));
         }
 
