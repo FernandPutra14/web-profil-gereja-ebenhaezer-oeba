@@ -61,7 +61,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 .Include(p => p.Pembuat)
                 .FirstOrDefaultAsync();
 
-            if(pengumuman == null)
+            if(pengumuman is null)
                 return NotFound();
 
             return View(pengumuman);
