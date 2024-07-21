@@ -7,8 +7,15 @@
 
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
+            if (pageIndex <= 0) 
+                throw new ArgumentOutOfRangeException(nameof(pageIndex), pageIndex, $"0 or negative");
+
+            TotalPages = (int)Math.Max(Math.Ceiling(count / (double)pageSize), 1);
+
+            if (pageIndex > TotalPages) 
+                throw new ArgumentOutOfRangeException(nameof(pageIndex), pageIndex, $"is greater than Total Pages : {TotalPages}");
+
             PageIndex = pageIndex;
-            TotalPages = (int)(Math.Ceiling(count / (double)pageSize));
 
             this.AddRange(items);
         }
@@ -18,12 +25,17 @@
 
         public static PaginatedList<T> Empty()
         {
-            return new PaginatedList<T>(new List<T>(), 0, 0, 0);
+            return new PaginatedList<T>(new List<T>(), 0, 1, 1);
         }
 
         public static PaginatedList<T> Create(IEnumerable<T> source, int pageIndex, int pageSize)
         {
             var count = source.Count();
+
+            var totalPages = (int)Math.Max(Math.Ceiling(count / (double)pageSize), 1);
+
+            if (pageIndex > totalPages) pageIndex = totalPages;
+
             var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
 
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
