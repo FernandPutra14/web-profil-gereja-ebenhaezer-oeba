@@ -7,6 +7,7 @@ using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Authentication;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
+using PKMGerejaEbenhaezer.Web.Services.FileHelper;
 using PKMGerejaEbenhaezer.Web.Services.ImageCompress;
 using PKMGerejaEbenhaezer.Web.Services.PDF;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
@@ -59,6 +60,7 @@ builder.Services.AddScoped<IToastrNotificationService, ToastrNotificationService
 builder.Services.AddScoped<IImageCompressService, ImageCompressService>();
 builder.Services.AddScoped<IAppDbContext, AppDbContext>();
 builder.Services.AddScoped<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
+builder.Services.AddScoped<IFileHelperService, FileHelperService>();
 
 builder.Services.AddHttpClient<IBeebeleApiService, BeebleApiService>(options =>
 {

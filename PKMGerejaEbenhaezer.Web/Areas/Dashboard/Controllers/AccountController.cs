@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Account;
+using PKMGerejaEbenhaezer.Web.Authentication;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
@@ -17,16 +18,19 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly IToastrNotificationService _notificationService;
         private readonly IPasswordHasher<AppUser> _passwordHasher;
+        private readonly ISignInManager _signInManager;
 
         public AccountController(IAppDbContext appDbContext,
             ILogger<AccountController> logger,
             IToastrNotificationService notificationService,
-            IPasswordHasher<AppUser> passwordHasher)
+            IPasswordHasher<AppUser> passwordHasher,
+            ISignInManager signInManager)
         {
             _appDbContext = appDbContext;
             _logger = logger;
             _notificationService = notificationService;
             _passwordHasher = passwordHasher;
+            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> Index()
@@ -104,7 +108,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (user is null) return NotFound();
 
-            if (user.UserName == User.Identity?.Name)
+            var currUser = await _signInManager.GetSignedInUser();
+
+            if (user.Id == currUser?.Id)
             {
                 _logger.LogError("Mencoba menghapus akun sendiri");
                 return BadRequest();
@@ -164,7 +170,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return BadRequest();
             }
 
-            if (user.UserName == User.Identity?.Name)
+            var currUser = await _signInManager.GetSignedInUser();
+
+            if (user.Id == currUser?.Id)
             {
                 _logger.LogError("Mencoba mengubah akun sendiri. User Name : {0}", user.UserName);
                 return BadRequest();
