@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah;
+using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using System.Security.Cryptography;
 
@@ -16,14 +17,17 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<IbadahController> _logger;
         private readonly IToastrNotificationService _notificationService;
+        private readonly IBeebeleApiService _beebeleApiService;
 
-        public IbadahController(IAppDbContext appDbContext, 
-            ILogger<IbadahController> logger, 
-            IToastrNotificationService notificationService)
+        public IbadahController(IAppDbContext appDbContext,
+            ILogger<IbadahController> logger,
+            IToastrNotificationService notificationService,
+            IBeebeleApiService beebeleApiService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
             _notificationService = notificationService;
+            _beebeleApiService = beebeleApiService;
         }
 
         public async Task<IActionResult> Index()
@@ -66,6 +70,21 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         {
             //Validasi
             if (!ModelState.IsValid) return View(tambahVM);
+
+            if(!await _beebeleApiService.IsValid(tambahVM.NasPembimbing))
+            {
+                ModelState.AddModelError(nameof(TambahVM.NasPembimbing), "Ayat Alkitab tidak valid");
+                return View(tambahVM);
+            }
+
+            if(tambahVM.Renungan is not null)
+            {
+                if (!await _beebeleApiService.IsValid(tambahVM.Renungan))
+                {
+                    ModelState.AddModelError(nameof(TambahVM.Renungan), "Ayat Alkitab tidak valid");
+                    return View(tambahVM);
+                }
+            }
 
             //Simpan ke database
             var kategori = await _appDbContext.KategoriIbadahTable
@@ -139,6 +158,21 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         {
             //Validasi
             if (!ModelState.IsValid) return View(editVM);
+
+            if (!await _beebeleApiService.IsValid(editVM.NasPembimbing))
+            {
+                ModelState.AddModelError(nameof(EditVM.NasPembimbing), "Ayat Alkitab tidak valid");
+                return View(editVM);
+            }
+
+            if (editVM.Renungan is not null)
+            {
+                if (!await _beebeleApiService.IsValid(editVM.Renungan))
+                {
+                    ModelState.AddModelError(nameof(EditVM.Renungan), "Ayat Alkitab tidak valid");
+                    return View(editVM);
+                }
+            }
 
             var ibadah = await _appDbContext.IbadahTable
                 .Where(i => i.Id == editVM.Id).FirstOrDefaultAsync();

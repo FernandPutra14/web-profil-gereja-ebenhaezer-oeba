@@ -6,5 +6,6 @@ namespace PKMGerejaEbenhaezer.Web.Services.BeebleApi
     {
         Task<Book[]?> List();
         Task<BeebleApiResponse?> PassageContent(AyatAlkitab ayatAlkitab);
+        Task<bool> IsValid(AyatAlkitab ayatAlkitab);
     }
 }
