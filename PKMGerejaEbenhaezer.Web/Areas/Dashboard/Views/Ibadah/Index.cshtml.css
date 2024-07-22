@@ -20,6 +20,7 @@
         .ibadahh .breadcrumbs li,
         .ibadahh .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .ibadahh .breadcrumbs li a {

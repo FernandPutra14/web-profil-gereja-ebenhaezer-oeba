@@ -268,7 +268,9 @@
                     <h2 class="ibadah-title">
                         @ibadah.Judul
                     </h2>
-                    <p>@ibadah.Deskripsi</p>
+                    <div class="ibadah-deskripsi-ckEditor">
+                        @Html.Raw(ibadah.Deskripsi)
+                    </div>
 
                     <div class="ibadah-info">
                         <a asp-action="Detail" asp-controller="Ibadah" asp-area="" asp-route-id="@ibadah.Id"

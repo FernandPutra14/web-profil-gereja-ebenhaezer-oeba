@@ -20,6 +20,7 @@
         .katibadah .breadcrumbs li,
         .katibadah .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .katibadah .breadcrumbs li a {

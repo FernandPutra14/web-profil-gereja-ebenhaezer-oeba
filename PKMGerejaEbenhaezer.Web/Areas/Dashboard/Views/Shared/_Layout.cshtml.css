@@ -107,6 +107,10 @@ nav {
         position: relative;
     }
 
+    nav .profile li{
+        list-style: none;
+    }
+
         nav .profile ::deep img {
             width: 36px;
             height: 36px;

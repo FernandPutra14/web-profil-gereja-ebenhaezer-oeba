@@ -150,7 +150,10 @@
                     <h2 class="ibadah-title">
                         @item.Judul
                     </h2>
-                    <p>@item.Deskripsi</p>
+
+                    <div class="ibadah-deskripsi-ckEditor">
+                        @Html.Raw(item.Deskripsi)
+                    </div>
 
                     <div class="ibadah-info">
                         <a asp-action="Detail" asp-controller="Ibadah" asp-area="" asp-route-id="@item.Id"

@@ -27,6 +27,7 @@
         .editray .breadcrumbs ::deep li,
         .editray .breadcrumbs ::deep li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .editray .breadcrumbs ::deep li ::deep a {

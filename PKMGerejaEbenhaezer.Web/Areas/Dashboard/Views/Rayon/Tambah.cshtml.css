@@ -27,6 +27,7 @@
         .tamrayon .breadcrumbs li,
         .tamrayon .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .tamrayon .breadcrumbs li a {

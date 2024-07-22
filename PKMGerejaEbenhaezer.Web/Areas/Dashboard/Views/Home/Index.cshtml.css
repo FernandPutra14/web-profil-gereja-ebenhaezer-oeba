@@ -20,6 +20,7 @@
         .pertama .breadcrumbs li,
         .pertama .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .pertama .breadcrumbs li a {

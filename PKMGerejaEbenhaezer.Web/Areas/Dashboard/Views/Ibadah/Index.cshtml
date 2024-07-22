@@ -51,7 +51,7 @@
                     <tr style="@(item.KategoriIbadah is null || item.Pendeta is null ? "background-color:red" : "")">
                         <td>@item.Id</td>
                         <td>@item.Judul</td>
-                        <td>@item.Deskripsi</td>
+                        <td>@Html.Raw(item.Deskripsi)</td>
                         <td>@(item.KategoriIbadah is null ? "Tidak Ada" : item.KategoriIbadah.Nama)</td>
                         <td>@item.NasPembimbing</td>
                         <td>@(item.Renungan is null ? "Tidak Ada" : item.Renungan)</td>

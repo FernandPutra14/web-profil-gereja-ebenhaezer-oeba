@@ -27,6 +27,7 @@
         .edikatib .breadcrumbs li,
         .edikatib .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .edikatib .breadcrumbs li a {
