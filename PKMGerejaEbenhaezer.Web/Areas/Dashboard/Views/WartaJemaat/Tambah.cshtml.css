@@ -27,6 +27,7 @@
         .tamwarta .breadcrumbs li,
         .tamwarta .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .tamwarta .breadcrumbs li a {

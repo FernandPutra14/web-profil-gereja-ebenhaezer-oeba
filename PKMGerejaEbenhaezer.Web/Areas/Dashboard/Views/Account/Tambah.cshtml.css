@@ -27,6 +27,7 @@
         .plusakn .breadcrumbs li,
         .plusakn .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .plusakn .breadcrumbs li a {

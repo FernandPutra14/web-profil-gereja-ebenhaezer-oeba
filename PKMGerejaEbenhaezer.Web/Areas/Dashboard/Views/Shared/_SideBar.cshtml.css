@@ -1,4 +1,8 @@
-﻿/* Sidebar */
+﻿li {
+    list-style: none;
+}
+
+/* Sidebar */
 #sidebar {
     position: fixed;
     box-shadow: 4px 0px 5px 0px rgba(198,181,181,0.75);

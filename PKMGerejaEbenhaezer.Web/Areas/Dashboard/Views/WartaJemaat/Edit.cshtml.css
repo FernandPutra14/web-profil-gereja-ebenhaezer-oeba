@@ -27,6 +27,7 @@
         .edwarta .breadcrumbs li,
         .edwarta .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .edwarta .breadcrumbs li a {

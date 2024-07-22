@@ -73,12 +73,19 @@
             margin-bottom: 20px;
         }
 
-            #blog-container .blogs .post .info-ibd {
-                display: flex;
-                text-align: center;
-                justify-content: center;
-                gap: 10px;
-            }
+.deskripsi-ibadah {
+    text-align: justify;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#blog-container .blogs .post .info-ibd {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+}
 
         #blog-container .blogs .post .dokumen {
             margin-top: 30px;

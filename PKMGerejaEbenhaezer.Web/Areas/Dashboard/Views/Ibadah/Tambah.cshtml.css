@@ -27,6 +27,7 @@
         .tambadah .breadcrumbs li,
         .tambadah .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .tambadah .breadcrumbs li a {

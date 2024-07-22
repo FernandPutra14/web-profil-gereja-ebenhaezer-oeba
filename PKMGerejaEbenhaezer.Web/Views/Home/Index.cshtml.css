@@ -582,8 +582,9 @@ section.ibadah {
     text-overflow: ellipsis;
 }
 
-.ibadah-card p {
+.ibadah-deskripsi-ckEditor {
     margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 13px;
     color: var(--dark-heading-clr);
     display: -webkit-box;
@@ -592,6 +593,10 @@ section.ibadah {
     -webkit-line-clamp: 2;
     text-overflow: ellipsis;
     line-height: 1.5em;
+}
+
+.ibadah-deskripsi-ckEditor ::deep p {
+    margin : 0;
 }
 
 .ibadah-card .ibadah-date {

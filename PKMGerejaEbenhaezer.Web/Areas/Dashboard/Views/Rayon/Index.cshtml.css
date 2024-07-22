@@ -20,6 +20,7 @@
         .dafray .breadcrumbs li,
         .dafray .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .dafray .breadcrumbs li a {

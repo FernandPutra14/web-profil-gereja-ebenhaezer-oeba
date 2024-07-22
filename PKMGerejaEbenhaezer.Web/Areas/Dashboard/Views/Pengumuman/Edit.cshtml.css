@@ -27,6 +27,7 @@
         .editpeng .breadcrumbs li,
         .editpeng .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .editpeng .breadcrumbs li a {

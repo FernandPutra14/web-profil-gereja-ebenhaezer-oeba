@@ -27,6 +27,7 @@
         .edibadah .breadcrumbs li,
         .edibadah .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .edibadah .breadcrumbs li a {

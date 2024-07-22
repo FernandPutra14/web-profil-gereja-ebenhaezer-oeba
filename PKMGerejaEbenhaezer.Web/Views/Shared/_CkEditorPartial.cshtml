@@ -16,13 +16,17 @@
         Essentials,
         Paragraph,
         Bold,
-        Italic
+        Italic,
+        List
     } from 'ckeditor5';
 
     ClassicEditor
         .create(document.querySelector('#editorberkelas'), {
-            plugins: [Essentials, Paragraph, Bold, Italic],
-            toolbar: ['bold', 'italic']
+            plugins: [Essentials, Paragraph, Bold, Italic, List ],
+            toolbar: ['bold', 'italic', 'numberedList', 'bulletedList']
+        })
+        .then(editor => {
+            editor.ui.view.editable.element.style.height = '200px'; // Set the height of the editor
         })
         .catch(error => {
             console.error(error);

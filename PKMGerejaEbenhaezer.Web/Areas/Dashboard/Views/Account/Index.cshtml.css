@@ -20,6 +20,7 @@
         .akunn .breadcrumbs li,
         .akunn .breadcrumbs li a {
             font-size: 14px;
+            list-style: none;
         }
 
             .akunn .breadcrumbs li a {
