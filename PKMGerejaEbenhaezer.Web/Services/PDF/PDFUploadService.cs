@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PKMGerejaEbenhaezer.Web.Configurations;
-using PKMGerejaEbenhaezer.Web.Utilities;
+using PKMGerejaEbenhaezer.Web.Services.FileHelper;
 
 namespace PKMGerejaEbenhaezer.Web.Services.PDF
 {
@@ -10,14 +10,17 @@ namespace PKMGerejaEbenhaezer.Web.Services.PDF
         private readonly ILogger<PDFUploadService> _logger;
         private readonly PDFFileSettingsOptions _options;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IFileHelperService _fileHelperService;
 
         public PDFUploadService(PDFFileSettingsOptions options,
             ILogger<PDFUploadService> logger,
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment,
+            IFileHelperService fileHelperService)
         {
             _options = options;
             _logger = logger;
             _webHostEnvironment = webHostEnvironment;
+            _fileHelperService = fileHelperService;
         }
 
         public async Task<string?> UploadAsync<T>(ModelStateDictionary modelState, IFormFile formFile)
@@ -35,7 +38,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.PDF
                 return null;
             }
 
-            var fileFormContent = await FileHelpers.ProcessFormFile<T>(
+            var fileFormContent = await _fileHelperService.ProcessFormFile<T>(
                 formFile,
                 modelState,
                 new string[] { ".pdf" },

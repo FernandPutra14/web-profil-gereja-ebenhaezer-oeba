@@ -20,9 +20,17 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             _beebeleApiService = beebeleApiService;
         }
 
-        public async Task<IActionResult> Index(int? bulan, int? tahun, string? searchString,
+        public async Task<IActionResult> Index(int? bulan = null, int? tahun = null, string? searchString = null,
             int pageIndex = 1)
         {
+            if (bulan is not null && (bulan < 1 || bulan > 12))
+                bulan = null;
+
+            if (tahun is not null && tahun <= 0)
+                tahun = null;
+
+            if (pageIndex <= 0) pageIndex = 1;
+
             var daftarIbadah = await _appDbContext.IbadahTable
                 .Include(i => i.Pendeta).ThenInclude(p => p.Foto)
                 .Include(i => i.KategoriIbadah)
@@ -30,14 +38,8 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
                 .OrderByDescending(i => i.TanggalIbadah)
                 .AsNoTracking().ToListAsync();
 
-            if (bulan is not null && (bulan < 1 || bulan > 12))
-                bulan = null;
-
             if (bulan is not null)
                 daftarIbadah = daftarIbadah.Where(i => i.TanggalIbadah.Month == bulan).ToList();
-
-            if (tahun is not null && tahun <= 0)
-                tahun = null;
 
             if (tahun is not null)
                 daftarIbadah = daftarIbadah.Where(i => i.TanggalIbadah.Year == tahun).ToList();

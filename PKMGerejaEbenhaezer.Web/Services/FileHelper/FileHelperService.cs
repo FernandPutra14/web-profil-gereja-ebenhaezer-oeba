@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Reflection;
 
-namespace PKMGerejaEbenhaezer.Web.Utilities
+namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
 {
-    public static class FileHelpers
+    public class FileHelperService : IFileHelperService
     {
         // If you require a check on specific characters in the IsValidFileExtensionAndSignature
         // method, supply the characters in the _allowedChars field.
@@ -51,7 +51,7 @@ namespace PKMGerejaEbenhaezer.Web.Utilities
         // systems. For more information, see the topic that accompanies this sample
         // app.
 
-        public static async Task<byte[]> ProcessFormFile<T>(IFormFile formFile,
+        public async Task<byte[]> ProcessFormFile<T>(IFormFile formFile,
             ModelStateDictionary modelState, string[] permittedExtensions,
             long minSizeLimit,
             long maxSizeLimit)
@@ -62,7 +62,7 @@ namespace PKMGerejaEbenhaezer.Web.Utilities
             // property associated with this IFormFile. If a display
             // name isn't found, error messages simply won't show
             // a display name.
-            MemberInfo property =
+            MemberInfo? property =
                 typeof(T).GetProperty(
                     formFile.Name.Substring(formFile.Name.IndexOf(".",
                     StringComparison.Ordinal) + 1));
@@ -91,7 +91,7 @@ namespace PKMGerejaEbenhaezer.Web.Utilities
                 return Array.Empty<byte>();
             }
 
-            if(formFile.Length < minSizeLimit)
+            if (formFile.Length < minSizeLimit)
             {
                 var megabyteSizeLimit = minSizeLimit / (double)1048576;
                 modelState.AddModelError(formFile.Name,
@@ -151,7 +151,7 @@ namespace PKMGerejaEbenhaezer.Web.Utilities
             return Array.Empty<byte>();
         }
 
-        public static async Task<byte[]> ProcessStreamedFile(
+        public async Task<byte[]> ProcessStreamedFile(
             MultipartSection section, ContentDispositionHeaderValue contentDisposition,
             ModelStateDictionary modelState, string[] permittedExtensions, long sizeLimit)
         {
@@ -173,7 +173,7 @@ namespace PKMGerejaEbenhaezer.Web.Utilities
                         $"The file exceeds {megabyteSizeLimit:N1} MB.");
                     }
                     else if (!IsValidFileExtensionAndSignature(
-                        contentDisposition.FileName.Value, memoryStream,
+                        contentDisposition.FileName.Value!, memoryStream,
                         permittedExtensions))
                     {
                         modelState.AddModelError("File",
@@ -197,7 +197,7 @@ namespace PKMGerejaEbenhaezer.Web.Utilities
             return Array.Empty<byte>();
         }
 
-        public static bool IsValidFileExtensionAndSignature(string fileName, 
+        private bool IsValidFileExtensionAndSignature(string fileName,
             Stream data, string[] permittedExtensions)
         {
             if (string.IsNullOrEmpty(fileName) || data == null || data.Length == 0)

@@ -9,7 +9,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.FotoModels
     {
         public PaginatedList<Foto>? Items { get; set; }
 
-        [Required]
+        [Display(Name = "File Foto")]
+        [Required(ErrorMessage = "{0} harus dipilih")]
         public IFormFile FormFile { get; set; }
     }
 }

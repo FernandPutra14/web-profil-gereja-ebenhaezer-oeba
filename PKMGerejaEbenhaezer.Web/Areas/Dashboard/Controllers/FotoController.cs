@@ -5,6 +5,7 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.FotoModels;
 using PKMGerejaEbenhaezer.Web.Configurations;
+using PKMGerejaEbenhaezer.Web.Services.FileHelper;
 using PKMGerejaEbenhaezer.Web.Services.ImageCompress;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using PKMGerejaEbenhaezer.Web.Utilities;
@@ -23,13 +24,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly ILogger<FotoController> _logger;
         private readonly IToastrNotificationService _notificationService;
         private readonly IImageCompressService _imageCompressService;
+        private readonly IFileHelperService _fileHelperService;
 
         public FotoController(IAppDbContext appDbContext,
             PhotoFileSettingsOptions photoFileSettingsOptions,
             IWebHostEnvironment webHostEnvironment,
             ILogger<FotoController> logger,
             IToastrNotificationService notificationService,
-            IImageCompressService imageCompressService)
+            IImageCompressService imageCompressService,
+            IFileHelperService fileHelperService)
         {
             _appDbContext = appDbContext;
             _photoFileSettingsOptions = photoFileSettingsOptions;
@@ -37,6 +40,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             _logger = logger;
             _notificationService = notificationService;
             _imageCompressService = imageCompressService;
+            _fileHelperService = fileHelperService;
         }
 
         public async Task<IActionResult> Index(int? pageIndex)
@@ -73,7 +77,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             //Upload File
-            var fileFormContent = await FileHelpers.ProcessFormFile<IndexVM>(
+            var fileFormContent = await _fileHelperService.ProcessFormFile<IndexVM>(
                 indexVM.FormFile,
                 ModelState,
                 _photoFileSettingsOptions.PermittedFileExtensions,
@@ -165,7 +169,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             //Upload File
-            var fileFormContent = await FileHelpers.ProcessFormFile<IFormFile>(
+            var fileFormContent = await _fileHelperService.ProcessFormFile<IFormFile>(
                 formFile,
                 ModelState,
                 _photoFileSettingsOptions.PermittedFileExtensions,
