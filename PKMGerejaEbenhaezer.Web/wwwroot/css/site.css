@@ -156,3 +156,11 @@ a.btndel {
     max-width: 700px;
 }
 /* Akhir Style Global Section Header */
+
+.ck-editor__editable {
+    min-height: 200px;
+    padding: 5px 20px !important;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    color: #6c757d;
+}

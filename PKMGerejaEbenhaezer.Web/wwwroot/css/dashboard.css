@@ -28,13 +28,3 @@ a {
     text-decoration: none;
 }
 
-/* ckEditor5 */
-.ck-editor__editable {
-    min-height: 200px;
-    padding: 5px 20px !important;
-    font-size: 16px;
-    font-family: 'poppins', sans-serif;
-    color: #6c757d;
-    line-height: 10px !important;
-}
-/* Akhir ckEditor5 */
