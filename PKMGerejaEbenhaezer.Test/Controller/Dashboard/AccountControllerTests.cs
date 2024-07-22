@@ -441,4 +441,25 @@ public class AccountControllerTests
             x => x.AddNotification(It.Is<ToastrNotification>(t => t.Type == ToastrNotificationType.Error)),
             Times.Once());
     }
+
+    [Fact]
+    public async Task Hapus_Should_ReturnRedirectToActionIndexResultAndCallSaveChangesAsync_WhenSuccess()
+    {
+        //Arrange
+        var actionName = nameof(AccountController.Index);
+        var id = 1;
+        var appUser = new AppUser { Id = id };
+        var daftarUser = new List<AppUser> { appUser };
+        var dbSet = new Mock<DbSet<AppUser>>();
+        _appDbContext.Setup(x => x.AppUserTable).ReturnsDbSet(daftarUser, dbSet);
+
+        //Act
+        var result = await _accountController.Hapus(id);
+
+        //Assert
+        dbSet.Verify(x => x.Remove(It.Is<AppUser>(a => a.Id == id)), Times.Once());
+        _appDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once());
+        var redirectToAction = result.Should().BeOfType<RedirectToActionResult>().Subject;
+        redirectToAction.ActionName.Should().Be(actionName);
+    }
 }
