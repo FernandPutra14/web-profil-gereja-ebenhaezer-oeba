@@ -463,7 +463,7 @@ section.ibadah {
 .ibadah-card .nats {
     position: absolute;
     left: 0;
-    top: 30px;
+    top: 40px;
     width: 100%;
     height: auto;
     overflow: hidden;
@@ -894,6 +894,7 @@ section.peng {
     }
 
 .owl-carousel ::deep .owl-dots {
+
 }
 
 #pendeta .owl-carousel .owl-dots span {

@@ -74,6 +74,27 @@ button.btn {
     }
 /* Akhir Style Global Button btn */
 
+
+/* Style Global Button btn */
+button.btndel {
+    padding: 10px 18px;
+    background-color: darkred;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    border: 1px solid darkred;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    button.btndel:hover {
+        background-color: var(--light-heading-clr);
+        color: darkred;
+        border: 1px solid var(--primary-clr);
+    }
+/* Akhir Style Global Button btn */
+
 /* Style Global Anchor Mirip Button btn */
 a.btn {
     padding: 10px 18px;
