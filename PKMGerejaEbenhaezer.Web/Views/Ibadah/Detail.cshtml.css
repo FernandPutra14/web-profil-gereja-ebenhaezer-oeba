@@ -1,9 +1,4 @@
-﻿* {
-    font-family: 'poppins';
-}
-
-
-#blog-container {
+﻿#blog-container {
     margin-top: 8rem;
     display: flex;
     padding: 30px 50px 30px 50px;
@@ -18,9 +13,24 @@
         margin: 0 auto;
     }
 
-        #blog-container .blogs img {
-            width: 40%;
-            border-radius: 13px;
+        #blog-container .blogs .post .atas ::deep img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 30px;
+        }
+
+        #blog-container .blogs .post .pendeta-detail {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        #blog-container .blogs .post .pendeta-detail ::deep img {
+            width: 25px;
+            height: 25px;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         #blog-container .blogs .post {
@@ -28,29 +38,29 @@
             justify-content: center;
         }
 
-        #blog-container .blogs .post h3 {
-            color: #29303B;
-            padding: 20px 0 0px 0;
-            font-size: 38px;
-            font-weight: 500;
-        }
+            #blog-container .blogs .post h3{
+                color: #29303B;
+                padding: 15px 0 0px 0;
+                font-size: 38px;
+                font-weight: 500;
+            }
 
             #blog-container .blogs .post h4 {
                 color: #10316B;
                 padding: 0px 0 0px 0;
-                font-size: 20px;
+                font-size: 18px;
                 font-weight: 600;
             }
 
             #blog-container .blogs .post h5 {
                 display: flex;
-                font-size: 10px;
+                font-size: 14px;
                 padding: 10px 0 0px 0;
                               
             }
 
             #blog-container .blogs .post h6 {
-                font-size: 11px;
+                font-size: 15px;
                 padding: 0px 0 0px 0;
             }
 
@@ -76,7 +86,7 @@
 .deskripsi-ibadah {
     text-align: justify;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 40px;
     margin-bottom: 10px;
 }
 
@@ -85,6 +95,10 @@
     text-align: center;
     justify-content: center;
     gap: 10px;
+}
+
+#blog-container .blogs .post .info-ibd i {
+    color: var(--primary-clr);
 }
 
         #blog-container .blogs .post .dokumen {

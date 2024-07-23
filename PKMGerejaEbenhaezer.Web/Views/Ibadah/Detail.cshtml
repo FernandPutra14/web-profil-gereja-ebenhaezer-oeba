@@ -13,34 +13,42 @@
         <div class="post">
             <!-- Image -->
             <div class="row atas">
-                <img src="~/img/background1_gereja_testing.jpg" style="width: 100%; height:300px; object-fit:cover  ; border-radius:5%;" />
+                <img src="~/img/pray-ibadah2.jpg" />
             </div>
             <!-- Judul -->
             <div class="row">
-                <h3 class="mb-3" style="font-weight:bold">@Model.Ibadah.Judul</h3>
+                <h3 class="" style="font-weight:600">@Model.Ibadah.Judul</h3>
             </div>
             <!-- Kategori Ibadah -->
             <div class="row">
                 <h4 class="">@Model.Ibadah.KategoriIbadah!.Nama</h4>
             </div>
+
+            <!-- Pendeta -->
+            <div class="pendeta-detail mt-2">
+                <div>
+                    <img src="~/img/pendeta-test.jpg" />
+                </div>
+                <div style="margin-top: 5px; margin-left:10px;">
+                    <h6 class="">@Model.Ibadah.Pendeta!.Nama</h6>
+                </div>
+
+            </div>
             <!-- Tempat, Tanggal, Jam -->
             <div class="info-ibd">
                 
-                    <h5><i class="ri-map-pin-range-line" style="padding-right: 5px;"></i>@Model.Ibadah.Tempat</h5>
+                    <h5><i class="ri-map-pin-range-line" style="padding-right: 3px;"></i>@Model.Ibadah.Tempat</h5>
                     <h5>
-                        <i class="ri-calendar-schedule-line" style="padding-right:5px;"></i>
+                        <i class="ri-calendar-schedule-line" style="padding-right:3px;"></i>
                         @Model.Ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
                     </h5>
                     <h5>
-                        <i class="ri-time-line" style="padding-right: 5px;"></i>
+                        <i class="ri-time-line" style="padding-right: 3px;"></i>
                         @Model.Ibadah.TanggalIbadah.ToString("hh:mm tt") -
                         @Model.Ibadah.TanggalIbadah.Add(Model.Ibadah.KategoriIbadah.Durasi).ToString("hh:mm tt")
                     </h5>   
             </div>
-            <!-- Pendeta -->
-            <div class="row mt-3" style="margin-bottom: 30px;">
-                <h6 class="">@Model.Ibadah.Pendeta!.Nama</h6>
-            </div>
+            
                      
             <!-- Deskripsi Ibadah -->
             <div class="deskripsi-ibadah">
