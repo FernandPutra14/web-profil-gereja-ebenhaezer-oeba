@@ -156,6 +156,7 @@ nav {
 .tomboltoa {
     padding: 10px 16px;
     display: flex;
+    width: 100%;
     grid-gap: 10px;
     font-size: 14px;
     border: none;
