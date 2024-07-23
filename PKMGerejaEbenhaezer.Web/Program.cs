@@ -66,6 +66,7 @@ builder.Services.AddHttpClient<IBeebeleApiService, BeebleApiService>(options =>
 {
     options.BaseAddress = new Uri("https://beeble.vercel.app/api/v1/passage/");
 });
+builder.Services.AddApplicationInsightsTelemetry();
 
 var app = builder.Build();
 

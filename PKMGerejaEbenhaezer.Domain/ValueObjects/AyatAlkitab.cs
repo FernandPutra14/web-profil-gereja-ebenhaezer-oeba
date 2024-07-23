@@ -70,14 +70,14 @@ namespace PKMGerejaEbenhaezer.Domain.ValueObjects
                 other.Kitab == Kitab && other.Pasal == Pasal && other.Ayat.SequenceEqual(Ayat);
         }
 
-        public static bool operator==(AyatAlkitab a, AyatAlkitab b)
+        public static bool operator==(AyatAlkitab? a, AyatAlkitab? b)
         {
             if(a is null || b is null) return false;
 
             return a.Equals(b); 
         }
 
-        public static bool operator!=(AyatAlkitab a, AyatAlkitab b)
+        public static bool operator!=(AyatAlkitab? a, AyatAlkitab? b)
         {
             return !(a == b);
         }

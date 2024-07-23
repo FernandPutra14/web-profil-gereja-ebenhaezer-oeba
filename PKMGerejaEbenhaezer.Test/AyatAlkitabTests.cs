@@ -1,4 +1,5 @@
-﻿using PKMGerejaEbenhaezer.Domain.ValueObjects;
+﻿using FluentAssertions;
+using PKMGerejaEbenhaezer.Domain.ValueObjects;
 
 namespace PKMGerejaEbenhaezer.UnitTest
 {
@@ -12,7 +13,7 @@ namespace PKMGerejaEbenhaezer.UnitTest
             var s = value.ToString();
 
             //Assert
-            Assert.Equal(valueString, s);
+            s.Should().Be(valueString);
         }
 
         [ClassData(typeof(AyatAlkitabTestData))]
@@ -23,9 +24,9 @@ namespace PKMGerejaEbenhaezer.UnitTest
             var isValid = AyatAlkitab.TryParse(valueString, null, out AyatAlkitab? result);
 
             //Assert
-            Assert.True(isValid);
-            Assert.NotNull(result);
-            Assert.Equal(value, result);
+            isValid.Should().BeTrue();
+            result.Should().NotBeNull();
+            result.Should().Be(value);
         }
 
         [ClassData(typeof(AyatAlkitabEqualTestData))]
@@ -36,8 +37,7 @@ namespace PKMGerejaEbenhaezer.UnitTest
             var result = value1.Equals(value2);
 
             //Assert
-            Assert.Equal(value1, value2);
-            Assert.True(result);
+            result.Should().BeTrue();
         }
 
         [ClassData(typeof(AyatAlkitabEqualTestData))]
@@ -48,8 +48,7 @@ namespace PKMGerejaEbenhaezer.UnitTest
             var result = value1 == value2;
 
             //Assert
-            Assert.Equal(value1, value2);
-            Assert.True(result);
+            result.Should().BeTrue();
         }
 
         [ClassData(typeof(AyatAlkitabNotEqualTestData))]
@@ -60,8 +59,7 @@ namespace PKMGerejaEbenhaezer.UnitTest
             var result = value1.Equals(value2);
 
             //Assert
-            Assert.NotEqual(value1, value2);
-            Assert.False(result);
+            result.Should().BeFalse();
         }
 
         [ClassData(typeof(AyatAlkitabNotEqualTestData))]
@@ -72,8 +70,7 @@ namespace PKMGerejaEbenhaezer.UnitTest
             var result = value1 == value2;
 
             //Assert
-            Assert.NotEqual(value1, value2);
-            Assert.False(result);
+            result.Should().BeFalse();
         }
     }
 

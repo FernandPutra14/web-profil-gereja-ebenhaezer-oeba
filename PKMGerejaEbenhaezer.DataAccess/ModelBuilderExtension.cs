@@ -220,31 +220,31 @@ namespace PKMGerejaEbenhaezer.DataAccess
                 new
                 {
                     Id = 1,
-                    Nama = "Pdt. Elen Th. Bailaen-Manafe, S.Si (Teol)",
+                    Nama = "Pendeta 1",
                     FotoId = daftarFoto[daftarFoto.Length - 1].Id
                 },
                 new
                 {
                     Id = 2,
-                    Nama = "Pdt. Aleida Y. Salean Sola, S.Th, M.Hum",
+                    Nama = "Pendeta 2",
                     FotoId = daftarFoto[daftarFoto.Length - 1].Id
                 },
                 new
                 {
                     Id = 3,
-                    Nama = "Pdt. Amelia Retha-Siokain, S.Th",
+                    Nama = "Pendeta 3",
                     FotoId = daftarFoto[daftarFoto.Length - 1].Id
                 },
                 new
                 {
                     Id = 4,
-                    Nama = "Pdt. Tera D. Klaping, M.Th",
+                    Nama = "Pendeta 4",
                     FotoId = daftarFoto[daftarFoto.Length - 1].Id
                 },
                 new
                 {
                     Id = 5,
-                    Nama = "Ita Tassi Adoe, S.Th.",
+                    Nama = "Pendeta 5",
                     FotoId = daftarFoto[daftarFoto.Length - 1].Id
                 }
             );
