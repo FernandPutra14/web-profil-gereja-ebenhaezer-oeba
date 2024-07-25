@@ -21,7 +21,11 @@
     $(
         function () {
             $('.table').DataTable({
-                responsive: true
+                responsive: {
+                    details: {
+                        renderer : $.fn.dataTable.Responsive.renderer.listHiddenNodes()
+                    }
+                }
             });
             $('.table').addClass('table-responsive-sm table-striped');
         }

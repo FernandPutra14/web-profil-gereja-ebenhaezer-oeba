@@ -355,6 +355,31 @@ public class IbadahControllerTests
         model.Should().Be(editVM);
     }
 
+    [Fact]
+    public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenRenunganNotValid()
+    {
+        //Arrange
+        var editVM = new EditVM 
+        { 
+            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>())
+        };
+
+        var mockSequence = new MockSequence();
+        _beebeleApiService.InSequence(mockSequence).Setup(x => x.IsValid(editVM.NasPembimbing)).ReturnsAsync(true);
+        _beebeleApiService.InSequence(mockSequence).Setup(x => x.IsValid(editVM.Renungan!)).ReturnsAsync(false);
+
+        //Act
+        var result = await _ibadahController.Edit(editVM);
+
+        //Assert
+        _beebeleApiService.VerifyAll();
+        _ibadahController.ModelState.IsValid.Should().BeFalse();
+        var viewResult = result.Should().BeOfType<ViewResult>().Subject;
+        var model = viewResult.Model.Should().BeOfType<EditVM>().Subject;
+        model.Should().Be(editVM);
+    }
+
     private List<Ibadah> GetDataIbadah()
     {
         return new List<Ibadah>
