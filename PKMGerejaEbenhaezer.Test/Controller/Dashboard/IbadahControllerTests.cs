@@ -366,8 +366,10 @@ public class IbadahControllerTests
         };
 
         var mockSequence = new MockSequence();
-        _beebeleApiService.InSequence(mockSequence).Setup(x => x.IsValid(editVM.NasPembimbing)).ReturnsAsync(true);
-        _beebeleApiService.InSequence(mockSequence).Setup(x => x.IsValid(editVM.Renungan!)).ReturnsAsync(false);
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.NasPembimbing)).ReturnsAsync(true);
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.Renungan!)).ReturnsAsync(false);
 
         //Act
         var result = await _ibadahController.Edit(editVM);
@@ -378,6 +380,230 @@ public class IbadahControllerTests
         var viewResult = result.Should().BeOfType<ViewResult>().Subject;
         var model = viewResult.Model.Should().BeOfType<EditVM>().Subject;
         model.Should().Be(editVM);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnRedirectToIndexResultAndAddErrorNotification_WhenIbadahNotFound()
+    {
+        //Arrange
+        var actionName = nameof(IbadahController.Index);
+
+        var editVM = new EditVM
+        {
+            Id = 1,
+            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>())
+        };
+
+        var ibadah = new Ibadah { Id = 2 };
+
+        _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(new List<Ibadah> { ibadah });
+
+        var mockSequence = new MockSequence();
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.NasPembimbing)).ReturnsAsync(true);
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.Renungan!)).ReturnsAsync(true);
+
+        //Act
+        var result = await _ibadahController.Edit(editVM);
+
+        //Assert
+        _beebeleApiService.VerifyAll();
+        _appDbContext.VerifyGet(x => x.IbadahTable, Times.AtLeastOnce());
+        _notificationService
+            .Verify(
+            x => x.AddNotification(It.Is<ToastrNotification>(x => x.Type == ToastrNotificationType.Error)),
+            Times.Once());
+
+        var redirectToActionResult = result.Should().BeOfType<RedirectToActionResult>().Subject;
+        redirectToActionResult.ActionName.Should().Be(actionName);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenKategoriNotFound()
+    {
+        //Arrange
+        var editVM = new EditVM
+        {
+            Id = 1,
+            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IdKategoriIbadah = 1,
+        };
+
+        var ibadah = new Ibadah { Id = editVM.Id };
+        var kategori = new KategoriIbadah { Id = 2 };
+
+        _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(new List<Ibadah> { ibadah });
+        _appDbContext.Setup(x => x.KategoriIbadahTable).ReturnsDbSet(new List<KategoriIbadah> { kategori });
+
+        var mockSequence = new MockSequence();
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.NasPembimbing)).ReturnsAsync(true);
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.Renungan!)).ReturnsAsync(true);
+
+        //Act
+        var result = await _ibadahController.Edit(editVM);
+
+        //Assert
+        _appDbContext.VerifyGet(x => x.KategoriIbadahTable, Times.Once());
+        _ibadahController.ModelState.IsValid.Should().BeFalse();
+
+        var viewResult = result.Should().BeOfType<ViewResult>().Subject;
+        var model = viewResult.Model.Should().BeOfType<EditVM>().Subject;
+        model.Should().Be(editVM);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenPendetaNotFound()
+    {
+        //Arrange
+        var editVM = new EditVM
+        {
+            Id = 1,
+            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IdKategoriIbadah = 1,
+            IdPendeta = 1
+        };
+
+        var ibadah = new Ibadah { Id = editVM.Id };
+        var kategori = new KategoriIbadah { Id = editVM.IdKategoriIbadah.Value };
+        var pendeta = new Pendeta { Id = 2 };
+
+        _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(new List<Ibadah> { ibadah });
+        _appDbContext.Setup(x => x.KategoriIbadahTable).ReturnsDbSet(new List<KategoriIbadah> { kategori });
+        _appDbContext.Setup(x => x.PendetaTable).ReturnsDbSet(new List<Pendeta> { pendeta });
+
+        var mockSequence = new MockSequence();
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.NasPembimbing)).ReturnsAsync(true);
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.Renungan!)).ReturnsAsync(true);
+
+        //Act
+        var result = await _ibadahController.Edit(editVM);
+
+        //Assert
+        _appDbContext.VerifyGet(x => x.PendetaTable, Times.Once());
+        _ibadahController.ModelState.IsValid.Should().BeFalse();
+
+        var viewResult = result.Should().BeOfType<ViewResult>().Subject;
+        var model = viewResult.Model.Should().BeOfType<EditVM>().Subject;
+        model.Should().Be(editVM);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_CallSaveChangesAsync()
+    {
+        //Arrange
+        var editVM = new EditVM
+        {
+            Id = 1,
+            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IdKategoriIbadah = 1,
+            IdPendeta = 1
+        };
+
+        var ibadah = new Ibadah { Id = editVM.Id };
+        var kategori = new KategoriIbadah { Id = editVM.IdKategoriIbadah.Value };
+        var pendeta = new Pendeta { Id = editVM.IdPendeta.Value };
+
+        _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(new List<Ibadah> { ibadah });
+        _appDbContext.Setup(x => x.KategoriIbadahTable).ReturnsDbSet(new List<KategoriIbadah> { kategori });
+        _appDbContext.Setup(x => x.PendetaTable).ReturnsDbSet(new List<Pendeta> { pendeta });
+
+        var mockSequence = new MockSequence();
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.NasPembimbing)).ReturnsAsync(true);
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.Renungan!)).ReturnsAsync(true);
+
+        //Act
+        await _ibadahController.Edit(editVM);
+
+        //Assert
+        _appDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once());    
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenSaveChangesAsyncThrow()
+    {
+        //Arrange
+        var editVM = new EditVM
+        {
+            Id = 1,
+            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IdKategoriIbadah = 1,
+            IdPendeta = 1
+        };
+
+        var ibadah = new Ibadah { Id = editVM.Id };
+        var kategori = new KategoriIbadah { Id = editVM.IdKategoriIbadah.Value };
+        var pendeta = new Pendeta { Id = editVM.IdPendeta.Value };
+
+        _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(new List<Ibadah> { ibadah });
+        _appDbContext.Setup(x => x.KategoriIbadahTable).ReturnsDbSet(new List<KategoriIbadah> { kategori });
+        _appDbContext.Setup(x => x.PendetaTable).ReturnsDbSet(new List<Pendeta> { pendeta });
+        _appDbContext.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
+
+        var mockSequence = new MockSequence();
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.NasPembimbing)).ReturnsAsync(true);
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.Renungan!)).ReturnsAsync(true);
+
+        //Act
+        var result = await _ibadahController.Edit(editVM);
+
+        //Assert
+        _appDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once());
+        _ibadahController.ModelState.IsValid.Should().BeFalse();
+
+        var viewResult = result.Should().BeOfType<ViewResult>().Subject;
+        var model = viewResult.Model.Should().BeOfType<EditVM>().Subject;
+        model.Should().Be(editVM);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnRedirectToActionIndex_WhenEditSuccess()
+    {
+        //Arrange
+        var actionName = nameof(IbadahController.Index);
+        var editVM = new EditVM
+        {
+            Id = 1,
+            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IdKategoriIbadah = 1,
+            IdPendeta = 1
+        };
+
+        var ibadah = new Ibadah { Id = editVM.Id };
+        var kategori = new KategoriIbadah { Id = editVM.IdKategoriIbadah.Value };
+        var pendeta = new Pendeta { Id = editVM.IdPendeta.Value };
+
+        _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(new List<Ibadah> { ibadah });
+        _appDbContext.Setup(x => x.KategoriIbadahTable).ReturnsDbSet(new List<KategoriIbadah> { kategori });
+        _appDbContext.Setup(x => x.PendetaTable).ReturnsDbSet(new List<Pendeta> { pendeta });
+        _appDbContext.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
+
+        var mockSequence = new MockSequence();
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.NasPembimbing)).ReturnsAsync(true);
+        _beebeleApiService.InSequence(mockSequence)
+            .Setup(x => x.IsValid(editVM.Renungan!)).ReturnsAsync(true);
+
+        //Act
+        var result = await _ibadahController.Edit(editVM);
+
+        //Assert
+        var redirectToActionResult = result.Should().BeOfType<RedirectToActionResult>().Subject;
+        redirectToActionResult.ActionName.Should().Be(actionName);
     }
 
     private List<Ibadah> GetDataIbadah()

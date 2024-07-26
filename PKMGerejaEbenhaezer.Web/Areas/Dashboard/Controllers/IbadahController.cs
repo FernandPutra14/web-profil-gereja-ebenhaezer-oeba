@@ -193,8 +193,21 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Simpan ke database
             var kategori = await _appDbContext.KategoriIbadahTable
                 .Where(k => k.Id == editVM.IdKategoriIbadah).FirstOrDefaultAsync();
+
+            if(kategori is null)
+            {
+                ModelState.AddModelError(nameof(EditVM.IdKategoriIbadah), "Kategori Ibadah Tidak Ditemukan");
+                return View(editVM);
+            }
+
             var pendeta = await _appDbContext.PendetaTable
                 .Where(k => k.Id == editVM.IdPendeta).FirstOrDefaultAsync();
+
+            if (pendeta is null)
+            {
+                ModelState.AddModelError(nameof(EditVM.IdPendeta), "Pendeta Tidak Ditemukan");
+                return View(editVM);
+            }
 
             ibadah.Judul = editVM.Judul;
             ibadah.Deskripsi = editVM.Deskripsi;
