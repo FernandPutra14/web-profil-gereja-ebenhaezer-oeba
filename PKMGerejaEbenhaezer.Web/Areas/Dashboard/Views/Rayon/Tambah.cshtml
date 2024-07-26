@@ -51,6 +51,14 @@
             </div>
 
             <div class="row mb-3">
+                <div class="col-12 mb-3 input-box">
+                    <label asp-for="@Model.NomorWa" class="form-label"></label>
+                    <input type="text" asp-for="@Model.NomorWa" class="form-control" placeholder="Contoh: 081111111111" />
+                    <span class="form-text text-danger" asp-validation-for="@Model.NomorWa"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
                 <label class="form-label">Jumlah Jemaat Berdasarkan Jenis Kelamin</label>
                 <div class="col-md-6 col-12 input-box">
                     <label asp-for="@Model.JumlahLakiLaki" class="form-label"></label>

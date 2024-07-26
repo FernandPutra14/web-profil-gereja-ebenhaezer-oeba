@@ -1,4 +1,5 @@
-﻿using PKMGerejaEbenhaezer.Web.CustomValidations;
+﻿using PKMGerejaEbenhaezer.Domain.ValueObjects;
+using PKMGerejaEbenhaezer.Web.CustomValidations;
 using System.ComponentModel.DataAnnotations;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Rayon
@@ -7,11 +8,16 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Rayon
     {
         [Display(Name = "Nama")]
         [Required(ErrorMessage = "{0} belum diisi")]
-        public string Nama { get; set; }
+        public string Nama { get; set; } = string.Empty;
 
         [Display(Name = "Ketua Rayon")]
         [Required(ErrorMessage = "{0} belum diisi")]
-        public string KetuaRayon { get; set; }
+        public string KetuaRayon { get; set; } = string.Empty;
+
+        [Display(Name = "Nomor WA Ketua Rayon")]
+        [RegularExpression(NoWa.ValidRegexPattern, ErrorMessage = "{0} tidak valid")]
+        [StringLength(NoWa.ValidLength, ErrorMessage = "Panjang {0} harus {1}")]
+        public string? NomorWa { get; set; }
 
         [Display(Name = "Foto Ketua")]
         [Required(ErrorMessage = "{0} harus diisi")]

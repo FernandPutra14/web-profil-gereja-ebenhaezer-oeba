@@ -15,15 +15,11 @@
         <li><a href="#" class="active">Rayon</a></li>
     </ul>
     <!-- Akhir Hyperlink -->
-
-
     <!-- Tombol Tambah Rayon -->
     <div class="mb-4 mt-4">
         <a style="width:320px;" class="btn" asp-area="Dashboard" asp-controller="Rayon" asp-action="Tambah"> + Tambah Rayon</a>
     </div>
     <!-- Akhir Tombol Tambah Rayon -->
-
-
     <!-- Container Tabel Daftar -->
     <div class="container">
         <table class="table table-bordered table-striped">
@@ -32,6 +28,7 @@
                     <th>ID</th>
                     <th>Nama</th>
                     <th width="20%">Ketua</th>
+                    <th>No. WA Ketua</th>
                     <th>Jumlah Laki - Laki</th>
                     <th>Jumlah Perempuan</th>
                     <th>Jumlah Anak - Anak</th>
@@ -51,19 +48,20 @@
                         <td>
                             <div class="row justify-content-center align-items-center">
                                 <div class="col-3 p-1">
-                                    @if(rayon.FotoKetua is not null)
+                                    @if (rayon.FotoKetua is not null)
                                     {
                                         <partial name="_PictureFotoPartial" model=@((rayon.FotoKetua.Id, "img-thumbnail")) />
-                                    } 
+                                    }
                                     else
                                     {
-                                        <img src="~/img/generaluser.png" alt="Ketua @(rayon.KetuaRayon)" 
-                                        class="img-thumbnail" />
+                                        <img src="~/img/generaluser.png" alt="Ketua @(rayon.KetuaRayon)"
+                                             class="img-thumbnail" />
                                     }
                                 </div>
                                 <div class="col-9">@rayon.KetuaRayon</div>
                             </div>
                         </td>
+                        <td>@(rayon.NoWa is not null ? rayon.NoWa.Value : "Tidak Ada")</td>
                         <td>@rayon.JumlahLakiLaki</td>
                         <td>@rayon.JumlahPerempuan</td>
                         <td>@rayon.JumlahAnak</td>
@@ -87,7 +85,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModal@(rayon.Id)">Hapus Pengumuman</h5>                                               
+                                                <h5 class="modal-title" id="exampleModal@(rayon.Id)">Hapus Pengumuman</h5>
                                             </div>
                                             <div class="modal-body">
                                                 Apakah anda yakin ingin menghapus?

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
+using PKMGerejaEbenhaezer.Domain.ValueObjects;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Rayon;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using PKMGerejaEbenhaezer.Web.Utilities;
@@ -50,13 +51,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             var foto = await _appDbContext.FotoTable.Where(f => f.Id == tambahVM.IdFoto)
                 .FirstOrDefaultAsync();
 
-            if(foto is null)
+            if (foto is null)
             {
                 ModelState.AddModelError(nameof(TambahVM.IdFoto), "Foto tidak ada");
                 return View(tambahVM);
             }
 
             //Simpan data rayon
+
             var newRayon = new Rayon
             {
                 Id = 0,
@@ -71,7 +73,20 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 JumlahDewasa = tambahVM.JumlahDewasa,
                 JumlahLansia = tambahVM.JumlahLansia,
             };
-            
+
+            if (tambahVM.NomorWa is not null)
+            {
+                var result = NoWa.Create(tambahVM.NomorWa);
+
+                if (result.IsFailure)
+                {
+                    ModelState.AddModelError(nameof(TambahVM.NomorWa), result.Errors.First().Message);
+                    return View(tambahVM);
+                }
+
+                newRayon.NoWa = result.Value;
+            }
+
             _appDbContext.RayonTable.Add(newRayon);
 
             try
@@ -107,6 +122,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Nama = rayon.Nama,
                 IdFoto = rayon.FotoKetua?.Id,
                 KetuaRayon = rayon.KetuaRayon,
+                NomorWa = rayon.NoWa?.Value,
                 JumlahLakiLaki = rayon.JumlahLakiLaki,
                 JumlahPerempuan = rayon.JumlahPerempuan,
                 JumlahAnak = rayon.JumlahAnak,
@@ -131,13 +147,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View(editVM);
             }
 
-            if(editVM.IdFoto is not null)
+            if (editVM.IdFoto is not null)
             {
                 var foto = await _appDbContext.FotoTable.Where(f => f.Id == editVM.IdFoto)
                     .AsNoTracking()
                     .FirstOrDefaultAsync();
 
-                if(foto is null)
+                if (foto is null)
                 {
                     ModelState.AddModelError(nameof(EditVM.IdFoto), "Foto tidak ada");
                     return View(editVM);
@@ -155,15 +171,32 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             rayon.JumlahDewasa = editVM.JumlahDewasa;
             rayon.JumlahLansia = editVM.JumlahLansia;
 
-            if (editVM.IdFoto is not null) 
+            if (editVM.IdFoto is not null)
             {
                 rayon.FotoKetua = await _appDbContext.FotoTable.Where(f => f.Id == editVM.IdFoto)
                     .FirstOrDefaultAsync();
             }
 
+            if(editVM.NomorWa is not null)
+            {
+                var result = NoWa.Create(editVM.NomorWa);
+
+                if (result.IsFailure)
+                {
+                    ModelState.AddModelError(nameof(EditVM.NomorWa), result.Errors.First().Message);
+                    return View(editVM);
+                }
+
+                rayon.NoWa = result.Value;
+            }
+            else
+            {
+                rayon.NoWa = null;
+            }
+
             try
-            { 
-               await _appDbContext.SaveChangesAsync();
+            {
+                await _appDbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
