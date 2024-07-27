@@ -142,9 +142,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             var rayon = await _appDbContext.RayonTable.Where(r => r.Id == editVM.Id).FirstOrDefaultAsync();
             if (rayon is null)
             {
-                ModelState.AddModelError(string.Empty, "Data yang akan diubah tidak di ditemukan!");
-                _logger.LogError("Edit Rayon Gagal! Data dengan Id {0} tidak ada!", editVM.Id);
-                return View(editVM);
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Edit Gagal!",
+                    Message = "Data yang akan diubah tidak di ditemukan!"
+                });
+
+                return RedirectToAction(nameof(Index));
             }
 
             if (editVM.IdFoto is not null)

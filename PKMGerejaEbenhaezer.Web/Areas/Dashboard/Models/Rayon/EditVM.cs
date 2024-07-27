@@ -19,7 +19,7 @@ public class EditVM : IRayonVM
 
     [Display(Name = "Nomor WA Ketua Rayon")]
     [RegularExpression(NoWa.ValidRegexPattern, ErrorMessage = "{0} tidak valid")]
-    [StringLength(NoWa.ValidLength, ErrorMessage = "Panjang {0} harus {1}")]
+    [StringLength(NoWa.ValidLength, MinimumLength = NoWa.ValidLength, ErrorMessage = "Panjang {0} harus {1}")]
     public string? NomorWa { get; set; }
 
     [Display(Name = "Foto Ketua")]
