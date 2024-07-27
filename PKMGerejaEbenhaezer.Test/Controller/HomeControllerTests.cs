@@ -44,5 +44,19 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             var viewResult = result.Should().BeOfType<ViewResult>().Subject;
             viewResult.Model.Should().BeOfType<IndexVM>();
         }
+
+        [Fact]
+        public async Task KoordinatorRayon_Should_ReturnViewResult()
+        {
+            //Arrange
+            _appDbContext.Setup(x => x.RayonTable).ReturnsDbSet(new List<Rayon>());
+
+            //Act
+            var result = await _homeController.KoordinatorRayon();
+
+            //Assert
+            var viewResult = result.Should().BeOfType<ViewResult>().Subject;
+            viewResult.Model.Should().BeOfType<List<Rayon>>();
+        }
     }
 }

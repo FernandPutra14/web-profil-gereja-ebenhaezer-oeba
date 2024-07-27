@@ -2,130 +2,134 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
-using PKMGerejaEbenhaezer.Web.Models;
 using PKMGerejaEbenhaezer.Web.Models.Home;
-using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
-using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
-using System.Diagnostics;
 
-namespace PKMGerejaEbenhaezer.Web.Controllers
+namespace PKMGerejaEbenhaezer.Web.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly IAppDbContext _appDbContext;
+
+    public HomeController(ILogger<HomeController> logger,
+        IAppDbContext appDbContext)
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IAppDbContext _appDbContext;
+        _logger = logger;
+        _appDbContext = appDbContext;
+    }
 
-        public HomeController(ILogger<HomeController> logger,
-            IAppDbContext appDbContext)
+    [ResponseCache(Duration = 15, Location = ResponseCacheLocation.Any)]
+    public async Task<IActionResult> Index()
+    {
+        var daftarPengumuman = await _appDbContext.PengumumanTable
+            .OrderByDescending(p => p.TanggalDiBuat)
+            .Include(p => p.Foto)
+            .Include(p => p.Pembuat)
+            .Take(3)
+            .AsNoTracking().ToListAsync();
+
+        var daftarWarta = await _appDbContext.WartaJemaatTable
+            .OrderByDescending(p => p.TanggalWarta)
+            .Include(w => w.Pembuat)
+            .Take(3)
+            .AsNoTracking().ToListAsync();
+
+        var daftarPendeta = await _appDbContext.PendetaTable
+            .Include(p => p.Foto)
+            .AsNoTracking().ToListAsync();
+
+        var daftarIbadah = await _appDbContext.IbadahTable
+            .Include(i => i.Pendeta).ThenInclude(p => p.Foto)
+            .Include(i => i.KategoriIbadah)
+            .Where(i => i.Pendeta != null && i.KategoriIbadah != null)
+            .OrderByDescending(i => i.TanggalIbadah)
+            .Take(3).AsNoTracking().ToListAsync();
+
+        var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
+
+        daftarRayon ??= new List<Rayon>();
+
+        return View(new IndexVM
         {
-            _logger = logger;
-            _appDbContext = appDbContext;
-        }
+            DaftarPengumuman = daftarPengumuman,
+            DaftarWartaJemaat = daftarWarta,
+            DaftarPendeta = daftarPendeta,
+            DaftarIbadah = daftarIbadah,
+            TotalAnak = daftarRayon.Sum(r => r.JumlahAnak),
+            TotalRemaja = daftarRayon.Sum(r => r.JumlahRemaja),
+            TotalPemuda = daftarRayon.Sum(r => r.JumlahPemuda),
+            TotalDewasa = daftarRayon.Sum(r => r.JumlahDewasa),
+            TotalLansia = daftarRayon.Sum(r => r.JumlahLansia),
+        });
+    }
 
-        [ResponseCache(Duration = 15, Location = ResponseCacheLocation.Any)]
-        public async Task<IActionResult> Index()
-        {
-            var daftarPengumuman = await _appDbContext.PengumumanTable
-                .OrderByDescending(p => p.TanggalDiBuat)
-                .Include(p => p.Foto)
-                .Include(p => p.Pembuat)
-                .Take(3)
-                .AsNoTracking().ToListAsync();
+    public IActionResult Kontak()
+    {
+        return View();
+    }
 
-            var daftarWarta = await _appDbContext.WartaJemaatTable
-                .OrderByDescending(p => p.TanggalWarta)
-                .Include(w => w.Pembuat)
-                .Take(3)
-                .AsNoTracking().ToListAsync();
+    public IActionResult SejarahGereja()
+    { 
+        return View(); 
+    }
 
-            var daftarPendeta = await _appDbContext.PendetaTable
-                .Include(p => p.Foto)
-                .AsNoTracking().ToListAsync();
+    public IActionResult VisiMisi()
+    {
+        return View();
+    }
 
-            var daftarIbadah = await _appDbContext.IbadahTable
-                .Include(i => i.Pendeta).ThenInclude(p => p.Foto)
-                .Include(i => i.KategoriIbadah)
-                .Where(i => i.Pendeta != null && i.KategoriIbadah != null)
-                .OrderByDescending(i => i.TanggalIbadah)
-                .Take(3).AsNoTracking().ToListAsync();
+    public async Task<IActionResult> KoordinatorRayon()
+    {
+        var daftarRayon = await _appDbContext.RayonTable
+            .OrderBy(x => x.Id)
+            .Include(x => x.FotoKetua)
+            .ToListAsync();
 
-            var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
+        return View(daftarRayon);
+    }
 
-            daftarRayon ??= new List<Rayon>();
+    public IActionResult ProblemBadRequest()
+    {
+        return BadRequest();
+    }
 
-            return View(new IndexVM
-            {
-                DaftarPengumuman = daftarPengumuman,
-                DaftarWartaJemaat = daftarWarta,
-                DaftarPendeta = daftarPendeta,
-                DaftarIbadah = daftarIbadah,
-                TotalAnak = daftarRayon.Sum(r => r.JumlahAnak),
-                TotalRemaja = daftarRayon.Sum(r => r.JumlahRemaja),
-                TotalPemuda = daftarRayon.Sum(r => r.JumlahPemuda),
-                TotalDewasa = daftarRayon.Sum(r => r.JumlahDewasa),
-                TotalLansia = daftarRayon.Sum(r => r.JumlahLansia),
-            });
-        }
+    public IActionResult InternalServerError()
+    {
+        return StatusCode(StatusCodes.Status500InternalServerError);
+    }
 
-        public IActionResult Kontak()
-        {
-            return View();
-        }
+    public IActionResult StatusCode404()
+    {
+        return View(); 
+    }
 
-        public IActionResult TentangKami()
-        { 
-            return View(); 
-        }
+    public IActionResult StatusCode400()
+    {
+        return View();
+    }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+    public IActionResult StatusCode500()
+    {
+        return View();
+    }
 
-        public IActionResult ProblemBadRequest()
-        {
-            return BadRequest();
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        var exceptionHandlerFeature = HttpContext.Features.GetRequiredFeature<IExceptionHandlerPathFeature>();
 
-        public IActionResult InternalServerError()
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError);
-        }
+        var error = exceptionHandlerFeature.Error;
+        var path = exceptionHandlerFeature.Path;
 
-        public IActionResult StatusCode404()
-        {
-            return View(); 
-        }
+        _logger.LogError(
+            "Unhandled Exception. Message : {@message}, Timestamp : {@dateTime}, Path : {@path}, Stack Trace : {@stackTrace}",
+            error.Message,
+            DateTime.Now,
+            path,
+            error.ToString());
 
-        public IActionResult StatusCode400()
-        {
-            return View();
-        }
-
-        public IActionResult StatusCode500()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            var exceptionHandlerFeature = HttpContext.Features.GetRequiredFeature<IExceptionHandlerPathFeature>();
-
-            var error = exceptionHandlerFeature.Error;
-            var path = exceptionHandlerFeature.Path;
-
-            _logger.LogError(
-                "Unhandled Exception. Message : {@message}, Timestamp : {@dateTime}, Path : {@path}, Stack Trace : {@stackTrace}",
-                error.Message,
-                DateTime.Now,
-                path,
-                error.ToString());
-
-            return StatusCode(StatusCodes.Status500InternalServerError);
-        }
+        return StatusCode(StatusCodes.Status500InternalServerError);
     }
 }
