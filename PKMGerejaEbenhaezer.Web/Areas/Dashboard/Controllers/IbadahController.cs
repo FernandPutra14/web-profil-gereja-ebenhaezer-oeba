@@ -17,17 +17,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<IbadahController> _logger;
         private readonly IToastrNotificationService _notificationService;
-        private readonly IBeebeleApiService _beebeleApiService;
 
         public IbadahController(IAppDbContext appDbContext,
             ILogger<IbadahController> logger,
-            IToastrNotificationService notificationService,
-            IBeebeleApiService beebeleApiService)
+            IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
             _notificationService = notificationService;
-            _beebeleApiService = beebeleApiService;
         }
 
         public async Task<IActionResult> Index()
@@ -71,27 +68,30 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Validasi
             if (!ModelState.IsValid) return View(tambahVM);
 
-            if(!await _beebeleApiService.IsValid(tambahVM.NasPembimbing))
+            if(tambahVM.Renungan is not null && tambahVM.IsiRenungan is null)
             {
-                ModelState.AddModelError(nameof(TambahVM.NasPembimbing), "Ayat Alkitab tidak valid");
+                ModelState.AddModelError(nameof(TambahVM.IsiRenungan), "Isi Renungan Harus Diisi Jika Ayat Renungan Di Isi");
                 return View(tambahVM);
-            }
-
-            if(tambahVM.Renungan is not null)
-            {
-                if (!await _beebeleApiService.IsValid(tambahVM.Renungan))
-                {
-                    ModelState.AddModelError(nameof(TambahVM.Renungan), "Ayat Alkitab tidak valid");
-                    return View(tambahVM);
-                }
             }
 
             //Simpan ke database
             var kategori = await _appDbContext.KategoriIbadahTable
                 .Where(k => k.Id == tambahVM.IdKategoriIbadah).FirstOrDefaultAsync();
 
+            if (kategori is null)
+            {
+                ModelState.AddModelError(nameof(TambahVM.IdKategoriIbadah), "Kategori Ibadah Tidak Ditemukan");
+                return View(tambahVM);
+            }
+
             var pendeta = await _appDbContext.PendetaTable
                 .Where(p => p.Id == tambahVM.IdPendeta).FirstOrDefaultAsync();
+
+            if (pendeta is null)
+            {
+                ModelState.AddModelError(nameof(TambahVM.IdPendeta), "Pendeta Tidak Ditemukan");
+                return View(tambahVM);
+            }
 
             var ibadah = new Ibadah
             {
@@ -99,7 +99,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Judul = tambahVM.Judul,
                 Deskripsi = tambahVM.Deskripsi,
                 NasPembimbing = tambahVM.NasPembimbing,
+                IsiNasPembimbing = tambahVM.IsiNaspembimbing,
                 Renungan = tambahVM.Renungan,
+                IsiRenungan = tambahVM.IsiRenungan,
                 TanggalIbadah = tambahVM.TanggalIbadah,
                 Tempat = tambahVM.Tempat,
                 KategoriIbadah = kategori,
@@ -111,6 +113,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 await _appDbContext.SaveChangesAsync();
+
+                _notificationService.AddNotification(
+                new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Ibadah baru sukses ditambah"
+                }
+            );
+                return RedirectToAction(nameof(Index));
             }
             catch(Exception ex)
             {
@@ -118,15 +129,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 _logger.LogError("Tambah. Simpan Gagal. Exception {0}", ex.ToString());
                 return View(tambahVM);
             }
-
-            _notificationService.AddNotification(
-                new ToastrNotification
-                {
-                    Type = ToastrNotificationType.Success,
-                    Title = "Ibadah baru sukses ditambah"
-                }
-            );
-            return RedirectToAction(nameof(Index));
         }
 
         //Edit Ibadah
@@ -145,7 +147,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Judul = ibadah.Judul,
                 Deskripsi = ibadah.Judul,
                 NasPembimbing = ibadah.NasPembimbing,
+                IsiNaspembimbing = ibadah.IsiNasPembimbing,
                 Renungan = ibadah.Renungan,
+                IsiRenungan = ibadah.IsiRenungan,
                 TanggalIbadah = ibadah.TanggalIbadah,
                 Tempat = ibadah.Tempat,
                 IdKategoriIbadah = ibadah.KategoriIbadah?.Id,
@@ -159,19 +163,12 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Validasi
             if (!ModelState.IsValid) return View(editVM);
 
-            if (!await _beebeleApiService.IsValid(editVM.NasPembimbing))
+            if (editVM.Renungan is not null && editVM.IsiRenungan is null)
             {
-                ModelState.AddModelError(nameof(EditVM.NasPembimbing), "Ayat Alkitab tidak valid");
+                ModelState.AddModelError(
+                    nameof(TambahVM.IsiRenungan), 
+                    "Isi Renungan Harus Diisi Jika Ayat Renungan Di Isi!");
                 return View(editVM);
-            }
-
-            if (editVM.Renungan is not null)
-            {
-                if (!await _beebeleApiService.IsValid(editVM.Renungan))
-                {
-                    ModelState.AddModelError(nameof(EditVM.Renungan), "Ayat Alkitab tidak valid");
-                    return View(editVM);
-                }
             }
 
             var ibadah = await _appDbContext.IbadahTable
@@ -212,7 +209,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             ibadah.Judul = editVM.Judul;
             ibadah.Deskripsi = editVM.Deskripsi;
             ibadah.NasPembimbing = editVM.NasPembimbing;
+            ibadah.IsiNasPembimbing = editVM.IsiNaspembimbing;
             ibadah.Renungan = editVM.Renungan;
+            ibadah.IsiRenungan = editVM.IsiRenungan;
             ibadah.TanggalIbadah = editVM.TanggalIbadah;
             ibadah.Tempat = editVM.Tempat;
             ibadah.KategoriIbadah = kategori;
@@ -221,6 +220,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 await _appDbContext.SaveChangesAsync();
+
+                _notificationService.AddNotification(
+                new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Ibadah sukses diubah"
+                }
+            );
+                return RedirectToAction(nameof(Index));
             }
             catch(Exception ex)
             {
@@ -228,15 +236,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 _logger.LogError("Edit. Simpan Gagal. Exception {0}", ex.ToString());
                 return View(editVM);
             }
-
-            _notificationService.AddNotification(
-                new ToastrNotification
-                {
-                    Type = ToastrNotificationType.Success,
-                    Title = "Ibadah sukses diubah"
-                }
-            );
-            return RedirectToAction(nameof(Index));
         }
 
         //Hapus Ibadah

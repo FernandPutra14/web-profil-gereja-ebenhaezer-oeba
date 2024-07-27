@@ -16,7 +16,6 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
     public class IbadahControllerTests
     {
         private readonly Mock<IAppDbContext> _appDbContext;
-        private readonly Mock<IBeebeleApiService> _beebeleApiService;
 
         private readonly IbadahController _ibadahController;
 
@@ -52,10 +51,9 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
         {
             //Depedencies
             _appDbContext = new Mock<IAppDbContext>();
-            _beebeleApiService = new Mock<IBeebeleApiService>();
 
             //SUT
-            _ibadahController = new IbadahController(_appDbContext.Object, _beebeleApiService.Object);
+            _ibadahController = new IbadahController(_appDbContext.Object);
         }
 
         [Fact]
@@ -275,7 +273,7 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
         }
 
         [Fact]
-        public async Task Detail_Shoud_ReturnNotFoundResult_WhenKategoriOrPendetaIsNull()
+        public async Task Detail_Should_ReturnNotFoundResult_WhenKategoriOrPendetaIsNull()
         {
             //Arrange
             var id = 1;
@@ -307,8 +305,8 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
 
             //Assert
             var viewResult = result.Should().BeOfType<ViewResult>().Subject;
-            var model = viewResult.Model.Should().BeOfType<DetailVM>().Subject;
-            model.Ibadah.Should().BeEquivalentTo(ibadah);
+            var model = viewResult.Model.Should().BeOfType<Ibadah>().Subject;
+            model.Should().BeEquivalentTo(ibadah);
         }
 
         private List<Ibadah> GetDataIbadah()
@@ -452,7 +450,8 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
             };
         }
 
-        private List<Ibadah> GetDataIbadah(int year = 2024, int month = 1, string s = "Tidak Kosong", int totalPages = 1)
+        private List<Ibadah> GetDataIbadah(
+            int year = 2024, int month = 1, string s = "Tidak Kosong", int totalPages = 1)
         {
             return GetDataIbadah()
                 .Concat(Enumerable.Range(0, 6 * totalPages).Select(i => new Ibadah

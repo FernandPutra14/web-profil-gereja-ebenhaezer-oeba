@@ -12,12 +12,10 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
     public class IbadahController : Controller
     {
         private readonly IAppDbContext _appDbContext;
-        private readonly IBeebeleApiService _beebeleApiService;
 
-        public IbadahController(IAppDbContext appDbContext, IBeebeleApiService beebeleApiService)
+        public IbadahController(IAppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-            _beebeleApiService = beebeleApiService;
         }
 
         public async Task<IActionResult> Index(int? bulan = null, int? tahun = null, string? searchString = null,
@@ -72,21 +70,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
             if (ibadah is null) return NotFound();
 
-            var isiNasPembimbing = await _beebeleApiService.PassageContent(ibadah.NasPembimbing);
-
-            var model = new DetailVM
-            {
-                Ibadah = ibadah,
-                NasPembimbing = isiNasPembimbing,
-            };
-
-            if(ibadah.Renungan is not null)
-            {
-                var isiRenungan = await _beebeleApiService.PassageContent(ibadah.Renungan);
-                model.Renungan = isiRenungan;
-            }
-
-            return View(model);
+            return View(ibadah);
         }
     }
 }

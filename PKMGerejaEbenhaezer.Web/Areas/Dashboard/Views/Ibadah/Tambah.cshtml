@@ -43,11 +43,19 @@
                     <label asp-for="@Model.NasPembimbing" class="form-label">Nats Pembimbing</label>
                     <input asp-for="@Model.NasPembimbing" placeholder="Contoh: Markus 3:4,15 atau Markus 3:4-15" class="form-control" />
                     <span asp-validation-for="@Model.NasPembimbing" class="form-text text-danger"></span>
+
+                    <label asp-for="@Model.IsiNaspembimbing" class="form-label">Isi Nats Pembimbing</label>
+                    <textarea asp-for="@Model.IsiNaspembimbing" class="form-control"></textarea>
+                    <span asp-validation-for="@Model.IsiNaspembimbing" class="form-text text-danger"></span>
                 </div>
                 <div class="col-md-6 col-12 input-box">
                     <label asp-for="@Model.Renungan" class="form-label">Nats Renungan</label>
                     <input asp-for="@Model.Renungan" placeholder="Contoh: Markus 3:4,15 atau Markus 3:4-15" class="form-control" />
                     <span asp-validation-for="@Model.Renungan" class="form-text text-danger"></span>
+
+                    <label asp-for="@Model.IsiRenungan" class="form-label">Isi Nats Renungan</label>
+                    <textarea asp-for="@Model.IsiRenungan" class="form-control"></textarea>
+                    <span asp-validation-for="@Model.IsiRenungan" class="form-text text-danger"></span>
                 </div>
             </div>
 

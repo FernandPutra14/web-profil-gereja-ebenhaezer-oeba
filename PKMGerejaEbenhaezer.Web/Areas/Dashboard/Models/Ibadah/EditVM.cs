@@ -20,8 +20,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
         [Required(ErrorMessage = "{0} harus diisi")]
         public AyatAlkitab NasPembimbing { get; set; }
 
+        [Display(Name = "Isi Nas Pembimbing")]
+        [Required(ErrorMessage = "{0} harus diisi")]
+        public string IsiNaspembimbing { get; set; } = string.Empty;
+
         [Display(Name = "Renungan")]
         public AyatAlkitab? Renungan { get; set; }
+
+        [Display(Name = "Isi Renungan")]
+        public string? IsiRenungan { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Tanggal Ibadah")]
