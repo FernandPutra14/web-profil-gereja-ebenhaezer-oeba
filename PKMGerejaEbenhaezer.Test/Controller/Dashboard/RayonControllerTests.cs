@@ -365,6 +365,21 @@ public class RayonControllerTests
     }
 
     [Fact]
+    public async Task Hapus_Should_CallSaveChangesAsync()
+    {
+        //Arrange
+        var id = 1;
+
+        _appDbContext.Setup(x => x.RayonTable).ReturnsDbSet(new Rayon[] { new() { Id = id } });
+
+        //Act
+        await _rayonController.Hapus(id);
+
+        //Assert
+        _appDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()));
+    }
+
+    [Fact]
     public async Task Hapus_Should_ReturnRedirectToActionResult_WhenSuccess()
     {
         //Arrange

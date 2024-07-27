@@ -128,8 +128,11 @@ public class IbadahControllerTests
         };
 
         _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(Array.Empty<Ibadah>());
-        _appDbContext.Setup(x => x.KategoriIbadahTable).ReturnsDbSet(Array.Empty<KategoriIbadah>());
-        _appDbContext.Setup(x => x.PendetaTable).ReturnsDbSet(Array.Empty<Pendeta>());
+
+        _appDbContext.Setup(x => x.KategoriIbadahTable)
+            .ReturnsDbSet(new KategoriIbadah[] { new() { Id = tambahVM.IdKategoriIbadah} });
+
+        _appDbContext.Setup(x => x.PendetaTable).ReturnsDbSet(new Pendeta[] { new() { Id = tambahVM.IdPendeta} });
         _appDbContext.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
             .ThrowsAsync(It.IsAny<Exception>());
 
@@ -594,6 +597,50 @@ public class IbadahControllerTests
 
         //Act
         var result = await _ibadahController.Edit(editVM);
+
+        //Assert
+        var redirectToActionResult = result.Should().BeOfType<RedirectToActionResult>().Subject;
+        redirectToActionResult.ActionName.Should().Be(actionName);
+    }
+
+    [Fact]
+    public async Task Hapus_Should_ReturnNotFound_WhenIbadahNotFound()
+    {
+        //Arrange
+        var id = 1;
+        _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(new Ibadah[] { new() { Id = id + 1 } });
+
+        //Act
+        var result = await _ibadahController.Hapus(id);
+
+        //Assert
+        result.Should().BeOfType<NotFoundResult>();
+    }
+
+    [Fact]
+    public async Task Hapus_Should_CallSaveChangesAsync()
+    {
+        //Arrange
+        var id = 1;
+        _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(new Ibadah[] { new() { Id = id } });
+
+        //Act
+        await _ibadahController.Hapus(id);
+
+        //Assert
+        _appDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task Hapus_Should_ReturnRedirectToActionIndex_WhenSuccess()
+    {
+        //Arrange
+        var actionName = nameof(IbadahController.Index);
+        var id = 1;
+        _appDbContext.Setup(x => x.IbadahTable).ReturnsDbSet(new Ibadah[] { new() { Id = id } });
+
+        //Act
+        var result = await _ibadahController.Hapus(id);
 
         //Assert
         var redirectToActionResult = result.Should().BeOfType<RedirectToActionResult>().Subject;
