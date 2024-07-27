@@ -1,0 +1,136 @@
+﻿/* CSS Koor Bagian Top */
+#korayonus {
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    background-position-y: inherit;
+    flex-direction: column;
+    margin: 0px auto;
+    width: 100%;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+    #korayonus h2 {
+        color: #fff;
+        padding-top: 60px;
+        font-size: 40px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+/* Akhir CSS Koor Bagian Top */
+
+
+#container-koor {
+    padding: 4vw 6vw;
+}
+
+.content-koor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    border: .1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+    .card h3 {
+        margin-top: 0;
+        font-size: 1.5em;
+    }
+
+    .card p {
+        font-size: 1.2em;
+    }
+
+.jabatan {
+    padding-top: 5px;
+    margin-bottom: 20px;
+}
+
+
+.gambar-koor {
+    margin-bottom: 10px;
+}
+
+
+.gambar-koor ::deep img {
+    width: 90px;
+    object-fit: cover;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.wa-koor {
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-clr);
+    padding: 10px;
+    width: 200px;
+    border-radius: 3rem;
+    box-shadow: 0 8px 24px hsl(210, 74%, 55%, 0,20);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1.50rem;
+    margin: 0 auto;
+    vertical-align: middle;
+    align-content: center;
+    align-items: center;
+}
+
+    .wa-koor i {
+        color: white;
+        font-size: 15px;
+    }
+
+    .wa-koor p {
+        color: white;
+        margin: 0;
+        font-size: 13px;
+        margin-left: 5px;
+    }
+
+
+@media (max-width: 530px) {
+    .wa-koor {
+        
+        width: 150px;
+        
+    }
+
+        .wa-koor i {
+            color: white;
+            font-size: 15px;
+        }
+
+        .wa-koor p {
+            color: white;
+            margin: 0;
+            font-size: 13px;
+            margin-left: 5px;
+        }
+}
+
+@media (max-width: 400px) {
+    .content-koor {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 800px) {
+    .content-koor {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
