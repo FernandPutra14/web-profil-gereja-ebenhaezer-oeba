@@ -48,11 +48,12 @@
                 </div>
             </div>
 
-            <h3>Opsional</h3>
+            
             <div class="row mb-3">
+                <label class="form-label">Opsional</label>
                 <div class="col-12 mb-3 input-box">
                     <label asp-for="@Model.NomorWa" class="form-label"></label>
-                    <input type="text" asp-for="@Model.NomorWa" class="form-control" placeholder="Contoh: 081111111111" />
+                    <input type="text" asp-for="@Model.NomorWa" class="form-control" />
                     <span class="form-text text-danger" asp-validation-for="@Model.NomorWa"></span>
                 </div>
             </div>
