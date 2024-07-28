@@ -1,2 +1,55 @@
-﻿body {
+﻿/* CSS SejarahGereja Bagian Top */
+#sejeo {
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing_min.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    background-position-y: inherit;
+    flex-direction: column;
+    margin: 0px auto;
+    width: 100%;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+    #sejeo h2 {
+        color: #fff;
+        padding-top: 60px;
+        font-size: 40px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+/* Akhir CSS SejarahGereja Bagian Top */
+
+
+/* Responsive 968px */
+@media (max-width:968px) {
+
+
+    #sejeo {
+        background-attachment: scroll;
+    }
+}
+
+/* Responsive 568 */
+@media (max-width:568px) {
+
+
+    #sejeo h2 {
+        font-size: 30px;
+        padding-top: 70px;
+    }
+}
+
+
+/* Responsive 468 */
+@media (max-width:468px) {
+
+    #sejeo h2 {
+        font-size: 25px;
+        padding-top: 70px;
+    }
 }
