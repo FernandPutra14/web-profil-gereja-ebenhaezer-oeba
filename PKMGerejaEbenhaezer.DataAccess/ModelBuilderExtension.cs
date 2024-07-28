@@ -145,12 +145,12 @@ namespace PKMGerejaEbenhaezer.DataAccess
             );
 
             modelBuilder.Entity<Rayon>().HasData(
-                new
+                Enumerable.Range(1, 33).Select(i => new
                 {
-                    Id = 1,
-                    Nama = "Rayon I",
+                    Id = i,
+                    Nama = $"Rayon {i.ToRomanNumeral()}",
                     FotoKetuaId = daftarFoto[5].Id,
-                    KetuaRayon = "Ketua Rayon I",
+                    KetuaRayon = $"Ketua Rayon {i.ToRomanNumeral()}",
                     NoWa = NoWa.Create("081234567891").Value,
                     JumlahLakiLaki = 25,
                     JumlahPerempuan = 35,
@@ -159,37 +159,7 @@ namespace PKMGerejaEbenhaezer.DataAccess
                     JumlahPemuda = 10,
                     JumlahDewasa = 15,
                     JumlahLansia = 15,
-                },
-                new
-                {
-                    Id = 2,
-                    Nama = "Rayon II",
-                    FotoKetuaId = daftarFoto[5].Id,
-                    KetuaRayon = "Ketua Rayon II",
-                    NoWa = NoWa.Create("081234567891").Value,
-                    JumlahLakiLaki = 25,
-                    JumlahPerempuan = 35,
-                    JumlahAnak = 10,
-                    JumlahRemaja = 10,
-                    JumlahPemuda = 10,
-                    JumlahDewasa = 15,
-                    JumlahLansia = 15,
-                },
-                new
-                {
-                    Id = 3,
-                    Nama = "Rayon III",
-                    FotoKetuaId = daftarFoto[5].Id,
-                    KetuaRayon = "Ketua Rayon III",
-                    NoWa = NoWa.Create("081234567891").Value,
-                    JumlahLakiLaki = 25,
-                    JumlahPerempuan = 35,
-                    JumlahAnak = 10,
-                    JumlahRemaja = 10,
-                    JumlahPemuda = 10,
-                    JumlahDewasa = 15,
-                    JumlahLansia = 15,
-                }
+                })
             );
 
             modelBuilder.Entity<WartaJemaat>().HasData(

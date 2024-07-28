@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240728033813_SeedingData33Rayon")]
+    partial class SeedingData33Rayon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 1,
                             LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAENTXQ12WqFH37gi5lDQc6+pKIlSgjz36KLjA5rY3NqS5A3x+g8avjEm4QCMkqeoG4A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHXUwQAcXhQlhC6PYbRkqZB9oLRL3e1fU3KngE4mvW+iGBSwj/swXY4SXRTablY5fw==",
                             Role = "Admin",
                             UserName = "admin"
                         },
@@ -65,7 +68,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 2,
                             LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAEIvWZpC3zCeRVEQ/qpe0o8A9s49snxADySeu73+gFYml0Ua3atnJqHIGn8nJX3/p/g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELlA/njNKGlZ9B3Jlx9Mtwzbsd2Y9AwgdWGiMYUn1JMTLGcSIaaC1728HawkPYriKA==",
                             Role = "SuperAdmin",
                             UserName = "super"
                         });
@@ -515,8 +518,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon I",
-                            Nama = "Rayon I",
+                            KetuaRayon = "Ketua Rayon 1",
+                            Nama = "Rayon 1",
                             NoWa = "081234567891"
                         },
                         new
@@ -530,8 +533,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon II",
-                            Nama = "Rayon II",
+                            KetuaRayon = "Ketua Rayon 2",
+                            Nama = "Rayon 2",
                             NoWa = "081234567891"
                         },
                         new
@@ -545,8 +548,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon III",
-                            Nama = "Rayon III",
+                            KetuaRayon = "Ketua Rayon 3",
+                            Nama = "Rayon 3",
                             NoWa = "081234567891"
                         },
                         new
@@ -560,8 +563,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon IV",
-                            Nama = "Rayon IV",
+                            KetuaRayon = "Ketua Rayon 4",
+                            Nama = "Rayon 4",
                             NoWa = "081234567891"
                         },
                         new
@@ -575,8 +578,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon V",
-                            Nama = "Rayon V",
+                            KetuaRayon = "Ketua Rayon 5",
+                            Nama = "Rayon 5",
                             NoWa = "081234567891"
                         },
                         new
@@ -590,8 +593,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon VI",
-                            Nama = "Rayon VI",
+                            KetuaRayon = "Ketua Rayon 6",
+                            Nama = "Rayon 6",
                             NoWa = "081234567891"
                         },
                         new
@@ -605,8 +608,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon VII",
-                            Nama = "Rayon VII",
+                            KetuaRayon = "Ketua Rayon 7",
+                            Nama = "Rayon 7",
                             NoWa = "081234567891"
                         },
                         new
@@ -620,8 +623,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon VIII",
-                            Nama = "Rayon VIII",
+                            KetuaRayon = "Ketua Rayon 8",
+                            Nama = "Rayon 8",
                             NoWa = "081234567891"
                         },
                         new
@@ -635,8 +638,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon IX",
-                            Nama = "Rayon IX",
+                            KetuaRayon = "Ketua Rayon 9",
+                            Nama = "Rayon 9",
                             NoWa = "081234567891"
                         },
                         new
@@ -650,8 +653,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon X",
-                            Nama = "Rayon X",
+                            KetuaRayon = "Ketua Rayon 10",
+                            Nama = "Rayon 10",
                             NoWa = "081234567891"
                         },
                         new
@@ -665,8 +668,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XI",
-                            Nama = "Rayon XI",
+                            KetuaRayon = "Ketua Rayon 11",
+                            Nama = "Rayon 11",
                             NoWa = "081234567891"
                         },
                         new
@@ -680,8 +683,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XII",
-                            Nama = "Rayon XII",
+                            KetuaRayon = "Ketua Rayon 12",
+                            Nama = "Rayon 12",
                             NoWa = "081234567891"
                         },
                         new
@@ -695,8 +698,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XIII",
-                            Nama = "Rayon XIII",
+                            KetuaRayon = "Ketua Rayon 13",
+                            Nama = "Rayon 13",
                             NoWa = "081234567891"
                         },
                         new
@@ -710,8 +713,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XIV",
-                            Nama = "Rayon XIV",
+                            KetuaRayon = "Ketua Rayon 14",
+                            Nama = "Rayon 14",
                             NoWa = "081234567891"
                         },
                         new
@@ -725,8 +728,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XV",
-                            Nama = "Rayon XV",
+                            KetuaRayon = "Ketua Rayon 15",
+                            Nama = "Rayon 15",
                             NoWa = "081234567891"
                         },
                         new
@@ -740,8 +743,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XVI",
-                            Nama = "Rayon XVI",
+                            KetuaRayon = "Ketua Rayon 16",
+                            Nama = "Rayon 16",
                             NoWa = "081234567891"
                         },
                         new
@@ -755,8 +758,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XVII",
-                            Nama = "Rayon XVII",
+                            KetuaRayon = "Ketua Rayon 17",
+                            Nama = "Rayon 17",
                             NoWa = "081234567891"
                         },
                         new
@@ -770,8 +773,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XVIII",
-                            Nama = "Rayon XVIII",
+                            KetuaRayon = "Ketua Rayon 18",
+                            Nama = "Rayon 18",
                             NoWa = "081234567891"
                         },
                         new
@@ -785,8 +788,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XIX",
-                            Nama = "Rayon XIX",
+                            KetuaRayon = "Ketua Rayon 19",
+                            Nama = "Rayon 19",
                             NoWa = "081234567891"
                         },
                         new
@@ -800,8 +803,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XX",
-                            Nama = "Rayon XX",
+                            KetuaRayon = "Ketua Rayon 20",
+                            Nama = "Rayon 20",
                             NoWa = "081234567891"
                         },
                         new
@@ -815,8 +818,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXI",
-                            Nama = "Rayon XXI",
+                            KetuaRayon = "Ketua Rayon 21",
+                            Nama = "Rayon 21",
                             NoWa = "081234567891"
                         },
                         new
@@ -830,8 +833,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXII",
-                            Nama = "Rayon XXII",
+                            KetuaRayon = "Ketua Rayon 22",
+                            Nama = "Rayon 22",
                             NoWa = "081234567891"
                         },
                         new
@@ -845,8 +848,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXIII",
-                            Nama = "Rayon XXIII",
+                            KetuaRayon = "Ketua Rayon 23",
+                            Nama = "Rayon 23",
                             NoWa = "081234567891"
                         },
                         new
@@ -860,8 +863,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXIV",
-                            Nama = "Rayon XXIV",
+                            KetuaRayon = "Ketua Rayon 24",
+                            Nama = "Rayon 24",
                             NoWa = "081234567891"
                         },
                         new
@@ -875,8 +878,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXV",
-                            Nama = "Rayon XXV",
+                            KetuaRayon = "Ketua Rayon 25",
+                            Nama = "Rayon 25",
                             NoWa = "081234567891"
                         },
                         new
@@ -890,8 +893,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXVI",
-                            Nama = "Rayon XXVI",
+                            KetuaRayon = "Ketua Rayon 26",
+                            Nama = "Rayon 26",
                             NoWa = "081234567891"
                         },
                         new
@@ -905,8 +908,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXVII",
-                            Nama = "Rayon XXVII",
+                            KetuaRayon = "Ketua Rayon 27",
+                            Nama = "Rayon 27",
                             NoWa = "081234567891"
                         },
                         new
@@ -920,8 +923,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXVIII",
-                            Nama = "Rayon XXVIII",
+                            KetuaRayon = "Ketua Rayon 28",
+                            Nama = "Rayon 28",
                             NoWa = "081234567891"
                         },
                         new
@@ -935,8 +938,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXIX",
-                            Nama = "Rayon XXIX",
+                            KetuaRayon = "Ketua Rayon 29",
+                            Nama = "Rayon 29",
                             NoWa = "081234567891"
                         },
                         new
@@ -950,8 +953,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXX",
-                            Nama = "Rayon XXX",
+                            KetuaRayon = "Ketua Rayon 30",
+                            Nama = "Rayon 30",
                             NoWa = "081234567891"
                         },
                         new
@@ -965,8 +968,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXXI",
-                            Nama = "Rayon XXXI",
+                            KetuaRayon = "Ketua Rayon 31",
+                            Nama = "Rayon 31",
                             NoWa = "081234567891"
                         },
                         new
@@ -980,8 +983,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXXII",
-                            Nama = "Rayon XXXII",
+                            KetuaRayon = "Ketua Rayon 32",
+                            Nama = "Rayon 32",
                             NoWa = "081234567891"
                         },
                         new
@@ -995,8 +998,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPemuda = 10,
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXXIII",
-                            Nama = "Rayon XXXIII",
+                            KetuaRayon = "Ketua Rayon 33",
+                            Nama = "Rayon 33",
                             NoWa = "081234567891"
                         });
                 });
