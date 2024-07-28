@@ -102,6 +102,39 @@
         margin-left: 5px;
     }
 
+/* Responsive 968px */
+@media (max-width:968px) {
+
+
+    #korayonus {
+        background-attachment: scroll;
+    }
+
+}
+
+/* Responsive 568 */
+@media (max-width:568px) {
+
+
+    #korayonus h2 {
+        font-size: 30px;
+        padding-top: 70px;
+    }
+
+}
+
+
+/* Responsive 468 */
+@media (max-width:468px) {
+
+
+    #korayonus h2 {
+        font-size: 25px;
+        padding-top: 70px;
+    }
+
+}
+
 
 @media (max-width: 530px) {
     .wa-koor {
@@ -134,3 +167,4 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
