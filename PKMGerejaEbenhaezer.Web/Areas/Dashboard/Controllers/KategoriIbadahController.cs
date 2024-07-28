@@ -13,11 +13,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
     public class KategoriIbadahController : Controller
     {
         private readonly IAppDbContext _appDbContext;
-        private readonly ILogger<IbadahController> _logger;
+        private readonly ILogger<KategoriIbadahController> _logger;
         private readonly IToastrNotificationService _notificationService;
 
         public KategoriIbadahController(IAppDbContext appDbContext,
-            ILogger<IbadahController> logger,
+            ILogger<KategoriIbadahController> logger,
             IToastrNotificationService notificationService)
         {
             _appDbContext = appDbContext;
@@ -124,7 +124,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if(kategori is null)
             {
-                //Kasih Notifikasi
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Edit Kategori Ibadah Gagal!",
+                    Message = "Entri yang ingin diedit tidak ditemukan"
+                });
+
                 return RedirectToAction(nameof(Index));
             }
 
