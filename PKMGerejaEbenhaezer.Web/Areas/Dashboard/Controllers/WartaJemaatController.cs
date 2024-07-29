@@ -70,6 +70,13 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 await _appDbContext.SaveChangesAsync();
+
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Warta Jemaat Baru Sukses Ditambahkan"
+                });
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
@@ -77,13 +84,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 _logger.LogError("Tambah. Exception : {0}", ex.ToString());
                 return View(tambahVM);
             }
-
-            _notificationService.AddNotification(new ToastrNotification
-            {
-                Type = ToastrNotificationType.Success,
-                Title = "Warta Jemaat Baru Sukses Ditambahkan"
-            });
-            return RedirectToAction(nameof(Index));
         }
 
         //Edit Warta Jemaat
@@ -106,14 +106,22 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         public async Task<IActionResult> Edit(EditVM editVM)
         {
             //Validasi
+            if(!ModelState.IsValid) return View(editVM);
+
             var warta = await _appDbContext.WartaJemaatTable
                 .Where(w => w.Id == editVM.Id)
                 .FirstOrDefaultAsync();
 
             if(warta is null)
             {
-                ModelState.AddModelError(string.Empty, "Warta Jemaat Tidak Ditemukan");
-                return View(editVM);
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Edit Gagal!",
+                    Message = "Warta Jemaat yang ingin diedit tidak ditemukan"
+                });
+
+                return RedirectToAction(nameof(Index));
             }
 
             var duplikasiTanggal = await _appDbContext.WartaJemaatTable
@@ -133,28 +141,26 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 await _appDbContext.SaveChangesAsync();
+
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Success,
+                    Title = "Warta Jemaat Berhasil Diubah"
+                });
+                return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Simpan Gagal!. Terjadi error saat menyimpan ke database!");
                 _logger.LogError("Edit. Exception : {0}", ex.ToString());
                 return View(editVM);
             }
-
-            _notificationService.AddNotification(new ToastrNotification
-            {
-                Type = ToastrNotificationType.Success,
-                Title = "Warta Jemaat Berhasil Diubah"
-            });
-            return RedirectToAction(nameof(Index));
         }
 
         //Hapus Warta Jemaat
         [HttpPost]
-        public async Task<IActionResult> Hapus(int id, string? returnUrl)
+        public async Task<IActionResult> Hapus(int id)
         {
-            returnUrl ??= Url.Action(nameof(Index));
-
             var warta = await _appDbContext.WartaJemaatTable
                 .Where(w => w.Id == id).FirstOrDefaultAsync();
 
@@ -182,7 +188,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 });
             }
 
-            return Redirect(returnUrl!);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
