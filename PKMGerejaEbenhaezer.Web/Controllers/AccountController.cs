@@ -56,7 +56,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
             if (result == false)
             {
-                ModelState.AddModelError(string.Empty, "Login Gagal!. User name atau password salah.");
+                ModelState.AddModelError(string.Empty, "Login Gagal! Username atau password salah.");
                 return View(loginVM);
             }
 
@@ -104,7 +104,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
             if (user is null)
             {
-                ModelState.AddModelError(string.Empty, "Anda harus login terlebih dahulu untuk merubah password");
+                ModelState.AddModelError(string.Empty, "Anda harus login terlebih dahulu untuk mengubah password");
                 return View(editVM);
             }
 
@@ -114,7 +114,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             if (duplikasiNama)
             {
                 ModelState.AddModelError(nameof(editVM.UserName),
-                    $"{editVM.UserName} sudah digunakan!. Gunakan nama lain.");
+                    $"{editVM.UserName} sudah digunakan!. Gunakan username lainnya.");
                 return View(editVM);
             }
 

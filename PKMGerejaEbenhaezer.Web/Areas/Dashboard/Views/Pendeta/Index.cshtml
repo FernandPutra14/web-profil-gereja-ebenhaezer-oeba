@@ -32,6 +32,7 @@
                     <th>ID</th>
                     <th width="15%">Foto</th>
                     <th>Nama</th>
+                    <th>Jabatan</th>
                     <th>Facebook</th>
                     <th>Instagram</th>
                     <th>Youtube</th>
@@ -54,6 +55,16 @@
                             }
                         </td>
                         <td>@item.Nama</td>
+                        <td>
+                            @if (item.jabatan is null)
+                            {
+                                <span> Tidak Ada </span>
+                            }
+                            else
+                            {
+                                <span>@item.jabatan</span>
+                            }
+                        </td>
                         <td>
                             @if (item.FacebookProfileLink is not null)
                             {

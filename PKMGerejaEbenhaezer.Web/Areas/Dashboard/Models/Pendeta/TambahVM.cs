@@ -12,6 +12,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pendeta
         [Required(ErrorMessage = "{0} harus dipilih")]
         public int IdFoto { get; set; }
 
+        [Display(Name = "Jabatan Pendeta")]
+        //[Required(ErrorMessage = "{0} harus diisi")]
+        public string? jabatan { get; set; }
+
         [Url(ErrorMessage = "{0} bukan URL https atau http yang valid")]
         [Display(Name = "Profil Facebook")]
         public string? FacebookProfileLink { get; set; }

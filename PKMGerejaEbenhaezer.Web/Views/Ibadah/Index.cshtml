@@ -27,7 +27,7 @@
                 <div class="custom-select-wrapper">
                 <select asp-for="@Model.Tahun" class="custom-select">
                     <option value="@null">Semua</option>
-                    @for (int tahun = DateTime.Now.Year; tahun >= 2000; tahun--)
+                    @for (int tahun = DateTime.Now.Year; tahun >= 2023; tahun--)
                     {
                         <option value="@tahun">@tahun</option>
                     }

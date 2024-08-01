@@ -44,7 +44,9 @@
 }
 
     .table th, .table td {
-        text-align: left;
+        /*text-align: center;
+        vertical-align: middle;
+        font-size: 125%;*/
     }
 
     .table thead th {
