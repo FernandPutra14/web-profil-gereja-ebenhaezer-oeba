@@ -47,6 +47,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         public async Task<IActionResult> Tambah(TambahVM tambahVM)
         {
             //Validasi
+            if (!ModelState.IsValid) return View(tambahVM);
+
             var duplikasiNama = await _appDbContext.PendetaTable
                 .AnyAsync(p => p.Nama.ToLower() == tambahVM.Nama.Trim().ToLower());
 
@@ -70,7 +72,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = 0,
                 Nama = tambahVM.Nama.Trim(),
-                jabatan = tambahVM.jabatan.Trim(),
+                Jabatan = tambahVM.Jabatan?.Trim(),
                 Foto = foto
             };
 
@@ -122,7 +124,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = pendeta.Id,
                 Nama = pendeta.Nama,
-                jabatan = pendeta.jabatan,
+                Jabatan = pendeta.Jabatan,
                 IdFoto = pendeta.Foto?.Id,
                 FacebookProfileLink = pendeta.FacebookProfileLink?.ToString(),
                 InstagramProfileLink = pendeta.InstagramProfileLink?.ToString(),
@@ -134,11 +136,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         public async Task<IActionResult> Edit(EditVM editVM)
         {
             //Validasi
-            var pendeta = await _appDbContext.PendetaTable
-                .Where(p => p.Id == editVM.Id).FirstOrDefaultAsync();
-
-            if (pendeta is null)
-                return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid) return View(editVM);
 
             var duplikasiNama = await _appDbContext.PendetaTable
                 .AnyAsync(p => p.Id != editVM.Id && p.Nama.ToLower() == editVM.Nama.Trim().ToLower());
@@ -162,9 +160,24 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 }
             }
 
+            var pendeta = await _appDbContext.PendetaTable
+                .Where(p => p.Id == editVM.Id).FirstOrDefaultAsync();
+
+            if (pendeta is null)
+            {
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Edit Data Pendeta Gagal!",
+                    Message = "Pendeta yang ingin diedit tidak ditemukan"
+                });
+
+                return RedirectToAction(nameof(Index));
+            }
+
             //Simpan ke database
             pendeta.Nama = editVM.Nama.Trim();
-            pendeta.jabatan = editVM.jabatan.Trim();
+            pendeta.Jabatan = editVM.Jabatan?.Trim();
             if (editVM.IdFoto is not null)
             {
                 pendeta.Foto = foto;

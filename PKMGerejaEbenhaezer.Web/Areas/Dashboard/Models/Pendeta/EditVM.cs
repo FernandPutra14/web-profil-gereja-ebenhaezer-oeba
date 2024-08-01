@@ -16,7 +16,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pendeta
 
         [Display(Name = "Jabatan Pendeta")]
         //[Required(ErrorMessage = "{0} harus diisi")]
-        public string? jabatan { get; set; } 
+        public string? Jabatan { get; set; } 
 
 
         [Url(ErrorMessage = "{0} bukan URL https atau http yang valid")]

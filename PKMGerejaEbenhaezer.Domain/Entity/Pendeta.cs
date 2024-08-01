@@ -10,7 +10,7 @@ namespace PKMGerejaEbenhaezer.Domain.Entity
         public string Nama { get; set; }
         public Foto? Foto { get; set; }
 
-        public string? jabatan { get; set; }
+        public string? Jabatan { get; set; }
         public Uri? FacebookProfileLink { get; set; }
         public Uri? InstagramProfileLink { get; set; }
         public Uri? YoutubeProfileLink { get; set; }
