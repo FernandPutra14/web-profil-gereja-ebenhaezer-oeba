@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240731025658_TambahjbtPendeta")]
+    partial class TambahjbtPendeta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,13 +168,6 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("IsiNasPembimbing")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("IsiRenungan")
-                        .HasColumnType("text");
-
                     b.Property<string>("Judul")
                         .IsRequired()
                         .HasColumnType("text");
@@ -209,8 +205,6 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 1,
                             Deskripsi = "Kebaktian hari minggu pagi pertama",
-                            IsiNasPembimbing = "Isi Naspembimbing",
-                            IsiRenungan = "Isi Renungan",
                             Judul = "Kebaktian Pagi Pertama",
                             KategoriIbadahId = 1,
                             NasPembimbing = "Mazmur 12:15",
@@ -223,8 +217,6 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 2,
                             Deskripsi = "Kebaktian hari minggu pagi kedua",
-                            IsiNasPembimbing = "Isi Naspembimbing",
-                            IsiRenungan = "Isi Renungan",
                             Judul = "Kebaktian Pagi Kedua",
                             KategoriIbadahId = 1,
                             NasPembimbing = "Mazmur 12:15",
@@ -237,7 +229,6 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 3,
                             Deskripsi = "Perjamuan Bulan Juni",
-                            IsiNasPembimbing = "Isi Naspembimbing",
                             Judul = "Perjamuan Bulan Juni",
                             KategoriIbadahId = 2,
                             NasPembimbing = "Matius 3:16",
@@ -497,9 +488,6 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("NoWa")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FotoKetuaId");
@@ -519,8 +507,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
                             KetuaRayon = "Ketua Rayon I",
-                            Nama = "Rayon I",
-                            NoWa = "081234567891"
+                            Nama = "Rayon I"
                         },
                         new
                         {
@@ -534,8 +521,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
                             KetuaRayon = "Ketua Rayon II",
-                            Nama = "Rayon II",
-                            NoWa = "081234567891"
+                            Nama = "Rayon II"
                         },
                         new
                         {
@@ -549,458 +535,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                             JumlahPerempuan = 35,
                             JumlahRemaja = 10,
                             KetuaRayon = "Ketua Rayon III",
-                            Nama = "Rayon III",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon IV",
-                            Nama = "Rayon IV",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon V",
-                            Nama = "Rayon V",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon VI",
-                            Nama = "Rayon VI",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon VII",
-                            Nama = "Rayon VII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon VIII",
-                            Nama = "Rayon VIII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon IX",
-                            Nama = "Rayon IX",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon X",
-                            Nama = "Rayon X",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XI",
-                            Nama = "Rayon XI",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XII",
-                            Nama = "Rayon XII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XIII",
-                            Nama = "Rayon XIII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XIV",
-                            Nama = "Rayon XIV",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XV",
-                            Nama = "Rayon XV",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XVI",
-                            Nama = "Rayon XVI",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XVII",
-                            Nama = "Rayon XVII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XVIII",
-                            Nama = "Rayon XVIII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XIX",
-                            Nama = "Rayon XIX",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XX",
-                            Nama = "Rayon XX",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXI",
-                            Nama = "Rayon XXI",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXII",
-                            Nama = "Rayon XXII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXIII",
-                            Nama = "Rayon XXIII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXIV",
-                            Nama = "Rayon XXIV",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 25,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXV",
-                            Nama = "Rayon XXV",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 26,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXVI",
-                            Nama = "Rayon XXVI",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 27,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXVII",
-                            Nama = "Rayon XXVII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 28,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXVIII",
-                            Nama = "Rayon XXVIII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 29,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXIX",
-                            Nama = "Rayon XXIX",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 30,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXX",
-                            Nama = "Rayon XXX",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 31,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXXI",
-                            Nama = "Rayon XXXI",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 32,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXXII",
-                            Nama = "Rayon XXXII",
-                            NoWa = "081234567891"
-                        },
-                        new
-                        {
-                            Id = 33,
-                            FotoKetuaId = 6,
-                            JumlahAnak = 10,
-                            JumlahDewasa = 15,
-                            JumlahLakiLaki = 25,
-                            JumlahLansia = 15,
-                            JumlahPemuda = 10,
-                            JumlahPerempuan = 35,
-                            JumlahRemaja = 10,
-                            KetuaRayon = "Ketua Rayon XXXIII",
-                            Nama = "Rayon XXXIII",
-                            NoWa = "081234567891"
+                            Nama = "Rayon III"
                         });
                 });
 

@@ -70,6 +70,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = 0,
                 Nama = tambahVM.Nama.Trim(),
+                jabatan = tambahVM.jabatan.Trim(),
                 Foto = foto
             };
 
@@ -121,6 +122,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = pendeta.Id,
                 Nama = pendeta.Nama,
+                jabatan = pendeta.jabatan,
                 IdFoto = pendeta.Foto?.Id,
                 FacebookProfileLink = pendeta.FacebookProfileLink?.ToString(),
                 InstagramProfileLink = pendeta.InstagramProfileLink?.ToString(),
@@ -162,8 +164,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             //Simpan ke database
             pendeta.Nama = editVM.Nama.Trim();
-
-            if(editVM.IdFoto is not null)
+            pendeta.jabatan = editVM.jabatan.Trim();
+            if (editVM.IdFoto is not null)
             {
                 pendeta.Foto = foto;
             }

@@ -40,7 +40,7 @@
     <div class="pendeta-box">
         <div class="owl-carousel owl-theme fernand">
 
-            @foreach (var pendeta in Model.DaftarPendeta)
+            @foreach (var pendeta in Model.DaftarPendeta) 
             {
                 <div class="profile">
                     <div class="gambar-pen">
@@ -54,9 +54,49 @@
                         }
                     </div>
                     <h6>@pendeta.Nama</h6>
-                    <p>Pendeta</p>
+                    <p>
+                        @if(pendeta.jabatan is null)
+                        {
+                            <span>Pendeta</span>
+                        }
+                        else
+                        {
+                            @(pendeta.jabatan)
+                        }
+                    </p>
                     <div class="pen-link">
-                        <a @(pendeta.FacebookProfileLink is not null ?
+                        @if (pendeta.FacebookProfileLink is null &&
+                              pendeta.InstagramProfileLink is null &&
+                             pendeta.YoutubeProfileLink is null)
+                          {
+                            <i style="border:none"></i>
+                        }
+                        else
+                        {
+                            @if (pendeta.FacebookProfileLink is not null)
+                            {
+                                <a href=@pendeta.FacebookProfileLink.AbsoluteUri>
+                                    <i align="center" class="ri-facebook-fill"></i>
+                                </a>
+                            }
+
+                            @if (pendeta.InstagramProfileLink is not null)
+                            {
+                                <a href=@pendeta.InstagramProfileLink.AbsoluteUri>
+                                    <i align="center" class="ri-instagram-fill"></i>
+                                </a>
+                            }
+
+                            @if (pendeta.YoutubeProfileLink is not null)
+                            {
+                                <a href=@pendeta.YoutubeProfileLink.AbsoluteUri>
+                                    <i align="center" class="ri-youtube-fill"></i>
+                                </a>
+                            }
+                            
+                        }
+
+                        @* <a @(pendeta.FacebookProfileLink is not null ?
                             $"href={pendeta.FacebookProfileLink.AbsoluteUri}" : "class=disabled")>
                             <i class="ri-facebook-fill"></i>
                         </a>
@@ -69,7 +109,7 @@
                         <a @(pendeta.YoutubeProfileLink is not null ?
                             $"href={pendeta.YoutubeProfileLink.AbsoluteUri}" : "class=disabled")>
                             <i class="ri-youtube-fill"></i>
-                        </a>
+                        </a> *@
                     </div>
                 </div>
             }
