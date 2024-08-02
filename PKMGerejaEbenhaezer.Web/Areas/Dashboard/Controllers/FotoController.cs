@@ -77,15 +77,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             //Upload File
-            var fileFormContent = await _fileHelperService.ProcessFormFile<IndexVM>(
+            var result = await _fileHelperService.ProcessFormFile<IndexVM>(
                 indexVM.FormFile,
-                ModelState,
                 _photoFileSettingsOptions.PermittedFileExtensions,
                 _photoFileSettingsOptions.MinSizeLimit,
                 _photoFileSettingsOptions.MaxSizeLimit);
 
-            if (!ModelState.IsValid)
+            if (result.IsFailure)
             {
+                ModelState.AddModelError(nameof(IndexVM.FormFile), result.Errors.FirstOrDefault()!.Message);
                 return View("Index", indexVM);
             }
 
@@ -93,11 +93,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             var fotoPathKompresi = string.Empty;
             try
             {
-                fotoPath = await SaveFile(fileFormContent, Path.GetExtension(indexVM.FormFile.FileName));
+                fotoPath = await SaveFile(result.Value, Path.GetExtension(indexVM.FormFile.FileName));
                 fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
                     $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                await _imageCompressService.Compress(fileFormContent, fotoPathKompresi);
+                await _imageCompressService.Compress(result.Value, fotoPathKompresi);
             }
             catch (Exception ex)
             {
@@ -169,27 +169,28 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             //Upload File
-            var fileFormContent = await _fileHelperService.ProcessFormFile<IFormFile>(
+            var result = await _fileHelperService.ProcessFormFile<IFormFile>(
                 formFile,
-                ModelState,
                 _photoFileSettingsOptions.PermittedFileExtensions,
                 _photoFileSettingsOptions.MinSizeLimit,
                 _photoFileSettingsOptions.MaxSizeLimit);
 
-            if (!ModelState.IsValid)
+            if (result.IsFailure)
             {
-                return BadRequest(ModelState);
+                ModelState.AddModelError(nameof(IndexVM.FormFile), result.Errors.FirstOrDefault()!.Message);
+                return BadRequest();
             }
 
             var fotoPath = string.Empty;
             var fotoPathKompresi = string.Empty;
+
             try
             {
-                fotoPath = await SaveFile(fileFormContent, Path.GetExtension(formFile.FileName));
+                fotoPath = await SaveFile(result.Value, Path.GetExtension(formFile.FileName));
                 fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
                     $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
 
-                await _imageCompressService.Compress(fileFormContent, fotoPathKompresi);
+                await _imageCompressService.Compress(result.Value, fotoPathKompresi);
             }
             catch (Exception ex)
             {

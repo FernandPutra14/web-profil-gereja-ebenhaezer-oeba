@@ -51,10 +51,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         public async Task<IActionResult> Tambah(TambahVM tambahVM)
         {
             //Validasi
-            if (!ModelState.IsValid)
-            {
-                return View(tambahVM);
-            }
+            if (!ModelState.IsValid) return View(tambahVM);
 
             var foto = await _appDbContext.FotoTable.Where(f => f.Id == tambahVM.IdFoto)
                 .FirstOrDefaultAsync();
@@ -84,9 +81,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Simpan File PDF
             if (tambahVM.HaveDocument)
             {
-                var pdfPath = await _pDFUploadService.UploadAsync<TambahVM>(ModelState, tambahVM.PDFFormFile!);
-                if (!ModelState.IsValid || pdfPath is null) return View(tambahVM);
-                newPengumuman.PathPDF = pdfPath;
+                var result = await _pDFUploadService.UploadAsync<TambahVM>(tambahVM.PDFFormFile!);
+
+                if (result.IsFailure)
+                {
+                    ModelState.AddModelError(nameof(TambahVM.PDFFormFile), result.Errors.FirstOrDefault()!.Message);
+                    return View(tambahVM);
+                }
+
+                newPengumuman.PathPDF = result.Value;
             }
 
             //Simpan pengumuman ke database
@@ -119,7 +122,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 
-            if (pengumuman == null) return NotFound();
+            if (pengumuman is null) return NotFound();
 
             if (pengumuman.HaveDocument && !System.IO.File.Exists(pengumuman.PathPDF))
                 _notificationService.AddNotification(new ToastrNotification
@@ -191,14 +194,18 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 if(editVM.PDFFormFile is not null)
                 {
-                    var pdfPath = await _pDFUploadService.UploadAsync<EditVM>(ModelState, editVM.PDFFormFile);
-                    if (!ModelState.IsValid || pdfPath is null)
+                    var result = await _pDFUploadService.UploadAsync<EditVM>(editVM.PDFFormFile!);
+
+                    if (result.IsFailure)
+                    {
+                        ModelState.AddModelError(nameof(EditVM.PDFFormFile), result.Errors.FirstOrDefault()!.Message);
                         return View(editVM);
+                    }
 
                     if (pengumuman.HaveDocument && System.IO.File.Exists(pengumuman.PathPDF))
                         System.IO.File.Delete(pengumuman.PathPDF);
 
-                    pengumuman.PathPDF = pdfPath;
+                    pengumuman.PathPDF = result.Value;
                 }
             }
             else

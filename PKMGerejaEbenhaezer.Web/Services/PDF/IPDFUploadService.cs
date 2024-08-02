@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using PKMGerejaEbenhaezer.Domain.Shared;
 
 namespace PKMGerejaEbenhaezer.Web.Services.PDF
 {
     public interface IPDFUploadService
     {
-        Task<string?> UploadAsync<T>(ModelStateDictionary ModelState, IFormFile formFile);
+        Task<Result<string>> UploadAsync<T>(IFormFile formFile);
     }
 }

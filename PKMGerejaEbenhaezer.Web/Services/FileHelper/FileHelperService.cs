@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Net.Http.Headers;
+using PKMGerejaEbenhaezer.Domain.Shared;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Reflection;
@@ -51,8 +52,8 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
         // systems. For more information, see the topic that accompanies this sample
         // app.
 
-        public async Task<byte[]> ProcessFormFile<T>(IFormFile formFile,
-            ModelStateDictionary modelState, string[] permittedExtensions,
+        public async Task<Result<byte[]>> ProcessFormFile<T>(IFormFile formFile,
+            string[] permittedExtensions,
             long minSizeLimit,
             long maxSizeLimit)
         {
@@ -67,7 +68,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
                     formFile.Name.Substring(formFile.Name.IndexOf(".",
                     StringComparison.Ordinal) + 1));
 
-            if (property != null)
+            if (property is not null)
             {
                 if (property.GetCustomAttribute(typeof(DisplayAttribute)) is
                     DisplayAttribute displayAttribute)
@@ -84,31 +85,27 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
             // Check the file length. This check doesn't catch files that only have 
             // a BOM as their content.
             if (formFile.Length == 0)
-            {
-                modelState.AddModelError(formFile.Name,
-                    $"{fieldDisplayName}({trustedFileNameForDisplay}) is empty.");
-
-                return Array.Empty<byte>();
-            }
+                return Result.Failure<byte[]>(new Error(
+                    "FileHelpers.FileEmpty", $"{fieldDisplayName}({trustedFileNameForDisplay}) kosong"));
 
             if (formFile.Length < minSizeLimit)
             {
                 var megabyteSizeLimit = minSizeLimit / (double)1048576;
-                modelState.AddModelError(formFile.Name,
-                    $"{fieldDisplayName}({trustedFileNameForDisplay}) kurang dari " +
-                    $"{megabyteSizeLimit:N3} MB.");
 
-                return Array.Empty<byte>();
+                return Result.Failure<byte[]>(new Error(
+                    "FileHelpers.FileSizeTooSmall",
+                    $"{fieldDisplayName}({trustedFileNameForDisplay}) kurang dari " +
+                    $"{megabyteSizeLimit:N3} MB."));
             }
 
             if (formFile.Length > maxSizeLimit)
             {
                 var megabyteSizeLimit = maxSizeLimit / (double)1048576;
-                modelState.AddModelError(formFile.Name,
-                    $"{fieldDisplayName}({trustedFileNameForDisplay}) exceeds " +
-                    $"{megabyteSizeLimit:N1} MB.");
 
-                return Array.Empty<byte>();
+                return Result.Failure<byte[]>(new Error(
+                    "FileHelpers.FileSizeTooBig",
+                    $"{fieldDisplayName}({trustedFileNameForDisplay}) lebih besar dari" +
+                    $"{megabyteSizeLimit:N1} MB."));
             }
 
             try
@@ -121,39 +118,33 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
                     // content was a BOM and the content is actually
                     // empty after removing the BOM.
                     if (memoryStream.Length == 0)
-                    {
-                        modelState.AddModelError(formFile.Name,
-                            $"{fieldDisplayName}({trustedFileNameForDisplay}) is empty.");
-                    }
+                        return Result.Failure<byte[]>(new Error(
+                            "FileHelpers.FileEmpty", $"{fieldDisplayName}({trustedFileNameForDisplay}) kosong."));
 
                     if (!IsValidFileExtensionAndSignature(
                         formFile.FileName, memoryStream, permittedExtensions))
-                    {
-                        modelState.AddModelError(formFile.Name,
-                            $"{fieldDisplayName}({trustedFileNameForDisplay}) file " +
-                            "type isn't permitted or the file's signature " +
-                            "doesn't match the file's extension.");
-                    }
-                    else
-                    {
-                        return memoryStream.ToArray();
-                    }
+                        return Result.Failure<byte[]>(new Error(
+                            "FileHelpers.ExtensionAndSignatureNotValid",
+                            $"{fieldDisplayName}({trustedFileNameForDisplay}) tipe file " +
+                            $"tidak didukung atau signature tidak cocok dengan ekstensi file"));
+
+                    return memoryStream.ToArray();
                 }
             }
             catch (Exception ex)
             {
-                modelState.AddModelError(formFile.Name,
-                    $"{fieldDisplayName}({trustedFileNameForDisplay}) upload failed. " +
-                    $"Please contact the Help Desk for support. Error: {ex.HResult}");
                 // Log the exception
-            }
 
-            return Array.Empty<byte>();
+                return Result.Failure<byte[]>(new Error(
+                    "FileHelpers.UploadFailed",
+                    $"{fieldDisplayName}({trustedFileNameForDisplay}) upload failed. " +
+                    $"Please contact the Help Desk for support. Error: {ex.HResult}"));
+            }
         }
 
-        public async Task<byte[]> ProcessStreamedFile(
+        public async Task<Result<byte[]>> ProcessStreamedFile(
             MultipartSection section, ContentDispositionHeaderValue contentDisposition,
-            ModelStateDictionary modelState, string[] permittedExtensions, long sizeLimit)
+            string[] permittedExtensions, long sizeLimit)
         {
             try
             {
@@ -163,38 +154,35 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
 
                     // Check if the file is empty or exceeds the size limit.
                     if (memoryStream.Length == 0)
-                    {
-                        modelState.AddModelError("File", "The file is empty.");
-                    }
-                    else if (memoryStream.Length > sizeLimit)
+                        return Result.Failure<byte[]>(new Error(
+                            "FileHelpers.FileEmpty", "File kosong"));
+
+                    if (memoryStream.Length > sizeLimit)
                     {
                         var megabyteSizeLimit = sizeLimit / 1048576;
-                        modelState.AddModelError("File",
-                        $"The file exceeds {megabyteSizeLimit:N1} MB.");
+
+                        return Result.Failure<byte[]>(new Error(
+                            "FileHelpers.FileSizeToBig", $"Ukuran file melebihi {megabyteSizeLimit:N1} MB."));
                     }
-                    else if (!IsValidFileExtensionAndSignature(
+
+                    if (!IsValidFileExtensionAndSignature(
                         contentDisposition.FileName.Value!, memoryStream,
                         permittedExtensions))
-                    {
-                        modelState.AddModelError("File",
+                        return Result.Failure<byte[]>(new Error(
+                            "FileHelpers.InvalidTypeOrSignatureDontMatch",
                             "The file type isn't permitted or the file's " +
-                            "signature doesn't match the file's extension.");
-                    }
-                    else
-                    {
-                        return memoryStream.ToArray();
-                    }
+                            "signature doesn't match the file's extension."));
+
+                    return memoryStream.ToArray();
                 }
             }
             catch (Exception ex)
             {
-                modelState.AddModelError("File",
-                    "The upload failed. Please contact the Help Desk " +
-                    $" for support. Error: {ex.HResult}");
-                // Log the exception
+                return Result.Failure<byte[]>(new Error(
+                    "FileHelpers.UploadFailed",
+                    $"Upload failed. " +
+                    $"Please contact the Help Desk for support. Error: {ex.HResult}"));
             }
-
-            return Array.Empty<byte>();
         }
 
         private bool IsValidFileExtensionAndSignature(string fileName,

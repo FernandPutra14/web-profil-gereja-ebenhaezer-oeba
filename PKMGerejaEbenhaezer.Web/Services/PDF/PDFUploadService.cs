@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using PKMGerejaEbenhaezer.Domain.Shared;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Services.FileHelper;
 
@@ -23,7 +24,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.PDF
             _fileHelperService = fileHelperService;
         }
 
-        public async Task<string?> UploadAsync<T>(ModelStateDictionary modelState, IFormFile formFile)
+        public async Task<Result<string>> UploadAsync<T>(IFormFile formFile)
         {
             var folderPath = Path.GetFullPath(_webHostEnvironment.ContentRootPath + _options.FolderPath);
 
@@ -33,19 +34,19 @@ namespace PKMGerejaEbenhaezer.Web.Services.PDF
             }
             catch (Exception ex) 
             {
-                modelState.AddModelError(string.Empty, "Upload PDF Gagal!");
                 _logger.LogError("Create Directory Failed. Exception : {0}", ex.ToString());
-                return null;
+
+                return Result.Failure<string>(new Error(
+                    "PDFUpload.UploadFailed", "Upload PDF Gagal"));
             }
 
-            var fileFormContent = await _fileHelperService.ProcessFormFile<T>(
+            var result = await _fileHelperService.ProcessFormFile<T>(
                 formFile,
-                modelState,
                 new string[] { ".pdf" },
                 _options.MinSizeLimit,
                 _options.MaxSizeLimit);
 
-            if (!modelState.IsValid) return null;
+            if (result.IsFailure) return Result.Failure<string>(result.Errors);
 
             var fileName = $"{Path.GetRandomFileName()}{Path.GetExtension(formFile.FileName)}";
             var pdfPath = folderPath + fileName;
@@ -54,14 +55,15 @@ namespace PKMGerejaEbenhaezer.Web.Services.PDF
             {
                 using (var fileStream = File.Create(pdfPath)) 
                 {
-                    await fileStream.WriteAsync(fileFormContent);
+                    await fileStream.WriteAsync(result.Value);
                 }
             }
             catch (Exception ex) 
             {
                 _logger.LogError("Saving PDF File to storage failed. Exception {0}", ex.ToString());
-                modelState.AddModelError(string.Empty, "Upload PDF Gagal!");
-                return null;
+
+                return Result.Failure<string>(new Error(
+                    "PDFUpload.UploadFailed", "Upload PDF Gagal"));
             }
 
             return pdfPath;
