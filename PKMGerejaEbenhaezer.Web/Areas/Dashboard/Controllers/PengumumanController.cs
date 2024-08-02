@@ -161,8 +161,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (pengumuman is null)
             {
-                ModelState.AddModelError(string.Empty, "Pengumuman dengan yang akan diubah tidak ditemukan");
-                return View(editVM);
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = "Edit Pengumuman Gagal",
+                    Message = "Pengumuman yang akan diubah tidak ditemukan",
+                });
+
+                return RedirectToAction(nameof(Index));
             }
 
             if (editVM.IdFoto is not null)
@@ -179,7 +185,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (editVM.HaveDocument && !pengumuman.HaveDocument && editVM.PDFFormFile is null)
             {
-                ModelState.AddModelError(nameof(editVM.PDFFormFile), "Dokumen harus diisi jika Ada Dokumen di centang!");
+                ModelState.AddModelError(nameof(editVM.PDFFormFile), 
+                    "Dokumen harus diisi jika Ada Dokumen di centang!");
                 return View(editVM);
             }
 
@@ -199,7 +206,8 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
                     if (result.IsFailure)
                     {
-                        ModelState.AddModelError(nameof(EditVM.PDFFormFile), result.Errors.FirstOrDefault()!.Message);
+                        ModelState.AddModelError(nameof(EditVM.PDFFormFile), 
+                            result.Errors.FirstOrDefault()!.Message);
                         return View(editVM);
                     }
 
@@ -240,14 +248,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Hapus(int id, string? returnUrl)
+        public async Task<IActionResult> Hapus(int id)
         {
-            returnUrl ??= Url.Action("Index", "Pengumuman", new { Area = "Dashboard" });
-            ViewData["returnUrl"] = returnUrl;
-
             //Validasi
             var pengumuman = await _appDbContext.PengumumanTable.Where(p => p.Id == id).FirstOrDefaultAsync();
-            if (pengumuman is null) return BadRequest(pengumuman);
+            if (pengumuman is null) return NotFound();
 
             //Hapus pengumuman
             _appDbContext.PengumumanTable.Remove(pengumuman);
@@ -265,7 +270,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                     Title = "Hapus Pengumuman Gagal",
                     Message = "Error terjadi ssat mencoba menghapus data dari database. Silahkan hubungi administrator"
                 });
-                return Redirect(returnUrl!);
+                return RedirectToAction(nameof(Index));
             }
 
             //Hapus PDF
@@ -287,7 +292,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                         Title = "Hapus File PDF Pengumuman Gagal",
                         Message = "Pengumuman berhasil dihapus tapi file PDF-nya tidak! Laporkan error ini ke administrator!"
                     });
-                    return Redirect(returnUrl!);
+                    return RedirectToAction(nameof(Index));
                 }
             }
 
@@ -296,7 +301,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Type = ToastrNotificationType.Success,
                 Title = "Pengumuman berhasil dihapus"
             });
-            return Redirect(returnUrl!);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

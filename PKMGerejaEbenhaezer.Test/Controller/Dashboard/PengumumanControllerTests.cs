@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -324,7 +323,217 @@ public class PengumumanControllerTests
         var result = await _pengumumanController.Edit(editVM);
 
         //Assert
+        _notificationService
+            .Verify(x => x.AddNotification(It.Is<ToastrNotification>(x => x.Type == ToastrNotificationType.Error)),
+                    Times.Once());
+
         result.Should().BeOfType<RedirectToActionResult>().Which.ActionName
               .Should().NotBeNull().And.Be(actionName);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenFotoNotFound()
+    {
+        //Arrange
+        var editVM = new EditVM { Id = 1, IdFoto = 1 };
+        var daftarPengumuman = new Pengumuman[] { new() { Id = editVM.Id } };
+        var daftarFoto = new Foto[] { new() { Id = editVM.IdFoto.Value + 1 } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+        _appDbContext.Setup(x => x.FotoTable).ReturnsDbSet(daftarFoto);
+
+        //Act
+        var result = await _pengumumanController.Edit(editVM);
+
+        //Assert
+        _pengumumanController.ModelState.IsValid.Should().BeFalse();
+
+        result.Should().BeOfType<ViewResult>().Which.Model
+              .Should().NotBeNull().And.BeOfType<EditVM>().And.BeEquivalentTo(editVM);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenHaveDocumentButPDFFormFileIsNull()
+    {
+        //Arrange
+        var editVM = new EditVM { Id = 1, HaveDocument = true, PDFFormFile = null };
+        var daftarPengumuman = new Pengumuman[] { new() { Id = editVM.Id, HaveDocument = false } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+
+        //Act
+        var result = await _pengumumanController.Edit(editVM);
+
+        //Assert
+        _pengumumanController.ModelState.IsValid.Should().BeFalse();
+
+        result.Should().BeOfType<ViewResult>().Which.Model
+              .Should().NotBeNull().And.BeOfType<EditVM>().And.BeEquivalentTo(editVM);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenPDFUploadFailed()
+    {
+        //Arrange
+        var editVM = new EditVM { Id = 1, HaveDocument = true, PDFFormFile = Mock.Of<IFormFile>() };
+        var daftarPengumuman = new Pengumuman[] { new() { Id = editVM.Id, HaveDocument = true } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+
+        _pDFUploadService.Setup(x => x.UploadAsync<EditVM>(editVM.PDFFormFile))
+            .ReturnsAsync(Result.Failure<string>(new Error(string.Empty, string.Empty)));
+
+        //Act
+        var result = await _pengumumanController.Edit(editVM);
+
+        //Assert
+        _pengumumanController.ModelState.IsValid.Should().BeFalse();
+
+        result.Should().BeOfType<ViewResult>().Which.Model
+              .Should().NotBeNull().And.BeOfType<EditVM>().And.BeEquivalentTo(editVM);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnViewResultAndModelStateNotValid_WhenSaveChangesAsyncThrow()
+    {
+        //Arrange
+        var editVM = new EditVM { Id = 1 };
+        var daftarPengumuman = new Pengumuman[] { new() { Id = editVM.Id } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+        _appDbContext.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
+
+        //Act
+        var result = await _pengumumanController.Edit(editVM);
+
+        //Assert
+        _pengumumanController.ModelState.IsValid.Should().BeFalse();
+
+        result.Should().BeOfType<ViewResult>().Which.Model
+              .Should().NotBeNull().And.BeOfType<EditVM>().And.BeEquivalentTo(editVM);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_CallSaveChangesAsync()
+    {
+        //Arrange
+        var editVM = new EditVM { Id = 1 };
+        var daftarPengumuman = new Pengumuman[] { new() { Id = editVM.Id } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+
+        //Act
+        var result = await _pengumumanController.Edit(editVM);
+
+        //Assert
+        _appDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once());
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnRedirectToActionIndex_WhenSuccess()
+    {
+        //Arrange
+        var actionName = nameof(PendetaController.Index);
+        var editVM = new EditVM { Id = 1 };
+        var daftarPengumuman = new Pengumuman[] { new() { Id = editVM.Id } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+
+        //Act
+        var result = await _pengumumanController.Edit(editVM);
+
+        //Assert
+        result.Should().BeOfType<RedirectToActionResult>().Which.ActionName
+              .Should().NotBeNull().And.Be(actionName);
+    }
+
+    [Fact]
+    public async Task Hapus_Should_ReturnNotFoundResult_WhenPengumumanNotFound()
+    {
+        //Arrange
+        var id = 1;
+        var daftarPengumuman = new Pengumuman[] { new() { Id = id + 1 } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+
+        //Act
+        var result = await _pengumumanController.Hapus(id);
+
+        //Assert
+        result.Should().BeOfType<NotFoundResult>();
+    }
+
+    [Fact]
+    public async Task Hapus_Should_ReturnRedirectToActionIndex_WhenSuccess()
+    {
+        //Arrange
+        var actionName = nameof(PengumumanController.Index);
+        var id = 1;
+        var daftarPengumuman = new Pengumuman[] { new() { Id = id } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+
+        //Act
+        var result = await _pengumumanController.Hapus(id);
+
+        //Assert
+        result.Should().BeOfType<RedirectToActionResult>().Which.ActionName
+              .Should().NotBeNull().And.Be(actionName);
+    }
+
+    [Fact]
+    public async Task Hapus_Should_ReturnRedirectToActionIndexAndAddErrorNotification_WhenSaveChangesAsync()
+    {
+        //Arrange
+        var actionName = nameof(PengumumanController.Index);
+        var id = 1;
+        var daftarPengumuman = new Pengumuman[] { new() { Id = id } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+        _appDbContext.Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
+
+        //Act
+        var result = await _pengumumanController.Hapus(id);
+
+        //Assert
+        _notificationService
+            .Verify(x => x.AddNotification(It.Is<ToastrNotification>(x => x.Type == ToastrNotificationType.Error)),
+                    Times.Once());
+
+        result.Should().BeOfType<RedirectToActionResult>().Which.ActionName
+              .Should().NotBeNull().And.Be(actionName);
+    }
+
+    [Fact]
+    public async Task Hapus_Should_CallRemove()
+    {
+        //Arrange
+        var id = 1;
+        var daftarPengumuman = new Pengumuman[] { new() { Id = id } };
+        var dbSetMock = new Mock<DbSet<Pengumuman>>();
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman, dbSetMock);
+
+        //Act
+        await _pengumumanController.Hapus(id);
+
+        //Assert
+        dbSetMock.Verify(x => x.Remove(It.Is<Pengumuman>(x => x.Id == id)), Times.Once());
+    }
+
+    [Fact]
+    public async Task Hapus_Should_CallSaveChangesAsync()
+    {
+        //Arrange
+        var id = 1;
+        var daftarPengumuman = new Pengumuman[] { new() { Id = id } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+
+        //Act
+        await _pengumumanController.Hapus(id);
+
+        //Assert
+        _appDbContext.Verify(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once());
     }
 }
