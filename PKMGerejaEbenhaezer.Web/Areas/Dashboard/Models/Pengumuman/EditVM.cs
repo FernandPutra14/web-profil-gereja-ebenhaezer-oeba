@@ -10,11 +10,11 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pengumuman
 
         [Display(Name = "Judul Pengumuman")]
         [Required(ErrorMessage = "{0} belum diisi")]
-        public string Judul { get; set; }
+        public string Judul { get; set; } = string.Empty;
 
         [Display(Name = "Isi Pengumuman")]
         [Required(ErrorMessage = "{0} belum diisi")]
-        public string Isi { get; set; }
+        public string Isi { get; set; } = string.Empty;
 
         [Display(Name = "Ada Dokumen")]
         [Required(ErrorMessage = "{0} harus diisi")]

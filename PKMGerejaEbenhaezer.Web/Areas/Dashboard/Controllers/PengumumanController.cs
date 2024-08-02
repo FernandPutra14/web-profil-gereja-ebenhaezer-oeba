@@ -156,6 +156,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         {
             //Validasi
             if (!ModelState.IsValid) return View(editVM);
+
             var pengumuman = _appDbContext.PengumumanTable.Where(p => p.Id == editVM.Id).FirstOrDefault();
 
             if (pengumuman is null)

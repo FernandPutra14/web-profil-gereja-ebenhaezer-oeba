@@ -294,4 +294,37 @@ public class PengumumanControllerTests
             .Verify(x => x.AddNotification(It.Is<ToastrNotification>(x => x.Type == ToastrNotificationType.Warning)),
                     Times.Once());
     }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnViewResult_WhenModelStateNotValid()
+    {
+        //Arrange
+        var editVM = new EditVM { Id = 1 };
+        _pengumumanController.ModelState.AddModelError(string.Empty, string.Empty);
+
+        //Act
+        var result = await _pengumumanController.Edit(editVM);
+
+        //Assert
+        result.Should().BeOfType<ViewResult>().Which.Model
+              .Should().NotBeNull().And.BeOfType<EditVM>().And.BeEquivalentTo(editVM);
+    }
+
+    [Fact]
+    public async Task EditPOST_Should_ReturnRedirectToActionIndexAndAddErrorNotification_WhenPengumumanNotFound()
+    {
+        //Arrange
+        var actionName = nameof(PendetaController.Index);
+        var editVM = new EditVM { Id = 1 };
+        var daftarPengumuman = new Pengumuman[] { new() { Id = editVM.Id + 1 } };
+
+        _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
+
+        //Act
+        var result = await _pengumumanController.Edit(editVM);
+
+        //Assert
+        result.Should().BeOfType<RedirectToActionResult>().Which.ActionName
+              .Should().NotBeNull().And.Be(actionName);
+    }
 }
