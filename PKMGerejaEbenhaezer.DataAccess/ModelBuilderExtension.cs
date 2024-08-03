@@ -148,9 +148,9 @@ namespace PKMGerejaEbenhaezer.DataAccess
                 Enumerable.Range(1, 33).Select(i => new
                 {
                     Id = i,
-                    Nama = $"Rayon {i.ToRomanNumeral()}",
+                    Nama = $"Rayon E{i}",
                     FotoKetuaId = daftarFoto[5].Id,
-                    KetuaRayon = $"Ketua Rayon {i.ToRomanNumeral()}",
+                    KetuaRayon = $"Ketua Rayon E{i}",
                     NoWa = NoWa.Create("081234567891").Value,
                     JumlahLakiLaki = 25,
                     JumlahPerempuan = 35,
