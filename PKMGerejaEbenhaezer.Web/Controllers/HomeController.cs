@@ -124,11 +124,11 @@ public class HomeController : Controller
         var path = exceptionHandlerFeature.Path;
 
         _logger.LogError(
-            "Unhandled Exception. Message : {@message}, Timestamp : {@dateTime}, Path : {@path}, Stack Trace : {@stackTrace}",
+            error,
+            "Unhandled Exception. Message : {@message}, Timestamp : {@dateTime}, Path : {@path}",
             error.Message,
             DateTime.Now,
-            path,
-            error.ToString());
+            path);
 
         return StatusCode(StatusCodes.Status500InternalServerError);
     }
