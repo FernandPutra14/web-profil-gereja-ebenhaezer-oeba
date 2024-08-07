@@ -29,9 +29,14 @@ builder.Services.AddScoped((sp) =>
     return sp.GetRequiredService<IOptionsSnapshot<PDFFileSettingsOptions>>().Value;
 });
 
+builder.Services.Configure<ImageCompressionOptions>(builder.Configuration
+    .GetSection(ImageCompressionOptions.ImageCompression));
+builder.Services.AddScoped(sp =>
+{
+    return sp.GetRequiredService<IOptionsSnapshot<ImageCompressionOptions>>().Value;
+});
 
 // Add services to the container.
-
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddLogging();

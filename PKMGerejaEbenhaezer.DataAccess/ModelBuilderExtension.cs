@@ -43,7 +43,9 @@ namespace PKMGerejaEbenhaezer.DataAccess
                 {
                     Id = 1,
                     PathFoto = "wwwroot/img/pengumuman/natall.jpg",
-                    PathFotoKompresi = "wwwroot/img/pengumuman/natall.jpg",
+                    PathFotoSmall = "wwwroot/img/pengumuman/natall.jpg",
+                    PathFotoMedium = "wwwroot/img/pengumuman/natall.jpg",
+                    PathFotoLarge = "wwwroot/img/pengumuman/natall.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = daftarUser[0].Id
                 },
@@ -51,7 +53,9 @@ namespace PKMGerejaEbenhaezer.DataAccess
                 {
                     Id = 2,
                     PathFoto = "wwwroot/img/pengumuman/rapatt.jpg",
-                    PathFotoKompresi = "wwwroot/img/pengumuman/rapatt.jpg",
+                    PathFotoSmall = "wwwroot/img/pengumuman/rapatt.jpg",
+                    PathFotoMedium = "wwwroot/img/pengumuman/rapatt.jpg",
+                    PathFotoLarge = "wwwroot/img/pengumuman/rapatt.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = daftarUser[0].Id
                 },
@@ -59,7 +63,9 @@ namespace PKMGerejaEbenhaezer.DataAccess
                 {
                     Id = 3,
                     PathFoto = "wwwroot/img/pengumuman/tripp.jpg",
-                    PathFotoKompresi = "wwwroot/img/pengumuman/tripp.jpg",
+                    PathFotoSmall = "wwwroot/img/pengumuman/tripp.jpg",
+                    PathFotoMedium = "wwwroot/img/pengumuman/tripp.jpg",
+                    PathFotoLarge = "wwwroot/img/pengumuman/tripp.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = daftarUser[0].Id
                 },
@@ -67,7 +73,9 @@ namespace PKMGerejaEbenhaezer.DataAccess
                 {
                     Id = 4,
                     PathFoto = "wwwroot/img/pengumuman/donasii.jpg",
-                    PathFotoKompresi = "wwwroot/img/pengumuman/donasii.jpg",
+                    PathFotoSmall = "wwwroot/img/pengumuman/donasii.jpg",
+                    PathFotoMedium = "wwwroot/img/pengumuman/donasii.jpg",
+                    PathFotoLarge = "wwwroot/img/pengumuman/donasii.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = daftarUser[0].Id
                 },
@@ -75,7 +83,9 @@ namespace PKMGerejaEbenhaezer.DataAccess
                 {
                     Id = 5,
                     PathFoto = "wwwroot/img/pengumuman/pelayanann.jpg",
-                    PathFotoKompresi = "wwwroot/img/pengumuman/pelayanann.jpg",
+                    PathFotoSmall = "wwwroot/img/pengumuman/pelayanann.jpg",
+                    PathFotoMedium = "wwwroot/img/pengumuman/pelayanann.jpg",
+                    PathFotoLarge = "wwwroot/img/pengumuman/pelayanann.jpg",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = daftarUser[0].Id
                 },
@@ -83,7 +93,9 @@ namespace PKMGerejaEbenhaezer.DataAccess
                 {
                     Id = 6,
                     PathFoto = @"wwwroot/img/generaluser.png",
-                    PathFotoKompresi = @"wwwroot/img/generaluser.png",
+                    PathFotoSmall = @"wwwroot/img/generaluser.png",
+                    PathFotoMedium = "wwwroot/img/generaluser.png",
+                    PathFotoLarge = "wwwroot/img/generaluser.png",
                     TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                     PembuatId = daftarUser[0].Id
                 },

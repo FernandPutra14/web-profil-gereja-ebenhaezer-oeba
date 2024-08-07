@@ -1,7 +1,9 @@
-﻿namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
+﻿using PKMGerejaEbenhaezer.Domain.Shared;
+
+namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
 {
     public interface IImageCompressService
     {
-        Task Compress(byte[] image, string outputPath);
+        Task<Result<ImageCompressionResult>> Compress(byte[] image, string fileName);
     }
 }

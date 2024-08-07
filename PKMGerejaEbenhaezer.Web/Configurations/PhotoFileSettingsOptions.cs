@@ -1,16 +1,12 @@
-﻿using System.Drawing;
+﻿namespace PKMGerejaEbenhaezer.Web.Configurations;
 
-namespace PKMGerejaEbenhaezer.Web.Configurations
+public class PhotoFileSettingsOptions
 {
-    public class PhotoFileSettingsOptions
-    {
-        public const string PhotoFileSettings = "PhotoFileSettings";
+    public const string PhotoFileSettings = "PhotoFileSettings";
 
-        public string[] PermittedFileExtensions { get; set; } = Array.Empty<string>();
-        public long MinSizeLimit { get; set; }
-        public long MaxSizeLimit { get; set; }
-        public string FolderPath { get; set; } = string.Empty;
-        public int CompressionQuality { get; set; }
-        public Size CompressionMaxSize { get; set; }
-    }
+    public string[] PermittedFileExtensions { get; set; } = Array.Empty<string>();
+    public long MinSizeLimit { get; set; }
+    public long MaxSizeLimit { get; set; }
+    public string FolderPath { get; set; } = string.Empty;
+    public int CompressionQuality { get; set; }
 }

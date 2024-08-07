@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240807091635_TambahPathFotoSmallMediumLarge")]
+    partial class TambahPathFotoSmallMediumLarge
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 1,
                             LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAELJTaJFkaWib8r8EausrbNpBhJqKgCdkwN+DvYkA/h7FUOf9/MrMeBV7iqnnb8wxlQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAaPXuJHksi/2ecjkd5nhKTbxSu3pYIei8FI7Q8NW301ukfKXKpeiJ4IPXapeaPXwg==",
                             Role = "Admin",
                             UserName = "admin"
                         },
@@ -65,7 +68,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 2,
                             LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAEETTe/3IT6uHTMGqC91FnZD4cgqKUPQsFfR6GcGtWwmuemyBI8HKZbtQz/QpsWBdEA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL41Ru8q10GIWJ1/ppnefKNfqqPMsnmeE/fV55Sgysd3HFkzZex9oDJVWsXHFguglg==",
                             Role = "SuperAdmin",
                             UserName = "super"
                         });
@@ -125,8 +128,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 2,
                             PathFoto = "wwwroot/img/pengumuman/rapatt.jpg",
-                            PathFotoLarge = "wwwroot/img/pengumuman/rapatt.jpg",
-                            PathFotoMedium = "wwwroot/img/pengumuman/rapatt.jpg",
+                            PathFotoLarge = "wwwroot/img/pengumuman/natall.jpg",
+                            PathFotoMedium = "wwwroot/img/pengumuman/natall.jpg",
                             PathFotoSmall = "wwwroot/img/pengumuman/rapatt.jpg",
                             PembuatId = 1,
                             TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -135,8 +138,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 3,
                             PathFoto = "wwwroot/img/pengumuman/tripp.jpg",
-                            PathFotoLarge = "wwwroot/img/pengumuman/tripp.jpg",
-                            PathFotoMedium = "wwwroot/img/pengumuman/tripp.jpg",
+                            PathFotoLarge = "wwwroot/img/pengumuman/natall.jpg",
+                            PathFotoMedium = "wwwroot/img/pengumuman/natall.jpg",
                             PathFotoSmall = "wwwroot/img/pengumuman/tripp.jpg",
                             PembuatId = 1,
                             TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -145,8 +148,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 4,
                             PathFoto = "wwwroot/img/pengumuman/donasii.jpg",
-                            PathFotoLarge = "wwwroot/img/pengumuman/donasii.jpg",
-                            PathFotoMedium = "wwwroot/img/pengumuman/donasii.jpg",
+                            PathFotoLarge = "wwwroot/img/pengumuman/natall.jpg",
+                            PathFotoMedium = "wwwroot/img/pengumuman/natall.jpg",
                             PathFotoSmall = "wwwroot/img/pengumuman/donasii.jpg",
                             PembuatId = 1,
                             TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -155,8 +158,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 5,
                             PathFoto = "wwwroot/img/pengumuman/pelayanann.jpg",
-                            PathFotoLarge = "wwwroot/img/pengumuman/pelayanann.jpg",
-                            PathFotoMedium = "wwwroot/img/pengumuman/pelayanann.jpg",
+                            PathFotoLarge = "wwwroot/img/pengumuman/natall.jpg",
+                            PathFotoMedium = "wwwroot/img/pengumuman/natall.jpg",
                             PathFotoSmall = "wwwroot/img/pengumuman/pelayanann.jpg",
                             PembuatId = 1,
                             TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -165,8 +168,8 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 6,
                             PathFoto = "wwwroot/img/generaluser.png",
-                            PathFotoLarge = "wwwroot/img/generaluser.png",
-                            PathFotoMedium = "wwwroot/img/generaluser.png",
+                            PathFotoLarge = "wwwroot/img/pengumuman/natall.jpg",
+                            PathFotoMedium = "wwwroot/img/pengumuman/natall.jpg",
                             PathFotoSmall = "wwwroot/img/generaluser.png",
                             PembuatId = 1,
                             TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified)

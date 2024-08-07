@@ -1,19 +1,18 @@
 ﻿using PKMGerejaEbenhaezer.Domain.Entity.Commons;
 using PKMGerejaEbenhaezer.Domain.Entity.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace PKMGerejaEbenhaezer.Domain.Entity
+namespace PKMGerejaEbenhaezer.Domain.Entity;
+
+public class Foto : BaseEntity, IAuditableEntity
 {
-    public class Foto : BaseEntity, IAuditableEntity
-    {
-        public string PathFoto { get; set; }
-        public string PathFotoKompresi { get; set; }
+    public string PathFoto { get; set; } = string.Empty;
+    public string PathFotoSmall { get; set; } = string.Empty;
+    public string PathFotoMedium { get; set; } = string.Empty;
+    public string PathFotoLarge { get; set; } = string.Empty;
 
-        public DateTime TanggalDiBuat { get; set; }
-        public DateTime? TanggalDiUbah { get; set; }
+    public DateTime TanggalDiBuat { get; set; }
+    public DateTime? TanggalDiUbah { get; set; }
 
-        public AppUser? Pembuat { get; set; }
-    }
+    public AppUser? Pembuat { get; set; }
 }

@@ -43,7 +43,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             _fileHelperService = fileHelperService;
         }
 
-        public async Task<IActionResult> Index(int? pageIndex)
+        public async Task<IActionResult> Index(int? pageIndex = null)
         {
             var daftarFoto = await _appDbContext.FotoTable
                 .Include(f => f.Pembuat)
@@ -77,27 +77,23 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             //Upload File
-            var result = await _fileHelperService.ProcessFormFile<IndexVM>(
+            var processFormFileResult = await _fileHelperService.ProcessFormFile<IndexVM>(
                 indexVM.FormFile,
                 _photoFileSettingsOptions.PermittedFileExtensions,
                 _photoFileSettingsOptions.MinSizeLimit,
                 _photoFileSettingsOptions.MaxSizeLimit);
 
-            if (result.IsFailure)
+            if (processFormFileResult.IsFailure)
             {
-                ModelState.AddModelError(nameof(IndexVM.FormFile), result.Errors.FirstOrDefault()!.Message);
+                ModelState.AddModelError(nameof(IndexVM.FormFile), 
+                    processFormFileResult.Errors.FirstOrDefault()!.Message);
                 return View("Index", indexVM);
             }
 
             var fotoPath = string.Empty;
-            var fotoPathKompresi = string.Empty;
             try
             {
-                fotoPath = await SaveFile(result.Value, Path.GetExtension(indexVM.FormFile.FileName));
-                fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
-                    $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
-
-                await _imageCompressService.Compress(result.Value, fotoPathKompresi);
+                fotoPath = await SaveFile(processFormFileResult.Value, Path.GetExtension(indexVM.FormFile.FileName));
             }
             catch (Exception ex)
             {
@@ -113,11 +109,28 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return View("Index", indexVM);
             }
 
+            var compressResult = await _imageCompressService.Compress(processFormFileResult.Value, 
+                Path.GetFileName(fotoPath));
+
+            if (compressResult.IsFailure)
+            {
+                _notificationService.AddNotification(new ToastrNotification
+                {
+                    Type = ToastrNotificationType.Error,
+                    Title = compressResult.Errors.FirstOrDefault()!.Message,
+                    Message = "Gagal Compress Foto. Laporkan error ke administrator"
+                });
+
+                return View("Index", indexVM);
+            }
+
             var foto = new Foto
             {
                 Id = 0,
                 PathFoto = fotoPath,
-                PathFotoKompresi = fotoPathKompresi,
+                PathFotoSmall = compressResult.Value.SmallPath,
+                PathFotoMedium = compressResult.Value.MediumPath,
+                PathFotoLarge = compressResult.Value.LargePath,
             };
 
             _appDbContext.FotoTable.Add(foto);
@@ -182,15 +195,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
 
             var fotoPath = string.Empty;
-            var fotoPathKompresi = string.Empty;
 
             try
             {
                 fotoPath = await SaveFile(result.Value, Path.GetExtension(formFile.FileName));
-                fotoPathKompresi = Path.Combine(Path.GetDirectoryName(fotoPath)!,
-                    $"{Path.GetFileNameWithoutExtension(fotoPath)}-kompresi.jpeg");
-
-                await _imageCompressService.Compress(result.Value, fotoPathKompresi);
             }
             catch (Exception ex)
             {
@@ -198,11 +206,18 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
+            var compressResult = await _imageCompressService.Compress(
+                result.Value, Path.GetFileName(fotoPath));
+
+            if (compressResult.IsFailure) return StatusCode(StatusCodes.Status500InternalServerError);
+
             var foto = new Foto
             {
                 Id = 0,
                 PathFoto = fotoPath,
-                PathFotoKompresi = fotoPathKompresi,
+                PathFotoSmall = compressResult.Value.SmallPath,
+                PathFotoMedium = compressResult.Value.MediumPath,
+                PathFotoLarge = compressResult.Value.LargePath,
             };
 
             var changeTracker = _appDbContext.FotoTable.Add(foto);
@@ -228,19 +243,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 .Where(f => f.Id == id)
                 .FirstOrDefaultAsync();
 
-            if (foto is null)
-            {
-                _logger.LogError("Hapus Foto Gagal! Id {0} tidak ditemukan", id);
-                _notificationService.AddNotification(
-                    new ToastrNotification
-                    {
-                        Type = ToastrNotificationType.Error,
-                        Title = "Hapus Foto Gagal!",
-                        Message = "Foto tidak ditemukan"
-                    }
-                );
-                return Redirect(returnUrl!);
-            }
+            if (foto is null) return NotFound();
 
             _appDbContext.FotoTable.Remove(foto);
 
@@ -267,8 +270,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 if (System.IO.File.Exists(foto.PathFoto))
                     System.IO.File.Delete(foto.PathFoto);
 
-                if (System.IO.File.Exists(foto.PathFotoKompresi))
-                    System.IO.File.Delete(foto.PathFotoKompresi);
+                if (System.IO.File.Exists(foto.PathFotoSmall))
+                    System.IO.File.Delete(foto.PathFotoSmall);
+
+                if (System.IO.File.Exists(foto.PathFotoMedium))
+                    System.IO.File.Delete(foto.PathFotoMedium);
+                
+                if (System.IO.File.Exists(foto.PathFotoLarge))
+                    System.IO.File.Delete(foto.PathFotoLarge);
             }
             catch (Exception ex)
             {

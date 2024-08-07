@@ -1,4 +1,5 @@
-﻿using PKMGerejaEbenhaezer.Web.Configurations;
+﻿using PKMGerejaEbenhaezer.Domain.Shared;
+using PKMGerejaEbenhaezer.Web.Configurations;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
@@ -8,56 +9,105 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
     public class ImageCompressService : IImageCompressService
     {
         private readonly PhotoFileSettingsOptions _photoFileSettingsOptions;
+        private readonly ImageCompressionOptions _imageCompressionOptions;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<ImageCompressService> _logger;
 
-        public ImageCompressService(PhotoFileSettingsOptions photoFileSettingsOptions, 
+        public ImageCompressService(PhotoFileSettingsOptions photoFileSettingsOptions,
+            ImageCompressionOptions imageCompressionOptions,
+            IWebHostEnvironment webHostEnvironment,
             ILogger<ImageCompressService> logger)
         {
             _photoFileSettingsOptions = photoFileSettingsOptions;
+            _imageCompressionOptions = imageCompressionOptions;
+            _webHostEnvironment = webHostEnvironment;
             _logger = logger;
         }
 
-        public async Task Compress(byte[] image, string outputPath)
+        public async Task<Result<ImageCompressionResult>> Compress(byte[] image, string fileName)
         {
             try
             {
-                using (var fotoKompresi = Image.Load(image))
+                var folderPath = Path.GetFullPath(
+                    _webHostEnvironment.ContentRootPath + _photoFileSettingsOptions.FolderPath);
+                var encoder = new JpegEncoder { Quality = _imageCompressionOptions.CompressionQuality };
+
+                var compressionResult = new ImageCompressionResult
                 {
-                    var encoder = new JpegEncoder
+                    SmallPath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-small.jpeg",
+                    MediumPath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-medium.jpeg",
+                    LargePath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-large.jpeg",
+                };
+
+                using (var fotoSmall = Image.Load(image))
+                {
+                    var newSize = GetNewSize(fotoSmall.Size, _imageCompressionOptions.Small);
+
+                    fotoSmall.Mutate(x => x.Resize(new ResizeOptions
                     {
-                        Quality = _photoFileSettingsOptions.CompressionQuality
-                    };
+                        Size = newSize,
+                        Mode = ResizeMode.Stretch,
+                        Sampler = KnownResamplers.Bicubic
+                    }));
 
-                    var maxSize = _photoFileSettingsOptions.CompressionMaxSize;
-                    var originalSize = fotoKompresi.Size;
-
-                    if(originalSize.Height > maxSize.Height || 
-                        originalSize.Width > maxSize.Width)
-                    {
-                        var ratioX = (double)maxSize.Width / originalSize.Width;
-                        var ratioY = (double)maxSize.Height / originalSize.Height;
-
-                        var ratio = Math.Min(ratioX, ratioY);
-
-                        var newSize = new Size((int)(originalSize.Width * ratio), 
-                            (int)(originalSize.Height * ratio));
-
-                        fotoKompresi.Mutate(x => x.Resize(new ResizeOptions
-                        {
-                            Size = newSize,
-                            Mode = ResizeMode.Stretch,
-                            Sampler = KnownResamplers.Bicubic,
-                        }));
-                    }
-
-                    await fotoKompresi.SaveAsync(outputPath, encoder);
+                    await fotoSmall.SaveAsync(compressionResult.SmallPath, encoder);
                 }
+
+                using (var fotoMedium = Image.Load(image))
+                {
+                    var newSize = GetNewSize(fotoMedium.Size, _imageCompressionOptions.Medium);
+
+                    fotoMedium.Mutate(x => x.Resize(new ResizeOptions
+                    {
+                        Size = newSize,
+                        Mode = ResizeMode.Stretch,
+                        Sampler = KnownResamplers.Bicubic
+                    }));
+
+                    await fotoMedium.SaveAsync(compressionResult.MediumPath, encoder);
+                }
+
+                using (var fotoLarge = Image.Load(image))
+                {
+                    var newSize = GetNewSize(fotoLarge.Size, _imageCompressionOptions.Large);
+
+                    fotoLarge.Mutate(x => x.Resize(new ResizeOptions
+                    {
+                        Size = newSize,
+                        Mode = ResizeMode.Stretch,
+                        Sampler = KnownResamplers.Bicubic
+                    }));
+
+                    await fotoLarge.SaveAsync(compressionResult.LargePath, encoder);
+                }
+
+                return compressionResult;
             }
             catch (Exception ex)
             {
-                _logger.LogError("Compress gambar gagal. Exception : {0}", ex.ToString());
-                throw;
+                _logger.LogError(
+                    ex,
+                    "Exception when try to compress image. Message : {@message}. Timestamp : {@timeStamp}",
+                    ex.Message,
+                    DateTime.Now);
+
+                return Result.Failure<ImageCompressionResult>(
+                    new Error("ImageCompressService.Compress", "Kompresi Foto Gagal"));
             }
+        }
+
+        private Size GetNewSize(Size original, System.Drawing.Size maxSize)
+        {
+
+            if (original.Height <= maxSize.Height && original.Width <= maxSize.Width)
+                return original;
+
+            var ratioX = (double)maxSize.Width / original.Width;
+            var ratioY = (double)maxSize.Height / original.Height;
+
+            var ratio = Math.Min(ratioX, ratioY);
+
+            return new Size((int)(original.Width * ratio), (int)(original.Height * ratio)); ;
         }
     }
 }

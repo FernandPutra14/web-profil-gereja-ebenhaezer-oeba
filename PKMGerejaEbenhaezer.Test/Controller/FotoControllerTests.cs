@@ -65,17 +65,28 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
         }
 
         [Fact]
-        public async Task Index_Should_ReturnPhysicalFileResultOfPathFoto_WhenKompresiIsFalse()
+        public async Task Index_Should_ReturnPhysicalFileResultOfPathFoto_WhenSizeIsOriginal()
         {
             //Arrange
             var id = 1;
-            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\background_gereja_testing.jpg";
-            var pathKompresi = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\background1_gereja_testing.jpg";
-            var foto = new Foto { Id = id, PathFoto = path, PathFotoKompresi = pathKompresi };
+            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test.jpg";
+            var pathSmall = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-small.jpg";
+            var pathMedium = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-medium.jpg";
+            var pathLarge = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-large.jpg";
+
+            var foto = new Foto 
+            { 
+                Id = id, 
+                PathFoto = path, 
+                PathFotoSmall = pathSmall,
+                PathFotoMedium = pathMedium,
+                PathFotoLarge = pathLarge,
+            };
+
             _appDbContext.Setup(x => x.FotoTable).ReturnsDbSet(new List<Foto> { foto });
 
             //Act
-            var result = await _fotoController.Index(id, false);
+            var result = await _fotoController.Index(id);
 
             //Assert
             var physicalFileResult = result.Should().BeOfType<PhysicalFileResult>().Subject;
@@ -83,21 +94,107 @@ namespace PKMGerejaEbenhaezer.UnitTest.Controller
         }
 
         [Fact]
-        public async Task Index_Should_ReturnPhysicalFileResultOfPathKompresi_WhenKompresiIsTrue()
+        public async Task Index_Should_ReturnPhysicalFileResultOfPathSmall_WhenSizeIsSmall()
         {
             //Arrange
             var id = 1;
-            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\background_gereja_testing.jpg";
-            var pathKompresi = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\background1_gereja_testing.jpg";
-            var foto = new Foto { Id = id, PathFoto = path, PathFotoKompresi = pathKompresi };
+            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test.jpg";
+            var pathSmall = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-small.jpg";
+            var pathMedium = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-medium.jpg";
+            var pathLarge = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-large.jpg";
+
+            var foto = new Foto
+            {
+                Id = id,
+                PathFoto = path,
+                PathFotoSmall = pathSmall,
+                PathFotoMedium = pathMedium,
+                PathFotoLarge = pathLarge,
+            };
+
             _appDbContext.Setup(x => x.FotoTable).ReturnsDbSet(new List<Foto> { foto });
 
             //Act
-            var result = await _fotoController.Index(id, true);
+            var result = await _fotoController.Index(id, FotoSizes.Small);
 
             //Assert
             var physicalFileResult = result.Should().BeOfType<PhysicalFileResult>().Subject;
-            physicalFileResult.FileName.Should().Be(pathKompresi);
+            physicalFileResult.FileName.Should().Be(pathSmall);
+        }
+
+        [Fact]
+        public async Task Index_Should_ReturnPhysicalFileResultOfPathMedium_WhenSizeIsMedium()
+        {
+            //Arrange
+            var id = 1;
+            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test.jpg";
+            var pathSmall = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-small.jpg";
+            var pathMedium = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-medium.jpg";
+            var pathLarge = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-large.jpg";
+
+            var foto = new Foto
+            {
+                Id = id,
+                PathFoto = path,
+                PathFotoSmall = pathSmall,
+                PathFotoMedium = pathMedium,
+                PathFotoLarge = pathLarge,
+            };
+
+            _appDbContext.Setup(x => x.FotoTable).ReturnsDbSet(new List<Foto> { foto });
+
+            //Act
+            var result = await _fotoController.Index(id, FotoSizes.Medium);
+
+            //Assert
+            var physicalFileResult = result.Should().BeOfType<PhysicalFileResult>().Subject;
+            physicalFileResult.FileName.Should().Be(pathMedium);
+        }
+
+        [Fact]
+        public async Task Index_Should_ReturnPhysicalFileResultOfPathLarge_WhenSizeIsLarge()
+        {
+            //Arrange
+            var id = 1;
+            var path = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test.jpg";
+            var pathSmall = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-small.jpg";
+            var pathMedium = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-medium.jpg";
+            var pathLarge = @"D:\Proyek\Gereja Ebenhezer Oeba\web-profil-gereja-ebenhaezer-oeba\PKMGerejaEbenhaezer.Test\Controller\TestFile\Foto\test-large.jpg";
+
+            var foto = new Foto
+            {
+                Id = id,
+                PathFoto = path,
+                PathFotoSmall = pathSmall,
+                PathFotoMedium = pathMedium,
+                PathFotoLarge = pathLarge,
+            };
+
+            _appDbContext.Setup(x => x.FotoTable).ReturnsDbSet(new List<Foto> { foto });
+
+            //Act
+            var result = await _fotoController.Index(id, FotoSizes.Large);
+
+            //Assert
+            var physicalFileResult = result.Should().BeOfType<PhysicalFileResult>().Subject;
+            physicalFileResult.FileName.Should().Be(pathLarge);
+        }
+
+        [Fact]
+        public async Task Index_Should_ReturnNotFound_WhenSizeInvalid()
+        {
+            //Arrange
+            var id = 1; 
+
+            var foto = new Foto { Id = id };
+
+            _appDbContext.Setup(x => x.FotoTable).ReturnsDbSet(new List<Foto> { foto });
+
+            //Act
+            var result = await _fotoController.Index(id, "Invalid Size");
+
+            //Assert
+            result.Should().BeOfType<NotFoundResult>();
         }
     }
 }

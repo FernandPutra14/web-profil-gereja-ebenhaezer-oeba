@@ -10,16 +10,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Controller\TestFile\Foto\background1_gereja_testing.jpg" />
-    <None Remove="Controller\TestFile\Foto\background_gereja_testing.jpg" />
+    <None Remove="Controller\TestFile\Foto\test-large.jpg" />
+    <None Remove="Controller\TestFile\Foto\test-medium.jpg" />
+    <None Remove="Controller\TestFile\Foto\test-small.jpg" />
+    <None Remove="Controller\TestFile\Foto\test.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Controller\TestFile\Foto\background1_gereja_testing.jpg">
+    <Content Include="Controller\TestFile\Foto\test-large.jpg">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Controller\TestFile\Foto\background_gereja_testing.jpg">
+    <Content Include="Controller\TestFile\Foto\test-medium.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Controller\TestFile\Foto\test-small.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Controller\TestFile\Foto\test.jpg">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
