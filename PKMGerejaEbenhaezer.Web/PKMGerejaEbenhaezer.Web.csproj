@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Emgu.CV" Version="4.7.0.5276" />
-    <PackageReference Include="Emgu.CV.runtime.mini.ubuntu-x64" Version="4.7.0.5276" />
-    <PackageReference Include="Emgu.CV.runtime.ubuntu-x64" Version="4.7.0.5276" />
-    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.7.0.5276" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
       <PrivateAssets>all</PrivateAssets>
