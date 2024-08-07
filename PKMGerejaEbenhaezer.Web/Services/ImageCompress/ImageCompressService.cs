@@ -1,6 +1,7 @@
 ﻿using PKMGerejaEbenhaezer.Domain.Shared;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
 
@@ -39,47 +40,9 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
                     LargePath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-large.jpeg",
                 };
 
-                using (var fotoSmall = Image.Load(image))
-                {
-                    var newSize = GetNewSize(fotoSmall.Size, _imageCompressionOptions.Small);
-
-                    fotoSmall.Mutate(x => x.Resize(new ResizeOptions
-                    {
-                        Size = newSize,
-                        Mode = ResizeMode.Stretch,
-                        Sampler = KnownResamplers.Bicubic
-                    }));
-
-                    await fotoSmall.SaveAsync(compressionResult.SmallPath, encoder);
-                }
-
-                using (var fotoMedium = Image.Load(image))
-                {
-                    var newSize = GetNewSize(fotoMedium.Size, _imageCompressionOptions.Medium);
-
-                    fotoMedium.Mutate(x => x.Resize(new ResizeOptions
-                    {
-                        Size = newSize,
-                        Mode = ResizeMode.Stretch,
-                        Sampler = KnownResamplers.Bicubic
-                    }));
-
-                    await fotoMedium.SaveAsync(compressionResult.MediumPath, encoder);
-                }
-
-                using (var fotoLarge = Image.Load(image))
-                {
-                    var newSize = GetNewSize(fotoLarge.Size, _imageCompressionOptions.Large);
-
-                    fotoLarge.Mutate(x => x.Resize(new ResizeOptions
-                    {
-                        Size = newSize,
-                        Mode = ResizeMode.Stretch,
-                        Sampler = KnownResamplers.Bicubic
-                    }));
-
-                    await fotoLarge.SaveAsync(compressionResult.LargePath, encoder);
-                }
+                await Compress(image, compressionResult.SmallPath, _imageCompressionOptions.Small, encoder);
+                await Compress(image, compressionResult.MediumPath, _imageCompressionOptions.Medium, encoder);
+                await Compress(image, compressionResult.LargePath, _imageCompressionOptions.Large, encoder);
 
                 return compressionResult;
             }
@@ -94,6 +57,22 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
                 return Result.Failure<ImageCompressionResult>(
                     new Error("ImageCompressService.Compress", "Kompresi Foto Gagal"));
             }
+        }
+
+        private async Task Compress(byte[] image, string outputPath, System.Drawing.Size size, IImageEncoder encoder)
+        {
+            using Image foto = Image.Load(image);
+
+            var newSize = GetNewSize(foto.Size, size);
+
+            foto.Mutate(x => x.Resize(new ResizeOptions
+            {
+                Size = newSize,
+                Mode = ResizeMode.Stretch,
+                Sampler = KnownResamplers.Bicubic
+            }));
+
+            await foto.SaveAsync(outputPath, encoder);
         }
 
         private Size GetNewSize(Size original, System.Drawing.Size maxSize)
