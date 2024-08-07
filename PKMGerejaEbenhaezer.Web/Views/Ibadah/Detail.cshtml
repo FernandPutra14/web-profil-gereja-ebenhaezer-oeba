@@ -27,7 +27,13 @@
             <!-- Pendeta -->
             <div class="pendeta-detail mt-2">
                 <div>
-                    <img src="~/img/pendeta-test.jpg" />
+                    @if(Model.Pendeta?.Foto is not null){
+                        <partial name="_PictureFotoPartial" model=@((Model.Pendeta.Foto.Id, ""))/>
+                    }
+                    else
+                    {
+                        <img src="~/img/pendeta-test.jpg" />
+                    }
                 </div>
                 <div style="margin-top: 5px; margin-left:10px;">
                     <h6 class="">@Model.Pendeta!.Nama</h6>
