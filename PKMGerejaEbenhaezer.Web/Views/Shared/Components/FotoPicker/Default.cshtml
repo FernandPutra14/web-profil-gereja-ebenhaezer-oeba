@@ -2,15 +2,17 @@
 
 <!-- Tombol Pilihan Gambar -->
 <div class="row mb-3 justify-content-center align-items-center">
-    <div id="dvPreview" class="d-flex justify-content-center @(Model.Multi ? "multi" : "")">
+    <div id="dvPreview" class="row @(Model.Multi ? "multi" : "")">
         @if (Model.DaftarIdFoto is not null && Model.DaftarIdFoto.Count > 0)
         {
             if (Model.Multi)
             {
                 foreach (var id in Model.DaftarIdFoto)
                 {
-                    <img src="@Url.Action("Index", "Foto", new{ Area="", id })"
-                         class="img-fluid" />
+                    <div class="col-3 p-1">
+                        <img src="@Url.Action("Index", "Foto", new{ Area="", id })"
+                             class="img-thumbnail" />
+                    </div>
                 }
             }
             else
@@ -21,7 +23,7 @@
         }
         else
         {
-            <div class="d-flex justify-content-center align-items-center flex-grow-1">
+            <div id="dash" class="d-flex justify-content-center align-items-center flex-grow-1">
                 <h2>Foto</h2>
             </div>
         }

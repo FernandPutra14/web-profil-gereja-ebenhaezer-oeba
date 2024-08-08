@@ -15,8 +15,6 @@
         <li><a href="#" class="active">Edit Pengumuman</a></li>
     </ul>
     <!-- Akhir Hyperlink -->
-
-
     <!-- Container Edit dan Tombol Simpan -->
     <div class="container-fluid cardedit">
         <form asp-action="Edit" method="post" class="container" enctype="multipart/form-data">
@@ -24,16 +22,14 @@
 
             <input asp-for="@Model.Id" hidden />
 
-            <div class="row mb-3">
-                <vc:foto-picker input-name=@nameof(EditVM.IdFoto) multi=false 
-                    values=@(Model.IdFoto is null ? null : new int[] { Model.IdFoto.Value })>
-                </vc:foto-picker>
-            </div>
+            <vc:foto-picker input-name=@nameof(EditVM.IdFoto) multi=false
+                            values=@(Model.IdFoto is null ? null : new int[] { Model.IdFoto.Value })>
+            </vc:foto-picker>
 
             <div class="row">
                 <span asp-validation-for="@Model.IdFoto" class="text-danger form-text"></span>
             </div>
-            
+
             <div class="row mb-3">
                 <div class="col-12 mt-3 input-box">
                     <label asp-for="@Model.Judul" class="form-label"></label>
@@ -59,7 +55,7 @@
             </div>
 
             <div id="document" class="row mb-3" @(Model.HaveDocument ? "" : "hidden")>
-                <input asp-for="@Model.OldDocumentExist" hidden/>
+                <input asp-for="@Model.OldDocumentExist" hidden />
                 @if (Model.OldDocumentExist)
                 {
                     <div class="col-12">
@@ -76,7 +72,7 @@
 
             <div class="row mb-3">
                 <div class="col d-flex justify-content-start mt-4">
-                    <button type="submit" class="btn me-2">Simpan</button>                 
+                    <button type="submit" class="btn me-2">Simpan</button>
                     <a class="btndel" asp-action="Index" asp-controller="Pengumuman" asp-area="Dashboard">Batal</a>
                 </div>
             </div>

@@ -135,10 +135,10 @@ function fotoPicker(data) {
             $('#dvPreview').html('');
             if (multi) {
                 for (let id of daftarIdTerpilih) {
-                    $('#dvPreview').append(`<img class="img-fluid" src="${makeGetUrl(id)}"/>`);
+                    $('#dvPreview').append(`<div class="col-3 p-2"><img class="img-thumbnail" src="${makeGetUrl(id)}"/></div>`);
                 }
             } else {
-                $('#dvPreview').append(`<img class="img-fluid" src="${makeGetUrl(idTerpilih)}"/>`);
+                $('#dvPreview').append(`<img class="img-thumbnail" src="${makeGetUrl(idTerpilih)}"/>`);
             }
         }
     });

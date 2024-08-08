@@ -22,7 +22,7 @@
         <form asp-action="Tambah" method="post" class="container" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
-            <div style="display:flex; justify-content: center; align-items: center;">
+            <div class="row mb-3">
                 <vc:foto-picker input-name=@nameof(TambahVM.IdFoto) multi=false></vc:foto-picker>
             </div>
             

@@ -20,8 +20,8 @@
         <form asp-action="Edit" method="post" class="container" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
-            <div style="display:flex; justify-content: center; align-items: center;">
-                <vc:foto-picker input-name=@nameof(EditVM.IdFoto) multi=false
+            <div class="row mb-3">
+                <vc:foto-picker input-name=@nameof(EditVM.IdFoto) multi=true
                                 values=@(Model.IdFoto is null ? null : new int[] { Model.IdFoto.Value })>
                 </vc:foto-picker>
             </div>
