@@ -146,4 +146,4 @@ function fotoPicker(data) {
     init();
 }
 
-const makeGetUrl = (id) => '/Foto/Index/' + id;
+const makeGetUrl = (id) => `/Foto/Index/${id}`;
