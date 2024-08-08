@@ -21,7 +21,7 @@
 }
 
     .dvPreview.multi {
-        overflow-y: scroll;
+        height: 400px;
     }
 
         .dvPreview.multi ::deep img {
