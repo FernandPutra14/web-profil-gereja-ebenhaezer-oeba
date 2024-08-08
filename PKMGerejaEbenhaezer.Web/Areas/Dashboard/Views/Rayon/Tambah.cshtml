@@ -22,16 +22,8 @@
         <form asp-action="Tambah" method="post" class="container" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
-            <div class="row mb-3 justify-content-center align-items-center">
-                <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
-                    <div class="d-flex justify-content-center align-items-center flex-grow-1">
-                        <h2>Foto Ketua Rayon</h2>
-                    </div>
-                </div>
-            </div>
-
             <div style="display:flex; justify-content: center; align-items: center;">
-                <vc:upload-foto id-foto="0"></vc:upload-foto>
+                <vc:foto-picker input-name=@nameof(TambahVM.IdFoto) multi=false></vc:foto-picker>
             </div>
             
             <div class="row mb-3 mt-4">

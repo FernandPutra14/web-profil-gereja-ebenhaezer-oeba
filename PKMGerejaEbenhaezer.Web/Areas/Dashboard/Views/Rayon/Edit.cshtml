@@ -15,23 +15,17 @@
         <li><a href="#" class="active">Edit Rayon</a></li>
     </ul>
     <!-- Akhir Hyperlink -->
-
-
     <!-- Container Edit dan Tombol Simpan -->
     <div class="container-fluid cardedit">
         <form asp-action="Edit" method="post" class="container" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="form-text text-danger"></div>
 
-            <div class="row mb-3 justify-content-center align-items-center">
-                <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
-                    <img class="img-fluid" src="@Url.Action("Index", "Foto", new {Area="", id = Model.IdFoto})" />
-                </div>
+            <div style="display:flex; justify-content: center; align-items: center;">
+                <vc:foto-picker input-name=@nameof(EditVM.IdFoto) multi=false
+                                values=@(Model.IdFoto is null ? null : new int[] { Model.IdFoto.Value })>
+                </vc:foto-picker>
             </div>
 
-            <div style="display:flex; justify-content: center; align-items: center;">
-                <vc:upload-foto id-foto=Model.IdFoto></vc:upload-foto>
-            </div>
-            
             <div class="row mb-3">
                 <div class="col-12 mt-4 input-box">
                     <label asp-for="@Model.Nama" class="form-label"></label>
@@ -48,7 +42,6 @@
                 </div>
             </div>
 
-            
             <div class="row mb-3">
                 <label class="form-label">Opsional</label>
                 <div class="col-12 mb-3 input-box">

@@ -24,15 +24,10 @@
 
             <input asp-for="@Model.Id" hidden />
 
-            <div class="row mb-3 justify-content-center align-items-center">
-                <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
-                    <img src="@Url.Action("Index", "Foto", new {Area = "", id = Model.IdFoto})"
-                         class="img-fluid" />
-                </div>
-            </div>
-
-            <div style="display:flex; justify-content: center; align-items: center;">
-                <vc:upload-foto id-foto=Model.IdFoto></vc:upload-foto>
+            <div class="row mb-3">
+                <vc:foto-picker input-name=@nameof(EditVM.IdFoto) multi=false 
+                    values=@(Model.IdFoto is null ? null : new int[] { Model.IdFoto.Value })>
+                </vc:foto-picker>
             </div>
 
             <div class="row">

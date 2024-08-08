@@ -1,0 +1,28 @@
+﻿::deep .foto-container.selected {
+    background: var(--primary-clr)
+}
+
+::deep .foto-container {
+    background: white;
+}
+
+/* Gambar Form */
+#dvPreview {
+    height: 350px;
+    width: 500px;
+    border-style: solid;
+    border-width: medium;
+    padding: 3px 3px 3px 3px;
+}
+
+    #dvPreview.multi {
+        height: 350px;
+        width: 700px;
+        overflow-y: scroll;
+    }
+
+    #dvPreview div {
+        border-style: dashed;
+        border-width: medium;
+    }
+/* Akhir Gambar Form */

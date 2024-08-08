@@ -24,22 +24,10 @@
 
             <input hidden asp-for="@Model.Id" />
 
-            <div class="row mb-3 justify-content-center align-items-center">
-                <div id="dvPreview" class="d-flex justify-content-center align-items-stretch">
-                    <div class="d-flex justify-content-center align-items-center flex-grow-1">
-                        @if (Model.IdFoto is not null)
-                        {
-                            <img class="img-fluid" src="@Url.Action("Index", "Foto", new {Area = "", id = Model.IdFoto})" />
-                        }
-                        else
-                        {
-                            <h2>Foto Pendeta</h2>
-                        }
-                    </div>
-                </div>
-            </div>
-            <div style="display:flex; justify-content: center; align-items: center;">
-                <vc:upload-foto id-foto="@Model.IdFoto"></vc:upload-foto>
+            <div class="row">
+                <vc:foto-picker input-name=@nameof(EditVM.IdFoto) 
+                    multi=false values=@(Model.IdFoto is null ? null : new int[] { Model.IdFoto.Value })>
+                </vc:foto-picker>
                 <span asp-validation-for="@Model.IdFoto"></span>
             </div>         
 
