@@ -8,9 +8,9 @@
 
 /* Gambar Form */
 .dvPreview {
-    height: 400px;
+    min-height: 400px;
     width: 400px;
-    overflow:clip;
+    overflow: scroll;
     border-style: solid;
     border-width: medium;
     padding: 3px 3px 3px 3px;
