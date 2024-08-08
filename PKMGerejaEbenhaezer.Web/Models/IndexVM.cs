@@ -25,11 +25,11 @@ namespace PKMGerejaEbenhaezer.Web.Models
         {
             var title = "";
 
-            if (Tahun is not null)
-                title += $"/{Tahun}";
-
             if (Bulan is not null)
                 title += $"/{MonthName(Bulan.Value).ToUpper()}";
+
+            if (Tahun is not null)
+                title += $"/{Tahun}";
 
             return title;
         }
