@@ -2,7 +2,7 @@
 
 <!-- Tombol Pilihan Gambar -->
 <div class="row mb-3 justify-content-center align-items-center">
-    <div id="dvPreview" class="row @(Model.Multi ? "multi" : "")">
+    <div id="dvPreview@(Model.Id)" class="dvPreview row @(Model.Multi ? "multi" : "")">
         @if (Model.DaftarIdFoto is not null && Model.DaftarIdFoto.Count > 0)
         {
             if (Model.Multi)
@@ -107,13 +107,15 @@
         const modal = $('#modal@(Model.Id)');
         const inputName = "@(Model.InputName)";
         const selectedClass = "selected";
+        const dvPreview = $('#dvPreview@(Model.Id)');
 
         fotoPicker({
             inputContainer,
             modal,
             inputName,
             multi,
-            selectedClass
+            selectedClass,
+            dvPreview
         });
     });
 </script>

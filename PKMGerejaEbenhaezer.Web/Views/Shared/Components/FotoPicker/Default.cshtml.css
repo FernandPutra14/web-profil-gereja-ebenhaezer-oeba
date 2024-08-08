@@ -7,7 +7,7 @@
 }
 
 /* Gambar Form */
-#dvPreview {
+.dvPreview {
     height: 400px;
     width: 400px;
     overflow:clip;
@@ -16,21 +16,21 @@
     padding: 3px 3px 3px 3px;
 }
 
-#dvPreview:not(.multi) ::deep img{
+.dvPreview:not(.multi) ::deep img{
     object-fit: contain;
 }
 
-    #dvPreview.multi {
+    .dvPreview.multi {
         overflow-y: scroll;
     }
 
-        #dvPreview.multi ::deep img {
+        .dvPreview.multi ::deep img {
             object-fit: cover;
             width: 100%;
             height: 80px !important;
         }
 
-    #dvPreview div#dash {
+    .dvPreview div#dash {
         border-style: dashed;
         border-width: medium;
     }

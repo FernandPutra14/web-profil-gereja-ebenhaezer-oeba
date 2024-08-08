@@ -1,5 +1,5 @@
 function fotoPicker(data) {
-    const { inputContainer, modal, inputName, selectedClass, multi } = data;
+    const { inputContainer, modal, inputName, selectedClass, multi, dvPreview } = data;
 
     if (typeof (selectedClass) !== "string") throw new Error("selectedClass must be string");
 
@@ -131,14 +131,14 @@ function fotoPicker(data) {
             $(inputContainer).html(`<input name="${inputName}" id="${inputName}" value="${idTerpilih}" hidden />`);
         }
 
-        if ($('#dvPreview') !== null && $('#dvPreview') !== undefined) {
-            $('#dvPreview').html('');
+        if ($(dvPreview) !== null && $(dvPreview) !== undefined) {
+            $(dvPreview).html('');
             if (multi) {
                 for (let id of daftarIdTerpilih) {
-                    $('#dvPreview').append(`<div class="col-3 p-2"><img class="img-thumbnail" src="${makeGetUrl(id)}"/></div>`);
+                    $(dvPreview).append(`<div class="col-3 p-2"><img class="img-thumbnail" src="${makeGetUrl(id)}"/></div>`);
                 }
             } else {
-                $('#dvPreview').append(`<img class="img-thumbnail" src="${makeGetUrl(idTerpilih)}"/>`);
+                $(dvPreview).append(`<img class="img-thumbnail" src="${makeGetUrl(idTerpilih)}"/>`);
             }
         }
     });
