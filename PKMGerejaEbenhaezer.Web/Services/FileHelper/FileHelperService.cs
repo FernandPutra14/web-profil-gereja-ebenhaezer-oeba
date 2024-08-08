@@ -85,27 +85,27 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
             // Check the file length. This check doesn't catch files that only have 
             // a BOM as their content.
             if (formFile.Length == 0)
-                return Result.Failure<byte[]>(new Error(
-                    "FileHelpers.FileEmpty", $"{fieldDisplayName}({trustedFileNameForDisplay}) kosong"));
+                return new Error( "FileHelpers.FileEmpty", 
+                    $"{fieldDisplayName}({trustedFileNameForDisplay}) kosong");
 
             if (formFile.Length < minSizeLimit)
             {
                 var megabyteSizeLimit = minSizeLimit / (double)1048576;
 
-                return Result.Failure<byte[]>(new Error(
+                return new Error(
                     "FileHelpers.FileSizeTooSmall",
                     $"{fieldDisplayName}({trustedFileNameForDisplay}) kurang dari " +
-                    $"{megabyteSizeLimit:N3} MB."));
+                    $"{megabyteSizeLimit:N3} MB.");
             }
 
             if (formFile.Length > maxSizeLimit)
             {
                 var megabyteSizeLimit = maxSizeLimit / (double)1048576;
 
-                return Result.Failure<byte[]>(new Error(
+                return new Error(
                     "FileHelpers.FileSizeTooBig",
                     $"{fieldDisplayName}({trustedFileNameForDisplay}) lebih besar dari" +
-                    $"{megabyteSizeLimit:N1} MB."));
+                    $"{megabyteSizeLimit:N1} MB.");
             }
 
             try
@@ -118,15 +118,15 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
                     // content was a BOM and the content is actually
                     // empty after removing the BOM.
                     if (memoryStream.Length == 0)
-                        return Result.Failure<byte[]>(new Error(
-                            "FileHelpers.FileEmpty", $"{fieldDisplayName}({trustedFileNameForDisplay}) kosong."));
+                        return new Error(
+                            "FileHelpers.FileEmpty", $"{fieldDisplayName}({trustedFileNameForDisplay}) kosong.");
 
                     if (!IsValidFileExtensionAndSignature(
                         formFile.FileName, memoryStream, permittedExtensions))
-                        return Result.Failure<byte[]>(new Error(
+                        return new Error(
                             "FileHelpers.ExtensionAndSignatureNotValid",
                             $"{fieldDisplayName}({trustedFileNameForDisplay}) tipe file " +
-                            $"tidak didukung atau signature tidak cocok dengan ekstensi file"));
+                            $"tidak didukung atau signature tidak cocok dengan ekstensi file");
 
                     return memoryStream.ToArray();
                 }
@@ -135,10 +135,10 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
             {
                 // Log the exception
 
-                return Result.Failure<byte[]>(new Error(
+                return new Error(
                     "FileHelpers.UploadFailed",
                     $"{fieldDisplayName}({trustedFileNameForDisplay}) upload failed. " +
-                    $"Please contact the Help Desk for support. Error: {ex.HResult}"));
+                    $"Please contact the Help Desk for support. Error: {ex.HResult}");
             }
         }
 
@@ -154,34 +154,33 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
 
                     // Check if the file is empty or exceeds the size limit.
                     if (memoryStream.Length == 0)
-                        return Result.Failure<byte[]>(new Error(
-                            "FileHelpers.FileEmpty", "File kosong"));
+                        return new Error("FileHelpers.FileEmpty", "File kosong");
 
                     if (memoryStream.Length > sizeLimit)
                     {
                         var megabyteSizeLimit = sizeLimit / 1048576;
 
-                        return Result.Failure<byte[]>(new Error(
-                            "FileHelpers.FileSizeToBig", $"Ukuran file melebihi {megabyteSizeLimit:N1} MB."));
+                        return new Error("FileHelpers.FileSizeToBig", 
+                            $"Ukuran file melebihi {megabyteSizeLimit:N1} MB.");
                     }
 
                     if (!IsValidFileExtensionAndSignature(
                         contentDisposition.FileName.Value!, memoryStream,
                         permittedExtensions))
-                        return Result.Failure<byte[]>(new Error(
+                        return new Error(
                             "FileHelpers.InvalidTypeOrSignatureDontMatch",
                             "The file type isn't permitted or the file's " +
-                            "signature doesn't match the file's extension."));
+                            "signature doesn't match the file's extension.");
 
                     return memoryStream.ToArray();
                 }
             }
             catch (Exception ex)
             {
-                return Result.Failure<byte[]>(new Error(
+                return new Error(
                     "FileHelpers.UploadFailed",
                     $"Upload failed. " +
-                    $"Please contact the Help Desk for support. Error: {ex.HResult}"));
+                    $"Please contact the Help Desk for support. Error: {ex.HResult}");
             }
         }
 

@@ -36,8 +36,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.PDF
             {
                 _logger.LogError("Create Directory Failed. Exception : {0}", ex.ToString());
 
-                return Result.Failure<string>(new Error(
-                    "PDFUpload.UploadFailed", "Upload PDF Gagal"));
+                return new Error("PDFUpload.UploadFailed", "Upload PDF Gagal");
             }
 
             var result = await _fileHelperService.ProcessFormFile<T>(
@@ -46,7 +45,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.PDF
                 _options.MinSizeLimit,
                 _options.MaxSizeLimit);
 
-            if (result.IsFailure) return Result.Failure<string>(result.Errors);
+            if (result.IsFailure) return Result<string>.Failure(result.Errors);
 
             var fileName = $"{Path.GetRandomFileName()}{Path.GetExtension(formFile.FileName)}";
             var pdfPath = folderPath + fileName;
@@ -62,8 +61,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.PDF
             {
                 _logger.LogError("Saving PDF File to storage failed. Exception {0}", ex.ToString());
 
-                return Result.Failure<string>(new Error(
-                    "PDFUpload.UploadFailed", "Upload PDF Gagal"));
+                return new Error("PDFUpload.UploadFailed", "Upload PDF Gagal");
             }
 
             return pdfPath;

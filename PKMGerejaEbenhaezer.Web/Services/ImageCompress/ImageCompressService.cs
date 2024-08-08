@@ -54,8 +54,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
                     ex.Message,
                     DateTime.Now);
 
-                return Result.Failure<ImageCompressionResult>(
-                    new Error("ImageCompressService.Compress", "Kompresi Foto Gagal"));
+                return new Error("ImageCompressService.Compress", "Kompresi Foto Gagal");
             }
         }
 

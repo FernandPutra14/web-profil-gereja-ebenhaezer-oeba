@@ -21,13 +21,13 @@ public class NoWa : ValueObject
     public static Result<NoWa> Create(string noWa)
     {
         if (string.IsNullOrEmpty(noWa))
-            return Result.Failure<NoWa>(NoWaDomainErrors.Empty);
+            return NoWaErrors.Empty;
 
         if (!Regex.IsMatch(noWa, ValidRegexPattern))
-            return Result.Failure<NoWa>(NoWaDomainErrors.NotValid);
+            return NoWaErrors.NotValid;
 
         if (noWa.Length != ValidLength)
-            return Result.Failure<NoWa>(NoWaDomainErrors.InvalidLength(ValidLength));
+            return NoWaErrors.InvalidLength(ValidLength);
 
         return new NoWa(noWa);
     }

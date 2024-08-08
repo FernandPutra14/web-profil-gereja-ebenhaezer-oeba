@@ -132,7 +132,7 @@ public class PengumumanControllerTests
 
         _pDFUploadService
             .Setup(x => x.UploadAsync<TambahVM>(tambahVM.PDFFormFile))
-            .ReturnsAsync(Result.Failure<string>());
+            .ReturnsAsync(Error.None);
 
         _pengumumanController.ModelState.AddModelError(string.Empty, string.Empty);
 
@@ -381,7 +381,7 @@ public class PengumumanControllerTests
         _appDbContext.Setup(x => x.PengumumanTable).ReturnsDbSet(daftarPengumuman);
 
         _pDFUploadService.Setup(x => x.UploadAsync<EditVM>(editVM.PDFFormFile))
-            .ReturnsAsync(Result.Failure<string>(new Error(string.Empty, string.Empty)));
+            .ReturnsAsync(new Error(string.Empty, string.Empty));
 
         //Act
         var result = await _pengumumanController.Edit(editVM);
