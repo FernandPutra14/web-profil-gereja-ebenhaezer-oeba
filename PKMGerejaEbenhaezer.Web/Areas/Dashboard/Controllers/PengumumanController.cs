@@ -85,7 +85,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
                 if (result.IsFailure)
                 {
-                    ModelState.AddModelError(nameof(TambahVM.PDFFormFile), result.Errors.FirstOrDefault()!.Message);
+                    ModelState.AddModelError(nameof(TambahVM.PDFFormFile), result.Error.Message);
                     return View(tambahVM);
                 }
 
@@ -206,8 +206,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
                     if (result.IsFailure)
                     {
-                        ModelState.AddModelError(nameof(EditVM.PDFFormFile), 
-                            result.Errors.FirstOrDefault()!.Message);
+                        ModelState.AddModelError(nameof(EditVM.PDFFormFile), result.Error.Message);
                         return View(editVM);
                     }
 

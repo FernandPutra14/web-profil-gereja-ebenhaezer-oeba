@@ -85,8 +85,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (processFormFileResult.IsFailure)
             {
-                ModelState.AddModelError(nameof(IndexVM.FormFile), 
-                    processFormFileResult.Errors.FirstOrDefault()!.Message);
+                ModelState.AddModelError(nameof(IndexVM.FormFile), processFormFileResult.Error.Message);
                 return View("Index", indexVM);
             }
 
@@ -117,7 +116,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 _notificationService.AddNotification(new ToastrNotification
                 {
                     Type = ToastrNotificationType.Error,
-                    Title = compressResult.Errors.FirstOrDefault()!.Message,
+                    Title = compressResult.Error.Message,
                     Message = "Gagal Compress Foto. Laporkan error ke administrator"
                 });
 
@@ -190,7 +189,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             if (result.IsFailure)
             {
-                ModelState.AddModelError(nameof(IndexVM.FormFile), result.Errors.FirstOrDefault()!.Message);
+                ModelState.AddModelError(nameof(IndexVM.FormFile), result.Error.Message);
                 return BadRequest();
             }
 

@@ -87,7 +87,7 @@ public class RayonController : Controller
 
             if (result.IsFailure)
             {
-                ModelState.AddModelError(nameof(TambahVM.NomorWa), result.Errors.First().Message);
+                ModelState.AddModelError(nameof(TambahVM.NomorWa), result.Error.Message);
                 return View(tambahVM);
             }
 
@@ -206,7 +206,7 @@ public class RayonController : Controller
 
             if (result.IsFailure)
             {
-                ModelState.AddModelError(nameof(EditVM.NomorWa), result.Errors.First().Message);
+                ModelState.AddModelError(nameof(EditVM.NomorWa), result.Error.Message);
                 return View(editVM);
             }
 
