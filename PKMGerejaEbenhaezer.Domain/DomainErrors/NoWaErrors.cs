@@ -8,6 +8,5 @@ public static class NoWaErrors
 
     public static readonly Error NotValid = new("NoWa.NotValid", "Nomor WA yang dimasukan tidak valid");
 
-    public static Error InvalidLength(int length) =>
-        new("NoWa.InvalidLength", $"Panjang No. WA harus {length}");
+    public static Error InvalidLength(int length) => new("NoWa.InvalidLength", $"Panjang No. WA harus {length}");
 }
