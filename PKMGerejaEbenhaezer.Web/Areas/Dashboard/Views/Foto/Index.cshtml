@@ -18,7 +18,7 @@
     </ul>
     <!-- Akhir Hyperlink -->
     <!-- Form Upload Foto -->
-    <form asp-action="IndexPOST" class="row mb-5" method="post" enctype="multipart/form-data" asp-route-pIndex="@Model.Items!.PageIndex">
+    <form asp-action="Tambah" class="row mb-5" method="post" enctype="multipart/form-data" asp-route-pageIndex="@Model.Items!.PageIndex">
         <div class="col-md-12 mb-3">
             <input class="form-control" type="file" asp-for="@Model.FormFile" style="font-size: 15px; margin-top: 0px;" />
             <span asp-validation-for="@Model.FormFile" class="text-danger"></span>

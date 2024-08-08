@@ -9,8 +9,6 @@ using PKMGerejaEbenhaezer.Web.Services.FileHelper;
 using PKMGerejaEbenhaezer.Web.Services.ImageCompress;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using PKMGerejaEbenhaezer.Web.Utilities;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Jpeg;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 {
@@ -59,25 +57,23 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> IndexPOST(IndexVM indexVM, int pIndex)
+        public async Task<IActionResult> Tambah(IndexVM indexVM, bool isJson = false, int pageIndex = 1)
         {
             var daftarFoto = await _appDbContext.FotoTable
                 .Include(f => f.Pembuat)
                 .OrderByDescending(f => f.TanggalDiBuat)
                 .AsNoTracking().ToListAsync();
 
-            var paginatedList = PaginatedList<Foto>.Create(daftarFoto, pIndex, 16);
+            var paginatedList = PaginatedList<Foto>.Create(daftarFoto, pageIndex, 16);
 
             indexVM.Items = paginatedList;
 
             //Validasi
             if (!ModelState.IsValid)
-            {
-                return View("Index", indexVM);
-            }
+                return isJson ? BadRequest(ModelState) : View(nameof(Index), indexVM);
 
             //Upload File
-            var processFormFileResult = await _fileHelperService.ProcessFormFile<IndexVM>(
+            var processFormFileResult = await _fileHelperService.ProcessFormFile<IFormFile>(
                 indexVM.FormFile,
                 _photoFileSettingsOptions.PermittedFileExtensions,
                 _photoFileSettingsOptions.MinSizeLimit,
@@ -86,10 +82,12 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             if (processFormFileResult.IsFailure)
             {
                 ModelState.AddModelError(nameof(IndexVM.FormFile), processFormFileResult.Error.Message);
-                return View("Index", indexVM);
+
+                return isJson ? BadRequest(ModelState) : View(nameof(Index), indexVM);
             }
 
             var fotoPath = string.Empty;
+
             try
             {
                 fotoPath = await SaveFile(processFormFileResult.Value, Path.GetExtension(indexVM.FormFile.FileName));
@@ -97,30 +95,37 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Upload Foto Gagal. Error: {0}", ex.ToString());
-                _notificationService.AddNotification(
+
+                if (!isJson)
+                {
+                    _notificationService.AddNotification(
                     new ToastrNotification
                     {
                         Type = ToastrNotificationType.Error,
                         Title = "Upload Foto Gagal",
                         Message = "Gagal menyimpan foto. Laporkan error ke administrator",
-                    }
-                );
-                return View("Index", indexVM);
+                    });
+                }
+
+                return isJson ? StatusCode(StatusCodes.Status500InternalServerError): View(nameof(Index), indexVM);
             }
 
-            var compressResult = await _imageCompressService.Compress(processFormFileResult.Value, 
+            var compressResult = await _imageCompressService.Compress(processFormFileResult.Value,
                 Path.GetFileName(fotoPath));
 
             if (compressResult.IsFailure)
             {
-                _notificationService.AddNotification(new ToastrNotification
+                if (!isJson)
                 {
-                    Type = ToastrNotificationType.Error,
-                    Title = compressResult.Error.Message,
-                    Message = "Gagal Compress Foto. Laporkan error ke administrator"
-                });
+                    _notificationService.AddNotification(new ToastrNotification
+                    {
+                        Type = ToastrNotificationType.Error,
+                        Title = compressResult.Error.Message,
+                        Message = "Gagal Compress Foto. Laporkan error ke administrator"
+                    });
+                }
 
-                return View("Index", indexVM);
+                return isJson ? StatusCode(StatusCodes.Status500InternalServerError) : View(nameof(Index), indexVM);
             }
 
             var foto = new Foto
@@ -137,101 +142,37 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             try
             {
                 await _appDbContext.SaveChangesAsync();
-                _notificationService.AddNotification(
+
+                if (!isJson)
+                {
+                    _notificationService.AddNotification(
                     new ToastrNotification
                     {
                         Type = ToastrNotificationType.Success,
                         Title = "Upload Foto Berhasil",
                         Message = "Foto berhasil disimpan",
-                    }
-                );
+                    });
+                }
+
+                return isJson ? Ok(foto) : RedirectToAction(nameof(Index), new { pageIndex });
             }
             catch (Exception ex)
             {
-                _logger.LogError("IndexPOST. Error : {0}", ex.ToString());
-                _notificationService.AddNotification(
+                _logger.LogError("Upload Foto Gagal. Error: {0}", ex.ToString());
+
+                if (!isJson)
+                {
+                    _notificationService.AddNotification(
                     new ToastrNotification
                     {
                         Type = ToastrNotificationType.Error,
                         Title = "Upload Foto Gagal",
                         Message = "Gagal menyimpan foto. Laporkan error ke administrator",
-                    }
-                );
+                    });
+                }
+
+                return isJson ? StatusCode(StatusCodes.Status500InternalServerError) : View(nameof(Index), indexVM);
             }
-
-            daftarFoto = await _appDbContext.FotoTable
-                .Include(f => f.Pembuat)
-                .OrderByDescending(f => f.TanggalDiBuat)
-                .AsNoTracking().ToListAsync();
-
-            paginatedList = PaginatedList<Foto>.Create(daftarFoto, pIndex, 16);
-
-            indexVM.Items = paginatedList;
-
-            return View("Index", indexVM);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> TambahJSON(IFormFile formFile)
-        {
-            //Validasi
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            //Upload File
-            var result = await _fileHelperService.ProcessFormFile<IFormFile>(
-                formFile,
-                _photoFileSettingsOptions.PermittedFileExtensions,
-                _photoFileSettingsOptions.MinSizeLimit,
-                _photoFileSettingsOptions.MaxSizeLimit);
-
-            if (result.IsFailure)
-            {
-                ModelState.AddModelError(nameof(IndexVM.FormFile), result.Error.Message);
-                return BadRequest();
-            }
-
-            var fotoPath = string.Empty;
-
-            try
-            {
-                fotoPath = await SaveFile(result.Value, Path.GetExtension(formFile.FileName));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Upload Foto Gagal. Error: {0}", ex.ToString());
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-
-            var compressResult = await _imageCompressService.Compress(
-                result.Value, Path.GetFileName(fotoPath));
-
-            if (compressResult.IsFailure) return StatusCode(StatusCodes.Status500InternalServerError);
-
-            var foto = new Foto
-            {
-                Id = 0,
-                PathFoto = fotoPath,
-                PathFotoSmall = compressResult.Value.SmallPath,
-                PathFotoMedium = compressResult.Value.MediumPath,
-                PathFotoLarge = compressResult.Value.LargePath,
-            };
-
-            var changeTracker = _appDbContext.FotoTable.Add(foto);
-
-            try
-            {
-                await _appDbContext.SaveChangesAsync();
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError("Upload Foto Gagal. Error: {0}", ex.ToString());
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-
-            return Ok(changeTracker.Entity);
         }
 
         public async Task<IActionResult> Hapus(int id, string? returnUrl)
@@ -274,7 +215,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
                 if (System.IO.File.Exists(foto.PathFotoMedium))
                     System.IO.File.Delete(foto.PathFotoMedium);
-                
+
                 if (System.IO.File.Exists(foto.PathFotoLarge))
                     System.IO.File.Delete(foto.PathFotoLarge);
             }

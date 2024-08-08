@@ -1,4 +1,5 @@
-﻿@model List<Foto>
+﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.FotoModels
+@model List<Foto>
 
 <!-- Tombol Pilihan Gambar -->
 <input type="text" name="IdFoto" id="IdFoto" class="form-control" hidden value="@ViewData["idFoto"]" />
@@ -95,7 +96,7 @@
             const formData = new FormData();
             const inputFile = $('#formFile')[0].files[0];
 
-            formData.append('formFile', inputFile);
+            formData.append('@(nameof(IndexVM.FormFile))', inputFile);
 
             $('#formFileVal').html('');
 
@@ -104,7 +105,7 @@
             $(this).prop('disabled', true);
 
             const response = await fetch(
-                '/Dashboard/Foto/TambahJSON',
+                '/Dashboard/Foto/Tambah?isJson=true',
                 {
                     credentials: 'same-origin',
                     method: "POST",

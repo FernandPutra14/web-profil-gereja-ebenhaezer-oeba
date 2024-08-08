@@ -94,7 +94,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
 
                 return new Error(
                     "FileHelpers.FileSizeTooSmall",
-                    $"{fieldDisplayName}({trustedFileNameForDisplay}) kurang dari " +
+                    $"Ukuran {fieldDisplayName}({trustedFileNameForDisplay}) kurang dari " +
                     $"{megabyteSizeLimit:N3} MB.");
             }
 
@@ -104,7 +104,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
 
                 return new Error(
                     "FileHelpers.FileSizeTooBig",
-                    $"{fieldDisplayName}({trustedFileNameForDisplay}) lebih besar dari" +
+                    $"Ukuran {fieldDisplayName}({trustedFileNameForDisplay}) lebih besar dari " +
                     $"{megabyteSizeLimit:N1} MB.");
             }
 
@@ -125,7 +125,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
                         formFile.FileName, memoryStream, permittedExtensions))
                         return new Error(
                             "FileHelpers.ExtensionAndSignatureNotValid",
-                            $"{fieldDisplayName}({trustedFileNameForDisplay}) tipe file " +
+                            $"Tipe file {fieldDisplayName}({trustedFileNameForDisplay}) " +
                             $"tidak didukung atau signature tidak cocok dengan ekstensi file");
 
                     return memoryStream.ToArray();
