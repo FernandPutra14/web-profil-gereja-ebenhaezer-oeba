@@ -97,7 +97,7 @@ app.UseSession();
 app.MapAreaControllerRoute(
     name: "admin",
     areaName: "Dashboard",
-    pattern: "dashboard/{controller=Home}/{action=Index}/{id?}");
+    pattern: "Dashboard/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
