@@ -15,6 +15,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
         private static readonly byte[] _allowedChars = { };
         // For more file signatures, see the File Signatures Database (https://www.filesignatures.net/)
         // and the official specifications for the file types you wish to add.
+        //TODO:Tambah file signature untuk file pdf
         private static readonly Dictionary<string, List<byte[]>> _fileSignature = new Dictionary<string, List<byte[]>>
         {
             { ".gif", new List<byte[]> { new byte[] { 0x47, 0x49, 0x46, 0x38 } } },
@@ -51,7 +52,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
         // used on the file before making the file available to users or other
         // systems. For more information, see the topic that accompanies this sample
         // app.
-
+        //TODO: Tambah API antivirus
         public async Task<Result<byte[]>> ProcessFormFile<T>(IFormFile formFile,
             string[] permittedExtensions,
             long minSizeLimit,
@@ -105,7 +106,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
                 return new Error(
                     "FileHelpers.FileSizeTooBig",
                     $"Ukuran {fieldDisplayName}({trustedFileNameForDisplay}) lebih besar dari " +
-                    $"{megabyteSizeLimit:N1} MB.");
+                    $"{megabyteSizeLimit:N3} MB.");
             }
 
             try
@@ -126,7 +127,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
                         return new Error(
                             "FileHelpers.ExtensionAndSignatureNotValid",
                             $"Tipe file {fieldDisplayName}({trustedFileNameForDisplay}) " +
-                            $"tidak didukung atau signature tidak cocok dengan ekstensi file");
+                            $"tidak didukung atau signature file tidak cocok dengan ekstensi file");
 
                     return memoryStream.ToArray();
                 }

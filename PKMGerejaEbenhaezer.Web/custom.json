@@ -9,7 +9,7 @@
     "FolderPath": "/img/"
   },
   "ImageCompression": {
-    "CompressionQuality": 50,
+    "CompressionQuality": 75,
     "Small": "600, 500",
     "Medium": "750, 750",
     "Large": "1000, 1000"

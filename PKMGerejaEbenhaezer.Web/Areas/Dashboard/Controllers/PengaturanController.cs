@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Pengaturan;
 using PKMGerejaEbenhaezer.Web.Configurations;
+using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 using System.Drawing;
 
 namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers;
@@ -16,18 +17,24 @@ public class PengaturanController : Controller
     private readonly IOptionsMonitor<PhotoFileSettingsOptions> _photoFileSettingsOptions;
     private readonly IOptionsMonitor<ImageCompressionOptions> _imageCompressionOptions;
     private readonly IWebHostEnvironment _webHostEnvironment;
+    private readonly IToastrNotificationService _notificationService;
+    private readonly ILogger<PengaturanController> _logger;
 
     public PengaturanController(
         IOptionsMonitor<PhotoFileSettingsOptions> photoFileSettings,
         IOptionsMonitor<ImageCompressionOptions> imageCompressionOptions,
-        IWebHostEnvironment webHostEnvironment)
+        IWebHostEnvironment webHostEnvironment,
+        IToastrNotificationService notificationService,
+        ILogger<PengaturanController> logger)
     {
         _photoFileSettingsOptions = photoFileSettings;
         _imageCompressionOptions = imageCompressionOptions;
         _webHostEnvironment = webHostEnvironment;
+        _notificationService = notificationService;
+        _logger = logger;
     }
 
-    public async Task<IActionResult> Foto()
+    public IActionResult Foto()
     {
         var photoFileSettings = _photoFileSettingsOptions.CurrentValue;
         var imageCompressionSettings = _imageCompressionOptions.CurrentValue;
@@ -71,9 +78,33 @@ public class PengaturanController : Controller
         var customSettingsJson = JsonConvert.SerializeObject(customSettings, Formatting.Indented);
         var filePath = $"{_webHostEnvironment.ContentRootPath}/{CustomConfigurationProviders.CustomJson}";
 
-        using (TextWriter writer = new StreamWriter(filePath, append: false))
+        try
         {
+            using TextWriter writer = new StreamWriter(filePath, append: false);
             await writer.WriteAsync(customSettingsJson);
+
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Pengaturan Foto Sukses Diubah"
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "Error when try to save configuration to Path : {@pathFile}. " +
+                "Message : {@message}. TimeStamp : {@timeStamp}",
+                filePath,
+                ex.Message,
+                DateTime.Now);
+
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Error,
+                Title = "Gagal Menyimpan Pengaturan!",
+                Message = "Hubungi administrator untuk melaporkan error"
+            });
         }
 
         return RedirectToAction(nameof(Foto));
