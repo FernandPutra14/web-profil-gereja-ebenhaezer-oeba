@@ -26,7 +26,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.KategoriIbadah
         [Range(0, 59, ErrorMessage = "{0} harus lebih dari {1} dan kurang dari sama dengan {2}")]
         public int TotalMenit { get; set; }
 
-        [MinTimeSpan(1)]
-        public TimeSpan Durasi { get => new TimeSpan(TotalJam, TotalMenit, 0); }
+        [MinTimeSpan(1, ErrorMessage = "{0} tidak boleh 0")]
+        public TimeSpan Durasi { get => new(TotalJam, TotalMenit, 0); }
     }
 }
