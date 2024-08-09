@@ -1,0 +1,83 @@
+﻿@model FotoVM
+@{
+    ViewData["Title"] = "Pengaturan Foto";
+}
+
+<form asp-action="Foto">
+    
+    <h2>Upload Foto</h2>
+    <div class="row mb-3">
+        <div class="col">
+            <label asp-for="@Model.MinSizeLimit" class="form-label"></label>
+            <input asp-for="@Model.MinSizeLimit" type="number" class="form-control"/>
+            <span asp-validation-for="@Model.MinSizeLimit" class="text-danger form-text"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label asp-for="@Model.MaxSizeLimit" class="form-label"></label>
+            <input asp-for="@Model.MaxSizeLimit" type="number" class="form-control" />
+            <span asp-validation-for="@Model.MaxSizeLimit" class="text-danger form-text"></span>
+        </div>
+    </div>
+
+    <h2>Kompresi Foto</h2>
+    <div class="row mb-3">
+        <div class="col">
+            <label asp-for="@Model.CompressionQuality" class="form-label"></label>
+            <input asp-for="@Model.CompressionQuality" type="number" class="form-control"/>
+            <span asp-validation-for="@Model.CompressionQuality" class="text-danger form-text"></span>
+        </div>
+    </div>
+
+    <h2>Ukuran Foto</h2>
+
+    <h3>Small</h3>
+    <div class="row mb-3">
+        <div class="col-6">
+            <label asp-for="@Model.SmallWidth" class="form-label"></label>
+            <input asp-for="@Model.SmallWidth" type="number" class="form-control" />
+            <span asp-validation-for="@Model.SmallWidth" class="text-danger form-text"></span>
+        </div>
+        <div class="col-6">
+            <label asp-for="@Model.SmallHeight" class="form-label"></label>
+            <input asp-for="@Model.SmallHeight" type="number" class="form-control" />
+            <span asp-validation-for="@Model.SmallHeight" class="text-danger form-text"></span>
+        </div>
+    </div>
+
+    <h3>Medium</h3>
+    <div class="row mb-3">
+        <div class="col-6">
+            <label asp-for="@Model.MediumWidth" class="form-label"></label>
+            <input asp-for="@Model.MediumWidth" type="number" class="form-control" />
+            <span asp-validation-for="@Model.MediumWidth" class="text-danger form-text"></span>
+        </div>
+        <div class="col-6">
+            <label asp-for="@Model.MediumHeight" class="form-label"></label>
+            <input asp-for="@Model.MediumHeight" type="number" class="form-control" />
+            <span asp-validation-for="@Model.MediumHeight" class="text-danger form-text"></span>
+        </div>
+    </div>
+
+    <h3>Large</h3>
+    <div class="row mb-3">
+        <div class="col-6">
+            <label asp-for="@Model.LargeWidth" class="form-label"></label>
+            <input asp-for="@Model.LargeWidth" type="number" class="form-control" />
+            <span asp-validation-for="@Model.LargeWidth" class="text-danger form-text"></span>
+        </div>
+        <div class="col-6">
+            <label asp-for="@Model.LargeHeight" class="form-label"></label>
+            <input asp-for="@Model.LargeHeight" type="number" class="form-control" />
+            <span asp-validation-for="@Model.LargeHeight" class="text-danger form-text"></span>
+        </div>
+    </div>
+
+    <button class="btn btn-primary">Simpan</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

@@ -1,0 +1,17 @@
+{
+  "PhotoFileSettings": {
+    "PermittedFileExtensions": [
+      ".jpeg",
+      ".jpg"
+    ],
+    "MinSizeLimit": 40960,
+    "MaxSizeLimit": 2097152,
+    "FolderPath": "/img/"
+  },
+  "ImageCompression": {
+    "CompressionQuality": 50,
+    "Small": "600, 500",
+    "Medium": "750, 750",
+    "Large": "1000, 1000"
+  }
+}

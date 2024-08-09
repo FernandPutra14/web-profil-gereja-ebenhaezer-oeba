@@ -2,19 +2,19 @@
 <section id="sidebar">
     <a href="" class="brand"><i class="ri-admin-fill icon"></i>ADMIN</a>
     <ul class="side-menu">
-        
+
         <li class="divider" data-text="dashboard">Dashboard</li>
         <li><a asp-area="Dashboard" asp-controller="Home" asp-action="Index" class="dash-link" data-match="all"><i class="ri-table-fill icon"></i>Beranda</a></li>
 
         <!-- Nonaktif -->
         @* <li>
-            <a href=""><i class="ri-booklet-fill icon"></i>Statistik<i class="ri-arrow-right-s-line icon-right"></i></a>
-            <ul class="side-dropdown">
-                <li><a href="">Pertama</a></li>
-                <li><a href="">Kedua</a></li>
-                <li><a href="">Ketiga</a></li>
-                <li><a href="">Keempat</a></li>
-            </ul>
+        <a href=""><i class="ri-booklet-fill icon"></i>Statistik<i class="ri-arrow-right-s-line icon-right"></i></a>
+        <ul class="side-dropdown">
+        <li><a href="">Pertama</a></li>
+        <li><a href="">Kedua</a></li>
+        <li><a href="">Ketiga</a></li>
+        <li><a href="">Keempat</a></li>
+        </ul>
         </li> *@
         <!-- Nonaktif -->
 
@@ -55,7 +55,16 @@
             <li class="divider" data-text="manajemen pengguna">Manajemen Pengguna</li>
             <li><a asp-area="Dashboard" asp-controller="Account" asp-action="Index" class="dash-link" data-match="partial"><i class="ri-account-box-fill icon"></i>Akun</a></li>
         }
-        <!-- Akhir Akun -->           
+        @if (User.IsInRole(AppUserRoles.SuperAdmin))
+        {
+            <li class="divider" data-text="Pengaturan">Pengaturan</li>
+            <li>
+                <a asp-area="Dashboard" asp-controller="Pengaturan" asp-action="Foto" class="dash-link" data-match="partial">
+                    <i class="ri-account-box-fill icon"></i>Foto
+                </a>
+            </li>
+        }
+        <!-- Akhir Akun -->
     </ul>
 </section>
 <!-- Akhir Sidebar -->

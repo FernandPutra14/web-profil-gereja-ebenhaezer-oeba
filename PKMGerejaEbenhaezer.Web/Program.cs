@@ -14,6 +14,11 @@ using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddJsonFile(
+    $"{CustomConfigurationProviders.CustomJson}",
+    optional: false, 
+    reloadOnChange: true);
+
 // Add configurations
 builder.Services.Configure<PhotoFileSettingsOptions>(builder.Configuration
     .GetSection(PhotoFileSettingsOptions.PhotoFileSettings));
