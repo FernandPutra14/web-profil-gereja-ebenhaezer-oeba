@@ -76,7 +76,6 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
 
         private Size GetNewSize(Size original, System.Drawing.Size maxSize)
         {
-
             if (original.Height <= maxSize.Height && original.Width <= maxSize.Width)
                 return original;
 
@@ -85,7 +84,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
 
             var ratio = Math.Min(ratioX, ratioY);
 
-            return new Size((int)(original.Width * ratio), (int)(original.Height * ratio)); ;
+            return new Size((int)(original.Width * ratio), (int)(original.Height * ratio));
         }
     }
 }

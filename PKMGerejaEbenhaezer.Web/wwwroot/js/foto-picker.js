@@ -30,7 +30,7 @@ function fotoPicker(data) {
                     $(this).removeClass(selectedClass);
                 }
             }
-        }); 
+        });
     }
 
     const onFotoClick = function () {
@@ -78,10 +78,11 @@ function fotoPicker(data) {
     btnUploadFoto.on('click', async function () {
         const formData = new FormData();
         const inputFile = $(modal).find('#formFile')[0].files[0];
+        const formValidation = $(modal).find('#formFileVal');
 
         formData.append('formFile', inputFile);
 
-        $('#formFileVal').html('');
+        formValidation.html('');
 
         $(this).html('');
         $(this).append('Loading...');
@@ -108,11 +109,20 @@ function fotoPicker(data) {
             fotoGrid.prepend(newFotoContainer);
             newFotoContainer.on('click', onFotoClick);
             daftarFotoContainer = $(modal).find('.foto-container');
+            $(modal).find('#formFile').val('');
+
+            if (toastr) {
+                toastr.success("Upload Sukses");
+            }
         } else {
             const data = await response.json();
 
-            $('#formFileVal').html('');
-            $('#formFileVal').append(data['formFile']);
+            formValidation.html('');
+            formValidation.append(data['FormFile']);
+
+            if (toastr) {
+                toastr.error("Upload Gagal");
+            }
         }
 
         $(this).html('');
