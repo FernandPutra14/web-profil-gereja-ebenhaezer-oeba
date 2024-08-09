@@ -8,5 +8,4 @@ public class PhotoFileSettingsOptions
     public long MinSizeLimit { get; set; }
     public long MaxSizeLimit { get; set; }
     public string FolderPath { get; set; } = string.Empty;
-    public int CompressionQuality { get; set; }
 }
