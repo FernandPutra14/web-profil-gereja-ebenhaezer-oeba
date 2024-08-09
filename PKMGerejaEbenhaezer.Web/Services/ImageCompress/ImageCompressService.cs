@@ -27,18 +27,17 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
 
         public async Task<Result<ImageCompressionResult>> Compress(byte[] image, string fileName)
         {
+            var compressionResult = new ImageCompressionResult();
+
             try
             {
                 var folderPath = Path.GetFullPath(
                     _webHostEnvironment.ContentRootPath + _photoFileSettingsOptions.FolderPath);
                 var encoder = new JpegEncoder { Quality = _imageCompressionOptions.CompressionQuality };
 
-                var compressionResult = new ImageCompressionResult
-                {
-                    SmallPath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-small.jpeg",
-                    MediumPath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-medium.jpeg",
-                    LargePath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-large.jpeg",
-                };
+                compressionResult.SmallPath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-small.jpeg";
+                compressionResult.MediumPath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-medium.jpeg";
+                compressionResult.LargePath = $"{folderPath}{Path.GetFileNameWithoutExtension(fileName)}-large.jpeg";
 
                 await Compress(image, compressionResult.SmallPath, _imageCompressionOptions.Small, encoder);
                 await Compress(image, compressionResult.MediumPath, _imageCompressionOptions.Medium, encoder);
@@ -48,6 +47,15 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
             }
             catch (Exception ex)
             {
+                if (File.Exists(compressionResult.SmallPath))
+                    File.Delete(compressionResult.SmallPath);
+
+                if (File.Exists(compressionResult.MediumPath))
+                    File.Delete(compressionResult.MediumPath);
+
+                if (File.Exists(compressionResult.LargePath))
+                    File.Delete(compressionResult.LargePath);
+
                 _logger.LogError(
                     ex,
                     "Exception when try to compress image. Message : {@message}. Timestamp : {@timeStamp}",
@@ -58,7 +66,11 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
             }
         }
 
-        private async Task Compress(byte[] image, string outputPath, System.Drawing.Size size, IImageEncoder encoder)
+        private static async Task Compress(
+            byte[] image, 
+            string outputPath, 
+            System.Drawing.Size size, 
+            IImageEncoder encoder)
         {
             using Image foto = Image.Load(image);
 
@@ -74,7 +86,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
             await foto.SaveAsync(outputPath, encoder);
         }
 
-        private Size GetNewSize(Size original, System.Drawing.Size maxSize)
+        private static Size GetNewSize(Size original, System.Drawing.Size maxSize)
         {
             if (original.Height <= maxSize.Height && original.Width <= maxSize.Width)
                 return original;
@@ -84,7 +96,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.ImageCompress
 
             var ratio = Math.Min(ratioX, ratioY);
 
-            return new Size((int)(original.Width * ratio), (int)(original.Height * ratio));
+            return new((int)(original.Width * ratio), (int)(original.Height * ratio));
         }
     }
 }

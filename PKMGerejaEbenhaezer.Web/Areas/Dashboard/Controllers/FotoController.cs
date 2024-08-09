@@ -59,14 +59,17 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         [HttpPost]
         public async Task<IActionResult> Tambah(IndexVM indexVM, bool isJson = false, int pageIndex = 1)
         {
-            var daftarFoto = await _appDbContext.FotoTable
+            if(!isJson)
+            {
+                var daftarFoto = await _appDbContext.FotoTable
                 .Include(f => f.Pembuat)
                 .OrderByDescending(f => f.TanggalDiBuat)
                 .AsNoTracking().ToListAsync();
 
-            var paginatedList = PaginatedList<Foto>.Create(daftarFoto, pageIndex, 16);
+                var paginatedList = PaginatedList<Foto>.Create(daftarFoto, pageIndex, 16);
 
-            indexVM.Items = paginatedList;
+                indexVM.Items = paginatedList;
+            }
 
             //Validasi
             if (!ModelState.IsValid)
@@ -107,10 +110,14 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                     });
                 }
 
+                if(System.IO.File.Exists(fotoPath))
+                    System.IO.File.Delete(fotoPath);
+
                 return isJson ? StatusCode(StatusCodes.Status500InternalServerError): View(nameof(Index), indexVM);
             }
 
-            var compressResult = await _imageCompressService.Compress(processFormFileResult.Value,
+            var compressResult = await _imageCompressService.Compress(
+                processFormFileResult.Value,
                 Path.GetFileName(fotoPath));
 
             if (compressResult.IsFailure)
@@ -124,6 +131,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                         Message = "Gagal Compress Foto. Laporkan error ke administrator"
                     });
                 }
+
+                if (System.IO.File.Exists(fotoPath))
+                    System.IO.File.Delete(fotoPath);
 
                 return isJson ? StatusCode(StatusCodes.Status500InternalServerError) : View(nameof(Index), indexVM);
             }
@@ -158,6 +168,18 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             }
             catch (Exception ex)
             {
+                if (System.IO.File.Exists(fotoPath))
+                    System.IO.File.Delete(fotoPath);
+
+                if (System.IO.File.Exists(compressResult.Value.SmallPath))
+                    System.IO.File.Delete(compressResult.Value.SmallPath);
+
+                if (System.IO.File.Exists(compressResult.Value.MediumPath))
+                    System.IO.File.Delete(compressResult.Value.MediumPath);
+
+                if (System.IO.File.Exists(compressResult.Value.LargePath))
+                    System.IO.File.Delete(compressResult.Value.LargePath);
+
                 _logger.LogError("Upload Foto Gagal. Error: {0}", ex.ToString());
 
                 if (!isJson)
