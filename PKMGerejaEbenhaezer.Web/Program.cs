@@ -26,6 +26,12 @@ builder.Configuration.AddJsonFile(
     optional: true,
     reloadOnChange: true);
 
+builder.Configuration.AddJsonFile(
+    builder.Environment.ContentRootFileProvider,
+    CustomConfigurationProviders.PDFFileSettingsJson,
+    optional: true,
+    reloadOnChange: true);
+
 // Add configurations
 builder.Services.Configure<PhotoFileSettingsOptions>(builder.Configuration
     .GetSection(PhotoFileSettingsOptions.PhotoFileSettings));

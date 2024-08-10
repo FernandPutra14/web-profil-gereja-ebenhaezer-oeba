@@ -7,13 +7,13 @@ public class FotoVM
 {
     [Display(Name = "Minimal Ukuran Upload (kB)")]
     [Required(ErrorMessage = "Harus Diisi")]
-    [Range(minimum: 10, maximum: 10000, ErrorMessage = "Harus di antara 10kB - 10MB")]
+    [Range(minimum: 10, maximum: 10 * 1024, ErrorMessage = "Harus di antara 10kB - 10MB")]
     [LessThan(nameof(MaxSizeLimit))]
     public long MinSizeLimit { get; set; }
 
     [Display(Name = "Maksimal Ukuran Upload (kB)")]
     [Required(ErrorMessage = "Harus Diisi")]
-    [Range(minimum: 10, maximum: 10000, ErrorMessage = "Harus di antara 10kB - 10MB")]
+    [Range(minimum: 10, maximum: 10 * 1024, ErrorMessage = "Harus di antara 10kB - 10MB")]
     public long MaxSizeLimit { get; set; }
 
     [Display(Name = "Kualitas Kompresi (0 - 100)")]
