@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile(
     $"{CustomConfigurationProviders.CustomJson}",
-    optional: false, 
+    optional: true, 
     reloadOnChange: true);
 
 // Add configurations

@@ -35,9 +35,7 @@ namespace PKMGerejaEbenhaezer.Web.Services.ToastrNotification
         {
             var tempData = _tempDataDictionary[_tempDataKey];
 
-            if (tempData is null) return new();
-
-            if (tempData is not string notificationsJson) return new();
+            if (tempData is null || tempData is not string notificationsJson) return new();
 
             var notifications = JsonConvert.DeserializeObject<List<ToastrNotification>>(notificationsJson);
 

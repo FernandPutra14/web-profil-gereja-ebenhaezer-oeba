@@ -39,6 +39,8 @@ public class PengaturanController : Controller
         var photoFileSettings = _photoFileSettingsOptions.CurrentValue;
         var imageCompressionSettings = _imageCompressionOptions.CurrentValue;
 
+        _logger.LogInformation("{@newWidth}, {@threadId}", imageCompressionSettings.Small.Width, Environment.CurrentManagedThreadId);
+
         return View(new FotoVM
         {
             MinSizeLimit = photoFileSettings.MinSizeLimit / 1024,
@@ -80,8 +82,10 @@ public class PengaturanController : Controller
 
         try
         {
-            using TextWriter writer = new StreamWriter(filePath, append: false);
-            await writer.WriteAsync(customSettingsJson);
+            using (TextWriter writer = new StreamWriter(filePath, append: false))
+            {
+                await writer.WriteAsync(customSettingsJson);
+            }
 
             _notificationService.AddNotification(new ToastrNotification
             {
@@ -106,6 +110,41 @@ public class PengaturanController : Controller
                 Message = "Hubungi administrator untuk melaporkan error"
             });
         }
+
+        return RedirectToAction(nameof(Foto));
+    }
+
+    [HttpPost]
+    public IActionResult ResetFoto()
+    {
+        var filePath = $"{_webHostEnvironment.ContentRootPath}/{CustomConfigurationProviders.CustomJson}";
+
+        try
+        {
+            if (System.IO.File.Exists(filePath))
+                System.IO.File.Delete(filePath);
+
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Success,
+                Title = "Pengaturan Berhasil Di Reset"
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex,
+                "Exception when try to reset settings. Message : {@message}. Timestamp : {@timeStamp}",
+                ex.Message, DateTime.Now);
+
+            _notificationService.AddNotification(new ToastrNotification
+            {
+                Type = ToastrNotificationType.Error,
+                Title = "Gagal Reset Pengaturan",
+                Message = "Laporkan ke administrator"
+            });
+        }
+
+        _logger.LogInformation("{@newWidth}, {@threadId}", _imageCompressionOptions.CurrentValue.Small.Width, Environment.CurrentManagedThreadId);
 
         return RedirectToAction(nameof(Foto));
     }
