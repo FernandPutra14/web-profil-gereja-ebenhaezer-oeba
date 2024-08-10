@@ -39,8 +39,6 @@ public class PengaturanController : Controller
         var photoFileSettings = _photoFileSettingsOptions.CurrentValue;
         var imageCompressionSettings = _imageCompressionOptions.CurrentValue;
 
-        _logger.LogInformation("{@newWidth}, {@threadId}", imageCompressionSettings.Small.Width, Environment.CurrentManagedThreadId);
-
         return View(new FotoVM
         {
             MinSizeLimit = photoFileSettings.MinSizeLimit / 1024,
@@ -71,20 +69,25 @@ public class PengaturanController : Controller
         imageCompressionOptions.Medium = new Size(fotoVM.MediumWidth, fotoVM.MediumHeight);
         imageCompressionOptions.Large = new Size(fotoVM.LargeWidth, fotoVM.LargeHeight);
 
-        var customSettings = new Dictionary<string, object>
+        var newPhotoSettings = new Dictionary<string, object>
         {
             { PhotoFileSettingsOptions.PhotoFileSettings, photoFileSettings },
-            { ImageCompressionOptions.ImageCompression, imageCompressionOptions },
+        };
+        var newImageCompressionSettings = new Dictionary<string, object>
+        {
+            { ImageCompressionOptions.ImageCompression, imageCompressionOptions }
         };
 
-        var customSettingsJson = JsonConvert.SerializeObject(customSettings, Formatting.Indented);
-        var filePath = $"{_webHostEnvironment.ContentRootPath}/{CustomConfigurationProviders.CustomJson}";
+        var newPhotoSettingsJson = JsonConvert.SerializeObject(newPhotoSettings, Formatting.Indented);
+        var newImageCompressionSettingsJson = JsonConvert.SerializeObject(newImageCompressionSettings, Formatting.Indented);
 
         try
         {
-            using (TextWriter writer = new StreamWriter(filePath, append: false))
+            using(TextWriter photoStream = new StreamWriter($"{_webHostEnvironment.ContentRootPath}/{CustomConfigurationProviders.PhotoFileSettingsJson}", append: false))
+            using(TextWriter imageStream = new StreamWriter($"{_webHostEnvironment.ContentRootPath}/{CustomConfigurationProviders.ImageCompressionJson}", append: false))
             {
-                await writer.WriteAsync(customSettingsJson);
+                await photoStream.WriteAsync(newPhotoSettingsJson);
+                await imageStream.WriteAsync(newImageCompressionSettingsJson);
             }
 
             _notificationService.AddNotification(new ToastrNotification
@@ -97,11 +100,8 @@ public class PengaturanController : Controller
         {
             _logger.LogError(
                 ex,
-                "Error when try to save configuration to Path : {@pathFile}. " +
-                "Message : {@message}. TimeStamp : {@timeStamp}",
-                filePath,
-                ex.Message,
-                DateTime.Now);
+                "Error when try to save configuration. Message : {@message}. TimeStamp : {@timeStamp}",
+                ex.Message, DateTime.Now);
 
             _notificationService.AddNotification(new ToastrNotification
             {
@@ -117,12 +117,16 @@ public class PengaturanController : Controller
     [HttpPost]
     public IActionResult ResetFoto()
     {
-        var filePath = $"{_webHostEnvironment.ContentRootPath}/{CustomConfigurationProviders.CustomJson}";
+        var photoSettingFilePath = $"{_webHostEnvironment.ContentRootPath}/{CustomConfigurationProviders.PhotoFileSettingsJson}";
+        var imageCompressionSettingFilePath = $"{_webHostEnvironment.ContentRootPath}/{CustomConfigurationProviders.ImageCompressionJson}";
 
         try
         {
-            if (System.IO.File.Exists(filePath))
-                System.IO.File.Delete(filePath);
+            if (System.IO.File.Exists(photoSettingFilePath))
+                System.IO.File.Delete(photoSettingFilePath);
+
+            if (System.IO.File.Exists(imageCompressionSettingFilePath))
+                System.IO.File.Delete(imageCompressionSettingFilePath);
 
             _notificationService.AddNotification(new ToastrNotification
             {
@@ -143,8 +147,6 @@ public class PengaturanController : Controller
                 Message = "Laporkan ke administrator"
             });
         }
-
-        _logger.LogInformation("{@newWidth}, {@threadId}", _imageCompressionOptions.CurrentValue.Small.Width, Environment.CurrentManagedThreadId);
 
         return RedirectToAction(nameof(Foto));
     }

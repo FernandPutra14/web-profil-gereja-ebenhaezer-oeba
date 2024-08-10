@@ -2,5 +2,6 @@
 
 public class CustomConfigurationProviders
 {
-    public const string CustomJson = "custom.json";
+    public const string PhotoFileSettingsJson = $"{PhotoFileSettingsOptions.PhotoFileSettings}.json";
+    public const string ImageCompressionJson = $"{ImageCompressionOptions.ImageCompression}.json";
 }
