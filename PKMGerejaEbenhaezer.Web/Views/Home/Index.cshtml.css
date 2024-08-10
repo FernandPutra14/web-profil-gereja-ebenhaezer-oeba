@@ -824,12 +824,9 @@ section.peng {
 
 /* CSS Slider Pendeta */
 #pendeta .owl-carousel ::deep .owl-nav .owl-next {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    padding-bottom: 10px !important;
+    position: absolute;    
     top: calc(50% - 50px);
-    right: 0px;
+    right: 0;
     opacity: 1;
     font-size: 30px !important;
     border-radius: 50%;
