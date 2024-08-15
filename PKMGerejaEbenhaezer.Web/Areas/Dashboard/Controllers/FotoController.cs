@@ -21,7 +21,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly ILogger<FotoController> _logger;
         private readonly IToastrNotificationService _notificationService;
-        private readonly IImageCompressService _imageCompressService;
         private readonly IFileHelperService _fileHelperService;
 
         public FotoController(IAppDbContext appDbContext,
@@ -29,7 +28,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             IWebHostEnvironment webHostEnvironment,
             ILogger<FotoController> logger,
             IToastrNotificationService notificationService,
-            IImageCompressService imageCompressService,
             IFileHelperService fileHelperService)
         {
             _appDbContext = appDbContext;
@@ -37,7 +35,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             _webHostEnvironment = webHostEnvironment;
             _logger = logger;
             _notificationService = notificationService;
-            _imageCompressService = imageCompressService;
             _fileHelperService = fileHelperService;
         }
 
@@ -116,35 +113,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 return isJson ? StatusCode(StatusCodes.Status500InternalServerError): View(nameof(Index), indexVM);
             }
 
-            var compressResult = await _imageCompressService.Compress(
-                processFormFileResult.Value,
-                Path.GetFileName(fotoPath));
-
-            if (compressResult.IsFailure)
-            {
-                if (!isJson)
-                {
-                    _notificationService.AddNotification(new ToastrNotification
-                    {
-                        Type = ToastrNotificationType.Error,
-                        Title = compressResult.Error.Message,
-                        Message = "Gagal Compress Foto. Laporkan error ke administrator"
-                    });
-                }
-
-                if (System.IO.File.Exists(fotoPath))
-                    System.IO.File.Delete(fotoPath);
-
-                return isJson ? StatusCode(StatusCodes.Status500InternalServerError) : View(nameof(Index), indexVM);
-            }
-
             var foto = new Foto
             {
                 Id = 0,
-                PathFoto = fotoPath,
-                PathFotoSmall = compressResult.Value.SmallPath,
-                PathFotoMedium = compressResult.Value.MediumPath,
-                PathFotoLarge = compressResult.Value.LargePath,
+                PathFoto = fotoPath
             };
 
             _appDbContext.FotoTable.Add(foto);
@@ -170,15 +142,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 if (System.IO.File.Exists(fotoPath))
                     System.IO.File.Delete(fotoPath);
-
-                if (System.IO.File.Exists(compressResult.Value.SmallPath))
-                    System.IO.File.Delete(compressResult.Value.SmallPath);
-
-                if (System.IO.File.Exists(compressResult.Value.MediumPath))
-                    System.IO.File.Delete(compressResult.Value.MediumPath);
-
-                if (System.IO.File.Exists(compressResult.Value.LargePath))
-                    System.IO.File.Delete(compressResult.Value.LargePath);
 
                 _logger.LogError("Upload Foto Gagal. Error: {0}", ex.ToString());
 
@@ -231,15 +194,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 if (System.IO.File.Exists(foto.PathFoto))
                     System.IO.File.Delete(foto.PathFoto);
-
-                if (System.IO.File.Exists(foto.PathFotoSmall))
-                    System.IO.File.Delete(foto.PathFotoSmall);
-
-                if (System.IO.File.Exists(foto.PathFotoMedium))
-                    System.IO.File.Delete(foto.PathFotoMedium);
-
-                if (System.IO.File.Exists(foto.PathFotoLarge))
-                    System.IO.File.Delete(foto.PathFotoLarge);
             }
             catch (Exception ex)
             {

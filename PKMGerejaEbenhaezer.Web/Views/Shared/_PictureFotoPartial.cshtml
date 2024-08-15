@@ -2,11 +2,5 @@
 @model (int id, string cssClass)
 
 <picture>
-    <source media="(max-width: 465px)"
-            srcset="@Url.Action("Index", "Foto", new {Area = "", id = Model.id, size=FotoSizes.Small})" />
-    <source media="(max-width: 750px)"
-            srcset="@Url.Action("Index", "Foto", new {Area = "", id = Model.id, size=FotoSizes.Medium})" />
-    <source media="(max-width: 1000px)"
-            srcset="@Url.Action("Index", "Foto", new {Area = "", id = Model.id, size=FotoSizes.Large})" />
     <img src="@Url.Action("Index", "Foto", new {Area = "", id = Model.id})" alt="" class="@Model.cssClass" />
 </picture>

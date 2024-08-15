@@ -27,7 +27,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index(int id, string size = FotoSizes.Original)
+        public async Task<IActionResult> Index(int id)
         {
             var foto = await _appDbContext.FotoTable
                 .Where(f => f.Id == id).AsNoTracking()
@@ -35,14 +35,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
             if (foto is null) return NotFound();
 
-            var path = size switch
-            {
-                FotoSizes.Original => foto.PathFoto,
-                FotoSizes.Small => foto.PathFotoSmall,
-                FotoSizes.Medium => foto.PathFotoMedium,
-                FotoSizes.Large => foto.PathFotoLarge,
-                _ => string.Empty
-            };
+            var path = foto.PathFoto;
 
             if (string.IsNullOrEmpty(path)) return NotFound();
 
