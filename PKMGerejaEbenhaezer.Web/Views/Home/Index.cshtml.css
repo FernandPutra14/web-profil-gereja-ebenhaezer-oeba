@@ -20,19 +20,20 @@
 }
 
     #hero h1 {
-        font-family: 'Alex brush';
-        padding-top: 50px;
+        width: 80%;
+        padding-top: 30px;
         color: #fff;
-        font-size: 150px;
-        letter-spacing: 1px;
+        font-size: 60px;
+        font-weight: bold;
+        text-transform: uppercase;
     }
 
     /* Masih Dinonaktifkan*/
     #hero p {
-        font-family: 'Tinos';
-        width: 50%;
+        width: 60%;
         color: #fff;
-        font-size: 20px;
+        font-size: 18px;
+        font-weight: 400;
         letter-spacing: 1px;
     }
 /* Akhir CSS Hero Section */
@@ -1042,7 +1043,7 @@ section.peng {
     }
 
         #hero h1 {
-            font-size: 120px;
+            font-size: 42px;
         }
     /* Akhir CSS Hero Section */
 
@@ -1140,7 +1141,7 @@ section.peng {
 
     /* CSS Hero Section */
     #hero h1 {
-        font-size: 100px;
+        font-size: 42px;
     }
     /* Akhir CSS Hero Section */
 
@@ -1227,7 +1228,7 @@ section.peng {
 
     /* CSS Hero Section */
     #hero h1 {
-        font-size: 80px;
+        font-size: 50px;
     }
     /* Akhir CSS Hero Section */
 
@@ -1285,7 +1286,7 @@ section.peng {
     }
 
         #hero h1 {
-            font-size: 60px;
+            font-size: 30px;
         }
 
         #hero p {
