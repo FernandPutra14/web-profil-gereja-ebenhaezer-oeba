@@ -32,10 +32,14 @@
                 </div>
             </div>
 
+
             <div class="row">
                 <div class="col-12 input-box">
                     <label asp-for="@Model.Password" class="form-label"></label>
-                    <input asp-for="@Model.Password" class="form-control" type="password" autocomplete="new-password" />
+                    <div class="show-box">
+                        <input asp-for="@Model.Password" class="form-control" type="password" autocomplete="new-password" id="id_password" />
+                        <i class="ri-eye-line showpass" id="togglePassword"></i>
+                    </div>
                     <span asp-validation-for="@Model.Password" class=" text-danger form-text"></span>
                 </div>
             </div>
@@ -43,7 +47,10 @@
             <div class="row">
                 <div class="col-12 input-box">
                     <label asp-for="@Model.PasswordConfirmation" class="form-label"></label>
-                    <input asp-for="@Model.PasswordConfirmation" class="form-control" type="password" />
+                    <div class="show-box">
+                        <input asp-for="@Model.PasswordConfirmation" class="form-control" type="password" id="id_password_confirmation" />
+                        <i class="ri-eye-line showpass2" id="togglePasswordConfirmation"></i>
+                    </div>
                     <span asp-validation-for="@Model.PasswordConfirmation" class=" text-danger form-text"></span>
                 </div>
             </div>
@@ -62,5 +69,27 @@
 
 <!-- Script JS -->
 @section Scripts {
+    <script type="text/javascript">
+        // Toggle Password visibility
+        const togglePassword = $('#togglePassword');
+        const password = $('#id_password');
+
+        $(togglePassword).on('click', function (e) {
+            const type = $(password).attr('type') === 'password' ? 'text' : 'password';
+            $(password).attr('type', type);
+            $(this).toggleClass('ri-eye-off-line');
+        });
+
+        // Toggle Password Confirmation visibility
+        const togglePasswordConfirmation = $('#togglePasswordConfirmation');
+        const passwordConfirmation = $('#id_password_confirmation');
+
+        $(togglePasswordConfirmation).on('click', function (e) {
+            const type = $(passwordConfirmation).attr('type') === 'password' ? 'text' : 'password';
+            $(passwordConfirmation).attr('type', type);
+            $(this).toggleClass('ri-eye-off-line');
+        });
+    </script>
+
     <partial name="_ValidationScriptsPartial" />
 }
