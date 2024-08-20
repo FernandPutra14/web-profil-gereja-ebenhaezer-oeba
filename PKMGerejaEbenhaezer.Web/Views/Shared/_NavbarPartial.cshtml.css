@@ -183,7 +183,7 @@
     position: fixed;
     top: 0;
     right: -70%;
-    width: 50%;
+    width: 60%;
     height: 100%;
     background-color: var(--primary-clr);
     box-shadow: -4px 0 4px rgba(0, 0, 0, 0.3);
@@ -230,13 +230,13 @@
             transform: scale(0.85);
         }
 
-::deep .side-menu .navbar-toggler-icon img {
-    width: 20px;
-    height: 20px;
+.gambar {
+    color: white;
+    font-size: 30px;
 }
 
 .side-menu .nav-item {
-    border-bottom: 3px solid #f1e324;
+    border-bottom: 3px solid #666666;
     display: block;
     padding-bottom: 10px;
     margin-bottom: 10px;
