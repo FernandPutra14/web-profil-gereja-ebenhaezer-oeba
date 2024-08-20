@@ -30,7 +30,7 @@
         text-decoration: none;
     }
 
-        .main-navbar .logo ::deep img {
+        ::deep .main-navbar .logo img {
             width: 180px;
             height: auto;
         }
@@ -167,16 +167,14 @@
     flex-direction: column;
 }
 
-.submenu:hover  a i {
-    transform: rotate(180deg);
-    transition: transform 0.3s ease;
-}
-
 .container-submenu ::deep a {
     cursor: pointer;
 }
 
-/*Side-Menu*/
+.submenu:hover .rotate-icon {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+}
 
 /* Side Menu */
 .side-menu {
