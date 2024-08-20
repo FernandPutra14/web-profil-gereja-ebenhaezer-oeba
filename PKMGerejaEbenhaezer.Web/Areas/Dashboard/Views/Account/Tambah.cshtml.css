@@ -43,6 +43,12 @@
 
 
 /* CSS type input Text dan Textarea */
+
+.show-box {
+    position: relative;
+}
+
+
 ::deep .input-box label {
     color: #333;
     font-size: 14px;
@@ -71,3 +77,26 @@
     padding: 0 15px;
 }
 /* Akhir CSS type input Text dan Textarea */
+
+/* Atur ulang posisi ikon show password */
+::deep .showpass {
+    position: absolute;
+    font-size: 23px;
+    z-index: 1000;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+::deep .showpass2 {
+    position: absolute;
+    font-size: 23px;
+    z-index: 1000;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
