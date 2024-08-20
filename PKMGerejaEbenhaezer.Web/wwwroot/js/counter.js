@@ -1,37 +1,46 @@
-﻿//Counter Chart Jemaat Section
+﻿// Counter Chart Jemaat Section
 const counters = document.querySelectorAll(".counters span");
 const container = document.querySelector(".counters");
 
 let activated = false;
 
 window.addEventListener("scroll", () => {
-    if (
-        pageYOffset > container.offsetTop - container.offsetHeight - 1000 && activated === false
-    ) {
-        counters.forEach(counter => {
-            counter.innerText = 0;
-            let count = 0;
+    const containerTop = container.getBoundingClientRect().top + window.scrollY;
+    const triggerPoint = containerTop - window.innerHeight + 100;
 
-            function updateCount() {
-                const target = parseInt(counter.dataset.count);
-                if (count < target) {
-                    count++;
-                    counter.innerText = count;
-                    setTimeout(updateCount, 1);
-                }
-                else {
+    if (window.scrollY > triggerPoint && !activated) {
+        counters.forEach(counter => {
+            counter.innerText = '0';
+            const target = parseInt(counter.dataset.count);
+            const duration = 2000;
+            const increment = target / (duration / 16.67);
+
+            let count = 0;
+            const startTime = performance.now();
+
+            function updateCount(timestamp) {
+                const elapsedTime = timestamp - startTime;
+
+                if (elapsedTime < duration) {
+                    count = Math.min(increment * (elapsedTime / 16.67), target);
+                    counter.innerText = Math.ceil(count);
+                    requestAnimationFrame(updateCount);
+                } else {
                     counter.innerText = target;
                 }
             }
-            updateCount();
+
+            requestAnimationFrame(updateCount);
             activated = true;
         });
     } else if (
-        pageYOffset < container.offsetTop - container.offsetHeight - 500 || pageYOffset === 0 && activated === true
+        window.scrollY < triggerPoint - 500 || window.scrollY === 0
     ) {
-        counters.forEach(counter => {
-            counter.innerText = 0;
-        });
-        activated = false;
+        if (activated) {
+            counters.forEach(counter => {
+                counter.innerText = '0';
+            });
+            activated = false;
+        }
     }
 });
