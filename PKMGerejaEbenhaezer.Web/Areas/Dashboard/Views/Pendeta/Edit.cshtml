@@ -24,7 +24,7 @@
 
             <input hidden asp-for="@Model.Id" />
 
-            <div class="row">
+            <div class="row mb-3">
                 <vc:foto-picker input-name=@nameof(EditVM.IdFoto) 
                     multi=false values=@(Model.IdFoto is null ? null : new int[] { Model.IdFoto.Value })>
                 </vc:foto-picker>

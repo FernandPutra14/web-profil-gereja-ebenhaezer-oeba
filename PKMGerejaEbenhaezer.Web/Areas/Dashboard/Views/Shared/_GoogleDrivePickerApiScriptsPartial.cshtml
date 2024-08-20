@@ -1,4 +1,5 @@
-﻿<script type="text/javascript">
+﻿@using PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.WartaJemaat
+<script type="text/javascript">
     /* exported gapiLoaded */
     /* exported gisLoaded */
     /* exported handleAuthClick */
@@ -131,7 +132,7 @@
             const documentLink = data.docs[0]['url'];
             console.log(data);
             console.log(documentLink);
-            $('#documentLink').val(documentLink);
+            $('#@(nameof(TambahVM.DocumentLink))').val(documentLink);
         }
     }
 </script>
