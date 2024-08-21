@@ -1,7 +1,7 @@
 ﻿<!-- Navbar -->
 <header class="head">
     <nav class="main-navbar">
-        <a href="#" class="logo">
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
             <img src="~/img/logo_gereja_text.png" />
         </a>
         <ul class="nav-list">
@@ -12,7 +12,7 @@
             <li><a asp-action="Index" asp-controller="Ibadah" asp-area="">Ibadah</a></li>
             <li><a asp-action="Index" asp-controller="Pengumuman" asp-area="">Pengumuman</a></li>
             <li class="submenu">
-                <a href="">Tentang JEO<i class="ri-arrow-down-s-line"></i></a>
+                <a style="cursor:pointer;">Tentang JEO<i class="ri-arrow-down-s-line rotate-icon"></i></a>
                 <div class="container-submenu">
                     <a asp-action="SejarahGereja" asp-controller="Home" asp-area="">Sejarah JEO</a>
                     <a asp-action="VisiMisi" asp-controller="Home" asp-area="">Visi dan Misi</a>
@@ -37,9 +37,87 @@
                 }
             </li>
         </ul>
-        <div class="menu-btn">
-            <span></span>
+        <button class="navbar-toggler" type="button" id="toggleButton" aria-label="toggle navigation">
+            <span class="navbar-toggler-icon">
+                <i class="ri-menu-3-line gambar"></i>
+            </span>
+        </button>
+
+        <div class="side-menu" id="sideMenu">
+            <div class="content-wrapper">
+                <div class="navbar-nav">
+                    <span class="navbar-toggler-icon" id="closeButton">
+                        <i class="ri-close-fill gambar"></i>
+                    </span>
+                    <div class="nav-item">
+                        <a asp-action="Index" asp-controller="Home" asp-area="" style="padding: 8px 0 20px;">Home</a>
+                    </div>
+                    <div class="nav-item">
+                        <a asp-action="Index" asp-controller="WartaJemaat" asp-area="" style="padding: 8px 0 20px;">Warta</a>
+                    </div>
+                    <div class="nav-item">
+                        <a asp-action="Index" asp-controller="Ibadah" asp-area="" style="padding: 8px 0 20px;">Ibadah</a>
+                    </div>
+                    <div class="nav-item">
+                        <a asp-action="Index" asp-controller="Pengumuman" asp-area="" style="padding: 8px 0 20px;">Pengumuman</a>
+                    </div>
+                    <div class="nav-item">
+                        <a asp-action="SejarahGereja" asp-controller="Home" asp-area="" style="padding: 8px 0 20px;">Sejarah JEO</a>
+                    </div>
+                    <div class="nav-item">
+                        <a asp-action="VisiMisi" asp-controller="Home" asp-area="" style="padding: 8px 0 20px;">Visi Misi</a>
+                    </div>
+                    <div class="nav-item">
+                        <a asp-action="KoordinatorRayon" asp-controller="Home" asp-area="" style="padding: 8px 0 20px;">Koordinator Rayon</a>
+                    </div>
+                    <div class="nav-item">
+                        <a asp-action="Kontak" asp-controller="Home" asp-area="" style="padding: 8px 0 20px;">Kontak</a>
+                    </div>
+                    <div class="nav-item">
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="Index" asp-controller="Home" asp-area="Dashboard">
+                                Dashboard
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-action="Login" asp-controller="Account" asp-area="">
+                                Login
+                            </a>
+                        }
+                    </div>
+                    
+                </div>
+            </div>
         </div>
+        <div class="overlay" id="overlay"></div>
     </nav>
 </header>
 <!-- Navbar -->
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.getElementById('toggleButton');
+        const closeButton = document.getElementById('closeButton');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('overlay');
+
+        toggleButton.addEventListener('click', function () {
+            sideMenu.classList.toggle('open');
+            overlay.classList.toggle('show');
+        });
+
+        closeButton.addEventListener('click', function () {
+            sideMenu.classList.remove('open');
+            overlay.classList.remove('show');
+        });
+
+        overlay.addEventListener('click', function () {
+            sideMenu.classList.remove('open');
+            overlay.classList.remove('show');
+        });
+    });
+</script>
