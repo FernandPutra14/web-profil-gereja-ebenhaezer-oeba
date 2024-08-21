@@ -109,6 +109,9 @@
     }
 /* AKhir CSS Content Galeri */
 
+.btn-hapus {
+    background-color: darkred;
+}
 
 /* --------------------------------------------------- Responsive --------------------------------------------------- */
 /* Responsive 768 */
