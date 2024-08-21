@@ -153,13 +153,13 @@
     display: none;
     position: absolute;
     top: 100%;
-    gap: 10px;
+    gap: 10px; 
     width: 220px;
     padding: 20px 15px;
     background-color: var(--primary-clr);
     border-radius: 5px;
     box-shadow: 0px 5px 50px rgba(0, 67, 101, 0.08);
-    transition: all 1s ease;
+    transition: all 3s ease;
 }
 
 .submenu:hover .container-submenu {

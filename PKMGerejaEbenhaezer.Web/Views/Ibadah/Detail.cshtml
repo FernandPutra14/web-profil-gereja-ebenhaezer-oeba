@@ -15,6 +15,14 @@
             <div class="row atas">
                 <img src="~/img/pray-ibadah2.jpg" />
             </div>
+            <!-- Anchor Kembali -->
+            <div>
+                <ul class="breadcrumbs mt-2">
+                    <li><a asp-action="Index">Semua Ibadah</a></li>
+                    <li class="divider">/</li>
+                    <li><a href="#" class="active">@Model.Judul</a></li>
+                </ul>
+            </div>
             <!-- Judul -->
             <div class="row">
                 <h3 class="" style="font-weight:600">@Model.Judul</h3>

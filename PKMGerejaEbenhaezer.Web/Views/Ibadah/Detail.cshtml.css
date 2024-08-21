@@ -1,4 +1,31 @@
-﻿#blog-container {
+﻿ .breadcrumbs {
+    display: flex;
+    grid-gap: 6px;
+    padding: 0;
+    margin: 0;
+}
+
+     .breadcrumbs li,
+     ::deep .breadcrumbs li a {
+        font-size: 14px;
+        list-style: none;
+        text-decoration: none;
+    }
+
+        .breadcrumbs li a {
+            color: #1775F1;
+            text-decoration: none;
+        }
+
+            .breadcrumbs li a.active,
+            .breadcrumbs li.divider {
+                color: black;
+                pointer-events: none;
+            }
+
+
+
+#blog-container {
     margin-top: 8rem;
     display: flex;
     padding: 30px 50px 30px 50px;
