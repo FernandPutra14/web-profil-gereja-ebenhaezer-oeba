@@ -25,12 +25,74 @@
 /* Akhir CSS SejarahGereja Bagian Top */
 
 
+.container-sejarah-gereja {
+    margin: 3vw 5vw;
+}
+
+.container-sejarah {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.tahun-sejarah {
+}
+
+.text-tahun {
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+}
+
+.text-tahun h5 {
+    padding-top: 10px;
+    font-size: 16px;
+    color: #ADADAD;
+}
+
+.isi-sejarah {
+}
+
+.text-isi {
+    display: flex;
+    flex-direction: column;
+}
+
+    .text-isi h3 {
+        font-size: 32px;
+        color: black;
+        font-weight: bold;
+    }
+
+    .text-isi p {
+        font-size: 16px;
+    }
+
+
+
+
+
+
+
+
+
+
 /* Responsive 968px */
 @media (max-width:968px) {
 
 
     #sejeo {
         background-attachment: scroll;
+    }
+
+
+    .container-sejarah {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .text-tahun {
+        display: flex;
+        justify-content: start;
     }
 }
 
