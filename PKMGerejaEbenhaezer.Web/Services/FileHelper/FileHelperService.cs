@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Net.Http.Headers;
 using PKMGerejaEbenhaezer.Domain.Shared;
+using PKMGerejaEbenhaezer.Web.Services.ScaniiApi;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Reflection;
@@ -46,13 +47,19 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
             },
         };
 
+        private readonly IScaniiApiService _scaniiApiService;
+
+        public FileHelperService(IScaniiApiService scaniiApiService)
+        {
+            _scaniiApiService = scaniiApiService;
+        }
+
         // **WARNING!**
         // In the following file processing methods, the file's content isn't scanned.
         // In most production scenarios, an anti-virus/anti-malware scanner API is
         // used on the file before making the file available to users or other
         // systems. For more information, see the topic that accompanies this sample
         // app.
-        //TODO: Tambah API antivirus
         public async Task<Result<byte[]>> ProcessFormFile<T>(IFormFile formFile,
             string[] permittedExtensions,
             long minSizeLimit,
@@ -82,6 +89,13 @@ namespace PKMGerejaEbenhaezer.Web.Services.FileHelper
             // the file name, HTML-encode the value.
             var trustedFileNameForDisplay = WebUtility.HtmlEncode(
                 formFile.FileName);
+
+            //Scan Anti-Virus
+            //var apiResponseResult = await _scaniiApiService.Files(formFile);
+            //if(apiResponseResult.IsFailure) return apiResponseResult.Error;
+
+            //if(apiResponseResult.Value.Findings.Length > 0) 
+            //    return new Error("FileHelpers.ScanFailed", "File yang anda coba upload memiliki virus!");
 
             // Check the file length. This check doesn't catch files that only have 
             // a BOM as their content.

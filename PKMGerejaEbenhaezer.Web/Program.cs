@@ -1,5 +1,8 @@
+using System.Net.Http.Headers;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -10,6 +13,7 @@ using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
 using PKMGerejaEbenhaezer.Web.Services.FileHelper;
 using PKMGerejaEbenhaezer.Web.Services.ImageCompress;
 using PKMGerejaEbenhaezer.Web.Services.PDF;
+using PKMGerejaEbenhaezer.Web.Services.ScaniiApi;
 using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,6 +58,13 @@ builder.Services.AddScoped(sp =>
     return sp.GetRequiredService<IOptionsSnapshot<ImageCompressionOptions>>().Value;
 });
 
+builder.Services.Configure<ScaniiApiSettingsOptions>(builder.Configuration
+    .GetSection(ScaniiApiSettingsOptions.ScaniiApiSettings));
+builder.Services.AddScoped(sp =>
+{
+    return sp.GetRequiredService<IOptionsSnapshot<ScaniiApiSettingsOptions>>().Value;
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -88,6 +99,15 @@ builder.Services.AddScoped<IFileHelperService, FileHelperService>();
 builder.Services.AddHttpClient<IBeebeleApiService, BeebleApiService>(options =>
 {
     options.BaseAddress = new Uri("https://beeble.vercel.app/api/v1/passage/");
+});
+
+builder.Services.AddHttpClient<IScaniiApiService, ScaniiApiService>(options =>
+{
+    options.BaseAddress = new Uri("https://api-ap2.scanii.com/v2.2/");
+
+    var key = $"{builder.Configuration.GetValue<string>($"{ScaniiApiSettingsOptions.ScaniiApiSettings}:{nameof(ScaniiApiSettingsOptions.ApiKey)}")}:{builder.Configuration.GetValue<string>($"{ScaniiApiSettingsOptions.ScaniiApiSettings}:{nameof(ScaniiApiSettingsOptions.Secret)}")}";
+    var keyBase64 = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(key));
+    options.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", keyBase64);
 });
 
 var app = builder.Build();
