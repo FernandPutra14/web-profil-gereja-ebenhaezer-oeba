@@ -20,7 +20,9 @@
         padding-top: 60px;
         font-size: 40px;
         font-weight: bold;
-        letter-spacing: 1px;
+        max-width: 80%;
+        margin: 0 auto;
+        word-wrap: break-word;
     }
 /* Akhir CSS SejarahGereja Bagian Top */
 
@@ -69,13 +71,6 @@
 
 
 
-
-
-
-
-
-
-
 /* Responsive 968px */
 @media (max-width:968px) {
 
@@ -101,7 +96,7 @@
 
 
     #sejeo h2 {
-        font-size: 30px;
+        font-size: 35px;
         padding-top: 70px;
     }
 }
@@ -111,7 +106,7 @@
 @media (max-width:468px) {
 
     #sejeo h2 {
-        font-size: 25px;
+        font-size: 30px;
         padding-top: 70px;
     }
 }
