@@ -25,6 +25,74 @@
 /* Akhir CSS VIsiMisi Bagian Top */
 
 
+.container-visi-misi {
+    display: flex;
+    margin: 4vw 0vw;
+}
+
+.visi {
+    padding: 40px 20px;
+    background-color: var(--primary-clr);
+}
+
+.text-visi {
+    display: flex;
+    padding: 0px 50px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+    .text-visi h3 {
+        color: #F5F5F5;
+        font-size: 38px;
+        font-weight: bold;
+    }
+
+    .text-visi p {
+        color: #F5F5F5;
+        line-height: 2.5rem;
+        font-size: 16px;
+    }
+
+.misi {
+    padding: 40px 20px;
+    background-color: #FFC107;
+}
+
+.text-misi {
+    display: flex;
+    padding: 0px 50px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.text-misi h3 {
+    font-size: 38px;
+    color: black;
+    font-weight: bold;
+}
+
+.text-misi p {
+    font-size: 16px;
+    text-align: start;
+    color: black;
+}
+
+    .text-misi ol {
+        font-size: 16px;
+        text-align: start;
+        color: black;
+    }
+
+    .text-misi ol li {
+        font-size: 16px;
+        text-align: start;
+        color: black;
+    }
+
+
 
 
 
@@ -45,6 +113,11 @@
 
     #visimisi {
         background-attachment: scroll;
+    }
+
+    .container-visi-misi {
+        display: flex;
+        flex-direction: column;
     }
 }
 
