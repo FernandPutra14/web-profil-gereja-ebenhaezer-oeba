@@ -932,13 +932,13 @@ section.peng {
         #injil .injil-text h6 {
             font-family: 'Tinos';
             font-weight: 400;
-            font-size: 14px;
+            font-size: 18px;
         }
 
         #injil .injil-text p {
             font-family: 'Tinos';
             font-weight: 500;
-            font-size: 14px;
+            font-size: 18px;
         }
     /* Akhir CSS Injil Section */
 
@@ -1286,7 +1286,7 @@ section.peng {
     }
 
         #hero h1 {
-            font-size: 30px;
+            font-size: 40px;
         }
 
         #hero p {
@@ -1294,6 +1294,22 @@ section.peng {
             width: 80%;
         }
     /* Akhir CSS Hero Section */
+
+    /* CSS Sejarah Section */
+
+        #sejarah .row-container .content-sej h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+    /* Akhir CSS Sejarah Section */
+
+    #pendeta h1 {
+        font-size: 30px;
+    }
+
+    #pendeta p {
+        font-size: 16px;
+    }
 
 
     /* CSS Chart Jemaat Section */
@@ -1321,6 +1337,21 @@ section.peng {
             font-size: 16px;
         }
     /* Akhir CSS Injil Section */
+
+
+    #about-container .about-text h2 {
+        font-size: 30px;
+        color: #29303B;
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+    #about-container .about-text p {
+        color: #686F7A;
+        font-size: 16px;
+        padding-bottom: 15px;
+        font-weight: 300;
+    }
 
 
     /* CSS warta Section */
@@ -1366,13 +1397,30 @@ section.peng {
 /* Responsive 468 */
 @media (max-width:468px) {
 
+    /* CSS Hero Section */
+    #hero {
+        display: flex;
+        flex-direction: column;
+    }
+
+        #hero h1 {
+            font-size: 35px;
+        }
+
+        #hero p {
+            font-size: 14px;
+            width: 80%;
+        }
+    /* Akhir CSS Hero Section */
+
     /* CSS Sejarah Section */
     #sejarah {
         margin-top: 10vw;
     }
 
         #sejarah .row-container .content-sej h2 {
-            font-size: 32px;
+            font-size: 28px;
+            margin-bottom: 15px;
         }
 
         #sejarah .row-container .content-sej p {
@@ -1380,6 +1428,28 @@ section.peng {
         }
     /* Akhir CSS Sejarah Section */
 
+    #pendeta h1 {
+        font-size: 28px;
+    }
+
+    #pendeta p {
+        font-size: 14px;
+    }
+
+
+    #about-container .about-text h2 {
+        font-size: 28px;
+        color: #29303B;
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+    #about-container .about-text p {
+        color: #686F7A;
+        font-size: 14px;
+        padding-bottom: 15px;
+        font-weight: 300;
+    }
 
     #about-container ::deep .about-char {
         padding-left: 20px;
@@ -1403,4 +1473,18 @@ section.peng {
             font-size: 14px;
         }
     /* Akhir CSS Injil Section */
+}
+
+/* Responsive 568 */
+@media (max-width:400px) {
+
+        #hero h1 {
+            font-size: 30px;
+        }
+
+        #hero p {
+            font-size: 14px;
+            width: 80%;
+        }
+    /* Akhir CSS Hero Section */
 }

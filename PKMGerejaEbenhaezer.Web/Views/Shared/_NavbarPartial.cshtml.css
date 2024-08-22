@@ -150,21 +150,26 @@
         }
 
 .container-submenu {
-    display: none;
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 100%;
-    gap: 10px; 
-    width: 220px;
+    gap: 10px;
+    width: 240px;
     padding: 20px 15px;
     background-color: var(--primary-clr);
     border-radius: 5px;
     box-shadow: 0px 5px 50px rgba(0, 67, 101, 0.08);
-    transition: all 3s ease;
+    opacity: 0; /* Set opacity to 0 initially */
+    transform: translateY(-20px); /* Start from -20px (above its final position) */
+    transition: all 0.3s ease; /* Transition effect */
+    visibility: hidden; /* Initially hide the submenu */
 }
 
 .submenu:hover .container-submenu {
-    display: flex;
-    flex-direction: column;
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Slide down */
+    visibility: visible; /* Make submenu visible */
 }
 
 .container-submenu ::deep a {
@@ -314,6 +319,35 @@
 
 /* --------------------------------------------------- Responsive --------------------------------------------------- */
 
+@media (max-width: 1150px) {
+    .main-navbar {
+        width: 100%;
+        max-height: 80px;
+        height: 8rem;
+        position: absolute;
+        opacity: 0.9;
+        padding: 0px 3%;
+        margin: 0px auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 101;
+    }
+
+
+    .main-navbar .nav-list li ::deep a {
+        position: relative;
+        color: var(--light-heading-clr);
+        font-weight: 500;
+        font-size: 13px;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 1px;
+        transition: all .3s ease;
+    }
+}
+
+
 @media (min-width: 969px) {
     .navbar-toggler {
         display: none;
@@ -366,11 +400,6 @@
 
             .main-navbar .nav-list li:nth-child(1) {
                 margin-top: calc(50% - 50px);
-            }
-
-            .main-navbar .nav-list li ::deep a {
-                font-size: 20px;
-                letter-spacing: 1px;
             }
 
     .main-navbar ::deep .login-btn {
