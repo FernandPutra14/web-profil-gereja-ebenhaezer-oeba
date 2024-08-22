@@ -8,26 +8,27 @@
     justify-content: center;
 }
 
-.container {
+.container-login {
     width: 440px;
     padding: 40px 32px;
+    margin: 0px 20px;
     border-radius: 8px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-    .container h1 {
+    .container-login h1 {
         font-size: 24px;
         font-weight: bold;
         text-align: center;
     }
 
-    .container .divider {
+    .container-login .divider {
         display: flex;
         align-items: center;
         gap: 20px;
     }
 
-        .container .divider .line {
+        .container-login .divider .line {
             height: 1px;
             width: 100%;
             background: var(--primary-clr);
@@ -35,7 +36,7 @@
             margin: 30px 0 16px;
         }
 
-    .container ::deep form label {
+    .container-login ::deep form label {
         color: var(--primary-clr);
         font-size: 14px;
         font-weight: bold;
@@ -44,11 +45,11 @@
         margin-top: 12px;
     }
 
-    .container ::deep form .custome-input {
+    .container-login ::deep form .custome-input {
         position: relative;
     }
 
-        .container ::deep form .custome-input input {
+        .container-login ::deep form .custome-input input {
             color: var(--primary-clr);
             font-size: 16px;
             font-weight: 500;
@@ -65,16 +66,16 @@
             padding-right: 45px;
         }
 
-            .container ::deep form .custome-input input::-ms-reveal {
+            .container-login ::deep form .custome-input input::-ms-reveal {
                 filter: invert(100%);
                 display: none;
             }
 
-            .container ::deep form .custome-input input:focus {
+            .container-login ::deep form .custome-input input:focus {
                 border-color: var(--primary-clr);
             }
 
-        .container ::deep form .custome-input i {
+        .container-login ::deep form .custome-input i {
             position: absolute;
             font-size: 28px;
             right: 10px;
@@ -82,41 +83,41 @@
             transition: all 0.3s ease;
         }
 
-        .container ::deep form .custome-input input:focus + i {
+        .container-login ::deep form .custome-input input:focus + i {
             color: var(--primary-clr);
         }
 
-    .container ::deep form .login {
-        width: 100%;
-        margin-top: 30px;
-        background: var(--primary-clr);
-        color: var(--light-heading-clr);
-        border: 1px solid;
-        line-height: 50px;
-        font-size: 18px;
-        letter-spacing: 0.025rem;
-        cursor: pointer;
-        font-weight: 800;
-        border-radius: 8px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
+.container-login ::deep form .login {
+    width: 100%;
+    margin-top: 30px;
+    background: var(--primary-clr);
+    color: var(--light-heading-clr);
+    border: 1px solid;
+    line-height: 50px;
+    font-size: 18px;
+    letter-spacing: 0.025rem;
+    cursor: pointer;
+    font-weight: 800;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+    .container-login ::deep form .login:hover {
+        background: var(--light-heading-clr);
+        color: var(--primary-clr);
     }
 
-        .container ::deep form .login:hover {
-            background: var(--light-heading-clr);
-            color: var(--primary-clr);
-        }
+.container-login ::deep form .form-check {
+    text-align: start;
+    margin-top: 18px;
+}
 
-    .container ::deep form .form-check {
-        text-align: start;
-        margin-top: 18px;
+    .container-login ::deep form .form-check .form-check-input {
+        margin-top: 0px;
+        margin-left: -1rem;
+        color: black;
+        font-size: 23px;
+        margin-right: 10px;
     }
-
-        .container ::deep form .form-check .form-check-input {
-            margin-top: 0px;
-            margin-left: -1rem;          
-            color: black;
-            font-size: 23px;
-            margin-right: 10px;
-        }
 /* Akhir Form Login Section */

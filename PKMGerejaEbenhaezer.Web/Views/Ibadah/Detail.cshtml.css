@@ -44,7 +44,7 @@
             width: 100%;
             height: 300px;
             object-fit: cover;
-            border-radius: 30px;
+            border-radius: 20px;
         }
 
         #blog-container .blogs .post .pendeta-detail {
@@ -143,6 +143,10 @@
 /* Responsive 768 */
 @media(max-width: 768px) {
 
+    #blog-container {
+        padding: 10px 25px 30px 25px;       
+    }
+
     #blog-container .blogs {
         width: 100%;
         margin-top: 30px;
@@ -162,11 +166,28 @@
 
 /* Responsive 568 */
 @media(max-width: 568px) {
+    #blog-container .blogs .post .pendeta-detail {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+    }
+
+    #blog-container .blogs .post h3 {
+        text-align: start;
+        padding-left: 5px;
+        font-size: 28px;
+    }
+
+    #blog-container .blogs .post h4 {
+        text-align: start;
+        padding-left: 5px;
+        font-size: 16px;
+    }
 
     #blog-container .blogs .post .info-ibd {
         display: flex;
         flex-direction: column;
         gap: normal;
-        align-items: center;
+        align-items: start;
     }
 }

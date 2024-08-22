@@ -16,7 +16,7 @@
     }
 
         #blog-container .blogs ::deep img {
-            width: 40%;
+            width: 50%;
             border-radius: 13px;
         }
 
@@ -56,6 +56,10 @@
 /* Responsive 768 */
  @media(max-width: 768px) {
 
+    #blog-container {
+        padding: 10px 25px 30px 25px;
+    }
+
     #blog-container .blogs {
         width: 100%;
         margin-top: 30px;
@@ -63,12 +67,17 @@
 
         #blog-container .blogs ::deep img {
             width: 100%;
-            height: 50vh;
+            height: 30vh;
             object-fit: cover;
         }
 
         #blog-container .blogs .post .info-blog {
             display: flex;
             flex-direction: column;
+        }
+
+        #blog-container .blogs .post h3 {
+            font-size: 25px;
+
         }
 }

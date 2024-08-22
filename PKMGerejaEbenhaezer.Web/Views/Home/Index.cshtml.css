@@ -96,7 +96,7 @@
                 }
 
     #sejarah .row-container .content-sej p {
-        margin-bottom: 25px;
+        margin-bottom: 30px;
         text-align: justify;
         font-size: 16px;
     }
@@ -1181,6 +1181,10 @@ section.peng {
             #sejarah .row-container .content-sej {
                 width: 100%;
             }
+
+        #sejarah ::deep .row-container .image-container {
+            margin-top: 10px;
+        }
     /* Akhir CSS Sejarah Section */
 
 
