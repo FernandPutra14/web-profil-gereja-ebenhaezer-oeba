@@ -32,7 +32,8 @@
 
 .visi {
     padding: 40px 20px;
-    background-color: var(--primary-clr);
+    /*background-color: var(--primary-clr);*/
+    background-color: #173c7c;
 }
 
 .text-visi {
@@ -57,7 +58,8 @@
 
 .misi {
     padding: 40px 20px;
-    background-color: #FFC107;
+    /*background-color: #FFC107;*/
+    background-color: #ffca2b;
 }
 
 .text-misi {
