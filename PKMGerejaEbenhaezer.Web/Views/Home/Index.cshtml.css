@@ -1,6 +1,6 @@
 ﻿/* CSS Hero Section */
 #hero {
-    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing_min.jpg");
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_2_ebebenhaezer.jpg");
     /* Effect Parallax */
     background-attachment: fixed;
     position: relative;
@@ -25,12 +25,14 @@
         color: #fff;
         font-size: 70px;
         font-weight: bold;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         text-transform: uppercase;
     }
 
     /* Masih Dinonaktifkan*/
     #hero p {
         width: 60%;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         color: #fff;
         font-size: 18px;
         font-weight: 400;
@@ -61,6 +63,7 @@
 
             #sejarah ::deep .row-container .image-container img {
                 width: 100%;
+                background: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75));
                 height: auto;
                 border-radius: 10px;
             }
@@ -197,17 +200,19 @@
     margin-top: 4vw;
     color: #fff;
     padding: 8vw 9vw 8vw 9vw;
-    background-image: linear-gradient(rgba(2, 5, 30, 0.3),rgba(5, 4, 25, 0.7)),url("img/background1_gereja_testing_min.jpg");
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.6)),url("img/background_gereja/background_2_ebebenhaezer.jpg");
 }
 
     #injil .injil-text h6 {
         font-family: 'Tinos';
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         font-weight: 400;
         font-size: 20px;
     }
 
     #injil .injil-text p {
         font-family: 'Tinos';
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         font-weight: 500;
         font-size: 20px;
     }

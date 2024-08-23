@@ -1,6 +1,6 @@
 ﻿/* CSS Warta Bagian Top */
 #wartaus {
-    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing_min.jpg");
+    background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_7_ebebenhaezer.jpg");
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -20,6 +20,7 @@
         color: #fff;
         padding-top: 60px;
         font-size: 40px;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         font-weight: bold;
         max-width: 80%;
         margin: 0 auto;
@@ -313,6 +314,7 @@ section.warta {
 
     #wartaus {
         background-attachment: scroll;
+        background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_2_ebebenhaezer.jpg");
     }
 
 }

@@ -73,6 +73,7 @@
             .main-navbar .nav-list li ::deep a {
                 position: relative;
                 color: var(--light-heading-clr);
+                text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
                 font-weight: 500;
                 font-size: 15px;
                 text-transform: uppercase;
