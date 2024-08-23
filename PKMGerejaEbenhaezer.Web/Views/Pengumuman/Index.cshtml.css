@@ -1,6 +1,6 @@
 ﻿/* CSS Pengumuman Bagian Top */
 #peng-us {
-    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.7)),url("img/background1_gereja_testing_min.jpg");
+    background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_1_ebenhaezer.jpg");
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -337,6 +337,7 @@ section.peng {
     /* CSS Pengumuman Bagian Top */
     #peng-us {
         background-attachment: scroll;
+        background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_2_ebebenhaezer.jpg");
     }
     /* Akhir CSS Pengumuman Bagian Top */
 }
