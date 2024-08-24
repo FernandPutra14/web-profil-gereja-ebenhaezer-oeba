@@ -33,7 +33,7 @@
             <div class="row mb-3">
                 <div class="col-12 mt-4 input-box">
                     <label asp-for="@Model.Judul" class="form-label"></label>
-                    <input type="text" asp-for="@Model.Judul" class="form-control" placeholder="Isi Judul Pengumuman" />
+                    <input type="text" asp-for="@Model.Judul" class="form-control" placeholder="Masukkan Judul Pengumuman" />
                     <span class="form-text text-danger" asp-validation-for="@Model.Judul"></span>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="row mb-3">
                 <div class="col-12 input-box">
                     <label asp-for="@Model.Isi" class="form-label"></label>
-                    <textarea type="text" asp-for="@Model.Isi" class="editorberkelas form-control" cols="10" rows="10"></textarea>
+                    <textarea type="text" asp-for="@Model.Isi" class="editorberkelas form-control" cols="10" rows="10" placeholder="Masukkan Isi Pengumuman"></textarea>
                     <span class="form-text text-danger" asp-validation-for="@Model.Isi"></span>
                 </div>
             </div>
