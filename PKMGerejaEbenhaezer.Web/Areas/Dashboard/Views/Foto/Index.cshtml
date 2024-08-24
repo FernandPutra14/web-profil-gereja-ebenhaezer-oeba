@@ -24,7 +24,7 @@
             <span asp-validation-for="@Model.FormFile" class="text-danger"></span>
         </div>
         <div class="col-md-12 d-flex justify-content-start">
-            <button class="btn" style="padding: 8px 100px;" type="submit">Upload</button>
+            <button class="btn" id="btnUpload" style="padding: 8px 100px;" type="submit">Upload</button>
         </div>
     </form>
     <!-- Akhir Form Upload Foto -->
@@ -82,8 +82,12 @@
 
 </div>
 
-
+<!-- Loading -->
+<div id="loadingSpinner" class="loading-spinner" hidden>
+    <dotlottie-player src="https://lottie.host/53fadc01-7247-414c-9f02-5064a1cd0fee/GTWU7krkFR.json" background="transparent" speed="1" style="width: 13rem; height: 13rem;" loop autoplay></dotlottie-player>
+</div>
 <!-- Script JS -->
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <partial name="_FancyBoxPartial" />
@@ -95,6 +99,19 @@
         }
     </script>
 
+
+    <script type="text/javascript">
+        $(function() {
+            const btnUpload = $('#btnUpload');
+            const loadingSpinner = $('#loadingSpinner');
+
+            btnUpload.on('click', function() {
+                loadingSpinner.prop('hidden', false);
+            });
+
+            loadingSpinner.prop('hidden', true);
+        })
+    </script>
     <script type="text/javascript">
         $(function () {
             $.fancybox.defaults.buttons = [
