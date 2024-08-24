@@ -70,7 +70,6 @@
 
         #sejarah ::deep .row-container .content-sej {
             width: 50%;
-            padding-top: 4vw !important;
             padding: 3vw;
             vertical-align: middle;
         }
@@ -1063,6 +1062,7 @@ section.peng {
         background-attachment: scroll;
         position: relative;
         overflow: scroll;
+        background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_3_ebenhaezer.jpg");
     }
 
         #hero h1 {

@@ -363,6 +363,7 @@
         position: fixed;
         background-color: var(--primary-clr);
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+        padding: 0px 5% 0px 5%;
     }
 
     .stick {
