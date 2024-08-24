@@ -25,6 +25,7 @@
 
             .pengumuman .breadcrumbs li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
                 .pengumuman .breadcrumbs li a.active,

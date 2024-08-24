@@ -25,6 +25,7 @@
 
             .wartaa .breadcrumbs li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
                 .wartaa .breadcrumbs li a.active,

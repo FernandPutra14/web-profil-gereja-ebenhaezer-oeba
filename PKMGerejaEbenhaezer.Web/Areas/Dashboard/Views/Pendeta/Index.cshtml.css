@@ -25,6 +25,7 @@
 
             .pendetaa .breadcrumbs li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
                 .pendetaa .breadcrumbs li a.active,

@@ -25,6 +25,7 @@
 
             .pertama .breadcrumbs li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
                 .pertama .breadcrumbs li a.active,

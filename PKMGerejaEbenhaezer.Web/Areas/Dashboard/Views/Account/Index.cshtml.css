@@ -25,6 +25,7 @@
 
             .akunn .breadcrumbs li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
                 .akunn .breadcrumbs li a.active,

@@ -25,6 +25,7 @@
 
             .dafray .breadcrumbs li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
                 .dafray .breadcrumbs li a.active,

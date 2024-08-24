@@ -30,8 +30,9 @@
             list-style: none;
         }
 
-            .pengaturan-foto .breadcrumbs ::deep li ::deep a {
+            .pengaturan-foto .breadcrumbs ::deep li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
             .pengaturan-foto .breadcrumbs ::deep li a.active,

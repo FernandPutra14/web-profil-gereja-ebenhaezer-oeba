@@ -25,6 +25,7 @@
 
             .katibadah .breadcrumbs li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
                 .katibadah .breadcrumbs li a.active,

@@ -25,6 +25,7 @@
 
             .fotoo .breadcrumbs li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
                 .fotoo .breadcrumbs li a.active,

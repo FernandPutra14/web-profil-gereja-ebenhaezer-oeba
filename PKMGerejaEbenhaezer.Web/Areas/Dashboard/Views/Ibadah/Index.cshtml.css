@@ -25,6 +25,7 @@
 
             .ibadahh .breadcrumbs li a {
                 color: var(--blue);
+                cursor: pointer;
             }
 
                 .ibadahh .breadcrumbs li a.active,
