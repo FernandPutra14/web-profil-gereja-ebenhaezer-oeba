@@ -1,6 +1,7 @@
 ﻿@using PKMGerejaEbenhaezer.Web.Services.ToastrNotification
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,16 +11,19 @@
     <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
     <!-- Akhir Owl Carousel -->
-    
+
     <!-- Font Awesome -->
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- Akhir Font Awesome-->
 
     <link rel="stylesheet" href="~/PKMGerejaEbenhaezer.Web.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <partial name="_SideBar" />
 
@@ -70,6 +74,7 @@
     <script src="~/lib/popper/popper.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/%40dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="~/js/sidebar.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -79,23 +84,24 @@
 
     @{
         var options = new ToastrOptions
-        {
-            closeButton = true,
-            progressBar = true,
-            newestOnTop = true,
-            preventDuplicates = false,
-            timeOut = (int)TimeSpan.FromSeconds(5).TotalMilliseconds,
-            extendedTimeOut = (int)TimeSpan.FromSeconds(5).TotalMilliseconds,
-            showDuration = (int)TimeSpan.FromSeconds(0.5).TotalMilliseconds,
-            hideDuration = (int)TimeSpan.FromSeconds(0.5).TotalMilliseconds,
-            showEasing = Easings.Swing,
-            hideEasing = Easings.Swing,
-            showMethod = AnimationMethods.FadeIn,
-            hideMethod = AnimationMethods.FadeOut,
-            positionClass = PositionClasses.TopFullWidth,
-        };
+            {
+                closeButton = true,
+                progressBar = true,
+                newestOnTop = true,
+                preventDuplicates = false,
+                timeOut = (int)TimeSpan.FromSeconds(5).TotalMilliseconds,
+                extendedTimeOut = (int)TimeSpan.FromSeconds(5).TotalMilliseconds,
+                showDuration = (int)TimeSpan.FromSeconds(0.5).TotalMilliseconds,
+                hideDuration = (int)TimeSpan.FromSeconds(0.5).TotalMilliseconds,
+                showEasing = Easings.Swing,
+                hideEasing = Easings.Swing,
+                showMethod = AnimationMethods.FadeIn,
+                hideMethod = AnimationMethods.FadeOut,
+                positionClass = PositionClasses.TopFullWidth,
+            };
     }
     <vc:toastr global-options=options></vc:toastr>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
