@@ -1,4 +1,20 @@
-﻿/* CSS Koor Bagian Top */
+﻿.judul-koor-rayon {
+    margin-bottom: 10px;
+}
+
+.judul-koor-rayon h3 {
+    font-size: 35px;
+    color: #29303B;
+}
+
+    .judul-koor-rayon p {
+        font-size: 16px;
+        color: #686F7A;
+    }
+
+
+
+/* CSS Koor Bagian Top */
 #korayonus {
     background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_1_ebenhaezer.jpg");
     background-attachment: fixed;
@@ -28,7 +44,7 @@
 
 
 #container-koor {
-    padding: 4vw 6vw;
+    padding:0vw 6vw 3vw;
 }
 
 .content-koor {
@@ -104,6 +120,134 @@
         margin-left: 5px;
     }
 
+
+
+
+/* CSS Chart jemaat Section */
+#about-container {
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    padding: 0vw 0vw 0vw 5vw;
+}
+
+    #about-container .about-char {
+        height: 450px;
+        width: 50%;
+        padding-left: 50px;
+        align-items: center;
+    }
+
+        #about-container .about-char img {
+            width: 100%;
+        }
+
+    #about-container .about-text {
+        width: 50%;
+    }
+
+        #about-container .about-text h2 {
+            font-size: 40px;
+            color: #29303B;
+            padding-bottom: 15px;
+        }
+
+        #about-container .about-text p {
+            color: #686F7A;
+            font-size: 16px;
+            padding-bottom: 15px;
+            font-weight: 300;
+        }
+
+        #about-container .about-text .about-fe {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 30px;
+        }
+
+            #about-container .about-text .about-fe img {
+                width: 50px;
+                background-size: cover;
+                background-position: center;
+                margin-right: 20px;
+            }
+
+            #about-container .about-text .about-fe .fe-text {
+                width: 90%;
+            }
+
+                #about-container .about-text .about-fe .fe-text h5 {
+                    font-size: 16px;
+                    color: #29303B;
+                }
+
+    #about-container .counters {
+        padding: 3em 2em;
+        background: var(--primary-clr);
+        color: white;
+        text-align: center;
+    }
+
+.counters > div {
+    max-width: auto;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4em 2em;
+}
+
+#about-container .counters .counter {
+    position: relative;
+}
+
+    #about-container .counters .counter h4 {
+        font-size: 3em;
+        margin-bottom: 0.5em;
+    }
+
+        #about-container .counters .counter h4 span {
+            color: white;
+        }
+/* Akhir CSS Chart jemaat Section */
+
+
+
+
+/* Responsive 1200 */
+@media (max-width:1200px) {
+
+    /* CSS Chart jemaat Section */
+
+    #about-container {
+        padding-bottom: 50px;
+    }
+
+    #about-container .about-char {
+        padding-right: 50px;
+    }
+
+    .counters > div {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .counter:nth-child(2)::before {
+        display: none;
+    }
+    /* Akhir CSS Chart jemaat Section */
+
+}
+
+/* Responsive 968px */
+@media (max-width:1000px) {
+
+    /* CSS Chart jemaat Section */
+    #about-container {
+        padding-top: 30px;
+    }
+
+}
+
 /* Responsive 968px */
 @media (max-width:968px) {
 
@@ -113,7 +257,71 @@
         background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_2_ebebenhaezer.jpg");
     }
 
+    /* CSS Chart jemaat Section */
+    #about-container .about-char {
+        padding-top: 70px;
+    }
+
+    .counters > div {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .counter:nth-child(2)::before {
+        display: none;
+    }
+    /* Akhir CSS Chart jemaat Section */
+
 }
+
+
+
+/* Responsive 768 */
+@media (max-width:768px) {
+
+    /* CSS Chart Jemaat Section */
+    #about-container {
+        padding: 2vw 1vw 2vw 1vw;
+        justify-content: center;
+        flex-direction: column-reverse;
+    }
+
+        #about-container ::deep .about-char {
+            width: 100%;
+            padding: 0px 0px 0px 0px;
+        }
+
+        #about-container ::deep .about-text {
+            width: 100%;
+            padding-bottom: 20px;
+        }
+
+        #about-container ::deep .about-char {
+            padding-left: 100px;
+        }
+    /* Akhir CSS Chart Jemaat Section */
+}
+
+
+/* Responsive 690 */
+@media (max-width:690px) {
+
+   
+
+
+    /* CSS Chart Jemaat Section */
+    #about-container .about-char {
+        height: 300px;
+        width: 100%;
+        padding-left: 50px;
+        align-items: center;
+    }
+
+    #about-container ::deep .about-char {
+        padding-left: 80px;
+    }
+    /* Akhir CSS Chart Jemaat Section */
+}
+
 
 /* Responsive 568 */
 @media (max-width:568px) {
@@ -123,6 +331,13 @@
         font-size: 35px;
         padding-top: 70px;
     }
+
+    /* CSS Chart Jemaat Section */
+    .counters > div {
+        grid-template-columns: 1fr;
+        row-gap: 5em;
+    }
+    /* Akhir CSS Chart Jemaat Section */
 
 }
 
@@ -134,6 +349,24 @@
     #korayonus h2 {
         font-size: 30px;
         padding-top: 70px;
+    }
+
+    #about-container .about-text h2 {
+        font-size: 28px;
+        color: #29303B;
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+    #about-container .about-text p {
+        color: #686F7A;
+        font-size: 14px;
+        padding-bottom: 15px;
+        font-weight: 300;
+    }
+
+    #about-container ::deep .about-char {
+        padding-left: 20px;
     }
 
 }

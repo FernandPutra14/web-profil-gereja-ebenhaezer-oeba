@@ -7,13 +7,89 @@
 <!-- Koor Bagian Top -->
 <section id="korayonus" class="mb-lg-5">
     <h2>
-        KOORDINATOR RAYON
+        RAYON
     </h2>
 </section>
 <!-- AKhir Koor Bagian Top -->
 
 <section id="container-koor">
+
+
+    <!-- Char Jemaat Section -->
+    <section id="about-container">
+        <!-- Char -->
+        <div class="about-char">
+            @{
+                var chartModel = new ChartModel
+            {
+                Type = ChartType.Doughnut,
+                Label = "Jemaat Gereja",
+                Data = new Dictionary<string, double>
+            {
+            {"Lansia", Model.TotalLansia},
+            {"Dewasa", Model.TotalDewasa},
+            {"Pemuda", Model.TotalPemuda},
+            {"Remaja", Model.TotalRemaja},
+            {"Anak", Model.TotalAnak},
+            },
+            };
+            }
+
+            <vc:chart chart-model=chartModel></vc:chart>
+        </div>
+        <!-- Akhir Char -->
+        <div class="about-text">
+            <h2>Jumlah Jemaat GMIT Ebenhaezer Oeba</h2>
+            <p>
+                Jumlah jemaat GMIT Ebenhaezer Oeba mencapai
+                <span style="font-weight:bold;">@(Model.TotalAnak + Model.TotalRemaja + Model.TotalPemuda + Model.TotalDewasa + Model.TotalLansia)</span>
+                anggota. Chart memperlihatkan distribusi jemaat, menyoroti keseimbangan yang ada di antara kelompok usia yang berbeda.
+            </p>
+            <div class="counters">
+                <div>
+                    <div class="=counter">
+                        <h3><span data-count="@Model.TotalLansia">0</span></h3>
+                        <h4>Lansia</h4>
+                    </div>
+                    <div class="=counter">
+                        <h3><span data-count="@Model.TotalDewasa">0</span></h3>
+                        <h4>Dewasa</h4>
+                    </div>
+                    <div class="=counter">
+                        <h3><span data-count="@Model.TotalPemuda">0</span></h3>
+                        <h4>Pemuda</h4>
+                    </div>
+                    <div class="=counter">
+                        <h3><span data-count="@Model.TotalRemaja">0</span></h3>
+                        <h4>Remaja</h4>
+                    </div>
+                    <div class="=counter">
+                        <h3><span data-count="@Model.TotalAnak">0</span></h3>
+                        <h4>Anak</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Akhir Chart Section -->
+
+
+
+
+
+
+    <div class="row judul-koor-rayon">
+        <h3 class="">Koordinator Rayon 1 - 33</h3>
+        <p>Daftar nama Koordinator Rayon beserta nomor yang bisa dihubungi</p>
+    </div>
+    
+
     <div class="content-koor">
+
+
+
+        
+
 
         @foreach(var rayon in Model.DaftarRayon)
         {
@@ -48,5 +124,6 @@
 
 <!-- Script JS -->
 @section Scripts {
+    <script type="text/javascript" src="~/js/counter.js"></script>
     <partial name="_NonTransparantNavbarPartial" />
 }
