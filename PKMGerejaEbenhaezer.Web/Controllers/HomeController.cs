@@ -87,7 +87,10 @@ public class HomeController : Controller
             .Include(x => x.FotoKetua)
             .ToListAsync();
 
-        return View(daftarRayon);
+        return View(new KoordinatorRayonVM
+        {
+            DaftarRayon = daftarRayon
+        });
     }
 
     public IActionResult ProblemBadRequest()
