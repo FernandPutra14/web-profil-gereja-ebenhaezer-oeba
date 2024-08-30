@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
@@ -7,6 +8,7 @@ using PKMGerejaEbenhaezer.Web.Utilities;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {
+    [OutputCache]
     public class PengumumanController : Controller
     {
         private readonly IAppDbContext _appDbContext;

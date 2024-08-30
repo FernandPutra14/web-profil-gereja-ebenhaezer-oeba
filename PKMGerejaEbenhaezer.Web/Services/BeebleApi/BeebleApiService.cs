@@ -1,19 +1,22 @@
 ﻿using Humanizer;
+using Microsoft.Extensions.Caching.Memory;
 using PKMGerejaEbenhaezer.Domain.ValueObjects;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace PKMGerejaEbenhaezer.Web.Services.BeebleApi
 {
     public class BeebleApiService : IBeebeleApiService
     {
+        private const string ListCacheKey = "ListCacheKey";
+
         private readonly HttpClient _httpClient;
         private readonly ILogger<BeebleApiService> _logger;
+        private readonly IMemoryCache _memoryCache;
 
-        public BeebleApiService(HttpClient httpClient, ILogger<BeebleApiService> logger)
+        public BeebleApiService(HttpClient httpClient, ILogger<BeebleApiService> logger, IMemoryCache memoryCache)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _memoryCache = memoryCache;
         }
 
         public async Task<bool> IsValid(AyatAlkitab ayatAlkitab)
@@ -51,6 +54,8 @@ namespace PKMGerejaEbenhaezer.Web.Services.BeebleApi
 
         public async Task<Book[]?> List()
         {
+            if (_memoryCache.TryGetValue(ListCacheKey, out Book[]? cacheData)) return cacheData;
+
             try
             {
                 var response = await _httpClient.GetFromJsonAsync<Dictionary<string, Book[]?>?>("list");
@@ -58,6 +63,8 @@ namespace PKMGerejaEbenhaezer.Web.Services.BeebleApi
                 if (response is null) return null;
 
                 if (!response.TryGetValue("data", out Book[]? data)) return null;
+
+                _memoryCache.Set(ListCacheKey, data);
 
                 return data;
             }

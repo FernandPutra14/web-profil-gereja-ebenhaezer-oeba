@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
-using PKMGerejaEbenhaezer.Domain.Entity;
 using PKMGerejaEbenhaezer.Web.Models.Home;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers;
@@ -20,7 +20,7 @@ public class HomeController : Controller
         _appDbContext = appDbContext;
     }
 
-    [ResponseCache(Duration = 15, Location = ResponseCacheLocation.Any)]
+    [OutputCache]
     public async Task<IActionResult> Index()
     {
         var daftarPengumuman = await _appDbContext.PengumumanTable
@@ -47,39 +47,34 @@ public class HomeController : Controller
             .OrderByDescending(i => i.TanggalIbadah)
             .Take(3).AsNoTracking().ToListAsync();
 
-        var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
-
-        daftarRayon ??= new List<Rayon>();
-
         return View(new IndexVM
         {
             DaftarPengumuman = daftarPengumuman,
             DaftarWartaJemaat = daftarWarta,
             DaftarPendeta = daftarPendeta,
-            DaftarIbadah = daftarIbadah,
-            TotalAnak = daftarRayon.Sum(r => r.JumlahAnak),
-            TotalRemaja = daftarRayon.Sum(r => r.JumlahRemaja),
-            TotalPemuda = daftarRayon.Sum(r => r.JumlahPemuda),
-            TotalDewasa = daftarRayon.Sum(r => r.JumlahDewasa),
-            TotalLansia = daftarRayon.Sum(r => r.JumlahLansia),
+            DaftarIbadah = daftarIbadah
         });
     }
 
+    [OutputCache]
     public IActionResult Kontak()
     {
         return View();
     }
 
+    [OutputCache]
     public IActionResult SejarahGereja()
     { 
         return View(); 
     }
 
+    [OutputCache]
     public IActionResult VisiMisi()
     {
         return View();
     }
 
+    [OutputCache]
     public async Task<IActionResult> KoordinatorRayon()
     {
         var daftarRayon = await _appDbContext.RayonTable
@@ -103,22 +98,25 @@ public class HomeController : Controller
         return StatusCode(StatusCodes.Status500InternalServerError);
     }
 
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.Any)]
     public IActionResult StatusCode404()
     {
         return View(); 
     }
 
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.Any)]
     public IActionResult StatusCode400()
     {
         return View();
     }
 
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.Any)]
     public IActionResult StatusCode500()
     {
         return View();
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.Any)]
     public IActionResult Error()
     {
         var exceptionHandlerFeature = HttpContext.Features.GetRequiredFeature<IExceptionHandlerPathFeature>();

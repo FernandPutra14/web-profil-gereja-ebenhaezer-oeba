@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
@@ -7,6 +8,7 @@ using PKMGerejaEbenhaezer.Web.Utilities;
 
 namespace PKMGerejaEbenhaezer.Web.Controllers
 {
+    [OutputCache]
     public class WartaJemaatController : Controller
     {
         private readonly IAppDbContext _appDbContext;
@@ -16,8 +18,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             _appDbContext = appDbContext;
         }
 
-        public async Task<IActionResult> Index(int? bulan = null, 
-            int? tahun = null, int pageIndex = 1)
+        public async Task<IActionResult> Index(int? bulan = null, int? tahun = null, int pageIndex = 1)
         {
             if (bulan is not null && (bulan < 1 || bulan > 12))
                 bulan = null;

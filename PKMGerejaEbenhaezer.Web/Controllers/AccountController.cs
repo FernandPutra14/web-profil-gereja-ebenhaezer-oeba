@@ -76,6 +76,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
         }
 
         [AllowAnonymous]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.Any)]
         public IActionResult AccessDenied(string? returnUrl)
         {
             ViewData["returnUrl"] = returnUrl;
@@ -145,12 +146,7 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Simpan gagal, terjadi error saat menyimpan ke database. Silahkan laporkan ke administrator");
-                _logger.LogError(
-                """
-                    Edit Akun Gagal. 
-                    User = {0}.
-                    Exception : {1}
-                """, user.UserName, ex.ToString());
+                _logger.LogError(ex, "Edit Akun Gagal. User = {@userName}. Message = {@message}", user.UserName, ex.Message);
                 return View(editVM);
             }
 

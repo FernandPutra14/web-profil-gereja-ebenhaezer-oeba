@@ -18,24 +18,6 @@ using PKMGerejaEbenhaezer.Web.Services.ToastrNotification;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile(
-    builder.Environment.ContentRootFileProvider,
-    CustomConfigurationProviders.PhotoFileSettingsJson,
-    optional: true, 
-    reloadOnChange: true);
-
-builder.Configuration.AddJsonFile(
-    builder.Environment.ContentRootFileProvider,
-    CustomConfigurationProviders.ImageCompressionJson,
-    optional: true,
-    reloadOnChange: true);
-
-builder.Configuration.AddJsonFile(
-    builder.Environment.ContentRootFileProvider,
-    CustomConfigurationProviders.PDFFileSettingsJson,
-    optional: true,
-    reloadOnChange: true);
-
 // Add configurations
 builder.Services.Configure<PhotoFileSettingsOptions>(builder.Configuration
     .GetSection(PhotoFileSettingsOptions.PhotoFileSettings));
@@ -110,6 +92,13 @@ builder.Services.AddHttpClient<IScaniiApiService, ScaniiApiService>(options =>
     options.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", keyBase64);
 });
 
+builder.Services.AddMemoryCache();
+
+builder.Services.AddOutputCache(options =>
+{
+    options.AddBasePolicy(builder => builder.Expire(TimeSpan.FromMinutes(20)));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -126,6 +115,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseOutputCache();
 
 app.UseAuthentication();
 app.UseAuthorization();
