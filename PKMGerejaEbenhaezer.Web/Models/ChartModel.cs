@@ -1,4 +1,6 @@
-﻿namespace PKMGerejaEbenhaezer.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PKMGerejaEbenhaezer.Web.Models
 {
     public class ChartModel
     {
@@ -9,24 +11,19 @@
 
     public enum ChartType
     {
-        Doughnut, Pie, PolarArea
-    }
+        [Display(Description = "doughnut", Name = "doughnut")]
+        Doughnut,
 
-    public static class ChartTypeExtension
-    {
-        public static string ToStringJS(this ChartType chartType)
-        {
-            switch (chartType)
-            {
-                case ChartType.Doughnut:
-                    return "doughnut";
-                case ChartType.Pie:
-                    return "pie";
-                case ChartType.PolarArea:
-                    return "polarArea";
-            };
+        [Display(Description = "pie", Name = "pie")]
+        Pie,
 
-            return string.Empty;
-        }
+        [Display(Description = "polarArea", Name = "polarArea")]
+        PolarArea,
+
+        [Display(Description = "line", Name = "line")]
+        Line,
+
+        [Display(Description = "bar", Name = "bar")]
+        Bar
     }
 }
