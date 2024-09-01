@@ -1,6 +1,6 @@
 ﻿/* CSS Kontak Bagian Top */
 #kontak-us {
-    background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_1_ebenhaezer.jpg");
+    background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/homepage/background_1_ebenhaezer.jpg");
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -200,7 +200,7 @@
     /* CSS Kontak Bagian Top */
     #kontak-us {
         background-attachment: scroll;
-        background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_2_ebebenhaezer.jpg");
+        background-image: linear-gradient(rgba(9, 5, 54, 0.4),rgba(5, 4, 46, 0.75)),url("img/top_section_image/background_2_ebebenhaezer.jpg");
     }
     /* Akhir CSS Kontak Bagian Top */
 

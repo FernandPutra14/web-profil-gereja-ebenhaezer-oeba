@@ -1,6 +1,6 @@
 ﻿/* CSS Hero Section */
 #hero {
-    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_1_ebenhaezer.jpg");
+    background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.75)),url("img/homepage/background_1_ebenhaezer.jpg");
     /* Effect Parallax */
     background-attachment: fixed;
     position: relative;
@@ -200,7 +200,7 @@
     margin-bottom: 2vw;
     color: #fff;
     padding: 8vw 9vw 8vw 9vw;
-    background-image: linear-gradient(rgba(9, 5, 54, 0.1),rgba(5, 4, 46, 0.5)),url("img/background_gereja/mimbar_gereja-min.jpg");
+    background-image: linear-gradient(rgba(9, 5, 54, 0.1),rgba(5, 4, 46, 0.5)),url("img/homepage/mimbar_gereja-min.jpg");
 }
 
     #injil .injil-text h6 {
@@ -1063,7 +1063,7 @@ section.peng {
         background-attachment: scroll;
         position: relative;
         overflow: scroll;
-        background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.75)),url("img/background_gereja/background_3_ebenhaezer.jpg");
+        background-image: linear-gradient(rgba(9, 5, 54, 0.3),rgba(5, 4, 46, 0.75)),url("img/homepage/background_3_ebenhaezer.jpg");
     }
 
         #hero h1 {
