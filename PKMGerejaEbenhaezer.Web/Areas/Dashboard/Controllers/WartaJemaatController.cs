@@ -62,7 +62,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = 0,
                 TanggalWarta = tambahVM.TanggalWarta,
-                DocumentLink = new Uri(tambahVM.DocumentLink)
+                DocumentLink = new Uri(tambahVM.DocumentLink),
+                SaldoKas = tambahVM.SaldoKas,
+                Penerimaan = tambahVM.Penerimaan,
+                Pengeluaran = tambahVM.Pengeluaran
             };
 
             _appDbContext.WartaJemaatTable.Add(warta);
@@ -98,7 +101,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             {
                 Id = id,
                 TanggalWarta = warta.TanggalWarta,
-                DocumentLink = warta.DocumentLink.ToString()
+                DocumentLink = warta.DocumentLink.ToString(),
+                SaldoKas = warta.SaldoKas,
+                Penerimaan = warta.Penerimaan,
+                Pengeluaran = warta.Pengeluaran
             });
         }
 
@@ -137,6 +143,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             _appDbContext.WartaJemaatTable.Update(warta);
             warta.TanggalWarta = editVM.TanggalWarta;
             warta.DocumentLink = new Uri(editVM.DocumentLink);
+            warta.SaldoKas = editVM.SaldoKas;
+            warta.Penerimaan = editVM.Penerimaan;
+            warta.Pengeluaran = editVM.Pengeluaran;
 
             try
             {
