@@ -68,9 +68,9 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Validasi
             if (!ModelState.IsValid) return View(tambahVM);
 
-            if(tambahVM.Renungan is not null && tambahVM.IsiRenungan is null)
+            if(tambahVM.Bacaan is not null && tambahVM.IsiBacaan is null)
             {
-                ModelState.AddModelError(nameof(TambahVM.IsiRenungan), "Isi Renungan Harus Diisi Jika Ayat Renungan Di Isi");
+                ModelState.AddModelError(nameof(TambahVM.IsiBacaan), "Isi Renungan Harus Diisi Jika Ayat Renungan Di Isi");
                 return View(tambahVM);
             }
 
@@ -98,10 +98,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Id = 0,
                 Judul = tambahVM.Judul,
                 Deskripsi = tambahVM.Deskripsi,
-                NasPembimbing = tambahVM.NasPembimbing,
-                IsiNasPembimbing = tambahVM.IsiNaspembimbing,
-                Renungan = tambahVM.Renungan,
-                IsiRenungan = tambahVM.IsiRenungan,
+                NatsPembimbing = tambahVM.NatsPembimbing,
+                IsiNatsPembimbing = tambahVM.IsiNatsPembimbing,
+                Bacaan = tambahVM.Bacaan,
+                IsiBacaan = tambahVM.IsiBacaan,
                 TanggalIbadah = tambahVM.TanggalIbadah,
                 Tempat = tambahVM.Tempat,
                 KategoriIbadah = kategori,
@@ -146,10 +146,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Id = ibadah.Id,
                 Judul = ibadah.Judul,
                 Deskripsi = ibadah.Judul,
-                NasPembimbing = ibadah.NasPembimbing,
-                IsiNaspembimbing = ibadah.IsiNasPembimbing,
-                Renungan = ibadah.Renungan,
-                IsiRenungan = ibadah.IsiRenungan,
+                NatsPembimbing = ibadah.NatsPembimbing,
+                IsiNatspembimbing = ibadah.IsiNatsPembimbing,
+                Bacaan = ibadah.Bacaan,
+                IsiBacaan = ibadah.IsiBacaan,
                 TanggalIbadah = ibadah.TanggalIbadah,
                 Tempat = ibadah.Tempat,
                 IdKategoriIbadah = ibadah.KategoriIbadah?.Id,
@@ -163,10 +163,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Validasi
             if (!ModelState.IsValid) return View(editVM);
 
-            if (editVM.Renungan is not null && editVM.IsiRenungan is null)
+            if (editVM.Bacaan is not null && editVM.IsiBacaan is null)
             {
                 ModelState.AddModelError(
-                    nameof(TambahVM.IsiRenungan), 
+                    nameof(TambahVM.IsiBacaan), 
                     "Isi Renungan Harus Diisi Jika Ayat Renungan Di Isi!");
                 return View(editVM);
             }
@@ -208,10 +208,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
             ibadah.Judul = editVM.Judul;
             ibadah.Deskripsi = editVM.Deskripsi;
-            ibadah.NasPembimbing = editVM.NasPembimbing;
-            ibadah.IsiNasPembimbing = editVM.IsiNaspembimbing;
-            ibadah.Renungan = editVM.Renungan;
-            ibadah.IsiRenungan = editVM.IsiRenungan;
+            ibadah.NatsPembimbing = editVM.NatsPembimbing;
+            ibadah.IsiNatsPembimbing = editVM.IsiNatspembimbing;
+            ibadah.Bacaan = editVM.Bacaan;
+            ibadah.IsiBacaan = editVM.IsiBacaan;
             ibadah.TanggalIbadah = editVM.TanggalIbadah;
             ibadah.Tempat = editVM.Tempat;
             ibadah.KategoriIbadah = kategori;

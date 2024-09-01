@@ -9,11 +9,11 @@ public class Ibadah : BaseEntity
     public string Judul { get; set; } = string.Empty;
     public string Deskripsi { get; set; } = string.Empty;
 
-    public AyatAlkitab NasPembimbing { get; set; }
-    public string IsiNasPembimbing { get; set; } = string.Empty;
+    public AyatAlkitab NatsPembimbing { get; set; }
+    public string IsiNatsPembimbing { get; set; } = string.Empty;
 
-    public AyatAlkitab? Renungan {  get; set; }
-    public string? IsiRenungan { get; set; }
+    public AyatAlkitab? Bacaan {  get; set; }
+    public string? IsiBacaan { get; set; }
 
     public string Tempat { get; set; } = string.Empty;
     public DateTime TanggalIbadah { get; set; }

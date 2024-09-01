@@ -70,23 +70,23 @@
             </div>
             <!-- Renungan -->
             <div class="nats">
-                <!-- Nats Renungan -->
-                @if (Model.Renungan is not null)
+                <!-- Bacaan -->
+                @if (Model.Bacaan is not null)
                 {
-                    <h5>Nats Renungan</h5>
+                    <h5>Bacaan</h5>
                     <p>
-                        @Model.Renungan
+                        @Model.Bacaan
                         <br />
-                        @Html.Raw(Model.IsiRenungan)
+                        @Html.Raw(Model.IsiBacaan)
                     </p>
                 }
 
                 <!-- Nats Pembimbing -->
                 <h5>Nats Pembimbing</h5>
                 <p>
-                    @Model.NasPembimbing
+                    @Model.NatsPembimbing
                     <br />
-                    @Html.Raw(Model.IsiNasPembimbing)
+                    @Html.Raw(Model.IsiNatsPembimbing)
                 </p>
             </div>
 

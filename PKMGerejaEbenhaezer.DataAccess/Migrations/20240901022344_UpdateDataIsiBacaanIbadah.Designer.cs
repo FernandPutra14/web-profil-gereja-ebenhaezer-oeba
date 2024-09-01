@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PKMGerejaEbenhaezer.DataAccess.Data;
@@ -11,9 +12,11 @@ using PKMGerejaEbenhaezer.DataAccess.Data;
 namespace PKMGerejaEbenhaezer.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240901022344_UpdateDataIsiBacaanIbadah")]
+    partial class UpdateDataIsiBacaanIbadah
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 1,
                             LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAELgdlZhEW2bxDdGu84/xXn5bWqzaBFPBoZrvdo/YdWcwJ0xLFV7ZSbequgi+imDTAw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOWZ2IINUaR5HhQsn1d3SKispXQ9Vvvm9oi1wY+y1OLxGMZ3Hebw2lNVQ47RVB0kyQ==",
                             Role = "Admin",
                             UserName = "admin"
                         },
@@ -65,7 +68,7 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 2,
                             LastChanged = new DateTime(2024, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PasswordHash = "AQAAAAIAAYagAAAAELzbGsorfZLX3oQAwA91hi6LNilvp1+GzBkyzwyYXW6h4HA3vOXbRaQE7bI4dtqVEQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJk45ulRAMU7RsopJpXBV5bVfn1DdjgTzEgiG95CJWpHs6Xu0gBx7U6iLqW23v4nBA==",
                             Role = "SuperAdmin",
                             UserName = "super"
                         });
@@ -199,10 +202,10 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 1,
                             Bacaan = "Markus 3:4-5",
-                            Deskripsi = "Kebaktian hari minggu pertama",
+                            Deskripsi = "Kebaktian hari minggu pagi pertama",
                             IsiBacaan = "<b>4</b> Kemudian kata-NYA kepada mereka: \"Manakah yang diperbolehkan pada hari Sabat, berbuat baik atau berbuat jahat, menyelamatkan orang atau membunuh orang?\"</br><b>5</b> Tetapi mereka diam saja. Ia berdukacita karena kedegilan mereka dan dengan marah Ia berkata kepada orang itu: \"Ulurkan tanganmu!\" Dan ia mengelurkan tangannya, maka sembuhlah tangannya itu.",
                             IsiNatsPembimbing = "<b>2</b> Tolong kiranya, TUHAN, sebab orang saleh telah habis, telah lenyap orang-orang yang setia dari antara anak-anak manusia.",
-                            Judul = "Kebaktian I",
+                            Judul = "Kebaktian Pagi Pertama",
                             KategoriIbadahId = 1,
                             NatsPembimbing = "Mazmur 12:2",
                             PendetaId = 1,
@@ -213,47 +216,19 @@ namespace PKMGerejaEbenhaezer.DataAccess.Migrations
                         {
                             Id = 2,
                             Bacaan = "Markus 3:4-5",
-                            Deskripsi = "Kebaktian hari minggu kedua",
+                            Deskripsi = "Kebaktian hari minggu pagi kedua",
                             IsiBacaan = "<b>4</b> Kemudian kata-NYA kepada mereka: \"Manakah yang diperbolehkan pada hari Sabat, berbuat baik atau berbuat jahat, menyelamatkan orang atau membunuh orang?\"</br><b>5</b> Tetapi mereka diam saja. Ia berdukacita karena kedegilan mereka dan dengan marah Ia berkata kepada orang itu: \"Ulurkan tanganmu!\" Dan ia mengelurkan tangannya, maka sembuhlah tangannya itu.",
                             IsiNatsPembimbing = "<b>2</b> Tolong kiranya, TUHAN, sebab orang saleh telah habis, telah lenyap orang-orang yang setia dari antara anak-anak manusia.",
-                            Judul = "Kebaktian II",
+                            Judul = "Kebaktian Pagi Kedua",
                             KategoriIbadahId = 1,
                             NatsPembimbing = "Mazmur 12:2",
                             PendetaId = 3,
-                            TanggalIbadah = new DateTime(2024, 6, 23, 8, 30, 0, 0, DateTimeKind.Unspecified),
+                            TanggalIbadah = new DateTime(2024, 6, 23, 8, 0, 0, 0, DateTimeKind.Unspecified),
                             Tempat = "Gedung Gereja Ebenhaezer Oeba"
                         },
                         new
                         {
                             Id = 3,
-                            Bacaan = "Markus 3:4-5",
-                            Deskripsi = "Kebaktian hari minggu ketiga",
-                            IsiBacaan = "<b>4</b> Kemudian kata-NYA kepada mereka: \"Manakah yang diperbolehkan pada hari Sabat, berbuat baik atau berbuat jahat, menyelamatkan orang atau membunuh orang?\"</br><b>5</b> Tetapi mereka diam saja. Ia berdukacita karena kedegilan mereka dan dengan marah Ia berkata kepada orang itu: \"Ulurkan tanganmu!\" Dan ia mengelurkan tangannya, maka sembuhlah tangannya itu.",
-                            IsiNatsPembimbing = "<b>2</b> Tolong kiranya, TUHAN, sebab orang saleh telah habis, telah lenyap orang-orang yang setia dari antara anak-anak manusia.",
-                            Judul = "Kebaktian III",
-                            KategoriIbadahId = 1,
-                            NatsPembimbing = "Mazmur 12:2",
-                            PendetaId = 3,
-                            TanggalIbadah = new DateTime(2024, 6, 23, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            Tempat = "Gedung Gereja Ebenhaezer Oeba"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Bacaan = "Markus 3:4-5",
-                            Deskripsi = "Kebaktian hari minggu keempat",
-                            IsiBacaan = "<b>4</b> Kemudian kata-NYA kepada mereka: \"Manakah yang diperbolehkan pada hari Sabat, berbuat baik atau berbuat jahat, menyelamatkan orang atau membunuh orang?\"</br><b>5</b> Tetapi mereka diam saja. Ia berdukacita karena kedegilan mereka dan dengan marah Ia berkata kepada orang itu: \"Ulurkan tanganmu!\" Dan ia mengelurkan tangannya, maka sembuhlah tangannya itu.",
-                            IsiNatsPembimbing = "<b>2</b> Tolong kiranya, TUHAN, sebab orang saleh telah habis, telah lenyap orang-orang yang setia dari antara anak-anak manusia.",
-                            Judul = "Kebaktian IV",
-                            KategoriIbadahId = 1,
-                            NatsPembimbing = "Mazmur 12:2",
-                            PendetaId = 3,
-                            TanggalIbadah = new DateTime(2024, 6, 23, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            Tempat = "Gedung Gereja Ebenhaezer Oeba"
-                        },
-                        new
-                        {
-                            Id = 5,
                             Deskripsi = "Perjamuan Bulan Juni",
                             IsiNatsPembimbing = "<b>2</b> Tolong kiranya, TUHAN, sebab orang saleh telah habis, telah lenyap orang-orang yang setia dari antara anak-anak manusia.",
                             Judul = "Perjamuan Bulan Juni",

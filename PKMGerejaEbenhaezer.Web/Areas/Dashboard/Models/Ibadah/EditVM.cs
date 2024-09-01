@@ -16,19 +16,19 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Models.Ibadah
         [Required(ErrorMessage = "{0} harus diisi")]
         public string Deskripsi { get; set; } = string.Empty;
 
-        [Display(Name = "Nas Pembimbing")]
+        [Display(Name = "Nats Pembimbing")]
         [Required(ErrorMessage = "{0} harus diisi")]
-        public AyatAlkitab NasPembimbing { get; set; }
+        public AyatAlkitab NatsPembimbing { get; set; }
 
-        [Display(Name = "Isi Nas Pembimbing")]
+        [Display(Name = "Isi Nats Pembimbing")]
         [Required(ErrorMessage = "{0} harus diisi")]
-        public string IsiNaspembimbing { get; set; } = string.Empty;
+        public string IsiNatspembimbing { get; set; } = string.Empty;
 
-        [Display(Name = "Renungan")]
-        public AyatAlkitab? Renungan { get; set; }
+        [Display(Name = "Bacaan")]
+        public AyatAlkitab? Bacaan { get; set; }
 
-        [Display(Name = "Isi Renungan")]
-        public string? IsiRenungan { get; set; }
+        [Display(Name = "Isi Bacaan")]
+        public string? IsiBacaan { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Tanggal Ibadah")]

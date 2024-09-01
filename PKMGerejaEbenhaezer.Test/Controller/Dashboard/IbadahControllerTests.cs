@@ -93,8 +93,8 @@ public class IbadahControllerTests
             Deskripsi = "Deskripsi",
             TanggalIbadah = new DateTime(),
             Tempat = "Tempat",
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
             IdPendeta = 1,
             IdKategoriIbadah = 1
         };
@@ -119,10 +119,10 @@ public class IbadahControllerTests
             Deskripsi = "Deskripsi",
             TanggalIbadah = new DateTime(),
             Tempat = "Tempat",
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatsPembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdPendeta = 1,
             IdKategoriIbadah = 1
         };
@@ -157,10 +157,10 @@ public class IbadahControllerTests
             Deskripsi = "Deskripsi",
             TanggalIbadah = new DateTime(),
             Tempat = "Tempat",
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatsPembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdPendeta = 1,
             IdKategoriIbadah = 1
         };
@@ -191,10 +191,10 @@ public class IbadahControllerTests
             Deskripsi = "Deskripsi",
             TanggalIbadah = new DateTime(),
             Tempat = "Tempat",
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatsPembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdPendeta = 1,
             IdKategoriIbadah = 1
         };
@@ -225,9 +225,9 @@ public class IbadahControllerTests
             Deskripsi = "Deskripsi",
             TanggalIbadah = new DateTime(),
             Tempat = "Tempat",
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatsPembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
             IdPendeta = 1,
             IdKategoriIbadah = 1
         };
@@ -258,10 +258,10 @@ public class IbadahControllerTests
             Deskripsi = "Deskripsi",
             TanggalIbadah = new DateTime(),
             Tempat = "Tempat",
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatsPembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdPendeta = 1,
             IdKategoriIbadah = 1
         };
@@ -284,8 +284,8 @@ public class IbadahControllerTests
                                           x.Deskripsi == tambahVM.Deskripsi &&
                                           x.TanggalIbadah == tambahVM.TanggalIbadah &&
                                           x.Tempat == tambahVM.Tempat &&
-                                          x.NasPembimbing == tambahVM.NasPembimbing &&
-                                          x.Renungan == tambahVM.Renungan &&
+                                          x.NatsPembimbing == tambahVM.NatsPembimbing &&
+                                          x.Bacaan == tambahVM.Bacaan &&
                                           x.Pendeta == pendeta &&
                                           x.KategoriIbadah == kategoriIbadah)), 
             Times.Once());
@@ -303,10 +303,10 @@ public class IbadahControllerTests
             Deskripsi = "Deskripsi",
             TanggalIbadah = new DateTime(),
             Tempat = "Tempat",
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatsPembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdPendeta = 1,
             IdKategoriIbadah = 1
         };
@@ -380,10 +380,10 @@ public class IbadahControllerTests
         var editVM = new EditVM
         {
             Id = 1,
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan"
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatspembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan"
         };
 
         var ibadah = new Ibadah { Id = 2 };
@@ -411,10 +411,10 @@ public class IbadahControllerTests
         var editVM = new EditVM
         {
             Id = 1,
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatspembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdKategoriIbadah = 1,
             IdPendeta = 1,
         };
@@ -444,10 +444,10 @@ public class IbadahControllerTests
         var editVM = new EditVM
         {
             Id = 1,
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatspembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdKategoriIbadah = 1,
             IdPendeta = 1,
         };
@@ -479,9 +479,9 @@ public class IbadahControllerTests
         var editVM = new EditVM
         {
             Id = 1,
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatspembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
             IdKategoriIbadah = 1,
             IdPendeta = 1,
         };
@@ -511,10 +511,10 @@ public class IbadahControllerTests
         var editVM = new EditVM
         {
             Id = 1,
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatspembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdKategoriIbadah = 1,
             IdPendeta = 1,
         };
@@ -541,10 +541,10 @@ public class IbadahControllerTests
         var editVM = new EditVM
         {
             Id = 1,
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatspembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdKategoriIbadah = 1,
             IdPendeta = 1,
         };
@@ -578,10 +578,10 @@ public class IbadahControllerTests
         var editVM = new EditVM
         {
             Id = 1,
-            NasPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiNaspembimbing = "Isi Nas Pembimbing",
-            Renungan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
-            IsiRenungan = "Isi Renungan",
+            NatsPembimbing = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiNatspembimbing = "Isi Nas Pembimbing",
+            Bacaan = new AyatAlkitab(Kitab.Kejadian, 1, Array.Empty<int>()),
+            IsiBacaan = "Isi Renungan",
             IdKategoriIbadah = 1,
             IdPendeta = 1,
         };
@@ -656,8 +656,8 @@ public class IbadahControllerTests
                     Id = 1,
                     Judul = "Kebaktian Pagi Pertama",
                     Deskripsi = "Kebaktian hari minggu pagi pertama",
-                    NasPembimbing = new AyatAlkitab(Kitab.Mazmur, 12, new int[] { 15 }),
-                    Renungan = new AyatAlkitab(Kitab.Markus, 3, new int[] { 4, 15 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Mazmur, 12, new int[] { 15 }),
+                    Bacaan = new AyatAlkitab(Kitab.Markus, 3, new int[] { 4, 15 }),
                     TanggalIbadah = new DateTime(2024,  12, 23, 6, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 1},
@@ -668,8 +668,8 @@ public class IbadahControllerTests
                     Id = 2,
                     Judul = "Kebaktian Pagi Kedua",
                     Deskripsi = "Kebaktian hari minggu pagi kedua",
-                    NasPembimbing = new AyatAlkitab(Kitab.Mazmur, 12, new int[] { 15 }),
-                    Renungan = new AyatAlkitab(Kitab.Markus, 3, 4, 15 ),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Mazmur, 12, new int[] { 15 }),
+                    Bacaan = new AyatAlkitab(Kitab.Markus, 3, 4, 15 ),
                     TanggalIbadah = new DateTime(2023, 11, 23, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 1},
@@ -680,7 +680,7 @@ public class IbadahControllerTests
                     Id = 3,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2022, 10, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},
@@ -691,7 +691,7 @@ public class IbadahControllerTests
                     Id = 4,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2021, 9, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},
@@ -702,7 +702,7 @@ public class IbadahControllerTests
                     Id = 5,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2020, 8, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},
@@ -713,7 +713,7 @@ public class IbadahControllerTests
                     Id = 6,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2019, 7, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},
@@ -724,7 +724,7 @@ public class IbadahControllerTests
                     Id = 7,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2018, 6, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},
@@ -735,7 +735,7 @@ public class IbadahControllerTests
                     Id = 8,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2017, 5, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},
@@ -746,7 +746,7 @@ public class IbadahControllerTests
                     Id = 9,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2016, 4, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},
@@ -757,7 +757,7 @@ public class IbadahControllerTests
                     Id = 10,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2015, 3, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},
@@ -768,7 +768,7 @@ public class IbadahControllerTests
                     Id = 11,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2014, 2, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},
@@ -779,7 +779,7 @@ public class IbadahControllerTests
                     Id = 12,
                     Judul = "Perjamuan Bulan Juni",
                     Deskripsi = "Perjamuan Bulan Juni",
-                    NasPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
+                    NatsPembimbing = new AyatAlkitab(Kitab.Matius, 3, new int[] { 16 }),
                     TanggalIbadah = new DateTime(2013, 1, 5, 8, 0, 0),
                     Tempat = "Gedung Gereja Ebenhaezer Oeba",
                     KategoriIbadah = new KategoriIbadah { Id = 2},

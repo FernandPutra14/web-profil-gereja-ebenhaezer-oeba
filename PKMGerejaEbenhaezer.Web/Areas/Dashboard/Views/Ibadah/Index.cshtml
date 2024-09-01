@@ -35,10 +35,10 @@
                     <th>Judul</th>
                     <th>Deskripsi</th>
                     <th>Kategori Ibadah</th>
-                    <th>Nas Pembimbing</th>
-                    <th>Isi Nas Pembimbing</th>
-                    <th>Renungan</th>
-                    <th>Isi Renungan</th>
+                    <th>Nats Pembimbing</th>
+                    <th>Isi Nats Pembimbing</th>
+                    <th>Bacaan</th>
+                    <th>Isi Bacaan</th>
                     <th>Tempat</th>
                     <th>Tanggal Ibadah</th>
                     <th>Jam Mulai</th>
@@ -55,10 +55,10 @@
                         <td>@item.Judul</td>
                         <td>@Html.Raw(item.Deskripsi)</td>
                         <td>@(item.KategoriIbadah is null ? "Tidak Ada" : item.KategoriIbadah.Nama)</td>
-                        <td>@item.NasPembimbing</td>
-                        <td>@Html.Raw(item.IsiNasPembimbing)</td>
-                        <td>@(item.Renungan is null ? "Tidak Ada" : item.Renungan)</td>
-                        <td>@(item.IsiRenungan is null ? "Tidak Ada" : Html.Raw(item.IsiRenungan))</td>
+                        <td>@item.NatsPembimbing</td>
+                        <td>@Html.Raw(item.IsiNatsPembimbing)</td>
+                        <td>@(item.Bacaan is null ? "Tidak Ada" : item.Bacaan)</td>
+                        <td>@(item.IsiBacaan is null ? "Tidak Ada" : Html.Raw(item.IsiBacaan))</td>
                         <td>@item.Tempat</td>
                         <td>@item.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</td>
                         <td>@item.TanggalIbadah.ToString("hh:mm tt")</td>

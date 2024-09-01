@@ -22,9 +22,9 @@ namespace PKMGerejaEbenhaezer.DataAccess.EntityConfigurations
                 .WithMany(p => p.DaftarIbadah).OnDelete(DeleteBehavior.SetNull);
             builder.Property(i => i.TanggalIbadah)
                 .HasColumnType("timestamp without time zone");
-            builder.Property(i => i.NasPembimbing)
+            builder.Property(i => i.NatsPembimbing)
                 .HasConversion(i => i.ToString(), s => AyatAlkitab.Parse(s, null));
-            builder.Property(i => i.Renungan)
+            builder.Property(i => i.Bacaan)
                 .HasConversion(i => i.ToString(), s => AyatAlkitab.Parse(s, null));
         }
     }
