@@ -154,7 +154,7 @@ public static class ModelBuilderExtension
             new
             {
                 Id = 1,
-                TanggalWarta = new DateOnly(2024, 7, 7),
+                TanggalWarta = new DateOnly(2024, 7, 14),
                 DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                 TanggalDiBuat = new DateTime(2024, 7, 7, 0, 0, 0, DateTimeKind.Unspecified),
                 PembuatId = daftarUser[0].Id,

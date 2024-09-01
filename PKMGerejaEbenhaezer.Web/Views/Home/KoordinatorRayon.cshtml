@@ -73,24 +73,12 @@
     </section>
     <!-- Akhir Chart Section -->
 
-
-
-
-
-
     <div class="row judul-koor-rayon">
-        <h3 class="">Koordinator Rayon 1 - 33</h3>
+        <h3 class="">Koordinator Rayon 1 - @(Model.DaftarRayon.Count)</h3>
         <p>Daftar nama Koordinator Rayon beserta nomor yang bisa dihubungi</p>
     </div>
-    
 
     <div class="content-koor">
-
-
-
-        
-
-
         @foreach(var rayon in Model.DaftarRayon)
         {
             <div class="card">
@@ -106,8 +94,7 @@
                 </div>
                 <h3>@rayon.KetuaRayon</h3>
                 <p class="jabatan">Ketua @rayon.Nama</p>
-                <p class="usia">Jumlah Pemuda : @rayon.JumlahPemuda</p>
-                <p class="usia">Jumlah Anak dan Remaja : @(rayon.JumlahAnak+rayon.JumlahRemaja)</p>
+                <p class="usia">Jumlah Jemaat : @rayon.JumlahJemaat</p>
                 <p class="jabatan"></p>
                 <div class="wa-koor">
                     <i class="ri-whatsapp-line"></i>
