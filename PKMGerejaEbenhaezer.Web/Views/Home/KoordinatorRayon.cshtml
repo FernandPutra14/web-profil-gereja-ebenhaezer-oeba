@@ -74,23 +74,12 @@
     <!-- Akhir Chart Section -->
 
 
-
-
-
-
     <div class="row judul-koor-rayon">
         <h3 class="">Koordinator Rayon 1 - 33</h3>
         <p>Daftar nama Koordinator Rayon beserta nomor yang bisa dihubungi</p>
     </div>
     
-
     <div class="content-koor">
-
-
-
-        
-
-
         @foreach(var rayon in Model.DaftarRayon)
         {
             <div class="card">
@@ -101,7 +90,7 @@
                     }
                     else
                     {
-                        <img src="~/img/pendeta-test.jpg" />
+                        <img src="~/img/default_image/pendeta-test.jpg"/>
                     }
                 </div>
                 <h3>@rayon.KetuaRayon</h3>
