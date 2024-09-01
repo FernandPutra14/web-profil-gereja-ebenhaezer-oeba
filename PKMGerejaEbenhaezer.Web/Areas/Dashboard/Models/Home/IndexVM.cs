@@ -2,6 +2,8 @@
 {
     public class IndexVM
     {
+        public List<Domain.Entity.WartaJemaat> DaftarWartaJemaat { get; set; } = new();
+
         public int TotalAnak { get; set; }
         public int TotalRemaja { get; set; }
         public int TotalPemuda { get; set; }

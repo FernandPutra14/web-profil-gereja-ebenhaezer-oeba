@@ -17,8 +17,6 @@
         <li><a class="active">Beranda</a></li>
     </ul>
     <!-- Akhir Hyperlink -->
-
-
     <!-- Content Beranda -->
     <div class="info-data">
 
@@ -106,7 +104,6 @@
         </div>
     </div>
 
-
     <div class="data">
 
         <!-- Card Doughnut Chart -->
@@ -116,22 +113,17 @@
             </div>
             <div class="chart">
                 @{
-                    var chartModel = new ChartModel
+                    var data = new Dictionary<string, double>
                     {
-                        Type = ChartType.Doughnut,
-                        Label = "Jemaat Gereja",
-                        Data = new Dictionary<string, double>
-                        {
-                            {"Lansia", Model.TotalLansia},
-                            {"Dewasa", Model.TotalDewasa},
-                            {"Pemuda", Model.TotalPemuda},
-                            {"Remaja", Model.TotalRemaja},
-                            {"Anak", Model.TotalAnak},
-                        },
+                        {"Lansia", Model.TotalLansia},
+                        {"Dewasa", Model.TotalDewasa},
+                        {"Pemuda", Model.TotalPemuda},
+                        {"Remaja", Model.TotalRemaja},
+                        {"Anak", Model.TotalAnak},
                     };
                 }
 
-                <vc:chart chart-model=chartModel></vc:chart>
+                <vc:chart chart-model=@(new ChartModel { Type=ChartType.Doughnut, Label="Jemaat Gereja", Data = data })></vc:chart>
             </div>
         </div>
 
@@ -142,23 +134,7 @@
                 <h3>Pie Chart</h3>
             </div>
             <div class="chart">
-                @{
-                    var chartModel1 = new ChartModel
-                    {
-                        Type = ChartType.Pie,
-                        Label = "Jemaat Gereja",
-                        Data = new Dictionary<string, double>
-                        {
-                            {"Lansia", Model.TotalLansia},
-                            {"Dewasa", Model.TotalDewasa},
-                            {"Pemuda", Model.TotalPemuda},
-                            {"Remaja", Model.TotalRemaja},
-                            {"Anak", Model.TotalAnak},
-                        },
-                    };
-                }
-
-                <vc:chart chart-model=chartModel1 ></vc:chart>
+                <vc:chart chart-model=@(new ChartModel { Type=ChartType.Pie, Label="Jemaat Gereja", Data = data })></vc:chart>
             </div>
         </div>
 
@@ -169,27 +145,70 @@
                 <h3>Polar Area Chart</h3>
             </div>
             <div class="chart">
+                <vc:chart chart-model=@(new ChartModel { Type=ChartType.PolarArea, Label="Jemaat Gereja", Data = data })></vc:chart>
+            </div>
+        </div>
+    </div>
+
+    <div class="data">
+        <!-- Card Line Chart -->
+        <div class="content-data">
+            <div class="head">
+                <h3>Grafik Saldo Kas</h3>
+            </div>
+            <div class="chart">
                 @{
-                    var chartModel2 = new ChartModel
+                    var chartModelSaldoKas = new ChartModel
                     {
-                        Type = ChartType.PolarArea,
-                        Label = "Jemaat Gereja",
-                        Data = new Dictionary<string, double>
-                        {
-                            {"Lansia", Model.TotalLansia},
-                            {"Dewasa", Model.TotalDewasa},
-                            {"Pemuda", Model.TotalPemuda},
-                            {"Remaja", Model.TotalRemaja},
-                            {"Anak", Model.TotalAnak},
-                        },
+                        Type = ChartType.Bar,
+                        Label = "Saldo Kas",
+                        Data = Model.DaftarWartaJemaat.ToDictionary(w => w.TanggalWarta.ToShortDateString(), w => w.SaldoKas)
                     };
                 }
+                <vc:chart chart-model=chartModelSaldoKas></vc:chart>
+            </div>
+        </div>
+    </div>
 
-                <vc:chart chart-model=chartModel2></vc:chart>
+    <div class="data">
+        <!-- Card Line Chart -->
+        <div class="content-data">
+            <div class="head">
+                <h3>Grafik Penerimaan</h3>
+            </div>
+            <div class="chart">
+                @{
+                    var chartModelPenerimaan = new ChartModel
+                    {
+                        Type = ChartType.Bar,
+                        Label = "Penerimaan",
+                        Data = Model.DaftarWartaJemaat.ToDictionary(w => w.TanggalWarta.ToShortDateString(), w => w.Penerimaan)
+                    };
+                }
+                <vc:chart chart-model=chartModelPenerimaan></vc:chart>
+            </div>
+        </div>
+    </div>
+
+    <div class="data">
+        <!-- Card Line Chart -->
+        <div class="content-data">
+            <div class="head">
+                <h3>Grafik Pengeluaran</h3>
+            </div>
+            <div class="chart">
+                @{
+                    var chartModelPengeluaran= new ChartModel
+                    {
+                        Type = ChartType.Bar,
+                        Label = "Pengeluaran",
+                        Data = Model.DaftarWartaJemaat.ToDictionary(w => w.TanggalWarta.ToShortDateString(), w => w.Pengeluaran)
+                    };
+                }
+                <vc:chart chart-model=chartModelPengeluaran></vc:chart>
             </div>
         </div>
     </div>
     <!-- Akhir Content Beranda -->
-
 
 </div>

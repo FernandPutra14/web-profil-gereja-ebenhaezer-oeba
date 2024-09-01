@@ -4,22 +4,21 @@
 @{
     var labels = JsonConvert.SerializeObject(Model.Data.Keys);
     var data = JsonConvert.SerializeObject(Model.Data.Values.Select(v => (int)v));
-    var chartId = "chart";
-    var id = Guid.NewGuid();
-
-    chartId += id.ToString();
 }
 
-<canvas id="@chartId"></canvas>
-<input id="labels" hidden value="@labels"/>
-<input id="data" hidden value="@data"/>
+<canvas id="@Model.Id"></canvas>
+<div id="@Model.Id">
+    <input id="labels" hidden value="@labels" />
+    <input id="data" hidden value="@data" />
+</div>
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', () => {
-        const ctx = document.getElementById('@chartId');
-        const labelsJson = $('#labels').val();
+        const id = "@(Model.Id)";
+        const ctx = document.getElementById(id);
+        const labelsJson = $(`div#${id} #labels`).val();
         const labels = JSON.parse(labelsJson);
-        const dataJson = $('#data').val();
+        const dataJson = $(`div#${id} #data`).val();
         const data = JSON.parse(dataJson);
 
         let chart;
@@ -75,6 +74,6 @@
             }
         }, { threshold: [0.1] });
 
-        observer.observe(document.querySelector("#@(chartId)"));
+        observer.observe(document.querySelector(`#${id}`));
     });
 </script>
