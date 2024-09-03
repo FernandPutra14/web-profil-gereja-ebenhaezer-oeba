@@ -158,9 +158,6 @@ public static class ModelBuilderExtension
                 DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                 TanggalDiBuat = new DateTime(2024, 7, 7, 0, 0, 0, DateTimeKind.Unspecified),
                 PembuatId = daftarUser[0].Id,
-                SaldoKas = 3e8,
-                Penerimaan = 1e8,
-                Pengeluaran = 1e8
             },
             new
             {
@@ -169,9 +166,6 @@ public static class ModelBuilderExtension
                 DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                 TanggalDiBuat = new DateTime(2024, 7, 14, 0, 0, 0, DateTimeKind.Unspecified),
                 PembuatId = daftarUser[0].Id,
-                SaldoKas = 3.5e8,
-                Penerimaan = 1e8,
-                Pengeluaran = 0.5e8
             },
             new
             {
@@ -180,9 +174,6 @@ public static class ModelBuilderExtension
                 DocumentLink = new Uri("https://drive.google.com/file/d/1-O8JJyBhEPPhwjjGKQp9u2gur0gWxuSl/view?usp=sharing"),
                 TanggalDiBuat = new DateTime(2024, 7, 21, 0, 0, 0, DateTimeKind.Unspecified),
                 PembuatId = daftarUser[0].Id,
-                SaldoKas = 4e8,
-                Penerimaan = 2e8,
-                Pengeluaran = 1e8
             }
         );
 
