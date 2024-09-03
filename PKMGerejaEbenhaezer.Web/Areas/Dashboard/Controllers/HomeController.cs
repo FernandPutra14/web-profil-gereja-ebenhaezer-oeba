@@ -19,15 +19,10 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var daftarWarta = await _appDbContext.WartaJemaatTable
-                .OrderBy(w => w.TanggalWarta)
-                .AsNoTracking().ToListAsync();
-
             var daftarRayon = await _appDbContext.RayonTable.AsNoTracking().ToListAsync();
 
             return View(new IndexVM
             {
-                DaftarWartaJemaat = daftarWarta,
                 TotalAnak = daftarRayon.Sum(r => r.JumlahAnak),
                 TotalRemaja = daftarRayon.Sum(r => r.JumlahRemaja),
                 TotalPemuda = daftarRayon.Sum(r => r.JumlahPemuda),

@@ -33,9 +33,6 @@
                 <tr>
                     <th>ID</th>
                     <th>Warta</th>
-                    <th>Saldo Kas</th>
-                    <th>Penerimaan</th>
-                    <th>Pengeluaran</th>
                     <th>Tanggal Warta</th>
                     <th>Tanggal Dibuat</th>
                     <th>Tanggal Diubah</th>
@@ -49,9 +46,6 @@
                     <tr>
                         <td>@item.Id</td>
                         <td><a href="@item.DocumentLink.AbsoluteUri">Warta</a></td>
-                        <td>Rp @item.SaldoKas.ToString("N2")</td>
-                        <td>Rp @item.Penerimaan.ToString("N2")</td>
-                        <td>Rp @item.Pengeluaran.ToString("N2")</td>
                         <td>@item.TanggalWarta.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)</td>
                         <td>@item.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @item.TanggalDiBuat.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
                         <td>@item.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo) @item.TanggalDiUbah?.ToString(cultureInfo.DateTimeFormat.ShortTimePattern, cultureInfo)</td>
