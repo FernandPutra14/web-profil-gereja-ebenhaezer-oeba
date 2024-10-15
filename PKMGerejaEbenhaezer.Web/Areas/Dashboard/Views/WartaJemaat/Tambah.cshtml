@@ -32,9 +32,9 @@
                 </div>
             </div>
 
-            <button type="button" id="authorize_button" onclick="handleAuthClick()" class="btn mb-2">
+            @* <button type="button" id="authorize_button" onclick="handleAuthClick()" class="btn mb-2">
                 Pilih/Upload dari Google Drive
-            </button>
+            </button> *@
 
             <div class="row">
                 <div class="col-12 input-box">
@@ -43,8 +43,7 @@
                     <p class="form-text">
                         Copy link file warta dari google drive ke sini
                     </p>
-                    <span asp-validation-for="@Model.DocumentLink" class="form-text text-danger"></span>
-                    
+                    <span asp-validation-for="@Model.DocumentLink" class="form-text text-danger"></span>            
                 </div>
             </div>
 
