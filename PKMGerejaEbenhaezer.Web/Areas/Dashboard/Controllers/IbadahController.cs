@@ -17,14 +17,17 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         private readonly IAppDbContext _appDbContext;
         private readonly ILogger<IbadahController> _logger;
         private readonly IToastrNotificationService _notificationService;
+        private readonly IBeebeleApiService _beebeleApiService;
 
         public IbadahController(IAppDbContext appDbContext,
             ILogger<IbadahController> logger,
-            IToastrNotificationService notificationService)
+            IToastrNotificationService notificationService,
+            IBeebeleApiService beebeleApiService)
         {
             _appDbContext = appDbContext;
             _logger = logger;
             _notificationService = notificationService;
+            _beebeleApiService = beebeleApiService;
         }
 
         public async Task<IActionResult> Index()
@@ -68,9 +71,15 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             //Validasi
             if (!ModelState.IsValid) return View(tambahVM);
 
-            if(tambahVM.Bacaan is not null && tambahVM.IsiBacaan is null)
+            if (!await _beebeleApiService.IsValid(tambahVM.NatsPembimbing))
             {
-                ModelState.AddModelError(nameof(TambahVM.IsiBacaan), "Isi Renungan Harus Diisi Jika Ayat Renungan Di Isi");
+                ModelState.AddModelError(nameof(TambahVM.NatsPembimbing), "Nats Pembimbing tidak valid");
+                return View(tambahVM);
+            }
+
+            if (tambahVM.Bacaan is not null && !await _beebeleApiService.IsValid(tambahVM.Bacaan))
+            {
+                ModelState.AddModelError(nameof(TambahVM.Bacaan), "Bacaan tidak valid");
                 return View(tambahVM);
             }
 
@@ -99,9 +108,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Judul = tambahVM.Judul,
                 Deskripsi = tambahVM.Deskripsi,
                 NatsPembimbing = tambahVM.NatsPembimbing,
-                IsiNatsPembimbing = tambahVM.IsiNatsPembimbing,
                 Bacaan = tambahVM.Bacaan,
-                IsiBacaan = tambahVM.IsiBacaan,
                 TanggalIbadah = tambahVM.TanggalIbadah,
                 Tempat = tambahVM.Tempat,
                 KategoriIbadah = kategori,
@@ -147,9 +154,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                 Judul = ibadah.Judul,
                 Deskripsi = ibadah.Judul,
                 NatsPembimbing = ibadah.NatsPembimbing,
-                IsiNatspembimbing = ibadah.IsiNatsPembimbing,
                 Bacaan = ibadah.Bacaan,
-                IsiBacaan = ibadah.IsiBacaan,
                 TanggalIbadah = ibadah.TanggalIbadah,
                 Tempat = ibadah.Tempat,
                 IdKategoriIbadah = ibadah.KategoriIbadah?.Id,
@@ -162,14 +167,6 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
         {
             //Validasi
             if (!ModelState.IsValid) return View(editVM);
-
-            if (editVM.Bacaan is not null && editVM.IsiBacaan is null)
-            {
-                ModelState.AddModelError(
-                    nameof(TambahVM.IsiBacaan), 
-                    "Isi Renungan Harus Diisi Jika Ayat Renungan Di Isi!");
-                return View(editVM);
-            }
 
             var ibadah = await _appDbContext.IbadahTable
                 .Where(i => i.Id == editVM.Id).FirstOrDefaultAsync();
@@ -185,6 +182,18 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
                     }
                 );
                 return RedirectToAction(nameof(Index));
+            }
+
+            if (!await _beebeleApiService.IsValid(editVM.NatsPembimbing))
+            {
+                ModelState.AddModelError(nameof(EditVM.NatsPembimbing), "Nats Pembimbing tidak valid");
+                return View(editVM);
+            }
+
+            if (editVM.Bacaan is not null && !await _beebeleApiService.IsValid(editVM.Bacaan))
+            {
+                ModelState.AddModelError(nameof(EditVM.Bacaan), "Bacaan tidak valid");
+                return View(editVM);
             }
 
             //Simpan ke database
@@ -209,9 +218,7 @@ namespace PKMGerejaEbenhaezer.Web.Areas.Dashboard.Controllers
             ibadah.Judul = editVM.Judul;
             ibadah.Deskripsi = editVM.Deskripsi;
             ibadah.NatsPembimbing = editVM.NatsPembimbing;
-            ibadah.IsiNatsPembimbing = editVM.IsiNatspembimbing;
             ibadah.Bacaan = editVM.Bacaan;
-            ibadah.IsiBacaan = editVM.IsiBacaan;
             ibadah.TanggalIbadah = editVM.TanggalIbadah;
             ibadah.Tempat = editVM.Tempat;
             ibadah.KategoriIbadah = kategori;
