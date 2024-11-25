@@ -7,6 +7,6 @@ namespace PKMGerejaEbenhaezer.Web.Models.IbadahModels
     {
         public Ibadah Ibadah { get; set; } = new();
         public BeebleApiResponse? NasPembimbing { get; set; }
-        public BeebleApiResponse? Renungan { get; set; }
+        public BeebleApiResponse? Bacaan { get; set; }
     }
 }

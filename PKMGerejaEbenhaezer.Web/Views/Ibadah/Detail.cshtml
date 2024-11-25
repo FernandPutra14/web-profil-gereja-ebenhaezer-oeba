@@ -1,11 +1,12 @@
 ﻿@using PKMGerejaEbenhaezer.Web.Models.IbadahModels
 @using System.Globalization
-@model Ibadah
+
+@model DetailVM
+
 @{
     ViewData["Title"] = "Ibadah";
     var cultureInfo = new CultureInfo("id-ID");
 }
-
 
 <!-- Content Detail Ibadah Section -->
 <section id="blog-container">
@@ -20,23 +21,23 @@
                 <ul class="breadcrumbs mt-2">
                     <li><a asp-action="Index">Semua Ibadah</a></li>
                     <li class="divider">/</li>
-                    <li><a href="#" class="active">@Model.KategoriIbadah!.Nama</a></li>
+                    <li><a href="#" class="active">@Model.Ibadah.KategoriIbadah!.Nama</a></li>
                 </ul>
             </div>
             <!-- Judul -->
             <div class="row">
-                <h3 class="" style="font-weight:600">@Model.Judul</h3>
+                <h3 class="" style="font-weight:600">@Model.Ibadah.Judul</h3>
             </div>
             <!-- Kategori Ibadah -->
             <div class="row">
-                <h4 class="">@Model.KategoriIbadah!.Nama</h4>
+                <h4 class="">@Model.Ibadah.KategoriIbadah!.Nama</h4>
             </div>
 
             <!-- Pendeta -->
             <div class="pendeta-detail mt-2">
                 <div>
-                    @if(Model.Pendeta?.Foto is not null){
-                        <partial name="_PictureFotoPartial" model=@((Model.Pendeta.Foto.Id, ""))/>
+                    @if(Model.Ibadah.Pendeta?.Foto is not null){
+                        <partial name="_PictureFotoPartial" model=@((Model.Ibadah.Pendeta.Foto.Id, ""))/>
                     }
                     else
                     {
@@ -44,52 +45,67 @@
                     }
                 </div>
                 <div style="margin-top: 5px; margin-left:10px;">
-                    <h6 class="">@Model.Pendeta!.Nama</h6>
+                    <h6 class="">@Model.Ibadah.Pendeta!.Nama</h6>
                 </div>
 
             </div>
             <!-- Tempat, Tanggal, Jam -->
             <div class="info-ibd">
 
-                <h5><i class="ri-map-pin-range-line" style="padding-right: 3px;"></i>@Model.Tempat</h5>
+                <h5><i class="ri-map-pin-range-line" style="padding-right: 3px;"></i>@Model.Ibadah.Tempat</h5>
                 <h5>
                     <i class="ri-calendar-schedule-line" style="padding-right:3px;"></i>
-                    @Model.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
+                    @Model.Ibadah.TanggalIbadah.ToString(cultureInfo.DateTimeFormat.LongDatePattern, cultureInfo)
                 </h5>
                 <h5>
                     <i class="ri-time-line" style="padding-right: 3px;"></i>
-                    @Model.TanggalIbadah.ToString("hh:mm tt") -
-                    @Model.TanggalIbadah.Add(Model.KategoriIbadah.Durasi).ToString("hh:mm tt")
+                    @Model.Ibadah.TanggalIbadah.ToString("hh:mm tt") -
+                    @Model.Ibadah.TanggalIbadah.Add(Model.Ibadah.KategoriIbadah.Durasi).ToString("hh:mm tt")
                 </h5>
             </div>
 
 
             <!-- Deskripsi Ibadah -->
             <div class="deskripsi-ibadah">
-                @Html.Raw(Model.Deskripsi)
+                @Html.Raw(Model.Ibadah.Deskripsi)
             </div>
             <!-- Renungan -->
             <div class="nats">
-                <!-- Bacaan -->
+                <!-- Nats Bacaan -->
                 @if (Model.Bacaan is not null)
                 {
-                    <h5>Bacaan</h5>
+                    var title = Model.Bacaan.Verses.FirstOrDefault(v => v.Type == "title");
+                    <h5>Nats Renungan</h5>
                     <p>
-                        @Model.Bacaan
+                        @Model.Ibadah.Bacaan
                         <br />
-                        @Html.Raw(Model.IsiBacaan)
+                        @if (title is not null)
+                        {
+                            <b>Judul : @title.Content.</b>
+                            <br />
+                        }
+                        @(string.Join(" ", Model.Bacaan.Verses.Where(v => v.Type == "content").Select(v => v.Content)))
                     </p>
                 }
 
                 <!-- Nats Pembimbing -->
-                <h5>Nats Pembimbing</h5>
-                <p>
-                    @Model.NatsPembimbing
-                    <br />
-                    @Html.Raw(Model.IsiNatsPembimbing)
-                </p>
-            </div>
+                @if (Model.NasPembimbing is not null)
+                {
+                    var title = Model.NasPembimbing.Verses.FirstOrDefault(v => v.Type == "title");
+                    <h5>Nats Pembimbing</h5>
+                    <p>
+                        @Model.Ibadah.NatsPembimbing
+                        <br />
+                        @if (title is not null)
+                        {
+                            <b>Judul : @title.Content.</b>
+                            <br />
+                        }
 
+                        @(string.Join(" ", Model.NasPembimbing.Verses.Where(v => v.Type == "content").Select(v => v.Content)))"
+                    </p>
+                }
+            </div>
         </div>
     </div>
 </section>

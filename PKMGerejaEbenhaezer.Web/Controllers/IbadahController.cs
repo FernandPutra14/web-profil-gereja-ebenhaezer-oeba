@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 using PKMGerejaEbenhaezer.DataAccess.Data;
 using PKMGerejaEbenhaezer.Domain.Entity;
+using PKMGerejaEbenhaezer.Domain.ValueObjects;
 using PKMGerejaEbenhaezer.Web.Models;
 using PKMGerejaEbenhaezer.Web.Models.IbadahModels;
 using PKMGerejaEbenhaezer.Web.Services.BeebleApi;
@@ -14,10 +15,12 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
     public class IbadahController : Controller
     {
         private readonly IAppDbContext _appDbContext;
+        private readonly IBeebeleApiService _beebeleApiService;
 
-        public IbadahController(IAppDbContext appDbContext)
+        public IbadahController(IAppDbContext appDbContext, IBeebeleApiService beebeleApiService)
         {
             _appDbContext = appDbContext;
+            _beebeleApiService = beebeleApiService;
         }
 
         public async Task<IActionResult> Index(int? bulan = null, int? tahun = null, string? searchString = null,
@@ -72,7 +75,15 @@ namespace PKMGerejaEbenhaezer.Web.Controllers
 
             if (ibadah is null) return NotFound();
 
-            return View(ibadah);
+            var responseNatsPembimbing = await _beebeleApiService.PassageContent(ibadah.NatsPembimbing);
+            var responseBacaan = ibadah.Bacaan is null ? null : await _beebeleApiService.PassageContent(ibadah.Bacaan);
+
+            return View(new DetailVM
+            {
+                Ibadah = ibadah,
+                NasPembimbing = responseNatsPembimbing,
+                Bacaan = responseBacaan,
+            });
         }
     }
 }
