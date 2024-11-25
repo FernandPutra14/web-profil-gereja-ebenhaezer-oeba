@@ -293,13 +293,28 @@ section.warta {
 }
 /* Akhir CSS Search dan Pagination */
 
+.grafik_pembendaharaan {
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.grafik_pembendaharaan .data {
+    width: 100%;
+}
+
+::deep .grafik_pembendaharaan .data canvas {
+    width: 100%;
+}
+
+
 
 /* --------------------------------------------------- Responsive --------------------------------------------------- */
 /* Responsive 1160 */
 @media (max-width:1160px) {
-
     /* CSS Content Warta Section */
-    section.warta {
+    section .warta {
         padding: 8% 10px 30px;
     }
 

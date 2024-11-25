@@ -23,65 +23,70 @@
 
 
 <section class="warta">
-    <div class="data">
-        <!-- Card Line Chart -->
-        <div class="content-data">
-            <div class="head">
-                <h3>Grafik Saldo Kas</h3>
-            </div>
-            <div class="chart">
-                @{
-                    var chartModelSaldoKas = new ChartModel
+
+    <div class="grafik_pembendaharaan">
+        <div class="data">
+            <!-- Card Line Chart -->
+            <div class="content-data">
+                <div class="head">
+                    <h3>Grafik Saldo Kas</h3>
+                </div>
+                <div class="chart">
+                    @{
+                        var chartModelSaldoKas = new ChartModel
             {
                 Type = ChartType.Line,
                 Label = "Saldo Kas",
                 Data = daftarWartaJemaat.ToDictionary(w => w.TanggalWarta.ToShortDateString(), w => w.SaldoKas)
             };
-                }
-                <vc:chart chart-model=chartModelSaldoKas></vc:chart>
+                    }
+                    <vc:chart chart-model=chartModelSaldoKas></vc:chart>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="data">
-        <!-- Card Line Chart -->
-        <div class="content-data">
-            <div class="head">
-                <h3>Grafik Penerimaan</h3>
-            </div>
-            <div class="chart">
-                @{
-                    var chartModelPenerimaan = new ChartModel
+        <div class="data">
+            <!-- Card Line Chart -->
+            <div class="content-data">
+                <div class="head">
+                    <h3>Grafik Penerimaan</h3>
+                </div>
+                <div class="chart">
+                    @{
+                        var chartModelPenerimaan = new ChartModel
             {
                 Type = ChartType.Line,
                 Label = "Penerimaan",
                 Data = daftarWartaJemaat.ToDictionary(w => w.TanggalWarta.ToShortDateString(), w => w.Penerimaan)
             };
-                }
-                <vc:chart chart-model=chartModelPenerimaan></vc:chart>
+                    }
+                    <vc:chart chart-model=chartModelPenerimaan></vc:chart>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="data">
-        <!-- Card Line Chart -->
-        <div class="content-data">
-            <div class="head">
-                <h3>Grafik Pengeluaran</h3>
-            </div>
-            <div class="chart">
-                @{
-                    var chartModelPengeluaran = new ChartModel
+        <div class="data">
+            <!-- Card Line Chart -->
+            <div class="content-data">
+                <div class="head">
+                    <h3>Grafik Pengeluaran</h3>
+                </div>
+                <div class="chart">
+                    @{
+                        var chartModelPengeluaran = new ChartModel
             {
                 Type = ChartType.Line,
                 Label = "Pengeluaran",
                 Data = daftarWartaJemaat.ToDictionary(w => w.TanggalWarta.ToShortDateString(), w => w.Pengeluaran)
             };
-                }
-                <vc:chart chart-model=chartModelPengeluaran></vc:chart>
+                    }
+                    <vc:chart chart-model=chartModelPengeluaran></vc:chart>
+                </div>
             </div>
         </div>
     </div>
+
+    
 
 
     <!-- Filter Tahun dan Bulan -->
