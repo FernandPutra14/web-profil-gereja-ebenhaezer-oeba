@@ -1,6 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using PKMGerejaEbenhaezer.Domain.Shared;
+﻿using PKMGerejaEbenhaezer.Domain.Shared;
 using PKMGerejaEbenhaezer.Web.Configurations;
 using PKMGerejaEbenhaezer.Web.Services.FileHelper;
 

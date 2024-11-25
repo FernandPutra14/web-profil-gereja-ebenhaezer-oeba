@@ -71,7 +71,7 @@ public static class ModelBuilderExtension
             new
             {
                 Id = 6,
-                PathFoto = @"wwwroot/img/default_img/generaluser.png",
+                PathFoto = @"wwwroot/img/default_image/generaluser.png",
                 TanggalDiBuat = new DateTime(2024, 5, 22, 0, 0, 0, DateTimeKind.Unspecified),
                 PembuatId = daftarUser[0].Id
             },
